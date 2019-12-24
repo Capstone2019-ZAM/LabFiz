@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Gate;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if ( !Gate::allows('isUser')){
+            abort(503,"Sorry, You do not have access to this page");
+        }
+
         return view('home');
     }
 }

@@ -1,8 +1,10 @@
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
-
+## Capstone Project Guide
+<a href="https://drive.google.com/file/d/1dgqoHwLrTQogZBYPUVslQ8pp7M4L0oOO/view?usp=sharing">Getting Started Document</a>
 
 ## About Laravel
+
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
