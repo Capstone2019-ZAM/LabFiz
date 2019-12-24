@@ -15,6 +15,16 @@
                     @endif
 
                     You are logged in!  {{ auth()->user()->name }}
+                    {{-- PUT YOUR ROLE BASE DISPLAY  --}}
+                    
+                    @can('isAdmin')                        
+                     <label > as an admin </label>                        
+                    @endcan
+
+                    @can('isUser')                        
+                     <label > as a user </label>                        
+                    @endcan
+
                 </div>
             </div>
         </div>

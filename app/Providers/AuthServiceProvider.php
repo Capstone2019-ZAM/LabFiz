@@ -42,5 +42,9 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('isStudent',function($user){
             return $user->role == 'student';
         });
+
+        $gate->define('isUser',function($user){
+            return $user->role == 'user';
+        });
     }
 }
