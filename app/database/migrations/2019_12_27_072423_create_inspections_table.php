@@ -23,6 +23,7 @@ class CreateInspectionsTable extends Migration
             $table->unsignedBigInteger('assigned_to');
             $table->foreign('assigned_to')->references('id')->on('users')->onDelete('cascade');
             $table->date('due_date');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -34,13 +34,13 @@ Route::group([
     // inspection end points
     Route::get('/inspection/{id}', 'Api\v1\InspectionController@get');
     Route::post('/inspection', 'Api\v1\InspectionController@create');
-    Route::delete('/inspection', 'Api\v1\InspectionController@delete');
+    Route::delete('/inspection/{id}', 'Api\v1\InspectionController@delete');
     Route::get('/inspections', 'Api\v1\InspectionController@get_all');
 
     // issue end points
     Route::get('/issue/{id}', 'Api\v1\IssueController@get');
     Route::post('/issue', 'Api\v1\IssueController@create');
-    Route::delete('/issue', 'Api\v1\IssueController@delete');
+    Route::delete('/issue/{id}', 'Api\v1\IssueController@delete');
     Route::get('/issues', 'Api\v1\IssueController@get_all');
 });
 
