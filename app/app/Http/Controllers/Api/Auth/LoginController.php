@@ -17,27 +17,27 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $token = $request->header('Authorization');
-        $user = User::where('api_token', $token)->first();
-        if (!$user)
-            return response()->json([
-                'message' => 'User not found.'
-            ]);
+        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            $result['message'] = 'User not found.';
+            return response($result, 400);
+        }
 
         $pass = Hash::check($request->password, $user->password);
-        if (!$pass)
-            return response()->json([
-                'message' => 'Invalid password.'
-            ]);
+        if (!$pass) {
+            $result['message'] = 'Invalid password.';
+            return response($result, 400);
+        }
 
-        $response = ['api_token' => null];
-        return response()->json([
-            'message' => 'User logged in successfully.',
-            'data' => [
-                'email' => $user->email,
-                'role' => $user->roles->pluck('name')[0],
-                'token' => $token
-            ]
-        ]);
+        $result['status'] = '200 (Ok)';
+        $result['message'] = 'User logged in successfully.';
+        $result['data'] = [
+            'email' => $user->email,
+            'role' => $user->roles->pluck('name')[0],
+            'token' => $user->api_token
+        ];
+
+        return response($result, 200);
     }
 }
