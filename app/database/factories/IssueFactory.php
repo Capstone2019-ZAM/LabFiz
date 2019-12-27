@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\issue;
+use App\Issue;
 use Faker\Generator as Faker;
 
-$factory->define(issue::class, function (Faker $faker) {
+$factory->define(Issue::class, function (Faker $faker) {
     $user_ids = DB::table('users')->select('id')->get();
     return [
         'room' => $faker->numberBetween(1,100),

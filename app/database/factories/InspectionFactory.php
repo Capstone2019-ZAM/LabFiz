@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\inspection;
+use App\Inspection;
 use Faker\Generator as Faker;
 
-$factory->define(inspection::class, function (Faker $faker) {
+$factory->define(Inspection::class, function (Faker $faker) {
     $user_ids = DB::table('users')->select('id')->get();
     $report_ids = DB::table('reports')->select('id')->get();
     return [
