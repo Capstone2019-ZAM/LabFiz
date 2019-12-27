@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Report extends Model
+class ReportSection extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -15,7 +15,7 @@ class Report extends Model
         'title'
     ];
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function report(){
+        return $this->belongsTo(Report::class);
     }
 }
