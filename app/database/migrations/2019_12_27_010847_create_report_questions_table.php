@@ -17,7 +17,7 @@ class CreateReportQuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('question');
             $table->unsignedBigInteger('report_section_id');
-            $table->foreign('report_section_id')->references('id')->on('reports')->onDelete('cascade');
+            $table->foreign('report_section_id')->references('id')->on('report_sections')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@ class ReportSection extends Model
      * @var array
      */
     protected $fillable = [
-        'title'
+        'title', 'report_id'
     ];
 
     public function report(){

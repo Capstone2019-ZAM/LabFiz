@@ -12,7 +12,7 @@ class ReportQuestion extends Model
      * @var array
      */
     protected $fillable = [
-        'question'
+        'question', 'report_section_id'
     ];
 
     public function report_section(){
