@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Issue;
+use App\User;
 use Illuminate\Http\Request;
 
 class IssueController extends Controller
@@ -15,12 +17,12 @@ class IssueController extends Controller
     public function get($id)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => 'Ill formed input', 'data' => ''];
-        $report = Report::where('id', $id)->first();
+        $report = Issue::where('id', $id)->first();
         if (!$report) {
             return response($result, 400);
         }
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Report retrieved succesfully.';
+        $result['message'] = 'Issue retrieved succesfully.';
         $result['data'] = $report;
         return response($result, 200);
     }
@@ -28,9 +30,9 @@ class IssueController extends Controller
     public function get_all()
     {
         $result = ['status' => '400 (Bad Request)', 'message' => 'Ill formed input', 'data' => ''];
-        $report = Report::all();
+        $report = Issue::all();
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Reports retrieved succesfully.';
+        $result['message'] = 'All Issues retrieved succesfully.';
         $result['data'] = $report;
         return response($result, 200);
     }
@@ -41,61 +43,38 @@ class IssueController extends Controller
         $header = $request->header('Authorization');
         $user = User::where('api_token', $header)->first();
 
-        $sections = $request->sections;
-        $title = $request->title;
-
-        // create the report
-        $report = new Report();
-        $report->title = $title;
-        $report->user_id = $user->id;
-        if (!$report->save()) {
-            $result['message'] = 'Invalid input provided for section:' . $title;
+        // create the inspection assignment
+        $issue = new Issue();
+        $issue->title = $request->title;
+        $issue->room = $request->room;
+        $issue->user_id = $user->id;
+        $issue->severity= $request->severity;
+        $issue->status = 'incomplete';
+        $issue->description = $request->description;
+        $issue->comments = $request->comments;
+        if(!$issue->save()){
+            $result['message'] = 'Failed to persist changes.';
             return response($result, 400);
         }
 
-        $result['data'][$title] = $report;
-
-        // create sections and bind questions
-        if ($sections) {
-            foreach ($sections as $sect => $value) {
-                $section = new ReportSection();
-                $section->title = $sect;
-                $section->report_id = $report->id;
-                if (!$section->save()) {
-                    $result['message'] = 'Invalid input provided for section:' . $sect;
-                    return response($result, 400);
-                }
-                $result['data']['$sect'] = $section;
-                foreach ($value['qs'] as $q) {
-                    $question = new ReportQuestion();
-                    $question->question = $q;
-                    $question->report_section_id = $section->id;
-                    if (!$question->save()) {
-                        $result['message'] = 'Invalid input provided for question:' . $q;
-                        return response($result, 400);
-                    }
-                    $result['data'][$q] = $question;
-                }
-            }
-        }
-
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Created report document succesfully!';
+        $result['data'] = $issue;
+        $result['message'] = 'Created issue succesfully!';
         return response($result, 200);
     }
 
     public function delete($id)
     {
-        $result = ['status' => '400 (Bad Request)', 'message' => 'Could not find report to be deleted by id', 'data' => ''];
-        $report = Report::where('id', $id)->first();
-        if (!$report) {
+        $result = ['status' => '400 (Bad Request)', 'message' => 'Could not find issue to be deleted by id', 'data' => ''];
+        $issue = Issue::where('id', $id)->first();
+        if (!$issue) {
             return response($result, 400);
         }
 
-        $report->delete();
+        $issue->delete();
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Report deleted succesfully.';
-        $result['data'] = $report;
+        $result['message'] = 'Issue deleted succesfully.';
+        $result['data'] = $issue;
         return response($result, 200);
     }
 }
