@@ -17,6 +17,16 @@ The end points described below are meant to perform CRUD operations on a relatio
      * [Get all](#GetAllReports)
      * [Create](#CreateReport)
      * [Delete](#DeleteReport)
+ * [**Inspections**](#inspections)
+     * [Get](#GetInspectionById)
+     * [Get all](#GetAllInspections)
+     * [Create](#CreateInspection)
+     * [Delete](#DeleteInspection)
+ * [**Issues**](#issues)
+     * [Get](#GetReportById)
+     * [Get all](#GetAllReports)
+     * [Create](#CreateReport)
+     * [Delete](#DeleteReport)
 <!--te-->
 
 # Endpoints Table
@@ -27,6 +37,14 @@ The end points described below are meant to perform CRUD operations on a relatio
 | 3 |  Report  |   localhost/api/v1/reports   |        1       |      GET     |        Gets all reports        | [Get all](#GetAllReports) |
 | 4 |  Report  |    localhost/api/v1/report   |        1       |     POST     |     Creates a unique report    | [Create](#CreateReport) |
 | 5 |  Report  |    localhost/api/v1/report/{id}   |        1       |    DELETE    |     Deletes a report by id     | [Delete](#DeleteReport) |
+| 6 |  Inspection  | localhost/api/v1/report/{id} |        1       |      GET     | Gets an inspection assignment by the id | [Get](#GetInspectionById) |
+| 7 |  Inspection  |   localhost/api/v1/inspection   |        1       |      GET     |        Gets all inspection assignments        | [Get all](#GetAllInspections) |
+| 8 |  Inspection  |    localhost/api/v1/inspection   |        1       |     POST     |     Creates a unique inspection assignment    | [Create](#CreateInspection) |
+| 9 |  Inspection  |    localhost/api/v1/inspection/{id}   |        1       |    DELETE    |     Deletes an inspection assignment     | [Delete](#DeleteInspection) |
+| 10 |  Issue  | localhost/api/v1/issue/{id} |        1       |      GET     | Gets an issue by id | [Get](#GetReportById) |
+| 11 |  Issue  |   localhost/api/v1/issue   |        1       |      GET     |        Gets all issues        | [Get all](#GetAllReports) |
+| 12 |  Issue  |    localhost/api/v1/issue   |        1       |     POST     |     Creates a unique issue    | [Create](#CreateReport) |
+| 13 |  Issue  |    localhost/api/v1/issue/{id}   |        1       |    DELETE    |     Deletes an issue by id     | [Delete](#DeleteReport) |
 
 Users
 ============
@@ -479,6 +497,316 @@ DeleteReport
         "user_id": 1,
         "created_at": "2019-12-27 04:27:45",
         "updated_at": "2019-12-27 04:27:45"
+    }
+}
+```
+
+* **Error Response:**
+
+```json
+{
+    "status": "400 (Bad Request)",
+    "message": "Could not find report to be deleted by id",
+    "data": ""
+}
+```
+
+
+OR
+
+
+```json
+{
+    "status": "401 (Unauthorized)",
+    "message": "You are not authorized to access this route.",
+    "data": ""
+}
+```
+
+Inspections
+============
+GetInspectionById
+-----
+```bash
+  Gets an inspection assignment by the id
+```
+
+* **Route:** 
+
+  localhost/api/v1/inspection/{id}
+ 
+* **Request Type:** 
+  
+  GET
+  
+  
+* **Content Type:** 
+  
+  `N/A` .
+  
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+
+* **Sample Request:**
+
+    localhost/api/v1/inspection/2
+  
+  
+* **Success Response:**
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "Inspection assignment retrieved succesfully.",
+    "data": {
+        "id": 2,
+        "room": 69,
+        "report_id": 1,
+        "user_id": 1,
+        "assigned_to": 1,
+        "due_date": "2020-12-12",
+        "status": "incomplete",
+        "created_at": "2019-12-27 08:02:34",
+        "updated_at": "2019-12-27 08:02:34"
+    }
+}
+```
+
+* **Error Response:**
+
+```json
+{
+    "status": "400 (Bad Request)",
+    "message": "Ill formed input",
+    "data": ""
+}
+```
+
+
+OR
+
+
+```json
+{
+    "status": "401 (Unauthorized)",
+    "message": "You are not authorized to access this route.",
+    "data": ""
+}
+```
+
+
+GetAllInspections
+-----
+```bash
+  Gets all inspection assignments	
+```
+
+* **Route:** 
+
+  localhost/api/v1/inspections
+ 
+* **Request Type:** 
+  
+  GET
+  
+  
+* **Content Type:** 
+  
+  `N/A` .
+  
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+
+* **Sample Request:**
+
+    localhost/api/v1/inspections
+  
+  
+* **Success Response:**
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "All Inspection assignments retrieved succesfully.",
+    "data": [
+        {
+            "id": 2,
+            "room": 69,
+            "report_id": 1,
+            "user_id": 1,
+            "assigned_to": 1,
+            "due_date": "2020-12-12",
+            "status": "incomplete",
+            "created_at": "2019-12-27 08:02:34",
+            "updated_at": "2019-12-27 08:02:34"
+        },
+        {
+            "id": 3,
+            "room": 250,
+            "report_id": 1,
+            "user_id": 1,
+            "assigned_to": 1,
+            "due_date": "2020-12-12",
+            "status": "incomplete",
+            "created_at": "2019-12-27 08:12:44",
+            "updated_at": "2019-12-27 08:12:44"
+        }
+    ]
+}
+```
+
+OR
+
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "All Inspection assignments retrieved succesfully.",
+    "data": []
+}
+```
+
+
+* **Error Response:**
+
+```json
+{
+    "status": "401 (Unauthorized)",
+    "message": "You are not authorized to access this route.",
+    "data": ""
+}
+```
+
+CreateInspection
+-----
+```bash
+  Creates a unique inspection.
+```
+
+* **Route:** 
+
+  localhost/api/v1/inspection
+ 
+* **Request Type:** 
+  
+  POST
+  
+  
+* **Content Type:** 
+  
+      `application/json` .
+      
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+|          |                         report_id                        |          room         |       assigned_to       |                     due_date                    |
+|:--------:|:--------------------------------------------------------:|:---------------------:|:-----------------------:|:-----------------------------------------------:|
+| Required |                             x                            |           x           |            x            |                        x                        |
+| Optional |                                                          |                       |                         |                                                 |
+|   Notes  | needs to be the report id this inspection is referencing | as an unsigned number | needs to be the user id | due date time stamp format: YYYY-MM-DD HH:MM:SS |
+
+
+* **Sample Request:**
+
+```json
+{
+	"report_id": 1,
+	"room" : 69,
+	"assigned_to": 1,
+	"due_date": "2020-12-12 10:10:5"
+}
+```  
+  
+* **Success Response:**
+
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "Created inspection assignment succesfully!",
+    "data": {
+        "room": 69,
+        "report_id": 1,
+        "assigned_to": 1,
+        "user_id": 1,
+        "due_date": "2020-12-12 10:10:5",
+        "status": "incomplete",
+        "updated_at": "2019-12-27 08:02:34",
+        "created_at": "2019-12-27 08:02:34",
+        "id": 2
+    }
+}
+```  
+
+* **Error Response:**
+
+```json
+{
+    "status": "401 (Unauthorized)",
+    "message": "You are not authorized to access this route.",
+    "data": ""
+}
+```
+
+
+DeleteInspection
+-----
+```bash
+  Deletes an existing inspection by the id.
+```
+
+* **Route:** 
+
+    localhost/api/v1/inspection/{id}
+ 
+* **Request Type:** 
+  
+  DELETE
+  
+  
+* **Content Type:** 
+  
+  `N/A` .
+  
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+
+* **Sample Request:**
+
+    localhost/api/v1/inspection/59
+  
+  
+* **Success Response:**
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "Inspection assignment deleted succesfully.",
+    "data": {
+        "id": 3,
+        "room": 250,
+        "report_id": 1,
+        "user_id": 1,
+        "assigned_to": 1,
+        "due_date": "2020-12-12",
+        "status": "incomplete",
+        "created_at": "2019-12-27 08:12:44",
+        "updated_at": "2019-12-27 08:12:44"
     }
 }
 ```
