@@ -26,19 +26,19 @@ Route::group([
     'prefix' => 'v1'
     ], function(){
     // report end points
-    Route::get('/report', 'Api\v1\ReportController@get');
+    Route::get('/report/{id}', 'Api\v1\ReportController@get');
     Route::post('/report', 'Api\v1\ReportController@create');
     Route::post('/report', 'Api\v1\ReportController@delete');
     Route::get('/reports', 'Api\v1\ReportController@get_all');
 
     // inspection end points
-    Route::get('/inspection', 'Api\v1\InspectionController@get');
+    Route::get('/inspection/{id}', 'Api\v1\InspectionController@get');
     Route::post('/inspection', 'Api\v1\InspectionController@create');
     Route::post('/inspection', 'Api\v1\InspectionController@delete');
     Route::get('/inspections', 'Api\v1\InspectionController@get_all');
 
     // issue end points
-    Route::get('/issue', 'Api\v1\IssueController@get');
+    Route::get('/issue/{id}', 'Api\v1\IssueController@get');
     Route::post('/issue', 'Api\v1\IssueController@create');
     Route::post('/issue', 'Api\v1\IssueController@delete');
     Route::get('/issues', 'Api\v1\IssueController@get_all');

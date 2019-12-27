@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Report;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -12,8 +13,16 @@ class ReportController extends Controller
 
     }
 
-    public function get(){
-        return 'todo';
+    public function get($id){
+        $result = ['status' => '400 (Bad Request)', 'message' => 'Ill formed input', 'data' => ''];
+        $report = Report::where('id',$id)->first();
+        if(!$report){
+            return response($result,400);
+        }
+        $result['status'] = '200 (Ok)';
+        $result['message'] = 'Report retrieved succesfully.';
+        $result['data'] = $report;
+        return response($result,200);
     }
 
     public function get_all(){
