@@ -1,6 +1,8 @@
 <?php
 
+use App\ReportQuestion;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ReportQuestionsSeeder extends Seeder
 {
@@ -11,6 +13,7 @@ class ReportQuestionsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        ReportQuestion::truncate();
+        $report_questions = factory('App\ReportQuestion', 10)->create();
     }
 }

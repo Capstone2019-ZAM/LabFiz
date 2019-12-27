@@ -4,9 +4,12 @@
 
 use App\Report;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\DB;
 
 $factory->define(Report::class, function (Faker $faker) {
+    $user_ids = DB::table('users')->select('id')->get();
     return [
-        'title' => $faker->title
+        'title' => $faker->sentence,
+        'user_id' => $faker->randomElement($user_ids)->id,
     ];
 });

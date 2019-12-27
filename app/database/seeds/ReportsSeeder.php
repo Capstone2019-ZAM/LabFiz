@@ -2,6 +2,7 @@
 
 use App\Report;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ReportsSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class ReportsSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Report::truncate();
-        $reports = factory('App\Report', 10)->make();
+        $reports = factory('App\Report', 10)->create();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
