@@ -16,6 +16,7 @@ class CreateReportSectionsTable extends Migration
         Schema::create('report_sections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->unsignedBigInteger('report_id');
             $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
             $table->timestamps();
         });

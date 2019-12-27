@@ -16,7 +16,8 @@ class CreateReportQuestionsTable extends Migration
         Schema::create('report_questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('question');
-            $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
+            $table->unsignedBigInteger('report_section_id');
+            $table->foreign('report_section_id')->references('id')->on('reports')->onDelete('cascade');
             $table->timestamps();
         });
     }
