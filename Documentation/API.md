@@ -23,10 +23,10 @@ The end points described below are meant to perform CRUD operations on a relatio
      * [Create](#CreateInspection)
      * [Delete](#DeleteInspection)
  * [**Issues**](#issues)
-     * [Get](#GetReportById)
-     * [Get all](#GetAllReports)
-     * [Create](#CreateReport)
-     * [Delete](#DeleteReport)
+     * [Get](#GetIssueById)
+     * [Get all](#GetAllIssues)
+     * [Create](#CreateIssue)
+     * [Delete](#DeleteIssue)
 <!--te-->
 
 # Endpoints Table
@@ -41,10 +41,10 @@ The end points described below are meant to perform CRUD operations on a relatio
 | 7 |  Inspection  |   localhost/api/v1/inspection   |        1       |      GET     |        Gets all inspection assignments        | [Get all](#GetAllInspections) |
 | 8 |  Inspection  |    localhost/api/v1/inspection   |        1       |     POST     |     Creates a unique inspection assignment    | [Create](#CreateInspection) |
 | 9 |  Inspection  |    localhost/api/v1/inspection/{id}   |        1       |    DELETE    |     Deletes an inspection assignment     | [Delete](#DeleteInspection) |
-| 10 |  Issue  | localhost/api/v1/issue/{id} |        1       |      GET     | Gets an issue by id | [Get](#GetReportById) |
-| 11 |  Issue  |   localhost/api/v1/issue   |        1       |      GET     |        Gets all issues        | [Get all](#GetAllReports) |
-| 12 |  Issue  |    localhost/api/v1/issue   |        1       |     POST     |     Creates a unique issue    | [Create](#CreateReport) |
-| 13 |  Issue  |    localhost/api/v1/issue/{id}   |        1       |    DELETE    |     Deletes an issue by id     | [Delete](#DeleteReport) |
+| 10 |  Issue  | localhost/api/v1/issue/{id} |        1       |      GET     | Gets an issue by id | [Get](#GetIssueById) |
+| 11 |  Issue  |   localhost/api/v1/issue   |        1       |      GET     |        Gets all issues        | [Get all](#GetAllIssues) |
+| 12 |  Issue  |    localhost/api/v1/issue   |        1       |     POST     |     Creates a unique issue    | [Create](#CreateIssue) |
+| 13 |  Issue  |    localhost/api/v1/issue/{id}   |        1       |    DELETE    |     Deletes an issue by id     | [Delete](#DeleteIssue) |
 
 Users
 ============
@@ -833,4 +833,319 @@ OR
 }
 ```
 
+Issues
+============
+GetIssueById
+-----
+```bash
+  Gets an issue by the id
+```
 
+* **Route:** 
+
+  localhost/api/v1/issue/{id}
+ 
+* **Request Type:** 
+  
+  GET
+  
+  
+* **Content Type:** 
+  
+  `N/A` .
+  
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+
+* **Sample Request:**
+
+    localhost/api/v1/issue/2
+  
+  
+* **Success Response:**
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "Issue retrieved succesfully.",
+    "data": {
+        "id": 1,
+        "room": 69,
+        "status": "incomplete",
+        "title": "oil spill",
+        "severity": "extreme",
+        "description": "someone clean this oil spill asap!",
+        "comments": "yikes, wow what a big oil spill!",
+        "user_id": 1,
+        "created_at": "2019-12-27 08:24:41",
+        "updated_at": "2019-12-27 08:24:41"
+    }
+}
+```
+
+* **Error Response:**
+
+```json
+{
+    "status": "400 (Bad Request)",
+    "message": "Ill formed input",
+    "data": ""
+}
+```
+
+
+OR
+
+
+```json
+{
+    "status": "401 (Unauthorized)",
+    "message": "You are not authorized to access this route.",
+    "data": ""
+}
+```
+
+
+GetAllIssues
+-----
+```bash
+  Gets all issues	
+```
+
+* **Route:** 
+
+  localhost/api/v1/issues
+ 
+* **Request Type:** 
+  
+  GET
+  
+  
+* **Content Type:** 
+  
+  `N/A` .
+  
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+
+* **Sample Request:**
+
+    localhost/api/v1/issues
+  
+  
+* **Success Response:**
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "All Issues retrieved succesfully.",
+    "data": [
+        {
+            "id": 1,
+            "room": 69,
+            "status": "incomplete",
+            "title": "oil spill",
+            "severity": "extreme",
+            "description": "someone clean this oil spill asap!",
+            "comments": "yikes, wow what a big oil spill!",
+            "user_id": 1,
+            "created_at": "2019-12-27 08:24:41",
+            "updated_at": "2019-12-27 08:24:41"
+        },
+        {
+            "id": 2,
+            "room": 234,
+            "status": "incomplete",
+            "title": "chemical spill",
+            "severity": "extreme",
+            "description": "someone clean this chemical spill asap!",
+            "comments": "yikes, wow what a big chemical spill!",
+            "user_id": 1,
+            "created_at": "2019-12-27 08:28:44",
+            "updated_at": "2019-12-27 08:28:44"
+        }
+    ]
+}
+```
+
+OR
+
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "All Issues retrieved succesfully.",
+    "data": []
+}
+```
+
+
+* **Error Response:**
+
+```json
+{
+    "status": "401 (Unauthorized)",
+    "message": "You are not authorized to access this route.",
+    "data": ""
+}
+```
+
+CreateIssue
+-----
+```bash
+  Creates a unique issue.
+```
+
+* **Route:** 
+
+  localhost/api/v1/issue
+ 
+* **Request Type:** 
+  
+  POST
+  
+  
+* **Content Type:** 
+  
+      `application/json` .
+      
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+|          | title |          room         |       assigned_to       | severity | description | comments |
+|:--------:|:-----:|:---------------------:|:-----------------------:|:--------:|:-----------:|:--------:|
+| Required |   x   |           x           |            x            |     x    |      x      |     x    |
+| Optional |       |                       |                         |          |             |          |
+|   Notes  |       | as an unsigned number | needs to be the user id |          |             |          |
+
+
+* **Sample Request:**
+
+```json
+{
+	"title": "oil spill",
+	"room" : 69,
+	"assigned_to": 1,
+	"severity": "extreme",
+	"description": "someone clean this oil spill asap!",
+	"comments": "yikes, wow what a big oil spill!"
+}
+```  
+  
+* **Success Response:**
+
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "Created issue succesfully!",
+    "data": {
+        "title": "oil spill",
+        "room": 69,
+        "user_id": 1,
+        "severity": "extreme",
+        "status": "incomplete",
+        "description": "someone clean this oil spill asap!",
+        "comments": "yikes, wow what a big oil spill!",
+        "updated_at": "2019-12-27 08:24:41",
+        "created_at": "2019-12-27 08:24:41",
+        "id": 1
+    }
+}
+```  
+
+* **Error Response:**
+
+```json
+{
+    "status": "401 (Unauthorized)",
+    "message": "You are not authorized to access this route.",
+    "data": ""
+}
+```
+
+
+DeleteIssue
+-----
+```bash
+  Deletes an existing issue by the id.
+```
+
+* **Route:** 
+
+    localhost/api/v1/issue/{id}
+ 
+* **Request Type:** 
+  
+  DELETE
+  
+  
+* **Content Type:** 
+  
+  `N/A` .
+  
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+
+* **Sample Request:**
+
+    localhost/api/v1/issue/59
+  
+  
+* **Success Response:**
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "Issue deleted succesfully.",
+    "data": {
+        "id": 1,
+        "room": 69,
+        "status": "incomplete",
+        "title": "oil spill",
+        "severity": "extreme",
+        "description": "someone clean this oil spill asap!",
+        "comments": "yikes, wow what a big oil spill!",
+        "user_id": 1,
+        "created_at": "2019-12-27 08:24:41",
+        "updated_at": "2019-12-27 08:24:41"
+    }
+}
+```
+
+* **Error Response:**
+
+```json
+{
+    "status": "400 (Bad Request)",
+    "message": "Could not find issue to be deleted by id",
+    "data": ""
+}
+```
+
+
+OR
+
+
+```json
+{
+    "status": "401 (Unauthorized)",
+    "message": "You are not authorized to access this route.",
+    "data": ""
+}
+```
