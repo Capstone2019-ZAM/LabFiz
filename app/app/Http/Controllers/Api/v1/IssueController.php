@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Issue\CreateRequest;
 use App\Issue;
 use App\Repositories\ModelRepository;
 use App\User;
@@ -46,7 +47,7 @@ class IssueController extends Controller
         return response($result, 200);
     }
 
-    public function create(Request $request)
+    public function create(CreateRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
         $header = $request->header('Authorization');
