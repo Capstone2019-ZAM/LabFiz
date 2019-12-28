@@ -118,6 +118,7 @@
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
+      <path value="$PROJECT_DIR$/vendor/jason-guru/laravel-make-repository" />
     </include_path>
   </component>
   <component name="ProjectId" id="1VPEUVPHhOohU9F6VcZ6YBblYyi" />
@@ -175,7 +176,7 @@
       <workItem from="1577321832800" duration="25140000" />
       <workItem from="1577406706048" duration="15494000" />
       <workItem from="1577431215814" duration="4825000" />
-      <workItem from="1577488501629" duration="241000" />
+      <workItem from="1577488501629" duration="5178000" />
     </task>
     <servers />
   </component>
@@ -207,9 +208,17 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="781" y="343" key="SettingsEditor/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577354488013" />
+    <state x="92" y="92" width="2376" height="1216" key="dock-window-1" timestamp="1577489490379">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="92" y="92" width="2376" height="1216" key="dock-window-1/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577489490379" />
     <state x="936" y="330" key="run.anything.popup" timestamp="1577322938896">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="936" y="330" key="run.anything.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577322938896" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1577490433504">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577490433504" />
   </component>
 </project>
