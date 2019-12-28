@@ -386,40 +386,59 @@ OR
     "status": "200 (Ok)",
     "message": "Created report document succesfully!",
     "data": {
-        "some cool title 2019": {
-            "title": "some cool title 2019",
-            "user_id": 1,
-            "updated_at": "2019-12-27 04:24:33",
-            "created_at": "2019-12-27 04:24:33",
-            "id": 16
-        },
+        "title": "some cool report title",
+        "user_id": 1,
+        "updated_at": "2019-12-28 04:15:02",
+        "created_at": "2019-12-28 04:15:02",
+        "id": 27,
         "$sect": {
             "title": "sect_title_3",
-            "report_id": 16,
-            "updated_at": "2019-12-27 04:24:33",
-            "created_at": "2019-12-27 04:24:33",
-            "id": 16
+            "report_id": 27,
+            "updated_at": "2019-12-28 04:15:02",
+            "created_at": "2019-12-28 04:15:02",
+            "id": 43
         },
         "quest_title_1": {
             "question": "quest_title_1",
-            "report_section_id": 16,
-            "updated_at": "2019-12-27 04:24:33",
-            "created_at": "2019-12-27 04:24:33",
-            "id": 20
+            "report_section_id": 41,
+            "updated_at": "2019-12-28 04:15:02",
+            "created_at": "2019-12-28 04:15:02",
+            "id": 71
         },
         "quest_title_2": {
             "question": "quest_title_2",
-            "report_section_id": 16,
-            "updated_at": "2019-12-27 04:24:33",
-            "created_at": "2019-12-27 04:24:33",
-            "id": 21
+            "report_section_id": 41,
+            "updated_at": "2019-12-28 04:15:02",
+            "created_at": "2019-12-28 04:15:02",
+            "id": 72
         },
         "quest_title_3": {
             "question": "quest_title_3",
-            "report_section_id": 16,
-            "updated_at": "2019-12-27 04:24:33",
-            "created_at": "2019-12-27 04:24:33",
-            "id": 22
+            "report_section_id": 42,
+            "updated_at": "2019-12-28 04:15:02",
+            "created_at": "2019-12-28 04:15:02",
+            "id": 73
+        },
+        "quest_title_4": {
+            "question": "quest_title_4",
+            "report_section_id": 43,
+            "updated_at": "2019-12-28 04:15:02",
+            "created_at": "2019-12-28 04:15:02",
+            "id": 74
+        },
+        "quest_title_5": {
+            "question": "quest_title_5",
+            "report_section_id": 43,
+            "updated_at": "2019-12-28 04:15:02",
+            "created_at": "2019-12-28 04:15:02",
+            "id": 75
+        },
+        "quest_title_6": {
+            "question": "quest_title_6",
+            "report_section_id": 43,
+            "updated_at": "2019-12-28 04:15:02",
+            "created_at": "2019-12-28 04:15:02",
+            "id": 76
         }
     }
 }
@@ -444,6 +463,40 @@ OR
 ```
 
 * **Error Response:**
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": {
+        "title": [
+            "The title field is required."
+        ]
+    },
+    "data": ""
+}
+```
+
+OR
+
+
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": {
+        "sections.sect_title_1.qs": [
+            "The sections.sect_title_1.qs field is required when sections.sect_title_1 is present."
+        ],
+        "sections.sect_title_2.qs": [
+            "The sections.sect_title_2.qs field is required when sections.sect_title_2 is present."
+        ],
+        "sections.sect_title_3.qs": [
+            "The sections.sect_title_3.qs field is required when sections.sect_title_3 is present."
+        ]
+    },
+    "data": ""
+}
+```
+
+OR
 
 ```json
 {
@@ -750,6 +803,47 @@ CreateInspection
 ```  
 
 * **Error Response:**
+
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": {
+        "report_id": [
+            "The report id field is required."
+        ],
+        "room": [
+            "The room field is required."
+        ],
+        "assigned_to": [
+            "The assigned to field is required."
+        ],
+        "due_date": [
+            "The due date field is required."
+        ]
+    },
+    "data": ""
+}
+```
+
+OR
+
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": {
+        "room": [
+            "The room must be a number."
+        ],
+        "assigned_to": [
+            "The assigned to must be a number."
+        ]
+    },
+    "data": ""
+}
+```
+
+OR
+
 
 ```json
 {
@@ -1066,6 +1160,77 @@ CreateIssue
 ```  
 
 * **Error Response:**
+
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": {
+        "title": [
+            "The title field is required."
+        ]
+    },
+    "data": ""
+}
+```
+
+OR
+
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": {
+        "assigned_to": [
+            "The assigned to must be a number."
+        ]
+    },
+    "data": ""
+}
+```
+
+OR
+
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": {
+        "title": [
+            "The title field is required."
+        ],
+        "room": [
+            "The room field is required."
+        ],
+        "assigned_to": [
+            "The assigned to field is required."
+        ],
+        "severity": [
+            "The severity field is required."
+        ],
+        "description": [
+            "The description field is required."
+        ],
+        "comments": [
+            "The comments field is required."
+        ]
+    },
+    "data": ""
+}
+```
+
+OR
+
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": {
+        "title": [
+            "The title field is required."
+        ]
+    },
+    "data": ""
+}
+```
+
+OR
 
 ```json
 {
