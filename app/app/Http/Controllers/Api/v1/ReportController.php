@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Report\CreateRequest;
 use App\Report;
 use App\ReportQuestion;
 use App\ReportSection;
@@ -53,7 +54,7 @@ class ReportController extends Controller
         return response($result, 200);
     }
 
-    public function create(Request $request)
+    public function create(CreateRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
         $header = $request->header('Authorization');

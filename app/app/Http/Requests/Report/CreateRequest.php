@@ -26,12 +26,10 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => array('required', 'regex:/^[\s\w-]*$/'),
-            'room' => array('required', 'numeric'),
-            'assigned_to' => array('required', 'numeric'),
-            'severity' => array('required', 'regex:/^[\s\w-]*$/'),
-            'description' => array('required', 'regex:/^[\s\w!-@#$^_:,.]*$/', 'max:250'),
-            'comments' => array('required', 'regex:/^[\s\w!-@#$^_:,.]*$/', 'max:250'),
+            'title' => array('required','required_with:bob', 'regex:/^[\s\w-]*$/'),
+            'sections.*' => array('sometimes','nullable','array'),
+            'sections.*.qs' => array('required_with:sections.*', 'array'),
+            'sections.*.qs.*' => array('required_with:sections.*.qs', 'regex:/^[\#s\w?-]*$/'),
         ];
     }
 
