@@ -65,7 +65,7 @@ class IssueController extends Controller
                 ]
             );
         } catch (Exception $ex) {
-            $result['message'] = $ex;
+            $result['message'] = $ex->getMessage();
             return response($result, 400);
         }
 
