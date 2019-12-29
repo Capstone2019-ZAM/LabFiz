@@ -27,6 +27,16 @@
     <expand />
     <select />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
@@ -122,6 +132,7 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1VPEUVPHhOohU9F6VcZ6YBblYyi" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -131,6 +142,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -177,6 +189,7 @@
       <workItem from="1577406706048" duration="15494000" />
       <workItem from="1577431215814" duration="4825000" />
       <workItem from="1577488501629" duration="17668000" />
+      <workItem from="1577588098363" duration="7628000" />
     </task>
     <servers />
   </component>
@@ -184,6 +197,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="1045" y="503" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577592577004">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1045" y="503" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577592577004" />
     <state x="960" y="428" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1577321815191">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -196,6 +213,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1010" y="455" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577494643537" />
+    <state x="1060" y="455" key="FileChooserDialogImpl" timestamp="1577588125034">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577588125034" />
     <state x="1089" y="515" key="NewPhpClassDialog" timestamp="1577498542915">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -204,10 +225,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1114" y="624" key="NewPhpFileDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577322745887" />
-    <state x="781" y="343" key="SettingsEditor" timestamp="1577354488013">
+    <state x="781" y="343" key="SettingsEditor" timestamp="1577591460050">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="781" y="343" key="SettingsEditor/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577354488013" />
+    <state x="781" y="343" key="SettingsEditor/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577591460050" />
     <state x="92" y="92" width="2376" height="1216" key="dock-window-1" timestamp="1577489490379">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

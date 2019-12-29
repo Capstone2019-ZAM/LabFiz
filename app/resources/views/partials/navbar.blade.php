@@ -2,7 +2,7 @@
     .links > a {
         color: #636b6f;
         padding: 0 25px;
-        font-size: 10px;
+        font-size: 15px;
         font-weight: 600;
         letter-spacing: .1rem;
         text-decoration: none;
@@ -13,9 +13,10 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <b>{{ config('app.name', 'ZAM') }}</b>
+            <b>ZAM Lab Solutions</b>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -25,24 +26,46 @@
 
             </ul>
 
-            <ul class="navbar-nav links">
-                    <a href="/">Home <span class="sr-only">(current)</span></a>
-                    <a href="/about">Dashboard</a>
-                    <a href="/services">About</a>
-            </ul>
+            @if (Route::has('login'))
+                <div class="top-right links">
+                    @if(Request::path() !== "/")
+                        <a class="nav-item dropdown nav-link" style="color: rgba(0,0,0,0.5)">
+                            @auth
+                                @if(Auth::user()->hasRole('admin'))
+                                    Admin
+                                @elseif(Auth::user()->hasRole('inspector'))
+                                    Inspector
+                                @else
+                                    Student
+                                @endif
+                                View
+                            @endif
+                        </a>
+                    @else
 
-            <!-- Right Side Of Navbar -->
+                    @endauth
+                </div>
+        @endif
+
+        <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto links">
-                <!-- Authentication Links -->
+                @if(Request::path() !== "/")
+                    <a class="mt-2" href="{{ url('/') }}">Home</a>
+                @endif
+            <!-- Authentication Links -->
                 @guest
-                        <a  href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="mt-2" href="{{ route('login') }}">{{ __('Login') }}</a>
                     @if (Route::has('register'))
-                            <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <a class="mt-2" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 @else
+                    @if(Request::path() !== "home")
+                        <a class="mt-2" href="{{ url('/home') }}">Dashboard</a>
+                    @endif
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -52,7 +75,8 @@
                                 {{ __('Logout') }}
                             </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
                                 @csrf
                             </form>
                         </div>

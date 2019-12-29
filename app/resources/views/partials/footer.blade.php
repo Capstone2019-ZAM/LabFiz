@@ -1,6 +1,6 @@
 <footer class="text-muted mt-3">
     <div class="container text-center">
-        <p>University of Regina Capstone! &copy; 2019-2020, Lab safety and training inspection app. </p>
+        <p> ZAM Lab Solutions &copy; 2019-2020, Labratory safety and training inspection application. </p>
     </div>
 </footer>
 
