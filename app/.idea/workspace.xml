@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ad52eaf2-ddb8-4461-bd03-6b3378c37c38" name="Default Changelist" comment="" />
+    <list default="true" id="ad52eaf2-ddb8-4461-bd03-6b3378c37c38" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/QuestionTemplate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/ReportTemplate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/SectionTemplate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_01_010959_create_report_templates_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_01_011056_create_section_templates_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_01_011107_create_question_templates_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -132,13 +140,16 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1VPEUVPHhOohU9F6VcZ6YBblYyi" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -190,11 +201,16 @@
       <workItem from="1577431215814" duration="4825000" />
       <workItem from="1577488501629" duration="17668000" />
       <workItem from="1577588098363" duration="7628000" />
+      <workItem from="1577596851908" duration="348000" />
+      <workItem from="1577834712388" duration="3674000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1045" y="503" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577592577004">
