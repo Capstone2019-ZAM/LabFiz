@@ -12,15 +12,14 @@ class ReportTemplate extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'report_id', 'user_id'
+        'title', 'user_id'
     ];
 
     /**
-     * Gets the report associated with this report template.
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function report()
+    public function sections()
     {
-        return $this->hasOne(Report::class);
+        return $this->hasMany('App\SectionTemplate');
     }
 }

@@ -12,15 +12,14 @@ class QuestionTemplate extends Model
      * @var array
      */
     protected $fillable = [
-        'question', 'question_id', 'user_id'
+        'question', 'user_id', 'section_id'
     ];
 
     /**
-     * Gets the report question associated with this question template.
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function question()
+    public function section()
     {
-        return $this->hasOne(ReportQuestion::class);
+        return $this->belongsTo('App\SectionTemplate');
     }
 }
