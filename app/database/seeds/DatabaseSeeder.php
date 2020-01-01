@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
 
             // seed report templates
             $this->call(ReportsTemplateSeeder::class);
+            $this->call(ReportSectionTemplateSeeder::class);
+            $this->call(ReportQuestionTemplateSeeder::class);
         }
     }
 }

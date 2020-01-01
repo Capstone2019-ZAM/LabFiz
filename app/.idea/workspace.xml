@@ -5,13 +5,17 @@
       <change afterPath="$PROJECT_DIR$/app/QuestionTemplate.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/ReportTemplate.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/SectionTemplate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/factories/QuestionTemplateFactory.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/database/factories/ReportTemplateFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/factories/SectionTemplateFactory.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_01_030622_create_report_templates_table.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_01_030655_create_section_templates_table.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_01_030757_create_question_templates_table.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_01_031559_alter_report_table.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_01_032932_alter_section_table.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_01_033217_alter_question_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/ReportQuestionTemplateSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/ReportSectionTemplateSeeder.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/database/seeds/ReportsTemplateSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
@@ -210,7 +214,7 @@
       <workItem from="1577488501629" duration="17668000" />
       <workItem from="1577588098363" duration="7628000" />
       <workItem from="1577596851908" duration="348000" />
-      <workItem from="1577834712388" duration="14438000" />
+      <workItem from="1577834712388" duration="15146000" />
     </task>
     <servers />
   </component>
