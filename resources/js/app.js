@@ -1,10 +1,7 @@
-
 require('./bootstrap');
 window.Vue = require('vue');
 
 import vuetify from './vuetify';
-
-
 import dashboard from './components/Dashboard.vue';
 
 // const files = require.context('./', true, /\.vue$/i)
