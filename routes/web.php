@@ -21,6 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/users', 'UserController@show');
 
+Route::get('/dashboard', function(){ return view('dashboardPage');
+        });
+
 // Route::get('/users', function () {
 //                     return view('users');
 //                 });

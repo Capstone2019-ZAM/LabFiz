@@ -22,7 +22,24 @@
                     @endcan
 
                     @can('isUser')                        
-                     <label > as a user </label>                        
+                   
+                   
+                        <div id="app">
+                          <v-app>
+                            <v-content>
+                              <v-container>Hello world</v-container>
+                            </v-content>
+                          </v-app>
+                        </div>
+                      
+                        
+                        <script>
+                          new Vue({
+                            el: '#app',
+                            vuetify: new Vuetify(),
+                          })
+                        </script>
+                    
                     @endcan
 
                 </div>
