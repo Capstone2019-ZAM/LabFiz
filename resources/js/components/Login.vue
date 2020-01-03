@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="login">
     <v-content>
       <v-container
         class="fill-height"
@@ -29,7 +29,7 @@
                   <v-text-field
                     label="Login"
                     name="login"
-                    prepend-icon="mdi-Account-circle"
+                    prepend-icon="mdi-account"
                     type="text"
                   />
 
