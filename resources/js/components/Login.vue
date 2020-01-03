@@ -1,6 +1,6 @@
 <template>
-  <v-app id="login">
-    <v-content>
+  <v-app >
+    <v-content id='login'>
       <v-container
         class="fill-height"
         fluid
@@ -45,14 +45,14 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="primary">Login</v-btn>
+                <v-btn color="primary" >Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
       </v-container>
     </v-content>
-  </v-app>
+ </v-app>
 </template>
 
 <script>
