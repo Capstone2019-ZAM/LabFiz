@@ -1,5 +1,5 @@
 <template>
-  <v-app >
+
     <v-content id='login'>
       <v-container
         class="fill-height"
@@ -52,7 +52,7 @@
         </v-row>
       </v-container>
     </v-content>
- </v-app>
+
 </template>
 
 <script>

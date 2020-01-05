@@ -1,5 +1,5 @@
 <template>
-<v-app>
+
   <v-card>
     <v-card-title>
       Nutrition
@@ -18,7 +18,7 @@
       :search="search"
     ></v-data-table>
   </v-card>
-  </v-app>
+  
 </template>
 
 
