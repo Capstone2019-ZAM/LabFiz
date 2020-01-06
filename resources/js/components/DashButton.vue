@@ -2,8 +2,9 @@
     <v-card max-width="420" max-height="200" class="mx-auto pa-3 d-flex flex-row" hover outlined>
       <v-layout row wrap align-content-center >
         <v-flex xs2 md4 centered>
-            <v-icon size="100">{{data.icon}}</v-icon>
-          
+          <v-responsive >
+            <v-icon max-height="auto" size="90">{{data.icon}}</v-icon>
+          </v-responsive>
         </v-flex>
 
         <v-flex xs10 md8 >
