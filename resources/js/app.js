@@ -13,6 +13,7 @@ Vue.component('login-form', require('./components/Login.vue').default);
 Vue.component('table-component', require('./components/TableComponent.vue').default);
 Vue.component('dash-button', require('./components/DashButton.vue').default);
 Vue.component('dash-board', require('./components/DashBoard.vue').default);
+Vue.component('template-list', require('./components/TemplateList.vue').default);
 
 const app = new Vue({
     vuetify,

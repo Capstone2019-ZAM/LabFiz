@@ -1,5 +1,5 @@
 <template>
-  <v-container >
+  <v-container>
     <!-- <v-layout row wrap align-start="">
         <v-flex  xs12 sm6 md4 lg4 xl2 > 
             <dash-button></dash-button>
@@ -11,14 +11,13 @@
 
     
     </v-layout>-->
-   
+
     <v-row>
-         <div v-for="data in options">
-      <v-col>
-        <dash-button :data="data"></dash-button>
-      </v-col>
-          </div>
- 
+      <div v-for="data in options">
+        <v-col>
+          <dash-button :data="data"></dash-button>
+        </v-col>
+      </div>
     </v-row>
   </v-container>
 </template>
@@ -57,7 +56,6 @@ export default {
           title: "Pending Inspections",
           description: "Something said here"
         }
-
       ]
     };
   }

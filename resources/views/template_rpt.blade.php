@@ -4,6 +4,6 @@
 
 <div id="app">
     {{-- < Your view components go here> --}}
-
+<template-list></template-list>
 </div>
 @endsection
