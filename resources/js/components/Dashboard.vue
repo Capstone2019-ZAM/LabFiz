@@ -18,7 +18,7 @@
         <dash-button :data="data"></dash-button>
       </v-col>
           </div>
-
+ 
     </v-row>
   </v-container>
 </template>
