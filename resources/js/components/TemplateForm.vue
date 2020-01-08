@@ -13,11 +13,14 @@
               :counter="10"
               label="Report Title"
               required
-            ></v-text-field>
+            ></v-text-field>          </v-col>
+
+            <v-col
+            cols="12"
+            md="2">
              <v-btn right>
             Save
-        </v-btn>
-          </v-col>
+        </v-btn></v-col>
   
           <v-col
             cols="12"

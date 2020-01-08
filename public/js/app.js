@@ -2269,6 +2269,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38768,8 +38771,15 @@ var render = function() {
                           },
                           expression: "title"
                         }
-                      }),
-                      _vm._v(" "),
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "2" } },
+                    [
                       _c("v-btn", { attrs: { right: "" } }, [
                         _vm._v("\n            Save\n        ")
                       ])
