@@ -29,6 +29,10 @@ Route::get('/templates', function () {
     return view('template_rpt');
 });
 
+Route::get('/template_builder', function () {
+    return view('template_builder');
+});
+
 // Route::get('/users', function () {
 //                     return view('users');
 //                 });

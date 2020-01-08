@@ -8,7 +8,7 @@
     hover
     outlined
   >
-    <v-layout row wrap align-content-center>
+    <v-layout dark row wrap align-content-center>
       <v-flex xs2 md4 centered pa-3>
         <v-responsive pa-2>
           <v-icon max-height="auto" size="90">{{data.icon}}</v-icon>

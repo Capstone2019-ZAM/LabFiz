@@ -14,6 +14,7 @@ Vue.component('table-component', require('./components/TableComponent.vue').defa
 Vue.component('dash-button', require('./components/DashButton.vue').default);
 Vue.component('dash-board', require('./components/DashBoard.vue').default);
 Vue.component('template-list', require('./components/TemplateList.vue').default);
+Vue.component('template-builder', require('./components/TemplateForm.vue').default);
 
 const app = new Vue({
     vuetify,
