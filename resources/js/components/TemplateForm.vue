@@ -18,8 +18,8 @@
           </v-col>-->
           <v-spacer></v-spacer>
 
-          <v-col  align="center" justify="end">
-          <v-btn dark>
+          <v-col  align="center" align-self="center">
+          <v-btn color="primary">
             <v-icon>mdi-content-save</v-icon>Save
           </v-btn>
           </v-col>
@@ -43,7 +43,7 @@
         </v-row>
 
         <v-row align="center" justify="center">
-          <v-btn dark>
+          <v-btn color="primary">
             <v-icon>mdi-plus-circle</v-icon>Add Question
           </v-btn>
         </v-row>
@@ -51,7 +51,7 @@
         <v-spacer></v-spacer>
         </v-row>
         <v-row align="center" justify="center" >
-            <v-btn dark block>
+            <v-btn  block color="primary">
               <v-icon>mdi-plus-circle</v-icon>Add Section
             </v-btn>
         </v-row>
@@ -66,13 +66,13 @@ export default {
     title: "",
     section_title: "",
     nameRules: [
-      v => !!v || "Name is required",
+      v => !!v || "Title is required",
       v => v.length <= 10 || "Name must be less than 10 characters"
     ],
     email: "",
     emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+/.test(v) || "E-mail must be valid"
+      v => !!v || "Question is required",
+      
     ]
   })
 };
