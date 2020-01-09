@@ -20,7 +20,7 @@
 </template>
 
 <script>
-export default {},
+export default {}
  data () {
     return {
       select: { state: 'Florida', abbr: 'FL' },
