@@ -38,6 +38,11 @@ Route::get('/issueform', function () {
     return view('issue_rpt');
 });
 
+Route::get('/account', function () {
+    return view('account_rpt');
+});
+
+
 // Route::get('/users', function () {
 //                     return view('users');
 //                 });
