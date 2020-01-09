@@ -17,6 +17,7 @@ Vue.component('template-list', require('./components/TemplateList.vue').default)
 Vue.component('template-builder', require('./components/TemplateForm.vue').default);
 Vue.component('inspection-form', require('./components/InspectionForm.vue').default);
 
+Vue.component('issue-form', require('./components/IssueTrackerForm.vue').default);
 const app = new Vue({
     vuetify,
 
