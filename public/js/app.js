@@ -2272,22 +2272,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       valid: false,
-      title: '',
-      section_title: '',
+      title: "",
+      section_title: "",
       nameRules: [function (v) {
-        return !!v || 'Name is required';
+        return !!v || "Title is required";
       }, function (v) {
-        return v.length <= 10 || 'Name must be less than 10 characters';
+        return v.length <= 10 || "Name must be less than 10 characters";
       }],
-      email: '',
+      email: "",
       emailRules: [function (v) {
-        return !!v || 'E-mail is required';
-      }, function (v) {
-        return /.+@.+/.test(v) || 'E-mail must be valid';
+        return !!v || "Question is required";
       }]
     };
   }
@@ -38755,7 +38755,7 @@ var render = function() {
                 [
                   _c(
                     "v-col",
-                    { attrs: { cols: "12", md: "8" } },
+                    { attrs: { cols: "12", md: "6", sm: "4" } },
                     [
                       _c("v-text-field", {
                         attrs: {
@@ -38776,17 +38776,31 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
                   _c(
                     "v-col",
-                    { attrs: { cols: "12", md: "2" } },
+                    { attrs: { align: "center", "align-self": "center" } },
                     [
-                      _c("v-btn", { attrs: { right: "" } }, [
-                        _vm._v("\n            Save\n        ")
-                      ])
+                      _c(
+                        "v-btn",
+                        { attrs: { color: "primary" } },
+                        [
+                          _c("v-icon", [_vm._v("mdi-content-save")]),
+                          _vm._v("Save\n        ")
+                        ],
+                        1
+                      )
                     ],
                     1
-                  ),
-                  _vm._v(" "),
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-row",
+                [
                   _c(
                     "v-col",
                     { attrs: { cols: "12", md: "5" } },
@@ -38808,8 +38822,14 @@ var render = function() {
                       })
                     ],
                     1
-                  ),
-                  _vm._v(" "),
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-row",
+                [
                   _c(
                     "v-col",
                     { attrs: { cols: "12", md: "10" } },
@@ -38827,11 +38847,7 @@ var render = function() {
                           },
                           expression: "question"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("v-btn", [
-                        _vm._v("\n            Add Question\n        ")
-                      ])
+                      })
                     ],
                     1
                   )
@@ -38839,7 +38855,41 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-btn", [_vm._v("\n            Add Section\n        ")])
+              _c(
+                "v-row",
+                { attrs: { align: "center", justify: "center" } },
+                [
+                  _c(
+                    "v-btn",
+                    { attrs: { color: "primary" } },
+                    [
+                      _c("v-icon", [_vm._v("mdi-plus-circle")]),
+                      _vm._v("Add Question\n        ")
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-row", { staticClass: "ma-3" }, [_c("v-spacer")], 1),
+              _vm._v(" "),
+              _c(
+                "v-row",
+                { attrs: { align: "center", justify: "center" } },
+                [
+                  _c(
+                    "v-btn",
+                    { attrs: { block: "", color: "primary" } },
+                    [
+                      _c("v-icon", [_vm._v("mdi-plus-circle")]),
+                      _vm._v("Add Section\n          ")
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
             1
           )
@@ -92910,8 +92960,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\Capstone\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\Capstone\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\project_test\blog\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\project_test\blog\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
