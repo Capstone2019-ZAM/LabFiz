@@ -20,6 +20,7 @@ Vue.component('inspection-table', require('./components/InspectionTable.vue').de
 Vue.component('assignments-manager', require('./components/InspectionManage.vue').default);
 
 Vue.component('issue-form', require('./components/IssueTrackerForm.vue').default);
+Vue.component('accountmanage-form', require('./components/AccountManagment.vue').default);
 const app = new Vue({
     vuetify,
     el: '#app',
