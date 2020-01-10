@@ -5,7 +5,7 @@
 <div id="app">
     {{-- < Your view components go here> --}}
     <v-app>
-        <inspection-form></inspection-form>
+        <assignments-manager></assignments-manager>
     </v-app>
 
 </div>
