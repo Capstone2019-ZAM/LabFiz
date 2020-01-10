@@ -22,7 +22,6 @@ Vue.component('assignments-manager', require('./components/InspectionManage.vue'
 Vue.component('issue-form', require('./components/IssueTrackerForm.vue').default);
 const app = new Vue({
     vuetify,
-
     el: '#app',
 });
 

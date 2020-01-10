@@ -1,8 +1,10 @@
 <template>
-  <div >
-    <v-row  justify="center">
-      <v-col cols="12" md="9" >
-    <v-container>
+  <div  >
+    <v-row  justify="center" >
+      <v-col cols="12" md="9"  >
+    <v-card>
+      <v-card-title>Assign Inspection</v-card-title>
+    <v-container  >
       <v-row>
         <v-col cols="12" md="3">
           <v-select v-model="selected_report" :items="reports" label="Report" prepend-icon="mdi-file-document"></v-select>
@@ -31,8 +33,10 @@
         <v-btn dark>Assign</v-btn></v-col>
       </v-row>
     </v-container>
+    </v-card>
       </v-col>
     </v-row>
+  
   </div>
 </template>
 
@@ -67,3 +71,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.border{
+  border-block-color: black;
+}
+</style>
