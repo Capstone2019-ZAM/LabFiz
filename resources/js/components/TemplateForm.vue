@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div >
     <v-form v-model="valid">
       <v-container >
         <v-row  >
