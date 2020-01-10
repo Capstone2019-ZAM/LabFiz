@@ -27,8 +27,9 @@
               <v-card-text>
                 <v-container>
                   <v-row>
-                      <v-col cols="12" sm="6" md="4">as
-                      <!-- <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field> -->
+                      <v-col cols="12" sm="6" md="4">
+                        
+                      <v-text-field v-model="editedItem.status" label="Fat (g)"></v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -73,6 +74,22 @@ export default {
         { text: "Due Date", value: "due_date", width: "100px" },
         { text: "Actions", value: "action", sortable: false  , width: "100px"}
       ],
+      editedIndex: -1,
+      editedItem: {
+      report: '',
+      room: '',
+      status: '',
+      assigned_to: '',
+       },
+      defaultItem:{
+        report: '',
+      room: '',
+      status: '',
+      assigned_to: '',
+      },
+      created () {
+    this.initialize()
+    },
       assignments: [
         {
           status_name: "Pending",
@@ -118,7 +135,45 @@ export default {
       else if (status_name == "Submitted") return "green";
       else if (status_name == "Overdue") return "red";
       else return "grey";
-    }
+    },
+    initialize () {
+      this.assignments = [
+        {
+          status_name: "Submitted",
+          lab_name: "ED-310",
+          assignee: "John Doe",
+          report_name: "Wet Lab",
+          due_date: "10-Jul-2020"
+        },      
+      ]
+    },
+    editItem (item) {
+      this.editedIndex = this.assignments.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
+    },
+
+    deleteItem (item) {
+      const index = this.assignments.indexOf(item)
+      confirm('Are you sure you want to delete this item?') && this.assignments.splice(index, 1)
+    },
+
+    close () {
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      }, 300)
+    },
+
+    save () {
+      if (this.editedIndex > -1) {
+        Object.assign(this.assignments[this.editedIndex], this.editedItem)
+      } else {
+        this.assignments.push(this.editedItem)
+      }
+      this.close()
+    },
   }
 };
 </script>
