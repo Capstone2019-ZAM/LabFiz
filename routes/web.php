@@ -32,6 +32,9 @@ Route::get('/templates', function () {
 Route::get('/template_builder', function () {
     return view('template_builder');
 });
+Route::get('/assignments', function () {
+    return view('assignment_rpt');
+});
 
 
 Route::get('/issueform', function () {
