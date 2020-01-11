@@ -18,6 +18,7 @@ Vue.component('template-builder', require('./components/TemplateForm.vue').defau
 Vue.component('inspection-form', require('./components/InspectionForm.vue').default);
 Vue.component('inspection-table', require('./components/InspectionTable.vue').default);
 Vue.component('assignments-manager', require('./components/InspectionManage.vue').default);
+Vue.component('assignment-instance', require('./components/Assignment.vue').default);
 
 Vue.component('issue-form', require('./components/IssueTrackerForm.vue').default);
 Vue.component('accountmanage-form', require('./components/AccountManagment.vue').default);

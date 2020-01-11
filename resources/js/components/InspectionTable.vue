@@ -42,14 +42,14 @@
               </v-card-actions>
             </v-card>
 
-          <v-dialog v-model="dialog" max-width="500px">
+          <!-- <v-dialog v-model="dialog" max-width="500px"> -->
 
           <template v-slot:item.action="{ item }">
             <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
             <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
           </template>
 
-          </v-dialog>          
+          <!-- </v-dialog>           -->
         </v-data-table>
       </v-card>
     </v-col>

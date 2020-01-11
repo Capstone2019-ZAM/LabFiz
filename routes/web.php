@@ -35,6 +35,9 @@ Route::get('/template_builder', function () {
 Route::get('/assignments', function () {
     return view('assignment_rpt');
 });
+Route::get('/assignment', function () {
+    return view('assignment');
+});
 
 
 Route::get('/issueform', function () {
