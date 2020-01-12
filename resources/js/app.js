@@ -22,6 +22,8 @@ Vue.component('assignment-instance', require('./components/Assignment.vue').defa
 
 Vue.component('issue-form', require('./components/IssueTrackerForm.vue').default);
 Vue.component('accountmanage-form', require('./components/AccountManagment.vue').default);
+Vue.component('issue-tracker', require('./components/IssueTracker.vue').default);
+Vue.component('account-manage', require('./components/AccountManager.vue').default);
 const app = new Vue({
     vuetify,
     el: '#app',
