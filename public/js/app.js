@@ -2012,11 +2012,132 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      checkbox: true
+      search: "",
+      dialog: false,
+      headers: [{
+        text: "Question",
+        align: "left",
+        sortable: false,
+        value: "question",
+        width: "50%"
+      }, {
+        text: "Answer",
+        value: "answer",
+        width: "20%",
+        sortable: false
+      }, {
+        text: "Comment",
+        value: "comment",
+        width: "30%",
+        sortable: false
+      }],
+      editedIndex: -1,
+      editedItem: {
+        comment: ""
+      },
+      defaultItem: {
+        comment: ""
+      },
+      created: function created() {
+        this.initialize();
+      },
+      sec_q: [{
+        question: "How do you do?"
+      }, {
+        question: "What is your age?"
+      }, {
+        question: "Did you clean ur room?Did you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur room"
+      }]
     };
+  },
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
+  },
+  created: function created() {
+    this.initialize();
+  },
+  methods: {
+    initialize: function initialize() {
+      this.sec_q = [{
+        question: "Did you clean ur room?Did",
+        comment: "Nada"
+      }, {
+        question: "What is your age?",
+        comment: "Nada"
+      }, {
+        question: "Did you clean ur room?",
+        comment: "Nada"
+      }];
+    },
+    editItem: function editItem(item) {
+      debugger;
+      this.editedIndex = this.sec_q.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    close: function close() {
+      var _this = this;
+
+      this.dialog = false;
+      setTimeout(function () {
+        _this.editedItem = Object.assign({}, _this.defaultItem);
+        _this.editedIndex = -1;
+      }, 300);
+    },
+    save: function save() {
+      // if (this.editedIndex > -1) {
+      //   Object.assign(this.sec_q[this.editedIndex], this.editedItem);
+      // } else {
+      //   this.sec_q.push(this.editedItem);
+      // }
+      this.close();
+    }
   }
 });
 
@@ -2345,6 +2466,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2359,7 +2481,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: "Status",
         value: "status_name",
-        width: "100px"
+        width: "200px"
       }, {
         text: "Report",
         value: "report_name",
@@ -2380,16 +2502,16 @@ __webpack_require__.r(__webpack_exports__);
       }],
       editedIndex: -1,
       editedItem: {
-        report: '',
-        room: '',
-        status: '',
-        assigned_to: ''
+        report: "",
+        room: "",
+        status: "",
+        assigned_to: ""
       },
       defaultItem: {
-        report: '',
-        room: '',
-        status: '',
-        assigned_to: ''
+        report: "",
+        room: "",
+        status: "",
+        assigned_to: ""
       },
       created: function created() {
         this.initialize();
@@ -2455,7 +2577,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteItem: function deleteItem(item) {
       var index = this.assignments.indexOf(item);
-      confirm('Are you sure you want to delete this item?') && this.assignments.splice(index, 1);
+      confirm("Are you sure you want to delete this item?") && this.assignments.splice(index, 1);
     },
     close: function close() {
       var _this = this;
@@ -42465,45 +42587,90 @@ var render = function() {
   return _c(
     "v-card",
     [
-      _c(
-        "v-row",
-        [
-          _c(
-            "v-col",
-            { attrs: { cols: "12", md: "6" } },
-            [_c("v-card-text", [_vm._v("Question Here")])],
-            1
-          ),
-          _vm._v(" "),
-          _vm._l(3, function(n) {
-            return _c(
-              "v-col",
-              { key: n, attrs: { cols: "12", md: "2" } },
-              [
-                _c("v-checkbox", {
-                  attrs: { label: "Checkbox 1" },
-                  model: {
-                    value: _vm.checkbox,
-                    callback: function($$v) {
-                      _vm.checkbox = $$v
+      _c("v-card-title", [_vm._v("Section Title")]),
+      _vm._v(" "),
+      _c("v-data-table", {
+        attrs: { headers: _vm.headers, items: _vm.sec_q, search: _vm.search },
+        scopedSlots: _vm._u([
+          {
+            key: "item.answer",
+            fn: function(ref) {
+              var item = ref.item
+              return [
+                _c(
+                  "v-radio-group",
+                  { attrs: { row: "" } },
+                  _vm._l(3, function(n) {
+                    return _c("v-radio", {
+                      key: n,
+                      attrs: { label: " |", value: n }
+                    })
+                  }),
+                  1
+                )
+              ]
+            }
+          },
+          {
+            key: "item.comment",
+            fn: function(props) {
+              return [
+                _c(
+                  "v-edit-dialog",
+                  {
+                    attrs: {
+                      "return-value": props.item.comment,
+                      large: "",
+                      persistent: ""
                     },
-                    expression: "checkbox"
-                  }
-                })
-              ],
-              1
-            )
-          }),
-          _vm._v(" "),
-          _c(
-            "v-col",
-            { attrs: { cols: "12", md: "6" } },
-            [_c("v-text-field")],
-            1
-          )
-        ],
-        2
-      )
+                    on: {
+                      "update:returnValue": function($event) {
+                        return _vm.$set(props.item, "comment", $event)
+                      },
+                      "update:return-value": function($event) {
+                        return _vm.$set(props.item, "comment", $event)
+                      },
+                      save: _vm.save,
+                      close: _vm.close
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "input",
+                          fn: function() {
+                            return [
+                              _c("v-text-field", {
+                                attrs: {
+                                  rules: [],
+                                  label: "Comment",
+                                  "single-line": "",
+                                  counter: "",
+                                  autofocus: ""
+                                },
+                                model: {
+                                  value: props.item.comment,
+                                  callback: function($$v) {
+                                    _vm.$set(props.item, "comment", $$v)
+                                  },
+                                  expression: "props.item.comment"
+                                }
+                              })
+                            ]
+                          },
+                          proxy: true
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [_c("div", [_vm._v(_vm._s(props.item.comment))])]
+                )
+              ]
+            }
+          }
+        ])
+      })
     ],
     1
   )
@@ -42936,7 +43103,7 @@ var render = function() {
               _c(
                 "v-card-title",
                 [
-                  _vm._v("\n          All Inspections\n          "),
+                  _vm._v("\n        All Inspections\n        "),
                   _c("v-spacer"),
                   _vm._v(" "),
                   _c("v-text-field", {
@@ -42973,14 +43140,15 @@ var render = function() {
                         var item = ref.item
                         return [
                           _c(
-                            "v-chip",
-                            {
-                              attrs: {
-                                color: _vm.getColor(item.status_name),
-                                dark: ""
-                              }
-                            },
-                            [_vm._v(_vm._s(item.status_name))]
+                            "v-radio-group",
+                            { attrs: { column: "false", row: "true" } },
+                            _vm._l(3, function(n) {
+                              return _c("v-radio", {
+                                key: n,
+                                attrs: { label: " |", value: n }
+                              })
+                            }),
+                            1
                           )
                         ]
                       }
@@ -98322,8 +98490,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\Capstone\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\Capstone\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\project\Capstone\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\project\Capstone\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
