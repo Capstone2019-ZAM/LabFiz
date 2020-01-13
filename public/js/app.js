@@ -2236,10 +2236,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       search: "",
+      dialog: false,
       headers: [{
         text: "Lab",
         align: "left",
@@ -2268,6 +2273,22 @@ __webpack_require__.r(__webpack_exports__);
         sortable: false,
         width: "100px"
       }],
+      editedIndex: -1,
+      editedItem: {
+        report: '',
+        room: '',
+        status: '',
+        assigned_to: ''
+      },
+      defaultItem: {
+        report: '',
+        room: '',
+        status: '',
+        assigned_to: ''
+      },
+      created: function created() {
+        this.initialize();
+      },
       assignments: [{
         status_name: "Pending",
         lab_name: "ED-401",
@@ -2301,9 +2322,53 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
+  },
+  created: function created() {
+    this.initialize();
+  },
   methods: {
     getColor: function getColor(status_name) {
       if (status_name == "Pending") return "blue";else if (status_name == "Submitted") return "green";else if (status_name == "Overdue") return "red";else return "grey";
+    },
+    initialize: function initialize() {
+      this.assignments = [{
+        status_name: "Submitted",
+        lab_name: "ED-310",
+        assignee: "John Doe",
+        report_name: "Wet Lab",
+        due_date: "10-Jul-2020"
+      }];
+    },
+    editItem: function editItem(item) {
+      this.editedIndex = this.assignments.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    deleteItem: function deleteItem(item) {
+      var index = this.assignments.indexOf(item);
+      confirm('Are you sure you want to delete this item?') && this.assignments.splice(index, 1);
+    },
+    close: function close() {
+      var _this = this;
+
+      this.dialog = false;
+      setTimeout(function () {
+        _this.editedItem = Object.assign({}, _this.defaultItem);
+        _this.editedIndex = -1;
+      }, 300);
+    },
+    save: function save() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.assignments[this.editedIndex], this.editedItem);
+      } else {
+        this.assignments.push(this.editedItem);
+      }
+
+      this.close();
     }
   }
 });
@@ -42642,40 +42707,6 @@ var render = function() {
                           )
                         ]
                       }
-                    },
-                    {
-                      key: "item.action",
-                      fn: function(ref) {
-                        var item = ref.item
-                        return [
-                          _c(
-                            "v-icon",
-                            {
-                              staticClass: "mr-2",
-                              attrs: { small: "" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.editItem(item)
-                                }
-                              }
-                            },
-                            [_vm._v("mdi-pencil")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-icon",
-                            {
-                              attrs: { small: "" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.deleteItem(item)
-                                }
-                              }
-                            },
-                            [_vm._v("mdi-delete")]
-                          )
-                        ]
-                      }
                     }
                   ])
                 },
@@ -42702,7 +42733,23 @@ var render = function() {
                                   _c(
                                     "v-col",
                                     { attrs: { cols: "12", sm: "6", md: "4" } },
-                                    [_vm._v("as\n                      ")]
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Fat (g)" },
+                                        model: {
+                                          value: _vm.editedItem.status,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.editedItem,
+                                              "status",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "editedItem.status"
+                                        }
+                                      })
+                                    ],
+                                    1
                                   )
                                 ],
                                 1
@@ -42741,7 +42788,54 @@ var render = function() {
                       )
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("v-dialog", {
+                    attrs: { "max-width": "500px" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "item.action",
+                        fn: function(ref) {
+                          var item = ref.item
+                          return [
+                            _c(
+                              "v-icon",
+                              {
+                                staticClass: "mr-2",
+                                attrs: { small: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editItem(item)
+                                  }
+                                }
+                              },
+                              [_vm._v("mdi-pencil")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-icon",
+                              {
+                                attrs: { small: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteItem(item)
+                                  }
+                                }
+                              },
+                              [_vm._v("mdi-delete")]
+                            )
+                          ]
+                        }
+                      }
+                    ]),
+                    model: {
+                      value: _vm.dialog,
+                      callback: function($$v) {
+                        _vm.dialog = $$v
+                      },
+                      expression: "dialog"
+                    }
+                  })
                 ],
                 1
               )
