@@ -1,6 +1,6 @@
 <template>
-  <v-list  tile>
-    <v-list-item>
+<v-row  justify="center"  >
+  <v-col cols="12" md="12">
       <v-card class="mx-auto" width="80%">
         <v-card-title>Report Templates</v-card-title>
         <v-list two-line subheader>
@@ -22,15 +22,14 @@
             </v-list-item-action>
           </v-list-item>
         </v-list>
-        <v-spacer></v-spacer>
 
         <v-btn block outlined color="indigo" class="ma-10">
           Add new Template
           <v-icon dark>mdi-plus</v-icon>
         </v-btn>
       </v-card>
-    </v-list-item>
-  </v-list>
+  </v-col>
+</v-row>
 </template>
 <script>
 export default {

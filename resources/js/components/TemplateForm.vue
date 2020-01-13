@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-card width="80%" max-height="600px">
+    <v-card width="80%" max-height="600px" class="mx-auto" >
       <v-row align="center" justify="center">
         <v-col cols="12" md="9">
           <v-card-title>Template Builder</v-card-title>

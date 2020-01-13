@@ -3152,7 +3152,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -44072,7 +44071,10 @@ var render = function() {
     [
       _c(
         "v-card",
-        { attrs: { width: "80%", "max-height": "600px" } },
+        {
+          staticClass: "mx-auto",
+          attrs: { width: "80%", "max-height": "600px" }
+        },
         [
           _c(
             "v-row",
@@ -44293,11 +44295,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-list",
-    { attrs: { tile: "" } },
+    "v-row",
+    { attrs: { justify: "center" } },
     [
       _c(
-        "v-list-item",
+        "v-col",
+        { attrs: { cols: "12", md: "12" } },
         [
           _c(
             "v-card",
@@ -44363,8 +44366,6 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-spacer"),
-              _vm._v(" "),
               _c(
                 "v-btn",
                 {
@@ -44372,7 +44373,7 @@ var render = function() {
                   attrs: { block: "", outlined: "", color: "indigo" }
                 },
                 [
-                  _vm._v("\n        Add new Template\n        "),
+                  _vm._v("\r\n          Add new Template\r\n          "),
                   _c("v-icon", { attrs: { dark: "" } }, [_vm._v("mdi-plus")])
                 ],
                 1
