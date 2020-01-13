@@ -1977,8 +1977,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2047,12 +2045,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2065,14 +2057,14 @@ __webpack_require__.r(__webpack_exports__);
         value: "question",
         width: "50%"
       }, {
-        text: "Answer",
+        text: "Response",
         value: "answer",
-        width: "20%",
+        width: "25%",
         sortable: false
       }, {
         text: "Comment",
         value: "comment",
-        width: "30%",
+        width: "25%",
         sortable: false
       }],
       editedIndex: -1,
@@ -2407,8 +2399,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -42509,50 +42499,54 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-card",
+    "v-row",
+    { attrs: { justify: "center" } },
     [
       _c(
-        "v-row",
-        { attrs: { justify: "center" } },
+        "v-card",
+        { attrs: { width: "80%", "max-width": "1000px" } },
         [
           _c(
-            "v-col",
-            { attrs: { cols: "12", md: "9" } },
-            [_c("v-card-title", [_vm._v("Wet Lab - Inspection")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-col",
-            { attrs: { cols: "12", md: "3" } },
-            [_c("v-card-subtitle", [_vm._v(">Due Date : 12_jan-2010")])],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-row",
-        [
-          _c(
-            "v-col",
-            { attrs: { cols: "12", md: "9" } },
-            [_c("v-card-subtitle", [_vm._v("ED-440")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-col",
-            { attrs: { cols: "12", md: "1" } },
-            [_c("v-btn", [_vm._v("Save")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-col",
-            { attrs: { cols: "12", md: "1" } },
-            [_c("v-btn", [_vm._v("Submitt")])],
+            "v-row",
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "9" } },
+                [
+                  _c("v-card-title", [_vm._v("Wet Lab - Inspection")]),
+                  _vm._v(" "),
+                  _c("v-card-subtitle", { staticClass: "headline " }, [
+                    _vm._v("ED-440")
+                  ]),
+                  _vm._v(" "),
+                  _c("v-card-text", { staticClass: "title" }, [
+                    _vm._v("Due Date : 12-Jan-2010")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "3" } },
+                [
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-btn", { attrs: { color: "primary", dark: "" } }, [
+                        _vm._v("Save")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-btn", { attrs: { color: "primary" } }, [
+                        _vm._v("Submit")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
             1
           )
         ],
@@ -42585,92 +42579,149 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-card",
+    "v-row",
+    { attrs: { justify: "center" } },
     [
-      _c("v-card-title", [_vm._v("Section Title")]),
-      _vm._v(" "),
-      _c("v-data-table", {
-        attrs: { headers: _vm.headers, items: _vm.sec_q, search: _vm.search },
-        scopedSlots: _vm._u([
-          {
-            key: "item.answer",
-            fn: function(ref) {
-              var item = ref.item
-              return [
-                _c(
-                  "v-radio-group",
-                  { attrs: { row: "" } },
-                  _vm._l(3, function(n) {
-                    return _c("v-radio", {
-                      key: n,
-                      attrs: { label: " |", value: n }
-                    })
-                  }),
-                  1
-                )
-              ]
-            }
-          },
-          {
-            key: "item.comment",
-            fn: function(props) {
-              return [
-                _c(
-                  "v-edit-dialog",
-                  {
-                    attrs: {
-                      "return-value": props.item.comment,
-                      large: "",
-                      persistent: ""
-                    },
-                    on: {
-                      "update:returnValue": function($event) {
-                        return _vm.$set(props.item, "comment", $event)
-                      },
-                      "update:return-value": function($event) {
-                        return _vm.$set(props.item, "comment", $event)
-                      },
-                      save: _vm.save,
-                      close: _vm.close
-                    },
-                    scopedSlots: _vm._u(
+      _c(
+        "v-card",
+        { staticClass: "ma-3", attrs: { width: "80%", "max-width": "1000px" } },
+        [
+          _c("v-card-title", [_vm._v("Section Title")]),
+          _vm._v(" "),
+          _c("v-data-table", {
+            attrs: {
+              headers: _vm.headers,
+              items: _vm.sec_q,
+              search: _vm.search,
+              "hide-default-footer": ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "item.answer",
+                fn: function(ref) {
+                  var item = ref.item
+                  return [
+                    _c(
+                      "v-radio-group",
+                      { attrs: { row: "" } },
                       [
-                        {
-                          key: "input",
-                          fn: function() {
-                            return [
-                              _c("v-text-field", {
-                                attrs: {
-                                  rules: [],
-                                  label: "Comment",
-                                  "single-line": "",
-                                  counter: "",
-                                  autofocus: ""
-                                },
-                                model: {
-                                  value: props.item.comment,
-                                  callback: function($$v) {
-                                    _vm.$set(props.item, "comment", $$v)
-                                  },
-                                  expression: "props.item.comment"
-                                }
-                              })
-                            ]
-                          },
-                          proxy: true
-                        }
+                        _c("v-radio", { attrs: { label: "Yes" } }),
+                        _vm._v(" "),
+                        _c("v-radio", { attrs: { label: "No" } }),
+                        _vm._v(" "),
+                        _c("v-radio", { attrs: { label: "NA" } })
                       ],
-                      null,
-                      true
+                      1
                     )
-                  },
-                  [_c("div", [_vm._v(_vm._s(props.item.comment))])]
-                )
-              ]
-            }
-          }
-        ])
-      })
+                  ]
+                }
+              },
+              {
+                key: "item.comment",
+                fn: function(props) {
+                  return [
+                    _c(
+                      "v-edit-dialog",
+                      {
+                        attrs: {
+                          "return-value": props.item.comment,
+                          large: "",
+                          persistent: ""
+                        },
+                        on: {
+                          "update:returnValue": function($event) {
+                            return _vm.$set(props.item, "comment", $event)
+                          },
+                          "update:return-value": function($event) {
+                            return _vm.$set(props.item, "comment", $event)
+                          },
+                          save: _vm.save,
+                          close: _vm.close
+                        },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "input",
+                              fn: function() {
+                                return [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      rules: [],
+                                      label: "Comment",
+                                      "single-line": "",
+                                      counter: "",
+                                      autofocus: ""
+                                    },
+                                    model: {
+                                      value: props.item.comment,
+                                      callback: function($$v) {
+                                        _vm.$set(props.item, "comment", $$v)
+                                      },
+                                      expression: "props.item.comment"
+                                    }
+                                  })
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ],
+                          null,
+                          true
+                        )
+                      },
+                      [_c("div", [_vm._v(_vm._s(props.item.comment))])]
+                    )
+                  ]
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c(
+            "v-row",
+            { attrs: { justify: "center" } },
+            [
+              _c(
+                "v-card-actions",
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "ma-2 white--text",
+                      attrs: { small: "", fab: "", color: "primary" }
+                    },
+                    [
+                      _c("v-icon", { attrs: { dark: "" } }, [
+                        _vm._v("mdi-arrow-left-thick")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-label", [_vm._v("Section # 1")]),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "ma-2 white--text",
+                      attrs: { small: "", fab: "", color: "primary" }
+                    },
+                    [
+                      _c("v-icon", { attrs: { dark: "" } }, [
+                        _vm._v("mdi-arrow-right-thick")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -43140,15 +43191,14 @@ var render = function() {
                         var item = ref.item
                         return [
                           _c(
-                            "v-radio-group",
-                            { attrs: { column: "false", row: "true" } },
-                            _vm._l(3, function(n) {
-                              return _c("v-radio", {
-                                key: n,
-                                attrs: { label: " |", value: n }
-                              })
-                            }),
-                            1
+                            "v-chip",
+                            {
+                              attrs: {
+                                color: _vm.getColor(item.status_name),
+                                dark: ""
+                              }
+                            },
+                            [_vm._v(_vm._s(item.status_name))]
                           )
                         ]
                       }

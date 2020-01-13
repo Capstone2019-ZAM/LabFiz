@@ -15,10 +15,8 @@
         </v-card-title>
         <v-data-table :headers="headers" :items="assignments" :search="search">
           <template v-slot:item.status_name="{ item }">
-            <!-- <v-chip :color="getColor(item.status_name)" dark>{{ item.status_name }}</v-chip> -->
-            <v-radio-group column="false" row="true">
-              <v-radio v-for="n in 3" :key="n" :label="` |`" :value="n"></v-radio>
-            </v-radio-group>
+            <v-chip :color="getColor(item.status_name)" dark>{{ item.status_name }}</v-chip>
+          
           </template>
 
           <v-card>
