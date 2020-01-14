@@ -94,7 +94,29 @@ export default {
         this.initialize();
       },
       assignments: [
-        {
+    
+      ]
+    };
+  },
+  watch: {
+    dialog(val) {
+      val || this.close();
+    }
+  },
+
+  created() {
+    this.initialize();
+  },
+  methods: {
+    getColor(status_name) {
+      if (status_name == "Pending") return "blue";
+      else if (status_name == "Submitted") return "green";
+      else if (status_name == "Overdue") return "red";
+      else return "grey";
+    },
+    initialize() {
+      this.assignments = [
+            {
           status_name: "Pending",
           lab_name: "ED-401",
           assignee: "John Doe",
@@ -122,34 +144,6 @@ export default {
           report_name: "Wet Lab",
           due_date: "14-Jan-2020"
         },
-        {
-          status_name: "Submitted",
-          lab_name: "ED-310",
-          assignee: "John Doe",
-          report_name: "Wet Lab",
-          due_date: "10-Jul-2020"
-        }
-      ]
-    };
-  },
-  watch: {
-    dialog(val) {
-      val || this.close();
-    }
-  },
-
-  created() {
-    this.initialize();
-  },
-  methods: {
-    getColor(status_name) {
-      if (status_name == "Pending") return "blue";
-      else if (status_name == "Submitted") return "green";
-      else if (status_name == "Overdue") return "red";
-      else return "grey";
-    },
-    initialize() {
-      this.assignments = [
         {
           status_name: "Submitted",
           lab_name: "ED-310",
