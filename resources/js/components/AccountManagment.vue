@@ -10,22 +10,22 @@
                 <v-container>
                 <v-row>
                     <v-col class="d-flex" cols="12" sm="8" md="6">
-                    <v-text-field v-model="firstname" label="First Name" :counter="10" :rules="NameRules" clearable></v-text-field>
+                    <v-text-field v-model="firstname" label="First Name" :counter="10" :rules="NameRules" clearable outlined></v-text-field>
                     </v-col>
                     <v-col class="d-flex" cols="12" sm="8" md="6">
-                    <v-text-field v-model="lastname" label="Last Name" :counter="10" :rules="NameRules" clearable></v-text-field>
+                    <v-text-field v-model="lastname" label="Last Name" :counter="10" :rules="NameRules" clearable outlined></v-text-field>
                     </v-col>
                 </v-row>
                 <v-row align="center" justify="center">
                     <v-col class="d-flex" cols="12" sm="6" md="5">
-                    <v-select :items="items" label="Role"></v-select>
+                    <v-select :items="items" label="Role" outlined></v-select>
                     </v-col>
                     <v-col class="d-flex" cols="12" sm="6" md="5">
-                    <v-select :items="items" label="Department"></v-select>
+                    <v-select :items="items" label="Department" outlined></v-select>
                     </v-col>
                 </v-row>    
                 <v-col cols="12" md="fill">
-                    <v-text-field v-model="email" label="Email" :rules="emailRules" clearable></v-text-field>
+                    <v-text-field v-model="email" label="Email" :rules="emailRules" clearable outlined></v-text-field>
                  </v-col>
                  <v-row align="center" justify="center">
                     <v-btn color="primary">

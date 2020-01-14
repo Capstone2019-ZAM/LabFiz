@@ -1,9 +1,8 @@
 <template>
 <v-container>
     <v-card>
-      <v-card-title class="text-center">
-        Account Manager
-        <v-spacer></v-spacer>
+      <v-card-title class="justify-center" >
+          <span class="headline" >Account Tracker</span>
       </v-card-title>
       <v-divider></v-divider>
       <v-data-table

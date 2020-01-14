@@ -1858,7 +1858,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -42472,12 +42471,9 @@ var render = function() {
       _c(
         "v-card",
         [
-          _c(
-            "v-card-title",
-            { staticClass: "text-center" },
-            [_vm._v("\r\n        Account Manager\r\n        "), _c("v-spacer")],
-            1
-          ),
+          _c("v-card-title", { staticClass: "justify-center" }, [
+            _c("span", { staticClass: "headline" }, [_vm._v("Account Tracker")])
+          ]),
           _vm._v(" "),
           _c("v-divider"),
           _vm._v(" "),
@@ -42566,7 +42562,8 @@ var render = function() {
                                   label: "First Name",
                                   counter: 10,
                                   rules: _vm.NameRules,
-                                  clearable: ""
+                                  clearable: "",
+                                  outlined: ""
                                 },
                                 model: {
                                   value: _vm.firstname,
@@ -42592,7 +42589,8 @@ var render = function() {
                                   label: "Last Name",
                                   counter: 10,
                                   rules: _vm.NameRules,
-                                  clearable: ""
+                                  clearable: "",
+                                  outlined: ""
                                 },
                                 model: {
                                   value: _vm.lastname,
@@ -42621,7 +42619,11 @@ var render = function() {
                             },
                             [
                               _c("v-select", {
-                                attrs: { items: _vm.items, label: "Role" }
+                                attrs: {
+                                  items: _vm.items,
+                                  label: "Role",
+                                  outlined: ""
+                                }
                               })
                             ],
                             1
@@ -42635,7 +42637,11 @@ var render = function() {
                             },
                             [
                               _c("v-select", {
-                                attrs: { items: _vm.items, label: "Department" }
+                                attrs: {
+                                  items: _vm.items,
+                                  label: "Department",
+                                  outlined: ""
+                                }
                               })
                             ],
                             1
@@ -42652,7 +42658,8 @@ var render = function() {
                             attrs: {
                               label: "Email",
                               rules: _vm.emailRules,
-                              clearable: ""
+                              clearable: "",
+                              outlined: ""
                             },
                             model: {
                               value: _vm.email,
@@ -43633,12 +43640,13 @@ var render = function() {
       _c(
         "v-card",
         [
-          _c(
-            "v-card-title",
-            { staticClass: "text-center" },
-            [_vm._v("\r\n        Issue Tracker\r\n        "), _c("v-spacer")],
-            1
-          ),
+          _c("v-card-title", { staticClass: "justify-center" }, [
+            _c("span", { staticClass: "headline" }, [
+              _vm._v("Issue Tracker Form")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("v-divider"),
           _vm._v(" "),
           _c("v-data-table", {
             attrs: { headers: _vm.headers, items: _vm.items }
@@ -43722,9 +43730,10 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  label: "Title",
+                                  placeholder: "Title",
                                   rules: _vm.titleRules,
-                                  clearable: ""
+                                  clearable: "",
+                                  outlined: ""
                                 },
                                 model: {
                                   value: _vm.Title,
@@ -43746,7 +43755,11 @@ var render = function() {
                             },
                             [
                               _c("v-select", {
-                                attrs: { items: _vm.status, label: "Status" }
+                                attrs: {
+                                  items: _vm.status,
+                                  label: "Status",
+                                  outlined: ""
+                                }
                               })
                             ],
                             1
@@ -43766,7 +43779,11 @@ var render = function() {
                             },
                             [
                               _c("v-select", {
-                                attrs: { items: _vm.lab, label: "Lab#" }
+                                attrs: {
+                                  items: _vm.lab,
+                                  label: "Lab#",
+                                  outlined: ""
+                                }
                               })
                             ],
                             1
@@ -43782,7 +43799,8 @@ var render = function() {
                               _c("v-select", {
                                 attrs: {
                                   items: _vm.assign,
-                                  label: "Assigned To"
+                                  label: "Assigned To",
+                                  outlined: ""
                                 }
                               })
                             ],
@@ -43799,7 +43817,8 @@ var render = function() {
                               _c("v-select", {
                                 attrs: {
                                   items: _vm.severity,
-                                  label: "Severity"
+                                  label: "Severity",
+                                  outlined: ""
                                 }
                               })
                             ],

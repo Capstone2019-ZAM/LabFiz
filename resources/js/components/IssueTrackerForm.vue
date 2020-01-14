@@ -10,21 +10,21 @@
                 <v-container>
                 <v-row>
                     <v-col class="d-flex" cols="12" sm="8" md="8">
-                    <v-text-field v-model="Title" label="Title" :rules="titleRules" clearable></v-text-field>
+                    <v-text-field v-model="Title" placeholder="Title" :rules="titleRules" clearable outlined></v-text-field>
                     </v-col>
                     <v-col class="d-flex" cols="12" sm="6" md="4">
-                    <v-select :items="status" label="Status"></v-select>
+                    <v-select :items="status" label="Status" outlined></v-select>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col class="d-flex" cols="12" sm="6" md="3">
-                    <v-select :items="lab" label="Lab#"></v-select>
+                    <v-select :items="lab" label="Lab#" outlined></v-select>
                     </v-col>
                     <v-col class="d-flex" cols="12" sm="6" md="5">
-                    <v-select :items="assign" label="Assigned To"></v-select>
+                    <v-select :items="assign" label="Assigned To" outlined></v-select>
                     </v-col>
                     <v-col class="d-flex" cols="12" sm="6" md="3">
-                    <v-select :items="severity" label="Severity"></v-select>
+                    <v-select :items="severity" label="Severity" outlined></v-select>
                     </v-col>
                 </v-row>    
                 <v-col cols="12" md="fill">
