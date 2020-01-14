@@ -38,16 +38,12 @@ Route::get('/assignments', function () {
 Route::get('/assignment', function () {
     return view('assignment');
 });
-
-
 Route::get('/issueform', function () {
     return view('issue_rpt');
 });
-
 Route::get('/newaccount', function () {
     return view('account_rpt');
 });
-
 Route::get('/issue', function () {
     return view('issue');
 });
