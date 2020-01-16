@@ -1,10 +1,10 @@
 <template>
 <v-container>
     <v-card>
-      <v-card-title class=text-center>
-        Issue Tracker
-        <v-spacer></v-spacer>
-      </v-card-title>
+       <v-card-title class="justify-center" >
+                <span class="headline" >Issue Tracker Form</span>
+        </v-card-title>
+        <v-divider></v-divider>
       <v-data-table
         :headers="headers"
         :items="items"
