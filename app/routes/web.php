@@ -31,11 +31,11 @@ Route::group(['middleware' => ['role:admin']], function(){
 });
 
 
-// Route::get('/dashboard', function () {
-//     return view('dashboardPage');
-// });
+Route::get('/dashboard', function () {
+    return view('dashboardPage');
+});
 
-Route::get('/dashboard', function(){
+Route::get('/api/v1/dashboard', function(){
     return Dashboard::all();
 });
 

@@ -11,7 +11,7 @@
     <v-layout dark row wrap align-content-center>
       <v-flex xs2 md4 centered pa-3>
         <v-responsive pa-2>
-          <v-icon max-height="auto" size="90">{{data.icon}}</v-icon>
+          <v-icon max-height="auto" size="90">{{data.img}}</v-icon>
         </v-responsive>
       </v-flex>
 
@@ -21,7 +21,7 @@
             <span>{{data.title}}</span>
           </v-list-item-title>
           <v-list-item-subtitle class="grey--light">
-            <span>{{data.description}}</span>
+            <span>{{data.desc}}</span>
           </v-list-item-subtitle>
           <!-- <v-card-title class="headline"> -->
           <!-- <v-card-subtitle class="greFy--light">  </v-card-subtitle> -->

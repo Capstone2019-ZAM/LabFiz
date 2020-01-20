@@ -1,19 +1,8 @@
 <template>
   <v-container>
-    <!-- <v-layout row wrap align-start="">
-        <v-flex  xs12 sm6 md4 lg4 xl2 > 
-            <dash-button></dash-button>
-        </v-flex>
-
-        <v-flex  xs12 sm6 md3 lg3 xl2 > 
-            <dash-button></dash-button>
-        </v-flex>
-
-    
-    </v-layout>-->
 
     <v-row>
-      <div v-for="data in options">
+      <div  v-for="data in options" :key="data.id">
         <v-col>
           <dash-button :data="data"></dash-button>
         </v-col>
@@ -24,40 +13,58 @@
 
 <script>
 import DashButton from "./DashButton";
+// import axios from 'axios';
+
 export default {
   components: {
     "dash-button": DashButton
   },
   data() {
     return {
-      options: [
-        {
-          icon: "mdi-file-document-edit",
-          title: "Assign Inspections",
-          description: "Something said here"
-        },
-        {
-          icon: "mdi-account-card-details",
-          title: "Account Managment",
-          description: "Something said here"
-        },
-        {
-          icon: "mdi-clipboard-text-multiple",
-          title: "Templates",
-          description: "Something said here"
-        },
-        {
-          icon: "mdi-bug",
-          title: "Issue Tracker",
-          description: "Something said here"
-        },
-        {
-          icon: "mdi-timetable",
-          title: "Pending Inspections",
-          description: "Something said here"
-        }
-      ]
+      loading :true,
+      options: null
+      // [
+        // {
+        //   icon: "mdi-file-document-edit",
+        //   title: "Assign Inspections",
+        //   description: "Something said here"
+        // },
+        // {
+        //   icon: "mdi-account-card-details",
+        //   title: "Account Managment",
+        //   description: "Something said here"
+        // },
+        // {
+        //   icon: "mdi-clipboard-text-multiple",
+        //   title: "Templates",
+        //   description: "Something said here"
+        // },
+        // {
+        //   icon: "mdi-bug",
+        //   title: "Issue Tracker",
+        //   description: "Something said here"
+        // },
+        // {
+        //   icon: "mdi-timetable",
+        //   title: "Pending Inspections",
+        //   description: "Something said here"
+        // }
+      //]
     };
+  },
+
+  mounted(){
+     this.loading = true;
+      axios.get("http://localhost/api/v1/dashboard")
+      .then((response)  =>  {
+        console.log('fetch done!')
+        this.options = response.data;
+        this.loading = true;
+            console.log(this.options);
+
+      }, (error)  =>  {
+        this.loading = false;
+    })
   }
 };
 </script>
