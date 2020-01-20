@@ -12,10 +12,11 @@ class Report extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'user_id'
+        'title', 'user_id', 'report_template_id', 'room', 'due_date'
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }
