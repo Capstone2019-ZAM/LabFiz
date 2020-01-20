@@ -13,6 +13,7 @@ class CreateReportQuestionsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('report_questions');
         Schema::create('report_questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('question');

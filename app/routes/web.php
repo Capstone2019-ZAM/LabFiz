@@ -1,4 +1,5 @@
 <?php
+Use App\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +31,12 @@ Route::group(['middleware' => ['role:admin']], function(){
 });
 
 
-Route::get('/dashboard', function () {
-    return view('dashboardPage');
+// Route::get('/dashboard', function () {
+//     return view('dashboardPage');
+// });
+
+Route::get('/dashboard', function(){
+    return Dashboard::all();
 });
 
 Route::get('/templates', function () {
