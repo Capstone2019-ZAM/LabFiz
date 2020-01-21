@@ -30,7 +30,7 @@ class DashboardController extends Controller
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
         $result['data'] = $this->model_dashboard->get();
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Issues retrieved succesfully.';
+        $result['message'] = 'All Dashboard options retrieved succesfully.';
         return response($result, 200);
     }
 

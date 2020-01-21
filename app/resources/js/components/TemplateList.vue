@@ -3,11 +3,11 @@
   <v-col cols="12" md="12">
       <v-card class="mx-auto" width="80%">
         <v-card-title>Report Templates</v-card-title>
-        <v-list two-line subheader>
+        <v-list two-line subheader >
 
           <v-list-item v-for="item in items" :key="item.title" @click>
             <v-list-item-avatar>
-              <v-icon :class="[item.iconClass]" v-text="item.icon"></v-icon>
+              <v-icon :class="iconClass" v-text="icon"></v-icon>
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -33,27 +33,50 @@
 </template>
 <script>
 export default {
-  data: () => ({
-    items: [
-      {
-        icon: "mdi-clipboard-text",
-        iconClass: "grey lighten-1 white--text",
-        title: "Wet Labaratory",
-        subtitle: "Jan 9, 2014"
-      },
-      {
-        icon: "mdi-clipboard-text",
-        iconClass: "grey lighten-1 white--text",
-        title: "Dry Labs",
-        subtitle: "Jan 17, 2014"
-      },
-      {
-        icon: "mdi-clipboard-text",
-        iconClass: "grey lighten-1 white--text",
-        title: "Software Labs",
-        subtitle: "Jan 28, 2014"
-      }
-    ]
-  })
+  data (){
+    return {
+    AuthStr : localStorage.getItem('api'),
+    loading :true,
+    icon: "mdi-clipboard-text",
+    iconClass: "grey lighten-1 white--text",
+    items: null//[
+      // {
+      //   icon: "mdi-clipboard-text",
+      //   iconClass: "grey lighten-1 white--text",
+      //   title: "Wet Labaratory",
+      //   subtitle: "Jan 9, 2014"
+      // },
+      // {
+      //   icon: "mdi-clipboard-text",
+        
+      //   title: "Dry Labs",
+      //   subtitle: "Jan 17, 2014"
+      // },
+      // {
+      //   icon: "mdi-clipboard-text",
+      //   iconClass: "grey lighten-1 white--text",
+      //   title: "Software Labs",
+      //   subtitle: "Jan 28, 2014"
+      // }
+  //  ]
+    }
+  }
+  ,
+    mounted(){
+     this.loading = true;
+    //  console.log('Auth '+AuthStr)
+      axios.get("http://localhost/api/v1/reports" , { headers: { Authorization: this.AuthStr } })
+      .then((response)  =>  {
+        console.log('fetch done!')
+        this.options = response.data;
+        this.loading = true;
+            console.log(this.options);
+
+      }, (error)  =>  {
+                console.log('fetch failed!')
+
+        this.loading = false;
+    })
+  }
 };
 </script>
