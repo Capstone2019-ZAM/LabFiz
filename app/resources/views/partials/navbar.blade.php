@@ -1,4 +1,4 @@
-<style>
+{{-- <style>
     .links > a {
         color: #636b6f;
         padding: 0 25px;
@@ -8,7 +8,7 @@
         text-decoration: none;
         text-transform: uppercase;
     }
-</style>
+</style> --}}
 
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
