@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\api\v1;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Dashboard;
 use App\Repositories\ModelRepository;
 use App\User;
+use Exception;
 
 
 class DashboardController extends Controller

@@ -1,5 +1,6 @@
 <?php
 Use App\Dashboard;
+Use App\Template;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +36,7 @@ Route::get('/dashboard', function () {
     return view('dashboardPage');
 });
 
-Route::get('/api/v1/dashboard', function(){
-    return Dashboard::all();
-});
+
 
 Route::get('/templates', function () {
     return view('template_rpt');
