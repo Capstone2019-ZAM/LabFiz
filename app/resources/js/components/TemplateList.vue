@@ -4,13 +4,13 @@
       <v-card class="mx-auto" width="80%">
         <v-card-title>Report Templates</v-card-title>
         <v-list two-line subheader>
-          <v-list-item v-for="item in items.data" :key="item.title" v-on:click="navigate(item.id)">
+          <v-list-item v-for="item in items.data" :key="item.id"  @click="navigate(item.id)">
             <v-list-item-avatar>
               <v-icon :class="iconClass" v-text="icon"></v-icon>
             </v-list-item-avatar>
 
-            <v-list-item-content>
-              <v-list-item-title v-text="item.name"></v-list-item-title>
+            <v-list-item-content >
+              <v-list-item-title v-text="item.name" ></v-list-item-title>
               <!-- <v-list-item-subtitle v-text=formattedDate(item.updated_at)></v-list-item-subtitle> -->
               <v-list-item-subtitle v-text="item.updated_at"></v-list-item-subtitle>
 
@@ -66,12 +66,9 @@ export default {
       //  ]
     };
   },
-  methods:{
-    
-  },
-   computed: {
+
+   methods: {
      navigate(id){
-       debugger;
           window.location.href = "http://localhost/template/"+id
     },
     formattedDate(dt) {

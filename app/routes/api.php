@@ -49,5 +49,13 @@ Route::group([
     
     //templates
     Route::get('/templates', 'Api\v1\TemplateController@get_all');
+    Route::get('/template/{id}', 'Api\v1\TemplateController@get');
+    Route::post('/template', 'Api\v1\TemplateController@create');
+    Route::put('/template/{id}', 'Api\v1\TemplateController@update'); //to do 
+    Route::delete('/template/{id}', 'Api\v1\TemplateController@get');
+
+
+
+
 });
 
