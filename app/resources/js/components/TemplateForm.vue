@@ -27,8 +27,8 @@
               <v-spacer></v-spacer>
             </v-row>
           </div>
-          <div class="border pa-4">
-            <v-row>
+          <div class="border pa-4" v-for="sec in sections" :key="sec.id">
+            <v-row >
               <v-col cols="12" md="5">
                 <v-text-field
                   v-model="section_title"
@@ -69,10 +69,8 @@ export default {
     // questions: "",
     // section_title: "",
     qRules: [v => !!v || "Question is required"],
-
-    d:
-    {"sections":[{"section_nm":"Section Title", "section_id": 1, "questions":["Question"] } ]}
-  })
+    sections : [ {section_nm : "Section 1", id : 1 , questions: ["How are u?", "How do u do"]}]
+    })
 };
 </script>
 
