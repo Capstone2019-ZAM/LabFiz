@@ -31,22 +31,26 @@
             <v-row >
               <v-col cols="12" md="5">
                 <v-text-field
-                  v-model="sec.section_title"
+                  v-model="sec.section_nm"
                  
                   label="Section Title"
                   outlined
                   required
                 ></v-text-field>
-              </v-col>
+              </v-col><v-spacer></v-spacer>
             <v-col cols="12" md="3">
-               <v-btn  color="danger" @click="removeSection(sec,sections)">
+               <v-btn  color="black"  dark @click="removeSection(sec,sections)">
               <v-icon>mdi-minus-circle</v-icon>Remove Section
             </v-btn>
             </v-col>
             </v-row>
             <v-row  v-for="(qs,index) in sec.questions" :key="index">
-              <v-col cols="12" md="10">
-                <v-text-field  v-model="qs[index]" :rules="qRules" label="Question" required ></v-text-field>
+              <v-col cols="12" md="9">
+                <v-text-field  v-model="sec.questions[index]" :rules="qRules" label="Question" required ></v-text-field>
+              </v-col>
+
+              <v-col cols="12" md="2">
+                <v-btn darl @click="removeQuestion(qs,sections)">Remove</v-btn>
               </v-col>
             </v-row>
 
@@ -78,19 +82,19 @@ export default {
     // section_title: "",
     qRules: [v => !!v || "Question is required"],
     sections : [ {section_nm : "Section 1", id : 1 , questions: ["A1w are u?", "B2w do u do"]},
-                  {section_nm : "Section 2", id :2 , questions: [ "H3w do u do"]}]
+                {section_nm : "Section 2", id :2 , questions: [ "H3w do u do"]}]
     }),
     methods :{
 
       addQuestion :function(sec){
-        debugger
         sec.questions.push("");
         console.log('Question Added')
       },
-      removeQuestion : function(sec){
+      removeQuestion : function(q, section){
         debugger
-        sec.questions.pop();
-        
+        const toRemove = ( element => element= q)
+        section.splice(section.questions.findIndex(toRemove) ,1);
+        // section.questions.pop();
         console.log('Question removed')
       },
       addSection : function(t , sec){
@@ -107,6 +111,10 @@ export default {
         sections.splice(sections.findIndex(toRemove) ,1);
         console.log('Section removed')
       },
+
+      postTemplate : function(){
+
+      }
       
       
 
