@@ -41,11 +41,11 @@ Route::get('/dashboard', function () {
 Route::get('/templates', function () {
     return view('template_rpt');
 });
-Route::get('/template/{id}', function () {
-    return view('template_builder');
-});
+// Route::get('/template/{id}', function () {
+//     return view('template_builder');
+// });
 
-Route::get('/template_builder', function () {
+Route::get('/template', function () {
     return view('template_builder');
 });
 Route::get('/assignments', function () {

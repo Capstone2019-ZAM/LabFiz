@@ -9,7 +9,7 @@
             </v-col>
 
             <v-col cols="12" md="3" sm="6">
-              <v-btn color="primary" lg>
+              <v-btn color="primary" @click="postTemplate()">
                 <v-icon>mdi-content-save</v-icon>Save
               </v-btn>
             </v-col>
@@ -37,7 +37,7 @@
           <v-container>
             <div class="border pa-4 mb-4 mt-5">
               <v-row>
-                <v-col cols="12" md="6" sm="12">
+                <v-col cols="12" md="9" sm="12">
                   <v-text-field
                     v-model="title"
                     outlined
@@ -76,7 +76,7 @@
                     required
                   ></v-text-field>
                 </v-col>
-                              <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
 
                 <v-col cols="12" md="1">
                   <v-btn @click="removeQuestion(qs,sec.questions)" icon color="error">
@@ -110,18 +110,19 @@ export default {
     Saving: false,
     NetError: false,
     SaveSucc: false,
+    loading: false,
+    AuthStr: localStorage.getItem("api"),
+    id: 1, // Get this from URL or router
     title: "",
-    // questions: "",
-    // section_title: "",
-    qRules: [v => !!v || "Question is required"],
-    sections: [
-      {
-        section_nm: "Section 1",
-        id: 1,
-        questions: ["A1w are u?", "B2w do u do"]
-      },
-      { section_nm: "Section 2", id: 2, questions: ["H3w do u do"] }
-    ]
+
+    qRules: [v => !!v || "Item value is required"],
+    sections: Array
+    // [
+    //   {
+    //     section_nm: "Section 1",
+    //     questions: ["q1?", ""]
+    //   }
+    // ]
   }),
   methods: {
     addQuestion: function(sec) {
@@ -129,8 +130,8 @@ export default {
       console.log("Question Added");
     },
     removeQuestion: function(q, section) {
-      function toRemove(element, index, array){
-        return element  == q
+      function toRemove(element, index, array) {
+        return element == q;
       }
       var n = section.findIndex(toRemove);
       section.splice(n, 1);
@@ -138,19 +139,17 @@ export default {
     },
     addSection: function(t, sec) {
       var newSec = Object();
-      newSec.section_nm = "";
+      newSec.section_nm = "New Section";
       newSec.questions = Array();
 
-      newSec.id = sec.length;
+      //newSec.id = sec.length;
       sec.push(newSec);
       console.log("Section Added");
     },
     removeSection: function(sec, sections) {
       //const toRemove = element => (element.id = sec.id);
-      function toRemove(element, index, array){
-              debugger
-
-        return element.id == sec.id;
+      function toRemove(element, index, array) {
+        return element.section_nm == sec.section_nm;
       }
       var n = sections.findIndex(toRemove);
       sections.splice(n, 1);
@@ -158,17 +157,54 @@ export default {
     },
 
     postTemplate: function() {
-      const AuthStr= localStorage.getItem('api');
+      this.Saving = true;
       const req = Object;
       req.title = this.title;
-      req.sections=  this.sections;
-      this.Saving = true;
-      if (this.valid){
-      axios.put({header:"Authorization "+AuthStr}, req);
-        // on success
-        //on error
+      req.sections = this.sections;
+      if (this.valid) {
+        axios
+          .put("http://localhost/api/v1/template/" + this.id, {
+            headers: { Authorization: this.AuthStr }
+
+            //TO DO : ADD Data to sent
+          })
+          .then(
+            response => {
+              console.log("Update done!");
+              this.items = response.data;
+              this.loading = true;
+            },
+            error => {
+              console.log("Update failed!");
+              this.loading = false;
+              this.Saving= false;
+              this.NetError = true;
+            }
+          );
       }
     }
+  },
+  mounted() {
+    this.loading = true;
+    axios
+      .get("http://localhost/api/v1/template/" + this.id, {
+        headers: { Authorization: this.AuthStr }
+      })
+      .then(
+        response => {
+          console.log("fetch done!");
+          let schema = JSON.parse(response.data.data.schema);
+          this.sections = schema.sections;
+          this.title = response.data.data.name;
+          this.id = response.data.data.id;
+          this.loading = false;
+        },
+        error => {
+          console.log("fetch failed!");
+          this.loading = false;
+          this.NetError = true;
+        }
+      );
   }
 };
 </script>

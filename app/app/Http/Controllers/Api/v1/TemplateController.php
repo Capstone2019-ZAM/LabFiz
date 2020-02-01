@@ -85,4 +85,25 @@ class TemplateController extends Controller
         $result['message'] = 'Template deleted succesfully';
         return response($result, 200);
     }
+    public function update(Request $request,$id)
+    {
+        // $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+
+        // try {
+        //     $template = $template->model_template->update($request->only($this->model_template) ,
+        //     $id);
+        //     $result['data'] = $this->model_template->getById($id);
+        // } catch (Exception $ex) {
+        //     $result['message'] = $ex->getMessage();
+        //     return response($result, 400);
+        // }
+        // $result['status'] = '200 (Ok)';
+        // $result['message'] = 'Template updated succesfully';
+        // return response($result, 200);   
+    
+    }
+
+    
+
 }
+
