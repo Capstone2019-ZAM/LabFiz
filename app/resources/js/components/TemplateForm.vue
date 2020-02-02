@@ -15,23 +15,42 @@
             </v-col>
           </v-row>
         </v-row>
-        <v-row align="center" justify="center">
-          <v-alert type="info" text transition="scale-transition" :value="Saving">
-            <v-progress-circular indeterminate color="primary"></v-progress-circular>Saving
-          </v-alert>
-          <v-alert
-            type="warning"
-            outlined
-            prominent
-            transition="scale-transition"
-            :value="!valid"
-          >Template missing required fields</v-alert>
-          <v-alert type="success" transition="scale-transition" :value="SaveSucc">Saved Successfully</v-alert>
-          <v-alert
-            type="error"
-            transition="scale-transition"
-            :value="NetError"
-          >Something went wrong. Please try again later</v-alert>
+        <v-row align="center" justify="center" v-if="!valid||Saving||NetError||SaveSucc">
+          <v-col cols="12" md="9">
+            <v-alert elevation=5 type="info" text transition="scale-transition" :value="Saving&&valid">
+              <v-progress-circular indeterminate color="primary"> 
+                </v-progress-circular> Saving
+            </v-alert>
+          </v-col>
+          <v-col cols="12" md="9" align="center" justify="center">
+            <v-alert
+              type="warning"
+              dense
+              dismissible= "true"
+              prominent
+              elevation=5
+              transition="scale-transition"
+              :value="!valid"
+            >Template missing required fields</v-alert>
+          </v-col>
+          <v-col cols="12" md="9">
+            <v-alert
+            elevation=5
+              type="success"
+              transition="scale-transition"
+              :value="SaveSucc"
+            >Saved Successfully</v-alert>
+          </v-col>
+          <v-col cols="12" md="9">
+            <v-alert
+            elevation=5
+              type="error"
+              transition="scale-transition"
+              :value="NetError"
+              dismissible ="true"
+              dense
+            >Something went wrong. Please try again later</v-alert>
+          </v-col>
         </v-row>
         <v-form v-model="valid">
           <v-container>
@@ -106,13 +125,13 @@
 <script>
 export default {
   data: () => ({
-    valid: false,
+    valid: null,
     Saving: false,
     NetError: false,
     SaveSucc: false,
     loading: false,
     AuthStr: localStorage.getItem("api"),
-    id: 1, // Get this from URL or router
+    id: window.location.pathname.split("/").pop(), // Get this from URL or router
     title: "",
 
     qRules: [v => !!v || "Item value is required"],
@@ -125,6 +144,34 @@ export default {
     // ]
   }),
   methods: {
+    setAlert: async function(msg) {
+      this.Saving = false;
+      this.NetError = false;
+      this.SaveSucc = false;
+
+      let promise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve(true), 1000);
+      });
+
+      let result = await promise; // wait until the promise resolves (*)
+      //debugger;
+
+      switch (msg) {
+        case "Saving":
+          this.Saving = result;
+          break;
+        case "NetError":
+          this.NetError = result;
+
+          break;
+        case "SaveSucc":
+          this.SaveSucc = result;
+          break;
+
+        default:
+          break;
+      }
+    },
     addQuestion: function(sec) {
       sec.questions.push("");
       console.log("Question Added");
@@ -157,11 +204,15 @@ export default {
     },
 
     postTemplate: function() {
-      this.Saving = true;
+      // this.NetError = false;
+      // this.SaveSucc = false;
+
       const req = Object;
       req.title = this.title;
       req.sections = this.sections;
+
       if (this.valid) {
+        this.setAlert("Saving");
         axios
           .put("http://localhost/api/v1/template/" + this.id, {
             headers: { Authorization: this.AuthStr }
@@ -171,14 +222,15 @@ export default {
           .then(
             response => {
               console.log("Update done!");
-              this.items = response.data;
-              this.loading = true;
+              this.items = response.data; //
+              //this.loading = true;
+              this.setAlert("SaveSucc");
+              //this.SaveSucc = true; //TODO: time it
             },
             error => {
               console.log("Update failed!");
-              this.loading = false;
-              this.Saving= false;
-              this.NetError = true;
+              //this.loading = false;
+              this.setAlert("NetError");
             }
           );
       }
