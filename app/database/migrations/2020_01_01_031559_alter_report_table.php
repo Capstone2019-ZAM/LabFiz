@@ -17,8 +17,11 @@ class AlterReportTable extends Migration
             $table->unsignedBigInteger('report_template_id');
             $table->foreign('report_template_id')->references('id')->on('report_templates')->onDelete('cascade');
             $table->unsignedMediumInteger('room');
-            $table->date('due_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            //$table->date('due_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->date('due_date')->useCurrent();
+
         });
+
     }
 
     /**

@@ -1,4 +1,6 @@
 <?php
+Use App\Dashboard;
+Use App\Template;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +29,40 @@ Route::group(['middleware' => ['role:admin|instructor|student']], function(){
 // admin routes
 Route::group(['middleware' => ['role:admin']], function(){
     Route::get('/admin','AdminController@index')->name('index');
+});
+
+
+Route::get('/dashboard', function () {
+    return view('dashboardPage');
+});
+
+
+
+Route::get('/templates', function () {
+    return view('template_rpt');
+});
+// Route::get('/template/{id}', function () {
+//     return view('template_builder');
+// });
+
+Route::get('/template/{id}', function () {
+    return view('template_builder');
+});
+Route::get('/assignments', function () {
+    return view('assignment_rpt');
+});
+Route::get('/assignment', function () {
+    return view('assignment');
+});
+Route::get('/issueform', function () {
+    return view('issue_rpt');
+});
+Route::get('/newaccount', function () {
+    return view('account_rpt');
+});
+Route::get('/issue', function () {
+    return view('issue');
+});
+Route::get('/account', function () {
+    return view('account');
 });

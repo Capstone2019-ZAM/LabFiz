@@ -42,5 +42,20 @@ Route::group([
     Route::post('/issue', 'Api\v1\IssueController@create');
     Route::delete('/issue/{id}', 'Api\v1\IssueController@delete');
     Route::get('/issues', 'Api\v1\IssueController@get_all');
+
+
+    //dashboard
+    Route::get('/dashboard','Api\v1\DashboardController@get_all');
+    
+    //templates
+    Route::get('/templates', 'Api\v1\TemplateController@get_all');
+    Route::get('/template/{id}', 'Api\v1\TemplateController@get');
+    Route::post('/template', 'Api\v1\TemplateController@create');
+    Route::put('/template/{id}', 'Api\v1\TemplateController@update'); //to do 
+    Route::delete('/template/{id}', 'Api\v1\TemplateController@get');
+
+
+
+
 });
 
