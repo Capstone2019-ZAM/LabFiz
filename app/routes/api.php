@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // login route
 Route::post('/login','Api\Auth\LoginController@login');
+Route::post('/refresh', 'Api\Auth\LoginController@refresh');
 
 // protected api v1 routes
 Route::group([
@@ -46,12 +47,12 @@ Route::group([
 
     //dashboard
     Route::get('/dashboard','Api\v1\DashboardController@get_all');
-    
+
     //templates
     Route::get('/templates', 'Api\v1\TemplateController@get_all');
     Route::get('/template/{id}', 'Api\v1\TemplateController@get');
     Route::post('/template', 'Api\v1\TemplateController@create');
-    Route::put('/template/{id}', 'Api\v1\TemplateController@update'); //to do 
+    Route::put('/template/{id}', 'Api\v1\TemplateController@update'); //to do
     Route::delete('/template/{id}', 'Api\v1\TemplateController@get');
 
 

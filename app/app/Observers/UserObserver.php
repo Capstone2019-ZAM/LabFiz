@@ -4,15 +4,12 @@
 namespace App\Observers;
 
 
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
-
+use App\Helpers\AuthHelper;
 class UserObserver
 {
     public function creating($user){
-            $user->api_token = Str::random(60);
-            $timestamp = Carbon::now()->addSeconds(30);
-            $user->api_token_expiry_date = $timestamp->format('Y-m-d H:i:s');
-            $user->api_refresh_token = Str::random(60);
+            $user->api_token = AuthHelper::instance()->create_auth_token();
+            $user->api_token_expiry_date = AuthHelper::instance()->create_auth_token_expiry();
+            $user->api_refresh_token = AuthHelper::instance()->create_auth_token();
     }
 }
