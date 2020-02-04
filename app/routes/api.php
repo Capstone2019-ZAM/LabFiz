@@ -54,7 +54,16 @@ Route::group([
     Route::put('/template/{id}', 'Api\v1\TemplateController@update'); //to do 
     Route::delete('/template/{id}', 'Api\v1\TemplateController@get');
 
+    //lab 
+    Route::get('/labs', 'Api\v1\LabController@get_all');
+    Route::get('/lab/{id}', 'Api\v1\LabController@get');
+    Route::post('/lab', 'Api\v1\LabController@create');
+    Route::put('/lab/{id}', 'Api\v1\LabController@update'); //to do 
+    Route::delete('/lab/{id}', 'Api\v1\LabController@get');
 
+    //TO DO 
+    // User Endpoint - for assignments
+    
 
 
 });
