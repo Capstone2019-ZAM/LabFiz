@@ -14,7 +14,7 @@ class AlterUserTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->date('api_token_expiry_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('api_token_expiry_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('api_refresh_token', 60)->unique()->nullable()->default(null);
             $table->string('api_token_type')->default('ApiAuth');
         });

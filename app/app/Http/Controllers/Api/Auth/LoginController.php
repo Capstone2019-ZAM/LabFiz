@@ -35,7 +35,8 @@ class LoginController extends Controller
         $result['data'] = [
             'email' => $user->email,
             'role' => $user->roles->pluck('name')[0],
-            'token' => $user->api_token
+            'token' => $user->api_token,
+            'api_refresh_token' => $user->api_refresh_token
         ];
 
         return response($result, 200);
