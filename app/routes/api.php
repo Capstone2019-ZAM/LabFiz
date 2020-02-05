@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // login route
 Route::post('/login','Api\Auth\LoginController@login');
 Route::post('/refresh', 'Api\Auth\LoginController@refresh');
+Route::post('/register', 'Api\Auth\LoginController@register');
 
 // protected api v1 routes
 Route::group([
@@ -54,9 +55,6 @@ Route::group([
     Route::post('/template', 'Api\v1\TemplateController@create');
     Route::put('/template/{id}', 'Api\v1\TemplateController@update'); //to do
     Route::delete('/template/{id}', 'Api\v1\TemplateController@get');
-
-
-
 
 });
 

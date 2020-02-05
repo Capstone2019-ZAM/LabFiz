@@ -20,6 +20,43 @@ class LoginController extends Controller
         $this->model_user = new ModelRepository($user);
     }
 
+    public function register(Request $request)
+    {
+        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+        try{
+            $user = $this->model_user->create(
+                [
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'password' => $request->password,
+                    'role' => $request->role,
+                    'department' => $request->department,
+                    'email' => $request->email
+                ]);
+
+            $result['data'] = [
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
+                'password' => $user->password,
+                'role' => $user->role,
+                'department' => $user->department,
+                'email' => $user->email,
+                'api_token' => $user->api_token,
+                'token_type' => $user->api_token_type,
+                'expires_at' => $user->api_token_expiry_date,
+                'refresh_token' => $user->api_refresh_token
+            ];
+
+        }catch (QueryException $ex) {
+            $result['message'] = $ex->getMessage();
+            return response($result, 400);
+        }
+
+        $result['status'] = '200 (Ok)';
+        $result['message'] = 'User registered successfully';
+        return response($result, 200);
+    }
+
     public function refresh(Request $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
