@@ -20,6 +20,15 @@ class LoginController extends Controller
         $this->model_user = new ModelRepository($user);
     }
 
+    public function get_all()
+    {
+        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+        $result['data'] = $this->model_user->get();
+        $result['status'] = '200 (Ok)';
+        $result['message'] = 'All Users retrieved successfully.';
+        return response($result, 200);
+    }
+
     public function register(Request $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];

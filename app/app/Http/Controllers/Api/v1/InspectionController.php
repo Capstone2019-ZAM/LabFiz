@@ -8,7 +8,6 @@ use App\Inspection;
 use App\Repositories\ModelRepository;
 use App\User;
 use Exception;
-use Illuminate\Http\Request;
 
 class InspectionController extends Controller
 {
@@ -55,7 +54,10 @@ class InspectionController extends Controller
         $user = $this->model_user->getByColumn($header, 'api_token');
 
         try {
-            $result['data'] = $this->model_inspection->create(
+            $result['data'] = $this->model_inspection->updateOrCreate(
+                [
+                    'id' => $request->id
+                ],
                 [
                     'room' => $request->room,
                     'report_id' => $request->report_id,
