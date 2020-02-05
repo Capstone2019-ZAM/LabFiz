@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Helpers\AuthHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\LoginRequest;
+use App\Http\Requests\User\RefreshRequest;
+use App\Http\Requests\User\RegisterRequest;
 use App\Repositories\ModelRepository;
 use App\User;
 use Illuminate\Database\QueryException;
@@ -29,9 +32,10 @@ class LoginController extends Controller
         return response($result, 200);
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+
         try{
             $user = $this->model_user->create(
                 [
@@ -66,11 +70,10 @@ class LoginController extends Controller
         return response($result, 200);
     }
 
-    public function refresh(Request $request)
+    public function refresh(RefreshRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
-        $user = new stdClass();
         try {
             $user = $this->model_user->getByColumn($request->api_refresh_token, 'api_refresh_token');
         } catch (QueryException $ex) {
@@ -106,11 +109,10 @@ class LoginController extends Controller
         return response($result, 200);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
-        $user = new stdClass();
         try {
             $user = $this->model_user->getByColumn($request->email, 'email');
         } catch (QueryException $ex) {

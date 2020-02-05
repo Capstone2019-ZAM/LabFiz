@@ -19,15 +19,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // user(s) routes
 Route::post('/user/login','Api\Auth\LoginController@login');
-Route::post('/user/refresh', 'Api\Auth\LoginController@refresh');
-Route::post('/user/register', 'Api\Auth\LoginController@register');
-Route::get('/users', 'Api\Auth\LoginController@get_all');
+
+Route::group([
+    'middleware' => ['ApiAuth'],
+], function() {
+    Route::post('/user/refresh', 'Api\Auth\LoginController@refresh');
+    Route::post('/user/register', 'Api\Auth\LoginController@register');
+    Route::get('/users', 'Api\Auth\LoginController@get_all');
+});
 
 // protected api v1 routes
 Route::group([
     'middleware' => ['ApiAuth'],
     'prefix' => 'v1'
     ], function(){
+
     // report end routes
     Route::get('/report/{id}', 'Api\v1\ReportController@get');
     Route::post('/report', 'Api\v1\ReportController@create');
