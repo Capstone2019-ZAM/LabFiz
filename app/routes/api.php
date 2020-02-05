@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/user/login','Api\Auth\LoginController@login');
 Route::post('/user/refresh', 'Api\Auth\LoginController@refresh');
 Route::post('/user/register', 'Api\Auth\LoginController@register');
-Route::post('/users', 'Api\Auth\LoginController@get_all');
+Route::get('/users', 'Api\Auth\LoginController@get_all');
 
 // protected api v1 routes
 Route::group([
@@ -55,6 +55,9 @@ Route::group([
     Route::post('/template', 'Api\v1\TemplateController@create');
     Route::put('/template/{id}', 'Api\v1\TemplateController@update'); //to do
     Route::delete('/template/{id}', 'Api\v1\TemplateController@get');
+
+    // labs
+    Route::get('/labs', 'Api\v1\LabController@get_all');
 
 });
 
