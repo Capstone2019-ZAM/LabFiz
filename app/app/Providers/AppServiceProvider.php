@@ -16,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(
             UserServiceProvider::class
         );
+
+        $this->app->register(
+          ReportServiceProvider::class
+        );
     }
 
     /**

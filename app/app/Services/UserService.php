@@ -17,17 +17,17 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService implements RestServiceContract
 {
-    protected $model_user;
+    protected $user_model;
 
     public function __construct(User $user)
     {
-        $this->model_user = new ModelRepository($user);
+        $this->user_model = new ModelRepository($user);
     }
 
     public function get_all()
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-        $result['data'] = $this->model_user->get();
+        $result['data'] = $this->user_model->get();
         $result['status'] = '200 (Ok)';
         $result['message'] = 'All Users retrieved successfully.';
         return ['response' => $result, 'status' => 200];
@@ -38,7 +38,7 @@ class UserService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try{
-            $user = $this->model_user->create(
+            $user = $this->user_model->create(
                 [
                     'first_name' => $request->first_name,
                     'last_name' => $request->last_name,
@@ -76,7 +76,7 @@ class UserService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $user = $this->model_user->getByColumn($request->api_refresh_token, 'api_refresh_token');
+            $user = $this->user_model->getByColumn($request->api_refresh_token, 'api_refresh_token');
         } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return ['data' => $result, 'status' => 400];
@@ -93,7 +93,7 @@ class UserService implements RestServiceContract
             return ['data' => $result, 'status' => 400];
         }
 
-        $user = $this->model_user->updateById(
+        $user = $this->user_model->updateById(
             $user->id,
             AuthHelper::instance()->create_auth_data()
         );
@@ -115,7 +115,7 @@ class UserService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $user = $this->model_user->getByColumn($request->email, 'email');
+            $user = $this->user_model->getByColumn($request->email, 'email');
         } catch (QueryException $ex) {
             $result['message'] = 'User not found.';
             return ['data' => $result, 'status' => 400];
