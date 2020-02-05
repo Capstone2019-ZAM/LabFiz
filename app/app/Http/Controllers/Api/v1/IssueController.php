@@ -34,7 +34,7 @@ class IssueController extends Controller
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Issue retrieved succesfully.';
+        $result['message'] = 'Issue retrieved successfully.';
         return response($result, 200);
     }
 
@@ -43,7 +43,7 @@ class IssueController extends Controller
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
         $result['data'] = $this->model_issue->get();
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Issues retrieved succesfully.';
+        $result['message'] = 'All Issues retrieved successfully.';
         return response($result, 200);
     }
 
@@ -72,7 +72,7 @@ class IssueController extends Controller
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Created issue succesfully!';
+        $result['message'] = 'Created issue successfully!';
         return response($result, 200);
     }
 
@@ -88,7 +88,7 @@ class IssueController extends Controller
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Issue deleted succesfully';
+        $result['message'] = 'Issue deleted successfully';
         return response($result, 200);
     }
 }

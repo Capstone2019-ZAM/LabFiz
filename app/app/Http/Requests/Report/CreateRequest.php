@@ -27,9 +27,16 @@ class CreateRequest extends FormRequest
     {
         return [
             'title' => array('required', 'regex:/^[\s\w-]*$/'),
+            'id' => array('required', 'int'),
+            'room' => array('required', 'int'),
+            'template_id' => array('required', 'int'),
             'sections.*' => array('sometimes','nullable','array'),
+            'sections.*.template_id' => array('required', 'int'),
             'sections.*.qs' => array('required_with:sections.*', 'array'),
-            'sections.*.qs.*' => array('required_with:sections.*.qs', 'regex:/^[\#s\w?-]*$/'),
+            'sections.*.qs.*' => array('required_with:sections.qs', 'array'),
+            'sections.*.qs.*.template_id' => array('required', 'int'),
+            'sections.*.qs.*.answer' => array('required', 'string'),
+            'sections.*.qs.*.description' => array('required', 'string'),
         ];
     }
 
