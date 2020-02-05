@@ -120,6 +120,16 @@ class ReportController extends Controller
         return response($result, 200);
     }
 
+    public function update_section(UpdateRequest $request)
+    {
+
+    }
+
+    public function update_question(UpdateRequest $request)
+    {
+
+    }
+
     public function delete($id)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];

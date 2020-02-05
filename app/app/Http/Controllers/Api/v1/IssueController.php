@@ -52,15 +52,16 @@ class IssueController extends Controller
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
         $header = $request->header('Authorization');
         $user = $this->model_user->getByColumn($header, 'api_token');
-
         try {
-            $result['data'] = $this->model_issue->create(
+            $result['data'] = $this->model_issue->updateOrCreate(
+                ['user_id,resolution_date'],
                 [
                     'title' => $request->title,
                     'room' => $request->room,
                     'user_id' => $user->id,
                     'severity' => $request->severity,
                     'status' => 'incomplete',
+                    'resolution_date' => $request->resolution_date,
                     'description' => $request->description,
                     'comments' => $request->comments
                 ]
