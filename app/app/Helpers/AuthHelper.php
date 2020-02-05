@@ -20,7 +20,7 @@ class AuthHelper
 
     public function create_auth_token_expiry()
     {
-        return Carbon::now()->addSeconds(60)->format('Y-m-d H:i:s');
+        return Carbon::now()->addSeconds(2592000)->format('Y-m-d H:i:s');
     }
 
     public function create_auth_data()

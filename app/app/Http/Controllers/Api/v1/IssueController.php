@@ -54,7 +54,7 @@ class IssueController extends Controller
         $user = $this->model_user->getByColumn($header, 'api_token');
         try {
             $result['data'] = $this->model_issue->updateOrCreate(
-                ['user_id,resolution_date'],
+                ['id' => $request->id],
                 [
                     'title' => $request->title,
                     'room' => $request->room,
