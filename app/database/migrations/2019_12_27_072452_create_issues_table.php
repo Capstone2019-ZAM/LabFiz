@@ -22,6 +22,8 @@ class CreateIssuesTable extends Migration
             $table->string('description');
             $table->string('comments');
             $table->unsignedBigInteger('user_id');
+            $table->date('due_date');
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

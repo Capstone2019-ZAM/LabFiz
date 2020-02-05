@@ -26,7 +26,7 @@
             <v-alert
               type="warning"
               dense
-              dismissible= "true"
+              dismissible= true
               prominent
               elevation=5
               transition="scale-transition"
@@ -47,7 +47,7 @@
               type="error"
               transition="scale-transition"
               :value="NetError"
-              dismissible ="true"
+              dismissible =true
               dense
             >Something went wrong. Please try again later</v-alert>
           </v-col>

@@ -21,6 +21,7 @@ export default {
   },
   data() {
     return {
+      AuthStr: localStorage.getItem("api"),
       loading :true,
       options: null
       // [
@@ -55,10 +56,13 @@ export default {
 
   mounted(){
      this.loading = true;
-      axios.get("http://localhost/api/v1/dashboard")
+      axios.get("http://localhost/api/v1/dashboard",
+      {
+        headers: { Authorization: this.AuthStr }})
       .then((response)  =>  {
         console.log('fetch done!')
-        this.options = response.data;
+        debugger
+        this.options = response.data.data;
         this.loading = true;
             console.log(this.options);
 

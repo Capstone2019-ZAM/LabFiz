@@ -27,48 +27,67 @@
             text: 'Status',
             align: 'left',
             sortable: false,
-            value: 'name',
+            value: 'status',
           },
-          { text: 'Issue', value: 'issue' },
+          { text: 'Issue', value: "title" },
           { text: 'Room #', value: 'room' },
-          { text: 'Assigned To', value: 'assigned' },
+          { text: 'Assigned To', value: 'user_id' },
           { text: 'Resoluton Date', value: 'date' },
         ],
         items: [
-          {
-            name: 'Status1',
-            issue: 33,
-            room: 'ED 123',
-            assigned: 'Edward Livingstone',
-            date: "Jan 02, 2020",
+          // {
+          //   name: 'Status1',
+          //   issue: 33,
+          //   room: 'ED 123',
+          //   assigned: 'Edward Livingstone',
+          //   date: "Jan 02, 2020",
             
-          },
-          {
-            name: 'Status1',
-            issue: 33,
-            room: 'ED 123',
-            assigned: 'Edward Livingstone',
-            date: "Jan 02, 2020",
+          // },
+          // {
+          //   name: 'Status1',
+          //   issue: 33,
+          //   room: 'ED 123',
+          //   assigned: 'Edward Livingstone',
+          //   date: "Jan 02, 2020",
             
-          },
-          {
-            name: 'Status1',
-            issue: 33,
-            room: 'ED 123',
-            assigned: 'Edward Livingstone',
-            date: "Jan 02, 2020",
+          // },
+          // {
+          //   name: 'Status1',
+          //   issue: 33,
+          //   room: 'ED 123',
+          //   assigned: 'Edward Livingstone',
+          //   date: "Jan 02, 2020",
             
-          },
-          {
-            name: 'Status1',
-            issue: 33,
-            room: 'ED 123',
-            assigned: 'Edward Livingstone',
-            date: "Jan 02, 2020",
+          // },
+          // {
+          //   name: 'Status1',
+          //   issue: 33,
+          //   room: 'ED 123',
+          //   assigned: 'Edward Livingstone',
+          //   date: "Jan 02, 2020",
             
-          },
+          // },
         ],
       }
     },
+
+     mounted() {
+    this.loading = true;
+    axios
+      .get("/api/v1/issues" , {
+        headers: { Authorization: this.AuthStr }
+      })
+      .then(
+        response => {
+          console.log("fetch done!");
+          debugger
+          this.items = response.data.data;
+        },
+        error => {
+          console.log("fetch failed!");
+       
+        }
+      );
+  }
   }
 </script>
