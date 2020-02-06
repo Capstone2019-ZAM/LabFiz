@@ -15,7 +15,6 @@ class AlterIssuesTable extends Migration
     {
         //
         Schema::table('issues', function (Blueprint $table) {
-            //$table->foreign('room')->references('id')->on('labs');
             $table->foreign('room')->references('location')->on('labs');
         });
     }
