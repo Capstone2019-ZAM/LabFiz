@@ -60,7 +60,7 @@ class IssueController extends Controller
                     'room' => $request->room,
                     'user_id' => $user->id,
                     'severity' => $request->severity,
-                    'status' => 'incomplete',
+                    'status' => 'Open',
                     'due_date'=> $request->due_date,
                     'description' => $request->description,
                     'comments' => $request->comments
