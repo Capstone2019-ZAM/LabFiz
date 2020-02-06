@@ -61,6 +61,7 @@ class IssueController extends Controller
                     'user_id' => $user->id,
                     'severity' => $request->severity,
                     'status' => 'incomplete',
+                    'due_date'=> $request->due_date,
                     'description' => $request->description,
                     'comments' => $request->comments
                 ]

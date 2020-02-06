@@ -31,6 +31,7 @@ class CreateRequest extends FormRequest
             'assigned_to' => array('required', 'numeric'),
             'severity' => array('required', 'regex:/^[\s\w-]*$/'),
             'description' => array('required', 'regex:/^[\s\w!-@#$^_:,.]*$/', 'max:250'),
+            'due_date' =>array('required' ,'date'),
             'comments' => array('required', 'regex:/^[\s\w!-@#$^_:,.]*$/', 'max:250'),
         ];
     }
