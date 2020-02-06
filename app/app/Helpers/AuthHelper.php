@@ -3,6 +3,8 @@
 
 namespace App\Helpers;
 
+use App\Repositories\ModelRepository;
+use App\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
@@ -21,6 +23,12 @@ class AuthHelper
     public function create_auth_token_expiry()
     {
         return Carbon::now()->addSeconds(2592000)->format('Y-m-d H:i:s');
+    }
+
+    public function user($request, ModelRepository $user)
+    {
+        $header = $request->header('Authorization');
+        return $user->getByColumn($header, 'api_token');
     }
 
     public function create_auth_data()

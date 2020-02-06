@@ -15,7 +15,7 @@ class ReportQuestion extends Model
         'question', 'report_section_id', 'report_question_template_id', 'answer','description'
     ];
 
-    public function report_section(){
+    public function section(){
         return $this->belongsTo(ReportSection::class);
     }
 }

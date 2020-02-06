@@ -18,4 +18,8 @@ class ReportSection extends Model
     public function report(){
         return $this->belongsTo(Report::class);
     }
+
+    public function questions(){
+        return $this->hasMany(ReportQuestion::class);
+    }
 }

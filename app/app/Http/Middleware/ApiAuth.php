@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\AuthHelper;
 use App\Repositories\ModelRepository;
 use App\User;
 use Closure;
@@ -24,15 +25,14 @@ class ApiAuth
      */
     public function handle($request, Closure $next)
     {
-        $auth_token = $request->header('Authorization');
-        if (!$auth_token)
+        if (!$request->header('Authorization'))
             return response()->json([
                 'status' => '401 (Unauthorized)',
-                'message' => 'You are not authorized to access this route.',
+                'message' => 'Please add the api authentication token in your request header.',
                 'data' => '',
             ], 401);
 
-        $user = $this->model_user->getByColumn($auth_token, 'api_token');
+        $user = AuthHelper::instance()->user($request,$this->model_user);
         if (!$user) {
             return response()->json([
                 'status' => '422 (Unauthorized)',

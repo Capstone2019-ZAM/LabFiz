@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Helpers\AuthHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Template\CreateRequest; 
+use App\Http\Requests\Template\CreateRequest;
 use App\Template;
 use App\Repositories\ModelRepository;
 use App\User;
-use Exception;
-use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class TemplateController extends Controller
 {
@@ -28,13 +28,13 @@ class TemplateController extends Controller
         try {
             $template = $this->model_template->getById($id);
             $result['data'] = $template;
-        } catch (Exception $ex) {
+        } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return response($result, 400);
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Template retrieved succesfully.';
+        $result['message'] = 'Template retrieved successfully.';
         return response($result, 200);
     }
 
@@ -43,30 +43,28 @@ class TemplateController extends Controller
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
         $result['data'] = $this->model_template->get();
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Templates retrieved succesfully.';
+        $result['message'] = 'All Templates retrieved successfully.';
         return response($result, 200);
     }
 
     public function create(CreateRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
-        $header = $request->header('Authorization');
-        $user = $this->model_user->getByColumn($header, 'api_token');
+        $user = AuthHelper::instance()->user($request,$this->model_user);
 
         try {
             $result['data'] = $this->model_template->create(
                 [
-                    
-                    'user_id' => $user->id,                    
+                    'user_id' => $user->id,
                 ]
             );
-        } catch (Exception $ex) {
+        } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return response($result, 400);
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Created template succesfully!';
+        $result['message'] = 'Created template successfully!';
         return response($result, 200);
     }
 
@@ -76,34 +74,15 @@ class TemplateController extends Controller
 
         try {
             $result['data'] = $this->model_template->deleteById($id);
-        } catch (Exception $ex) {
+        } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return response($result, 400);
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Template deleted succesfully';
+        $result['message'] = 'Template deleted successfully';
         return response($result, 200);
     }
-    public function update(Request $request,$id)
-    {
-        // $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-
-        // try {
-        //     $template = $template->model_template->update($request->only($this->model_template) ,
-        //     $id);
-        //     $result['data'] = $this->model_template->getById($id);
-        // } catch (Exception $ex) {
-        //     $result['message'] = $ex->getMessage();
-        //     return response($result, 400);
-        // }
-        // $result['status'] = '200 (Ok)';
-        // $result['message'] = 'Template updated succesfully';
-        // return response($result, 200);   
-    
-    }
-
-    
 
 }
 

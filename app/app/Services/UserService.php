@@ -76,7 +76,7 @@ class UserService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $user = $this->user_model->getByColumn($request->api_refresh_token, 'api_refresh_token');
+            $user = AuthHelper::instance()->user($request,$this->model_user);
         } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return ['data' => $result, 'status' => 400];
@@ -89,7 +89,7 @@ class UserService implements RestServiceContract
 
         $api_token_refresh_date = $user->api_token_expiry_date;
         if ($api_token_refresh_date > now()) {
-            $result['message'] = 'Api token has not expired yet. Nothing to refresh.';
+            $result['message'] = 'Api token has not expired yet.';
             return ['data' => $result, 'status' => 400];
         }
 

@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Contracts\RestServiceContract;
+use App\Helpers\AuthHelper;
 use App\Report;
 use App\ReportQuestion;
 use App\ReportSection;
@@ -25,12 +26,52 @@ class ReportService implements RestServiceContract
         $this->user_model = new ModelRepository($user);
     }
 
+    protected function get_foreign($report, $result)
+    {
+        $result['data'] = [
+            $report->title =>
+                [
+                    'id' => $report->id,
+                    'title' => $report->title,
+                    'user_id' => $report->user_id,
+                    'created_at' => $report->created_at,
+                    'updated_at' => $report->updated_at,
+                    'report_template_id' => $report->report_template_id,
+                    'room' => $report->room
+                ]
+        ];
+        foreach ($report->sections as $section) {
+            $result['data'][$report->title]['ref'][$section->title] = [
+                'id' => $section->id,
+                'report_id' => $section->report_id,
+                'created_at' => $section->created_at,
+                'updated_at' => $section->updated_at,
+                'report_section_template_id' => $section->report_section_template_id
+            ];
+
+            foreach ($section->questions as $question) {
+                $result['data'][$report->title]['ref'][$section->title]['ref'][$question->question] = [
+                    'id' => $question->id,
+                    'question' => $question->question,
+                    'report_section_id' => $question->report_section_id,
+                    'created_at' => $question->created_at,
+                    'updated_at' => $question->updated_at,
+                    'report_question_template_id' => $question->report_question_template_id,
+                    'answer' => $question->answer,
+                    'description' => $question->description,
+                ];
+            }
+        }
+        return $result;
+    }
+
     public function get($id)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $result['data'] = $this->report_model->getById($id);
+            $report = $this->report_model->getById($id);
+            $result = $this->get_foreign($report, $result);
         } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
@@ -44,7 +85,10 @@ class ReportService implements RestServiceContract
     public function get_all()
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-        $result['data'] = $this->report_model->get();
+        $reports = $this->report_model->get();
+        foreach ($reports as $report)
+            $result = $this->get_foreign($report, $result);
+
         $result['status'] = '200 (Ok)';
         $result['message'] = 'All Reports retrieved successfully.';
         return ['response' => $result, 'status' => 200];
@@ -54,8 +98,7 @@ class ReportService implements RestServiceContract
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
 
-        $header = $request->header('Authorization');
-        $user = $this->user_model->getByColumn($header, 'api_token');
+        $user = AuthHelper::instance()->user($request,$this->model_user);
         $sections = $request->sections;
 
         // create the report
@@ -78,8 +121,8 @@ class ReportService implements RestServiceContract
         $result['data'] = [
             'id' => $report->id,
             'title' => $report->title,
-            'user_id'=> $report->user_id,
-            'created_at'=> $report->created_at,
+            'user_id' => $report->user_id,
+            'created_at' => $report->created_at,
             'updated_at' => $report->updated_at,
             'report_template_id' => $report->report_template_id,
             'room' => $report->room,
@@ -110,7 +153,7 @@ class ReportService implements RestServiceContract
                     'id' => $section->id,
                     'title' => $section->title,
                     'report_id' => $section->report_id,
-                    'created_at'=> $section->created_at,
+                    'created_at' => $section->created_at,
                     'updated_at' => $section->updated_at,
                     'report_section_template_id' => $section->report_template_section_id
                 ];

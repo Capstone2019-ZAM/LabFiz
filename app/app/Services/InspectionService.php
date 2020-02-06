@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Contracts\RestServiceContract;
+use App\Helpers\AuthHelper;
 use App\Inspection;
 use App\Repositories\ModelRepository;
 use App\User;
@@ -49,8 +50,7 @@ class InspectionService implements RestServiceContract
     public function create(FormRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
-        $header = $request->header('Authorization');
-        $user = $this->user_model->getByColumn($header, 'api_token');
+        $user = AuthHelper::instance()->user($request,$this->model_user);
 
         try {
             $result['data'] = $this->inspection_model->updateOrCreate(
