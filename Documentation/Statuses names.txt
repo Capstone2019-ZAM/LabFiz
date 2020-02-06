@@ -1,0 +1,11 @@
+List of Statuses for Issue
+Open
+Closed
+
+
+List of Statuses for Inspection
+Pending
+Submitted
+Review Required
+Overdue
+Complete
