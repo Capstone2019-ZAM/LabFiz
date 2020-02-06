@@ -1,62 +1,112 @@
 # API Documentation 
-The end points described below are meant to perform CRUD operations on a relational database backend and serve authenticated JSON to the front-end for the laravel app.
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) [![Generic badge](https://img.shields.io/badge/Version-1.0-<COLOR>.svg)](https://shields.io/)[![Generic badge](https://img.shields.io/badge/Iros-RestApi-<COLOR>.svg)](https://shields.io/)
+ [![made-with-Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 
-*Current Latest API version is 1.0.
+The end points described below serve authenticated JSON to a VueJs frontend. All the endpoints(except login) are protected using token based authentication with short-lived access tokens. Note that the refresh route will need to be invoked when an api access token expires in order to refresh it using a refresh token.
 
-*All routes are protected using token based authentication.
+## Generic Errors 
 
-*Documentation style follows @iros REST api documentation.
+*Using an authentication token that has expired.*
 
-# Table of Contents
+```json
+{
+    "status": "401 (Unauthorized)",
+    "message": "Your token is expired, refresh your api auth token using the refresh route.",
+    "data": ""
+}
+```
+
+*The authentication token in request header is invalid(does not exisit):*
+
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": "Invalid api authentication token.",
+    "data": ""
+}
+```
+
+*Missing authorization field in the request header with the value field as the authentication token:*
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": "Please add the api authentication token in your request header.",
+    "data": ""
+}
+```
+
+## Endpoints
 
 <!--ts-->
  * [**Users**](#users)
      * [Login](#login)
+     * [Refresh](#Refresh)
+     * [Get](#GetUserById)
+     * [Get all](#GetAllUsers)
+     * [Create/Update](#CreateUser)
+     * [Delete](#DeleteUser)
  * [**Reports**](#reports)
      * [Get](#GetReportById)
      * [Get all](#GetAllReports)
-     * [Create](#CreateReport)
+     * [Create/Update](#CreateReport)
      * [Delete](#DeleteReport)
  * [**Inspections**](#inspections)
      * [Get](#GetInspectionById)
      * [Get all](#GetAllInspections)
-     * [Create](#CreateInspection)
+     * [Create/Update](#CreateInspection)
      * [Delete](#DeleteInspection)
  * [**Issues**](#issues)
      * [Get](#GetIssueById)
      * [Get all](#GetAllIssues)
-     * [Create](#CreateIssue)
+     * [Create/Update](#CreateIssue)
      * [Delete](#DeleteIssue)
+  * [**Labs**](#labs)
+	 * [Get](#GetLabById)
+     * [Get all](#GetAllLabs)
+     * [Create/Update](#CreateLab)
+     * [Delete](#DeleteLab)
 <!--te-->
 
-# Endpoints Table
 | # | Category |           Route URL          | Latest Version | Request Type |              Desc              |                More Info               |
 |:-:|:--------:|:----------------------------:|:--------------:|:------------:|:------------------------------:|:--------------------------------------:|
-| 1 |  User  | localhost/api/login            |        -       |      POST     | Gets a report by the report id | [Login](#Login) |
-| 2 |  Report  | localhost/api/v1/report/{id} |        1       |      GET     | Gets a report by the report id | [Get](#GetReportById) |
-| 3 |  Report  |   localhost/api/v1/reports   |        1       |      GET     |        Gets all reports        | [Get all](#GetAllReports) |
-| 4 |  Report  |    localhost/api/v1/report   |        1       |     POST     |     Creates a unique report    | [Create](#CreateReport) |
-| 5 |  Report  |    localhost/api/v1/report/{id}   |        1       |    DELETE    |     Deletes a report by id     | [Delete](#DeleteReport) |
-| 6 |  Inspection  | localhost/api/v1/report/{id} |        1       |      GET     | Gets an inspection assignment by the id | [Get](#GetInspectionById) |
-| 7 |  Inspection  |   localhost/api/v1/inspection   |        1       |      GET     |        Gets all inspection assignments        | [Get all](#GetAllInspections) |
-| 8 |  Inspection  |    localhost/api/v1/inspection   |        1       |     POST     |     Creates a unique inspection assignment    | [Create](#CreateInspection) |
-| 9 |  Inspection  |    localhost/api/v1/inspection/{id}   |        1       |    DELETE    |     Deletes an inspection assignment     | [Delete](#DeleteInspection) |
-| 10 |  Issue  | localhost/api/v1/issue/{id} |        1       |      GET     | Gets an issue by id | [Get](#GetIssueById) |
-| 11 |  Issue  |   localhost/api/v1/issue   |        1       |      GET     |        Gets all issues        | [Get all](#GetAllIssues) |
-| 12 |  Issue  |    localhost/api/v1/issue   |        1       |     POST     |     Creates a unique issue    | [Create](#CreateIssue) |
-| 13 |  Issue  |    localhost/api/v1/issue/{id}   |        1       |    DELETE    |     Deletes an issue by id     | [Delete](#DeleteIssue) |
+| 1 |  User  | localhost/api/user/login            |        -       |      POST     | Logins in a user by the user id | [More](#Login) |
+| 2 |  User  | localhost/api/user/refresh            |        -       |      POST     | Refreshes an expired api auth token | [More](#Refresh) |
+| 3 |  User  | localhost/api/user/{id} |        -       |      GET     | Gets a user by the user id | [More](#GetUserById) |
+| 4 |  User  | localhost/api/users |        -       |      GET     | Gets all users | [More](#GetAllUsers) |
+| 5 |  User  | localhost/api/user |        -       |      POST     | Creates a user if it does not exist, otherwise updates an exisiting one | [More](#CreateUser) |
+| 6 |  User  | localhost/api/user/{id} |        -       |      POST     | Deletes an exisiting user | [More](#DeleteUser) |
+| 7 |  User  | localhost/api/user/{id} |        -       |      DELETE    | Deletes a user by id | [More](#DeleteUser) |
+| 8 |  Report  | localhost/api/v1/report/{id} |        1       |      GET     | Gets a report by the report id | [More](#GetReportById) |
+| 9 |  Report  |   localhost/api/v1/reports   |        1       |      GET     |        Gets all reports        | [More](#GetAllReports) |
+| 10 |  Report  |    localhost/api/v1/report   |        1       |     POST     |     Creates a report if it does not exist, otherwise updates an exisiting one    | [More](#CreateReport) |
+| 11 |  Report  |    localhost/api/v1/report/{id}   |        1       |    DELETE    |     Deletes a report by id     | [More](#DeleteReport) |
+| 12 |  Inspection  | localhost/api/v1/report/{id} |        1       |      GET     | Gets an inspection assignment by the id | [More](#GetInspectionById) |
+| 13 |  Inspection  |   localhost/api/v1/inspection   |        1       |      GET     |        Gets all inspection assignments        | [More](#GetAllInspections) |
+| 14 |  Inspection  |    localhost/api/v1/inspection   |        1       |     POST     |     Creates an inspection if it does not exist, otherwise updates exisiting one    | [More](#CreateInspection) |
+| 15 |  Inspection  |    localhost/api/v1/inspection/{id}   |        1       |    DELETE    |     Deletes an inspection assignment     | [More](#DeleteInspection) |
+| 16 |  Issue  | localhost/api/v1/issue/{id} |        1       |      GET     | Gets an issue by id | [More](#GetIssueById) |
+| 17 |  Issue  |   localhost/api/v1/issues   |        1       |      GET     |        Gets all issues        | [More](#GetAllIssues) |
+| 18 |  Issue  |    localhost/api/v1/issue   |        1       |     POST     |     Creates an issue if it does not exist, otherwise updates exisiting one    | [More](#CreateIssue) |
+| 19 |  Issue  |    localhost/api/v1/issue/{id}   |        1       |    DELETE    |     Deletes an issue by id     | [More](#DeleteIssue) |
+| 20 |  Lab  | localhost/api/v1/lab/{id} |        1       |      GET     | Gets an lab by id | [More](#GetLabById) |
+| 21 |  Lab  |   localhost/api/v1/labs   |        1       |      GET     |        Gets all labs        | [More](#GetAllLabs) |
+| 22 |  Lab  |    localhost/api/v1/lab   |        1       |     POST     |     Creates a lab if it does not exist, otherwise updates exisiting one    | [More](#CreateLab) |
+| 23 |  Lab  |    localhost/api/v1/lab/{id}   |        1       |    DELETE    |     Deletes a lab by id     | [More](#DeleteLab) |
+
 
 Users
 ============
 Login
 -----
 ```bash
-  Logs in the user using token based authentication.
+  Logs in the user using a short lived access token. Once the access token has expired,
+  a refresh will need to be issued to the refresh route in order to generate a new 
+  refresh and access token pair.
 ```
 
 * **Route:** 
 
-localhost/api/login
+  localhost/api/user/login
 
 
 * **Request Type:** 
@@ -100,7 +150,10 @@ localhost/api/login
     "data": {
         "email": "bob@gmail.com",
         "role": "admin",
-        "token": "UcZ8JrhrCZzcy1Hdz53iVIqpYMVgYivSMCBTKM2t7CNuWSEv9KkXB5KutFCc"
+        "token": "KMxhZdg8IL83STU8pwDYJmFTJbHmdp1HvGOqh6Q1ACumJxodNmFYFMFdOnwt",
+        "token_type": "ApiAuth",
+        "expires_at": "2020-02-04T08:08:26.000000Z",
+        "refresh_token": "hrRf6LGb8WFEl8RFFFQYMsp1Fk6vLIfq9eiSoAWf40pfXQTk6GcTtuqTsBZ7"
     }
 }
 ```
@@ -115,8 +168,312 @@ localhost/api/login
 }
 ```
 
+OR
+
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": {
+        "password": [
+            "The password field is required."
+        ],
+        "email": [
+            "The email field is required."
+        ]
+    },
+    "data": ""
+}
+```
+
+Refresh
+-----
+```bash
+  Used to refresh auth tokens. A new api auth and refresh token pair will be generated.
+```
+
+* **Route:** 
+
+localhost/api/user/refresh
+
+
+* **Request Type:** 
+  
+  POST
+  
+  
+* **Content Type:** 
+ 
+    `application/json` .
+  
+  
+* **Auth Required:**
+
+  **Yes**
+  
+  
+* **Body:**
+
+
+  
+* **Sample Request:**
+
+```json  
+{
+	"api_refresh_token": "I3tDzkQxQnyQbDNPmQyOPgmWWu6z7fxJQj7ffDG2JpJft7kNgouuncSZLkTb"
+}
+```
+  
+* **Success Response:**
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "Api token refreshed successfully",
+    "data": {
+        "token": "q2E5T7rHcPUblPCiSWBE3wikjksctzdOIJOFj7oXbLXNxqB03FRVRoFrJVkK",
+        "token_type": "ApiAuth",
+        "expires_at": "2020-02-04T23:27:46.000000Z",
+        "refresh_token": "WmtUxLxverc6tzDPgU6lBfkJzYi0UDdxqMfbXhcMnYNixNIv5GDAfh9bqKyM"
+    }
+}
+```
+
+* **Error Response:**
+
+```json
+{
+    "status": "422 (Unprocessable Entity)",
+    "message": {
+        "api_refresh_token": [
+            "The api refresh token field is required."
+        ]
+    },
+    "data": ""
+}
+```
+
+OR
+
+
+```json
+{
+    "status": "400 (Bad Request)",
+    "message": "Authentication token has not expired yet.",
+    "data": ""
+}
+```
+
+
+OR
+
+
+```json
+{
+    "status": "400 (Bad Request)",
+    "message": "Could not find given refresh token.",
+    "data": ""
+}
+```
+
+GetUserById
+-----
+```bash
+  Logs in the user using a short lived access token.
+  Once the access token has expired, a refresh will 
+  need to be issued to the refresh route in 
+  order to generate a new refresh and access token pair.
+```
+
+* **Route:** 
+
+localhost/api/user/{id}
+
+
+* **Request Type:** 
+  
+  POST
+  
+  
+* **Content Type:** 
+ 
+    `application/json` .
+  
+  
+* **Auth Required:**
+
+  **Yes**
+  
+  
+* **Body:**
+
+|          	|                 Email                	|                      Password                     	|
+|:--------:	|:------------------------------------:	|:-------------------------------------------------:	|
+| Required 	|                   x                  	|                         x                         	|
+| Optional 	|                                      	|                                                   	|
+|   Notes  	| 	| 	|
+  
+* **Sample Request:**
+
+```json  
+    localhost/api/user/1
+```
+  
+* **Success Response:**
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "User retrieved successfully.",
+    "data": {
+        "id": 1,
+        "first_name": "Isabell",
+        "last_name": "Adams",
+        "department": "chemical",
+        "email": "egrimes@example.net",
+        "email_verified_at": "2020-02-03 01:30:23",
+        "api_token": "24nsjA8zwK21ewKMCNab9EFm2NMgozN2x8k1fDktxgRbQfK4sZFi73FWULMe",
+        "created_at": "2020-02-03 01:30:23",
+        "updated_at": "2020-02-05 07:41:53",
+        "api_token_expiry_date": "2020-02-04 00:04:23",
+        "api_refresh_token": "s7uLzmhqRF44nVwBRou8JrJqfLk36dPUxsMjoPKj9OkHOCDxyBAk7ZMOpAM5",
+        "api_token_type": "ApiAuth"
+    }
+}
+```
+
+* **Error Response:**
+
+```json
+{
+    "status": "400 (Bad Request)",
+    "message": "No query results for model [App\\User] 232",
+    "data": ""
+}
+```
+
+GetAllUsers
+-----
+```bash
+  Gets all users.
+```
+
+* **Route:** 
+
+localhost/api/users
+
+
+* **Request Type:** 
+  
+  POST
+  
+  
+* **Content Type:** 
+ 
+    `application/json` .
+  
+  
+* **Auth Required:**
+
+  **Yes**
+  
+  
+* **Body:**
+
+
+* **Sample Request:**
+
+```json  
+```
+  
+* **Success Response:**
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "All Users retrieved successfully.",
+    "data": [
+        {
+            "id": 1,
+            "first_name": "Isabell",
+            "last_name": "Adams",
+            "department": "chemical",
+            "email": "egrimes@example.net",
+            "email_verified_at": "2020-02-03 01:30:23",
+            "api_token": "SjFJ0XyVOke1bpHfXVq8IAbwCTYwIgXHWztJi6lnJeLrLlu1QOgSQApJfK9r",
+            "created_at": "2020-02-03 01:30:23",
+            "updated_at": "2020-02-03 01:30:23",
+            "api_token_expiry_date": "2020-02-04 00:04:23",
+            "api_refresh_token": null,
+            "api_token_type": "ApiAuth"
+        },
+        {
+            "id": 2,
+            "first_name": "Eusebio",
+            "last_name": "Schamberger",
+            "department": "software",
+            "email": "tatyana.zemlak@example.net",
+            "email_verified_at": "2020-02-03 01:30:23",
+            "api_token": "eAljW1ZkFQqKJvS6zg2660weDAMgYdhHwBodAMsbke7hA2lsioPoAJ6swDla",
+            "created_at": "2020-02-03 01:30:23",
+            "updated_at": "2020-02-03 01:30:23",
+            "api_token_expiry_date": "2020-02-04 00:04:23",
+            "api_refresh_token": null,
+            "api_token_type": "ApiAuth"
+        },
+        {
+            "id": 3,
+            "first_name": "Tyshawn",
+            "last_name": "Blanda",
+            "department": "electrical",
+            "email": "ebradtke@example.org",
+            "email_verified_at": "2020-02-03 01:30:23",
+            "api_token": "R1k6sY55sbzXjVkSycH8qZS9aGQB3m4d3S1XEfEUJKfemN8P6cEJg1XcYc0Y",
+            "created_at": "2020-02-03 01:30:23",
+            "updated_at": "2020-02-03 01:30:23",
+            "api_token_expiry_date": "2020-02-04 00:04:23",
+            "api_refresh_token": null,
+            "api_token_type": "ApiAuth"
+        },
+        {
+            "id": 4,
+            "first_name": "Izaiah",
+            "last_name": "Rowe",
+            "department": "chemical",
+            "email": "laura13@example.com",
+            "email_verified_at": "2020-02-03 01:30:23",
+            "api_token": "FxppX3PqRAAZYW7V8q0tZOCvhdbOSDTwadG3hs0inNC5yninXTWGrWcg0pxL",
+            "created_at": "2020-02-03 01:30:23",
+            "updated_at": "2020-02-03 01:30:23",
+            "api_token_expiry_date": "2020-02-04 00:04:23",
+            "api_refresh_token": null,
+            "api_token_type": "ApiAuth"
+        },
+        {
+            "id": 5,
+            "first_name": "Mariah",
+            "last_name": "Feil",
+            "department": "petroleum",
+            "email": "ollie.bayer@example.org",
+            "email_verified_at": "2020-02-03 01:30:23",
+            "api_token": "7ql7LrH7woABenV5435BPigx77fQMJusFLvVqk88obQs5J6v9V7lLzUIDHeF",
+            "created_at": "2020-02-03 01:30:23",
+            "updated_at": "2020-02-03 01:30:23",
+            "api_token_expiry_date": "2020-02-04 00:04:23",
+            "api_refresh_token": null,
+            "api_token_type": "ApiAuth"
+        }
+    ]
+}
+```
+
+* **Error Response:**
+
+```json
+```
+
 Reports
 ============
+
 GetReportById
 -----
 ```bash
@@ -145,21 +502,114 @@ GetReportById
 
 * **Sample Request:**
 
-    localhost/api/v1/report/1
+    localhost/api/v1/report/155
   
   
 * **Success Response:**
 
 ```json
 {
-    "status": "200 (Ok)",
-    "message": "Report retrieved succesfully.",
+    "status": "400 (Bad Request)",
+    "message": "",
     "data": {
-        "id": 1,
-        "title": "Some cool title",
-        "user_id": 1,
-        "created_at": "2019-12-27 02:03:36",
-        "updated_at": "2019-12-27 02:03:36"
+        "some cool title": {
+            "id": 155,
+            "title": "some cool title",
+            "user_id": 23,
+            "created_at": "2020-02-05T06:09:48.000000Z",
+            "updated_at": "2020-02-05T06:17:47.000000Z",
+            "report_template_id": 1,
+            "room": 69,
+            "ref": {
+                "sect_title_1": {
+                    "id": 162,
+                    "report_id": 155,
+                    "created_at": "2020-02-05T06:09:48.000000Z",
+                    "updated_at": "2020-02-05T06:09:48.000000Z",
+                    "report_section_template_id": 3,
+                    "ref": {
+                        "quest_title_1": {
+                            "id": 183,
+                            "question": "quest_title_1",
+                            "report_section_id": 162,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        },
+                        "quest_title_2": {
+                            "id": 184,
+                            "question": "quest_title_2",
+                            "report_section_id": 162,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        }
+                    }
+                },
+                "sect_title_2": {
+                    "id": 163,
+                    "report_id": 155,
+                    "created_at": "2020-02-05T06:09:48.000000Z",
+                    "updated_at": "2020-02-05T06:09:48.000000Z",
+                    "report_section_template_id": 1,
+                    "ref": {
+                        "quest_title_1": {
+                            "id": 185,
+                            "question": "quest_title_1",
+                            "report_section_id": 163,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        },
+                        "quest_title_2": {
+                            "id": 186,
+                            "question": "quest_title_2",
+                            "report_section_id": 163,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        }
+                    }
+                },
+                "sect_title_3": {
+                    "id": 164,
+                    "report_id": 155,
+                    "created_at": "2020-02-05T06:09:48.000000Z",
+                    "updated_at": "2020-02-05T06:09:48.000000Z",
+                    "report_section_template_id": 1,
+                    "ref": {
+                        "quest_title_1": {
+                            "id": 187,
+                            "question": "quest_title_1",
+                            "report_section_id": 164,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        },
+                        "quest_title_2": {
+                            "id": 188,
+                            "question": "quest_title_2",
+                            "report_section_id": 164,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 ```
@@ -167,25 +617,7 @@ GetReportById
 * **Error Response:**
 
 ```json
-{
-    "status": "400 (Bad Request)",
-    "message": "Ill formed input",
-    "data": ""
-}
 ```
-
-
-OR
-
-
-```json
-{
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
-    "data": ""
-}
-```
-
 
 GetAllReports
 -----
@@ -222,91 +654,108 @@ GetAllReports
 
 ```json
 {
-    "status": "200 (Ok)",
-    "message": "All Reports retrieved succesfully.",
-    "data": [
-        {
-            "id": 1,
-            "title": "Oil Spills",
-            "user_id": 1,
-            "created_at": "2019-12-27 02:03:36",
-            "updated_at": "2019-12-27 02:03:36"
-        },
-        {
-            "id": 2,
-            "title": "Oil Spills",
-            "user_id": 1,
-            "created_at": "2019-12-27 02:03:36",
-            "updated_at": "2019-12-27 02:03:36"
-        },
-        {
-            "id": 3,
-            "title": "Oil Spills",
-            "user_id": 1,
-            "created_at": "2019-12-27 02:03:36",
-            "updated_at": "2019-12-27 02:03:36"
-        },
-        {
-            "id": 4,
-            "title": "Oil Spills",
-            "user_id": 1,
-            "created_at": "2019-12-27 02:03:36",
-            "updated_at": "2019-12-27 02:03:36"
-        },
-        {
-            "id": 5,
-            "title": "Oil Spills",
-            "user_id": 1,
-            "created_at": "2019-12-27 02:03:36",
-            "updated_at": "2019-12-27 02:03:36"
-        },
-        {
-            "id": 6,
-            "title": "Oil Spills",
-            "user_id": 1,
-            "created_at": "2019-12-27 02:03:36",
-            "updated_at": "2019-12-27 02:03:36"
-        },
-        {
-            "id": 7,
-            "title": "Oil Spills",
-            "user_id": 1,
-            "created_at": "2019-12-27 02:03:36",
-            "updated_at": "2019-12-27 02:03:36"
-        },
-        {
-            "id": 8,
-            "title": "Oil Spills",
-            "user_id": 1,
-            "created_at": "2019-12-27 02:03:36",
-            "updated_at": "2019-12-27 02:03:36"
-        },
-        {
-            "id": 9,
-            "title": "Oil Spills",
-            "user_id": 1,
-            "created_at": "2019-12-27 02:03:36",
-            "updated_at": "2019-12-27 02:03:36"
-        },
-        {
-            "id": 10,
-            "title": "Chemical Spills",
-            "user_id": 1,
-            "created_at": "2019-12-27 02:03:36",
-            "updated_at": "2019-12-27 02:03:36"
+    "status": "400 (Bad Request)",
+    "message": "",
+    "data": {
+        "some cool title": {
+            "id": 155,
+            "title": "some cool title",
+            "user_id": 23,
+            "created_at": "2020-02-05T06:09:48.000000Z",
+            "updated_at": "2020-02-05T06:17:47.000000Z",
+            "report_template_id": 1,
+            "room": 69,
+            "ref": {
+                "sect_title_1": {
+                    "id": 162,
+                    "report_id": 155,
+                    "created_at": "2020-02-05T06:09:48.000000Z",
+                    "updated_at": "2020-02-05T06:09:48.000000Z",
+                    "report_section_template_id": 3,
+                    "ref": {
+                        "quest_title_1": {
+                            "id": 183,
+                            "question": "quest_title_1",
+                            "report_section_id": 162,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        },
+                        "quest_title_2": {
+                            "id": 184,
+                            "question": "quest_title_2",
+                            "report_section_id": 162,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        }
+                    }
+                },
+                "sect_title_2": {
+                    "id": 163,
+                    "report_id": 155,
+                    "created_at": "2020-02-05T06:09:48.000000Z",
+                    "updated_at": "2020-02-05T06:09:48.000000Z",
+                    "report_section_template_id": 1,
+                    "ref": {
+                        "quest_title_1": {
+                            "id": 185,
+                            "question": "quest_title_1",
+                            "report_section_id": 163,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        },
+                        "quest_title_2": {
+                            "id": 186,
+                            "question": "quest_title_2",
+                            "report_section_id": 163,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        }
+                    }
+                },
+                "sect_title_3": {
+                    "id": 164,
+                    "report_id": 155,
+                    "created_at": "2020-02-05T06:09:48.000000Z",
+                    "updated_at": "2020-02-05T06:09:48.000000Z",
+                    "report_section_template_id": 1,
+                    "ref": {
+                        "quest_title_1": {
+                            "id": 187,
+                            "question": "quest_title_1",
+                            "report_section_id": 164,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        },
+                        "quest_title_2": {
+                            "id": 188,
+                            "question": "quest_title_2",
+                            "report_section_id": 164,
+                            "created_at": "2020-02-05T06:09:48.000000Z",
+                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        }
+                    }
+                }
+            }
         }
-    ]
-}
-```
-
-OR
-
-
-```json
-{
-    "status": "200 (Ok)",
-    "message": "All Reports retrieved succesfully.",
-    "data": ""
+    }
 }
 ```
 
@@ -314,17 +763,12 @@ OR
 * **Error Response:**
 
 ```json
-{
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
-    "data": ""
-}
 ```
 
 CreateReport
 -----
 ```bash
-  Creates a unique report.
+  Creates a report if it does not exist, otherwise updates an exisiting one
 ```
 
 * **Route:** 
@@ -356,26 +800,34 @@ CreateReport
 
 ```json
 {
-	"title" : "some cool title 2019",
+	"title" : "some cool title",
+	"id": 155,
+	"template_id": 1,
+	"room" : 69,
+	"due_date": "2020-02-04 23:26:46",
 	"sections" : {
 		"sect_title_1" : {
-		 "qs": ["quest_title_1","quest_title_2"]
+		 "template_id": 3,
+		 "qs": {
+		 	"quest_title_1" : {"template_id": 1, "answer":"dog", "description":"food"},
+			"quest_title_2" : {"template_id": 1, "answer":"dog", "description":"food"}
+		 	}
 		},
 		"sect_title_2" : {
-			"qs": ["quest_title_1"]
+			"template_id": 1,
+			"qs": {
+		 	"quest_title_1" : {"template_id": 1, "answer":"dog", "description":"food"},
+			"quest_title_2" : {"template_id": 1, "answer":"dog", "description":"food"}
+		 	}
 		},
 		"sect_title_3" : {
-			"qs": ["quest_title_1","quest_title_2","quest_title_3"]
+			"template_id": 1,
+			"qs": {
+		 	"quest_title_1" : {"template_id": 1, "answer":"dog", "description":"food"},
+			"quest_title_2" : {"template_id": 1, "answer":"dog", "description":"food"}
+		 	}
 		}
 	}
-}
-```  
-
-OR
-
-```json
-{
-	"title" : "some cool title 2029"
 }
 ```  
   
@@ -384,79 +836,107 @@ OR
 ```json
 {
     "status": "200 (Ok)",
-    "message": "Created report document succesfully!",
+    "message": "Created report document successfully!",
     "data": {
-        "title": "some cool report title",
-        "user_id": 1,
-        "updated_at": "2019-12-28 04:15:02",
-        "created_at": "2019-12-28 04:15:02",
-        "id": 27,
-        "$sect": {
-            "title": "sect_title_3",
-            "report_id": 27,
-            "updated_at": "2019-12-28 04:15:02",
-            "created_at": "2019-12-28 04:15:02",
-            "id": 43
-        },
-        "quest_title_1": {
-            "question": "quest_title_1",
-            "report_section_id": 41,
-            "updated_at": "2019-12-28 04:15:02",
-            "created_at": "2019-12-28 04:15:02",
-            "id": 71
-        },
-        "quest_title_2": {
-            "question": "quest_title_2",
-            "report_section_id": 41,
-            "updated_at": "2019-12-28 04:15:02",
-            "created_at": "2019-12-28 04:15:02",
-            "id": 72
-        },
-        "quest_title_3": {
-            "question": "quest_title_3",
-            "report_section_id": 42,
-            "updated_at": "2019-12-28 04:15:02",
-            "created_at": "2019-12-28 04:15:02",
-            "id": 73
-        },
-        "quest_title_4": {
-            "question": "quest_title_4",
-            "report_section_id": 43,
-            "updated_at": "2019-12-28 04:15:02",
-            "created_at": "2019-12-28 04:15:02",
-            "id": 74
-        },
-        "quest_title_5": {
-            "question": "quest_title_5",
-            "report_section_id": 43,
-            "updated_at": "2019-12-28 04:15:02",
-            "created_at": "2019-12-28 04:15:02",
-            "id": 75
-        },
-        "quest_title_6": {
-            "question": "quest_title_6",
-            "report_section_id": 43,
-            "updated_at": "2019-12-28 04:15:02",
-            "created_at": "2019-12-28 04:15:02",
-            "id": 76
-        }
-    }
-}
-```
-
-OR
-
-```
-{
-    "status": "200 (Ok)",
-    "message": "Created report document succesfully!",
-    "data": {
-        "some cool title 2029": {
-            "title": "some cool title 2029",
-            "user_id": 1,
-            "updated_at": "2019-12-27 04:27:45",
-            "created_at": "2019-12-27 04:27:45",
-            "id": 18
+        "id": 155,
+        "title": "some cool title",
+        "user_id": 23,
+        "created_at": "2020-02-05T06:09:48.000000Z",
+        "updated_at": "2020-02-05T06:17:47.000000Z",
+        "report_template_id": 1,
+        "room": 69,
+        "due_date": "2020-02-04 23:26:46",
+        "ref": {
+            "sect_title_1": {
+                "id": 162,
+                "title": "sect_title_1",
+                "report_id": 155,
+                "created_at": "2020-02-05T06:09:48.000000Z",
+                "updated_at": "2020-02-05T06:09:48.000000Z",
+                "report_section_template_id": null,
+                "ref": {
+                    "quest_title_1": {
+                        "id": 183,
+                        "question": "quest_title_1",
+                        "report_section_id": 162,
+                        "created_at": "2020-02-05 06:09:48",
+                        "updated_at": "2020-02-05 06:09:48",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
+                    },
+                    "quest_title_2": {
+                        "id": 184,
+                        "question": "quest_title_2",
+                        "report_section_id": 162,
+                        "created_at": "2020-02-05 06:09:48",
+                        "updated_at": "2020-02-05 06:09:48",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
+                    }
+                }
+            },
+            "sect_title_2": {
+                "id": 163,
+                "title": "sect_title_2",
+                "report_id": 155,
+                "created_at": "2020-02-05T06:09:48.000000Z",
+                "updated_at": "2020-02-05T06:09:48.000000Z",
+                "report_section_template_id": null,
+                "ref": {
+                    "quest_title_1": {
+                        "id": 185,
+                        "question": "quest_title_1",
+                        "report_section_id": 163,
+                        "created_at": "2020-02-05 06:09:48",
+                        "updated_at": "2020-02-05 06:09:48",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
+                    },
+                    "quest_title_2": {
+                        "id": 186,
+                        "question": "quest_title_2",
+                        "report_section_id": 163,
+                        "created_at": "2020-02-05 06:09:48",
+                        "updated_at": "2020-02-05 06:09:48",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
+                    }
+                }
+            },
+            "sect_title_3": {
+                "id": 164,
+                "title": "sect_title_3",
+                "report_id": 155,
+                "created_at": "2020-02-05T06:09:48.000000Z",
+                "updated_at": "2020-02-05T06:09:48.000000Z",
+                "report_section_template_id": null,
+                "ref": {
+                    "quest_title_1": {
+                        "id": 187,
+                        "question": "quest_title_1",
+                        "report_section_id": 164,
+                        "created_at": "2020-02-05 06:09:48",
+                        "updated_at": "2020-02-05 06:09:48",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
+                    },
+                    "quest_title_2": {
+                        "id": 188,
+                        "question": "quest_title_2",
+                        "report_section_id": 164,
+                        "created_at": "2020-02-05 06:09:48",
+                        "updated_at": "2020-02-05 06:09:48",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
+                    }
+                }
+            }
         }
     }
 }
@@ -467,8 +947,17 @@ OR
 {
     "status": "422 (Unprocessable Entity)",
     "message": {
+        "id": [
+            "The id field is required."
+        ],
         "title": [
             "The title field is required."
+        ],
+        "room": [
+            "The room field is required."
+        ],
+        "template_id": [
+            "The template id field is required."
         ]
     },
     "data": ""
@@ -492,16 +981,6 @@ OR
             "The sections.sect_title_3.qs field is required when sections.sect_title_3 is present."
         ]
     },
-    "data": ""
-}
-```
-
-OR
-
-```json
-{
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
     "data": ""
 }
 ```
@@ -557,24 +1036,8 @@ DeleteReport
 * **Error Response:**
 
 ```json
-{
-    "status": "400 (Bad Request)",
-    "message": "Could not find report to be deleted by id",
-    "data": ""
-}
 ```
 
-
-OR
-
-
-```json
-{
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
-    "data": ""
-}
-```
 
 Inspections
 ============
@@ -632,23 +1095,7 @@ GetInspectionById
 * **Error Response:**
 
 ```json
-{
-    "status": "400 (Bad Request)",
-    "message": "Ill formed input",
-    "data": ""
-}
-```
 
-
-OR
-
-
-```json
-{
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
-    "data": ""
-}
 ```
 
 
@@ -716,32 +1163,16 @@ GetAllInspections
 }
 ```
 
-OR
-
-
-```json
-{
-    "status": "200 (Ok)",
-    "message": "All Inspection assignments retrieved succesfully.",
-    "data": []
-}
-```
-
 
 * **Error Response:**
 
 ```json
-{
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
-    "data": ""
-}
 ```
 
 CreateInspection
 -----
 ```bash
-  Creates a unique inspection.
+  Creates an inspection if it does not exist, otherwise updates an exisiting one
 ```
 
 * **Route:** 
@@ -774,10 +1205,13 @@ CreateInspection
 
 ```json
 {
-	"report_id": 1,
-	"room" : 69,
-	"assigned_to": 1,
-	"due_date": "2020-12-12 10:10:5"
+	"id": 155,
+	"report_id": 155,
+	"room": 1,
+	"assigned_to" : 2,
+	"user_id" : "1",
+	"status" : "incomplete",
+	"due_date": "2020-02-04 23:26:46"
 }
 ```  
   
@@ -789,15 +1223,15 @@ CreateInspection
     "status": "200 (Ok)",
     "message": "Created inspection assignment succesfully!",
     "data": {
-        "room": 69,
-        "report_id": 1,
-        "assigned_to": 1,
-        "user_id": 1,
-        "due_date": "2020-12-12 10:10:5",
+        "room": 1,
+        "report_id": 155,
+        "assigned_to": 2,
+        "user_id": 23,
+        "due_date": "2020-02-04 23:26:46",
         "status": "incomplete",
-        "updated_at": "2019-12-27 08:02:34",
-        "created_at": "2019-12-27 08:02:34",
-        "id": 2
+        "updated_at": "2020-02-05 06:37:11",
+        "created_at": "2020-02-05 06:37:11",
+        "id": 3
     }
 }
 ```  
@@ -821,34 +1255,6 @@ CreateInspection
             "The due date field is required."
         ]
     },
-    "data": ""
-}
-```
-
-OR
-
-```json
-{
-    "status": "422 (Unprocessable Entity)",
-    "message": {
-        "room": [
-            "The room must be a number."
-        ],
-        "assigned_to": [
-            "The assigned to must be a number."
-        ]
-    },
-    "data": ""
-}
-```
-
-OR
-
-
-```json
-{
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
     "data": ""
 }
 ```
@@ -908,23 +1314,7 @@ DeleteInspection
 * **Error Response:**
 
 ```json
-{
-    "status": "400 (Bad Request)",
-    "message": "Could not find report to be deleted by id",
-    "data": ""
-}
-```
 
-
-OR
-
-
-```json
-{
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
-    "data": ""
-}
 ```
 
 Issues
@@ -984,25 +1374,7 @@ GetIssueById
 * **Error Response:**
 
 ```json
-{
-    "status": "400 (Bad Request)",
-    "message": "Ill formed input",
-    "data": ""
-}
 ```
-
-
-OR
-
-
-```json
-{
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
-    "data": ""
-}
-```
-
 
 GetAllIssues
 -----
@@ -1070,32 +1442,16 @@ GetAllIssues
 }
 ```
 
-OR
-
-
-```json
-{
-    "status": "200 (Ok)",
-    "message": "All Issues retrieved succesfully.",
-    "data": []
-}
-```
-
-
 * **Error Response:**
 
 ```json
-{
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
-    "data": ""
-}
+
 ```
 
 CreateIssue
 -----
 ```bash
-  Creates a unique issue.
+  Creates an issue if it does not exist, otherwise updates an exisiting one
 ```
 
 * **Route:** 
@@ -1128,12 +1484,14 @@ CreateIssue
 
 ```json
 {
-	"title": "oil spill",
-	"room" : 69,
-	"assigned_to": 1,
-	"severity": "extreme",
-	"description": "someone clean this oil spill asap!",
-	"comments": "yikes, wow what a big oil spill!"
+	"id": 1,
+	"room": 213,
+	"title": "some cool title 32",
+	"severity": "critical",
+	"description": "dog food",
+	"comments": "more dog food",
+	"resolution_date": "2020-02-04 23:26:46",
+	"assigned_to": 1
 }
 ```  
   
@@ -1145,16 +1503,17 @@ CreateIssue
     "status": "200 (Ok)",
     "message": "Created issue succesfully!",
     "data": {
-        "title": "oil spill",
-        "room": 69,
-        "user_id": 1,
-        "severity": "extreme",
+        "id": 1,
+        "room": 213,
         "status": "incomplete",
-        "description": "someone clean this oil spill asap!",
-        "comments": "yikes, wow what a big oil spill!",
-        "updated_at": "2019-12-27 08:24:41",
-        "created_at": "2019-12-27 08:24:41",
-        "id": 1
+        "title": "some cool title 32",
+        "severity": "critical",
+        "description": "dog food",
+        "comments": "more dog food",
+        "user_id": 23,
+        "created_at": "2020-02-05 03:28:42",
+        "updated_at": "2020-02-05 03:29:01",
+        "resolution_date": "2020-02-04 23:26:46"
     }
 }
 ```  
@@ -1165,34 +1524,9 @@ CreateIssue
 {
     "status": "422 (Unprocessable Entity)",
     "message": {
-        "title": [
-            "The title field is required."
-        ]
-    },
-    "data": ""
-}
-```
-
-OR
-
-```json
-{
-    "status": "422 (Unprocessable Entity)",
-    "message": {
-        "assigned_to": [
-            "The assigned to must be a number."
-        ]
-    },
-    "data": ""
-}
-```
-
-OR
-
-```json
-{
-    "status": "422 (Unprocessable Entity)",
-    "message": {
+        "id": [
+            "The id field is required."
+        ],
         "title": [
             "The title field is required."
         ],
@@ -1212,30 +1546,6 @@ OR
             "The comments field is required."
         ]
     },
-    "data": ""
-}
-```
-
-OR
-
-```json
-{
-    "status": "422 (Unprocessable Entity)",
-    "message": {
-        "title": [
-            "The title field is required."
-        ]
-    },
-    "data": ""
-}
-```
-
-OR
-
-```json
-{
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
     "data": ""
 }
 ```
@@ -1304,13 +1614,187 @@ DeleteIssue
 ```
 
 
-OR
+Labs
+============
+GetLabById
+-----
+```bash
+  Gets an lab by the id
+```
 
+* **Route:** 
+
+  localhost/api/v1/lab/{id}
+ 
+* **Request Type:** 
+  
+  GET
+  
+  
+* **Content Type:** 
+  
+  `N/A` .
+  
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+
+* **Sample Request:**
+
+    localhost/api/v1/lab/2
+  
+  
+* **Success Response:**
 
 ```json
 {
-    "status": "401 (Unauthorized)",
-    "message": "You are not authorized to access this route.",
-    "data": ""
+    "status": "200 (Ok)",
+    "message": "Lab retrieved successfully.",
+    "data": {
+        "id": 1,
+        "created_at": "2020-02-05 10:09:14",
+        "updated_at": "2020-02-05 10:09:16",
+        "title": "bob"
+    }
 }
+```
+
+* **Error Response:**
+
+```json
+```
+
+
+GetAllLabs
+-----
+```bash
+  Gets all labs	
+```
+
+* **Route:** 
+
+  localhost/api/v1/labs
+ 
+* **Request Type:** 
+  
+  GET
+  
+  
+* **Content Type:** 
+  
+  `N/A` .
+  
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+
+* **Sample Request:**
+
+    localhost/api/v1/labs
+  
+  
+* **Success Response:**
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "All Labs retrieved successfully.",
+    "data": [
+        {
+            "id": 1,
+            "created_at": "2020-02-05 10:09:14",
+            "updated_at": "2020-02-05 10:09:16",
+            "title": "edc-232"
+        }
+    ]
+}
+```
+
+* **Error Response:**
+
+```json
+
+```
+
+CreateLab
+-----
+```bash
+  Creates a lab if it does not exist, otherwise updates an exisiting one
+```
+
+* **Route:** 
+
+  localhost/api/v1/lab
+ 
+* **Request Type:** 
+  
+  POST
+  
+  
+* **Content Type:** 
+  
+      `application/json` .
+      
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+
+* **Sample Request:**
+
+
+* **Success Response:**
+
+
+* **Error Response:**
+
+
+DeleteLab
+-----
+```bash
+  Deletes an existing lab by the id.
+```
+
+* **Route:** 
+
+    localhost/api/v1/lab/{id}
+ 
+* **Request Type:** 
+  
+  DELETE
+  
+  
+* **Content Type:** 
+  
+  `N/A` .
+  
+* **Auth Required:**
+
+  YES
+  
+* **Body:**
+
+
+* **Sample Request:**
+
+    localhost/api/v1/lab/59
+  
+  
+* **Success Response:**
+
+```json
+
+```
+
+* **Error Response:**
+
+```json
 ```
