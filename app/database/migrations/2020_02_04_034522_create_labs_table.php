@@ -13,10 +13,10 @@ class CreateLabsTable extends Migration
      */
     public function up()
     {
-        Schema::create('lab', function (Blueprint $table) {
+        Schema::create('labs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 400)->nullable()->default('lab');
-            $table->string('location', 400)->default('UofR');
+            $table->string('location',400)->unique();//->default('UofR');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

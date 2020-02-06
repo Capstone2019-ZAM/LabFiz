@@ -15,15 +15,15 @@ class CreateIssuesTable extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('room');
+            // $table->unsignedBigInteger('room');
+            $table->string('room', 400);
             $table->string('status');
             $table->string('title');
             $table->string('severity');
             $table->string('description');
-            $table->string('comments');
+            $table->unsignedBigInteger('comment_id');
             $table->unsignedBigInteger('user_id');
             $table->date('due_date');
-            $table->foreign('room')->references('location')->on('labs');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
