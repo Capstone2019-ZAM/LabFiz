@@ -5,20 +5,18 @@ namespace App\Services;
 
 
 use App\Contracts\RestServiceContract;
-use App\Inspection;
+use App\Lab;
 use App\Repositories\ModelRepository;
-use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Http\FormRequest;
 
-class InspectionService implements RestServiceContract
+class LabService implements RestServiceContract
 {
-    protected $inspection_model, $user_model;
+    protected $lab_model;
 
-    public function __construct(User $user, Inspection $inspection)
+    public function __construct(Lab $lab)
     {
-        $this->inspection_model = new ModelRepository($inspection);
-        $this->user_model = new ModelRepository($user);
+        $this->lab_model = new ModelRepository($lab);
     }
 
     public function get($id)
@@ -26,44 +24,38 @@ class InspectionService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $result['data'] = $this->inspection_model->getById($id);
+            $result['data'] = $this->lab_model->getById($id);
         } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Inspection assignment retrieved successfully.';
+        $result['message'] = 'Lab retrieved successfully.';
         return ['response' => $result, 'status' => 200];
     }
 
     public function get_all()
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-        $result['data'] = $this->inspection_model->get();
+        $result['data'] = $this->lab_model->get();
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Inspection assignments retrieved successfully.';
+        $result['message'] = 'All Labs retrieved successfully.';
         return ['response' => $result, 'status' => 200];
     }
 
     public function create(FormRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
-        $header = $request->header('Authorization');
-        $user = $this->user_model->getByColumn($header, 'api_token');
 
         try {
-            $result['data'] = $this->inspection_model->updateOrCreate(
+            $result['data'] = $this->lab_model->updateOrCreate(
                 [
-                    'id' => $request->id
+                    'id' => $request->id,
+                    'title' => $request->title
                 ],
                 [
-                    'room' => $request->room,
-                    'report_id' => $request->report_id,
-                    'assigned_to' => $request->assigned_to,
-                    'user_id' => $user->id,
-                    'due_date' => $request->due_date,
-                    'status' => 'incomplete',
+                    'title' => $request->title,
                 ]
             );
         } catch (QueryException $ex) {
@@ -72,7 +64,7 @@ class InspectionService implements RestServiceContract
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Created inspection assignment successfully!';
+        $result['message'] = 'Created lab successfully!';
         return ['response' => $result, 'status' => 200];
     }
 
@@ -81,14 +73,14 @@ class InspectionService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $result['data'] = $this->inspection_model->deleteById($id);
+            $result['data'] = $this->lab_model->deleteById($id);
         } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Inspection assignment deleted successfully.';
+        $result['message'] = 'Lab deleted successfully';
         return ['response' => $result, 'status' => 200];
     }
 }

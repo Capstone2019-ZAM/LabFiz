@@ -30,14 +30,12 @@ class ReportService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $issue = $this->model_report->getById($id);
-
+            $result['data'] = $this->report_model->getById($id);
         } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
 
-        $result['data'] = $issue;
         $result['status'] = '200 (Ok)';
         $result['message'] = 'Report retrieved successfully.';
         return ['response' => $result, 'status' => 200];
@@ -46,7 +44,7 @@ class ReportService implements RestServiceContract
     public function get_all()
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-        $result['data'] = $this->model_report->get();
+        $result['data'] = $this->report_model->get();
         $result['status'] = '200 (Ok)';
         $result['message'] = 'All Reports retrieved successfully.';
         return ['response' => $result, 'status' => 200];
@@ -57,12 +55,12 @@ class ReportService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
 
         $header = $request->header('Authorization');
-        $user = $this->model_user->getByColumn($header, 'api_token');
+        $user = $this->user_model->getByColumn($header, 'api_token');
         $sections = $request->sections;
 
         // create the report
         try {
-            $report = $this->model_report->updateOrCreate(
+            $report = $this->report_model->updateOrCreate(
                 ['id' => $request->id],
                 [
                     'title' => $request->title,
@@ -94,7 +92,7 @@ class ReportService implements RestServiceContract
 
                 // create the section
                 try {
-                    $section = $this->model_report_section->updateOrCreate(
+                    $section = $this->report_section_model->updateOrCreate(
                         ['report_id' => $request->id, 'title' => $sect_key],
                         [
                             'title' => $sect_key,
@@ -120,7 +118,7 @@ class ReportService implements RestServiceContract
                 // create any questions
                 foreach ($sect_val['qs'] as $question_key => $question_val) {
                     try {
-                        $question = $this->model_report_question->updateOrCreate(
+                        $question = $this->report_question_model->updateOrCreate(
                             [
                                 'report_section_id' => $section->id,
                                 'question' => $question_key
@@ -153,7 +151,7 @@ class ReportService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $result['data'] = $this->model_report->deleteById($id);
+            $result['data'] = $this->report_model->deleteById($id);
         } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];

@@ -3,11 +3,11 @@
 namespace App\Providers;
 
 use App\Contracts\RestServiceContract;
-use App\Http\Controllers\Api\Auth\LoginController;
-use App\Services\UserService;
+use App\Http\Controllers\Api\v1\IssueController;
+use App\Services\IssueService;
 use Illuminate\Support\ServiceProvider;
 
-class UserServiceProvider extends ServiceProvider
+class IssueServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -16,9 +16,9 @@ class UserServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->when(LoginController::class)
+        $this->app->when(IssueController::class)
             ->needs(RestServiceContract::class)
-            ->give(UserService::class);
+            ->give(IssueService::class);
     }
 
     /**

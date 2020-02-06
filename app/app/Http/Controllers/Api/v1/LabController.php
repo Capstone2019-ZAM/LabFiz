@@ -2,21 +2,40 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Contracts\RestServiceContract;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Lab\CreateRequest;
 
 class LabController extends Controller
 {
-    public function __construct()
-    {
+    protected $lab_service;
 
+    public function __construct(RestServiceContract $service)
+    {
+        $this->lab_service = $service;
+    }
+
+    public function get($id)
+    {
+        $res = $this->lab_service->get($id);
+        return response($res['response'], $res['status']);
     }
 
     public function get_all()
     {
-        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-        $result['data'] = ['ED-69','ED-420','RN-69','EB-420','EN-1337']; // TODO: load data dynamically instead of hardcode
-        $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Labs retrieved successfully.';
-        return response($result, 200);
+        $res = $this->lab_service->get_all();
+        return response($res['response'], $res['status']);
+    }
+
+    public function create(CreateRequest $request)
+    {
+        $res = $this->lab_service->create($request);
+        return response($res['response'], $res['status']);
+    }
+
+    public function delete($id)
+    {
+        $res = $this->lab_service->delete($id);
+        return response($res['response'], $res['status']);
     }
 }

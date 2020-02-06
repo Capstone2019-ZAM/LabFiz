@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\RestServiceContract;
+use App\Http\Controllers\Api\v1\ReportController;
 use App\Services\ReportService;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,7 +16,9 @@ class ReportServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(RestServiceContract::class, ReportService::class);
+        $this->app->when(ReportController::class)
+            ->needs(RestServiceContract::class)
+            ->give(ReportService::class);
     }
 
     /**
