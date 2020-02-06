@@ -9,7 +9,7 @@ use App\Helpers\AuthHelper;
 use App\Issue;
 use App\Repositories\ModelRepository;
 use App\User;
-use Illuminate\Database\QueryException;
+use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 
 class IssueService implements RestServiceContract
@@ -28,8 +28,8 @@ class IssueService implements RestServiceContract
 
         try {
             $result['data'] = $this->issue_model->getById($id);
-        } catch (QueryException $ex) {
-            $result['message'] = $ex->getMessage();
+        } catch (Exception $ex) {
+            $result['message'] = 'Could not find issue record.';
             return ['response' => $result, 'status' => 400];
         }
 
@@ -66,7 +66,7 @@ class IssueService implements RestServiceContract
                     'comments' => $request->comments
                 ]
             );
-        } catch (QueryException $ex) {
+        } catch (Exception $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
@@ -82,8 +82,8 @@ class IssueService implements RestServiceContract
 
         try {
             $result['data'] = $this->issue_model->deleteById($id);
-        } catch (QueryException $ex) {
-            $result['message'] = $ex->getMessage();
+        } catch (Exception $ex) {
+            $result['message'] = 'Could not find issue record.';
             return ['response' => $result, 'status' => 400];
         }
 

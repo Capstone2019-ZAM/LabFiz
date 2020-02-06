@@ -11,7 +11,7 @@ use App\ReportQuestion;
 use App\ReportSection;
 use App\Repositories\ModelRepository;
 use App\User;
-use Illuminate\Database\QueryException;
+use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ReportService implements RestServiceContract
@@ -72,8 +72,8 @@ class ReportService implements RestServiceContract
         try {
             $report = $this->report_model->getById($id);
             $result = $this->foreign_data($report, $result);
-        } catch (QueryException $ex) {
-            $result['message'] = $ex->getMessage();
+        } catch (Exception $ex) {
+            $result['message'] = 'Could not find report record.';
             return ['response' => $result, 'status' => 400];
         }
 
@@ -124,7 +124,7 @@ class ReportService implements RestServiceContract
                 'room' => $report->room,
                 'due_date' => $report->due_date
             ];
-        } catch (QueryException $ex) {
+        } catch (Exception $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
@@ -153,7 +153,7 @@ class ReportService implements RestServiceContract
                         'updated_at' => $section->updated_at,
                         'report_section_template_id' => $section->report_template_section_id
                     ];
-                } catch (QueryException $ex) {
+                } catch (Exception $ex) {
                     $result['message'] = $ex->getMessage();
                     return ['response' => $result, 'status' => 400];
                 }
@@ -176,7 +176,7 @@ class ReportService implements RestServiceContract
                         );
 
                         $result['data']['ref'][$sect_key]['ref'][$question_key] = $question;
-                    } catch (QueryException $ex) {
+                    } catch (Exception $ex) {
                         $result['message'] = $ex->getMessage();
                         return ['response' => $result, 'status' => 400];
                     }
@@ -195,8 +195,8 @@ class ReportService implements RestServiceContract
 
         try {
             $result['data'] = $this->report_model->deleteById($id);
-        } catch (QueryException $ex) {
-            $result['message'] = $ex->getMessage();
+        } catch (Exception $ex) {
+            $result['message'] = 'Could not find report record.';
             return ['response' => $result, 'status' => 400];
         }
 

@@ -9,7 +9,7 @@ use App\Helpers\AuthHelper;
 use App\Inspection;
 use App\Repositories\ModelRepository;
 use App\User;
-use Illuminate\Database\QueryException;
+use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 
 class InspectionService implements RestServiceContract
@@ -28,8 +28,8 @@ class InspectionService implements RestServiceContract
 
         try {
             $result['data'] = $this->inspection_model->getById($id);
-        } catch (QueryException $ex) {
-            $result['message'] = $ex->getMessage();
+        } catch (Exception $ex) {
+            $result['message'] = 'Could not find inspection record.';
             return ['response' => $result, 'status' => 400];
         }
 
@@ -66,7 +66,7 @@ class InspectionService implements RestServiceContract
                     'status' => 'incomplete',
                 ]
             );
-        } catch (QueryException $ex) {
+        } catch (Exception $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
@@ -82,8 +82,8 @@ class InspectionService implements RestServiceContract
 
         try {
             $result['data'] = $this->inspection_model->deleteById($id);
-        } catch (QueryException $ex) {
-            $result['message'] = $ex->getMessage();
+        } catch (Exception $ex) {
+            $result['message'] = 'Could not find inspection record.';
             return ['response' => $result, 'status' => 400];
         }
 

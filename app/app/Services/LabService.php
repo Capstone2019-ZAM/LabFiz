@@ -7,7 +7,7 @@ namespace App\Services;
 use App\Contracts\RestServiceContract;
 use App\Lab;
 use App\Repositories\ModelRepository;
-use Illuminate\Database\QueryException;
+use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LabService implements RestServiceContract
@@ -25,8 +25,8 @@ class LabService implements RestServiceContract
 
         try {
             $result['data'] = $this->lab_model->getById($id);
-        } catch (QueryException $ex) {
-            $result['message'] = $ex->getMessage();
+        } catch (Exception $ex) {
+            $result['message'] = 'Could not find lab record.';
             return ['response' => $result, 'status' => 400];
         }
 
@@ -58,7 +58,7 @@ class LabService implements RestServiceContract
                     'title' => $request->title,
                 ]
             );
-        } catch (QueryException $ex) {
+        } catch (Exception $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
@@ -74,8 +74,8 @@ class LabService implements RestServiceContract
 
         try {
             $result['data'] = $this->lab_model->deleteById($id);
-        } catch (QueryException $ex) {
-            $result['message'] = $ex->getMessage();
+        } catch (Exception $ex) {
+            $result['message'] = 'Could not find lab record.';
             return ['response' => $result, 'status' => 400];
         }
 

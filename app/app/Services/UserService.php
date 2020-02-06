@@ -12,7 +12,6 @@ use App\Http\Requests\User\RegisterRequest;
 use App\Repositories\ModelRepository;
 use App\User;
 use Exception;
-use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -62,7 +61,7 @@ class UserService implements RestServiceContract
                 'refresh_token' => $user->api_refresh_token
             ];
 
-        }catch (QueryException $ex) {
+        }catch (Exception $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
@@ -78,8 +77,8 @@ class UserService implements RestServiceContract
 
         try {
             $user = AuthHelper::instance()->user($request,$this->user_model);
-        } catch (QueryException $ex) {
-            $result['message'] = $ex->getMessage();
+        } catch (Exception $ex) {
+            $result['message'] = 'Could not find user associated with current request auth token.';
             return ['response' => $result, 'status' => 400];
         }
 
@@ -117,8 +116,13 @@ class UserService implements RestServiceContract
 
         try {
             $user = $this->user_model->getByColumn($request->email, 'email');
-        } catch (QueryException $ex) {
-            $result['message'] = 'User not found.';
+        } catch (Exception $ex) {
+            $result['message'] = $ex->getMessage();
+            return ['response' => $result, 'status' => 400];
+        }
+
+        if (!$user) {
+            $result['message'] = 'Could not find report record.';
             return ['response' => $result, 'status' => 400];
         }
 
@@ -149,7 +153,7 @@ class UserService implements RestServiceContract
         try {
             $result['data'] = $this->user_model->getById($id);
         } catch (Exception $ex) {
-            $result['message'] = $ex->getMessage();
+            $result['message'] = 'Could not find user record.';
             return ['response' => $result, 'status' => 400];
         }
 
