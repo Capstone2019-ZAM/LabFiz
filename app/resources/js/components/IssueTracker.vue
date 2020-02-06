@@ -7,8 +7,15 @@
         <v-divider></v-divider>
       <v-data-table
         :headers="headers"
-        :items="items"
-      ></v-data-table>
+        :items="issues"
+      >
+      
+      <template v-slot:item.status="{ item }">
+            <v-chip :color="getColor(item.status)" dark>{{ item.status }}</v-chip>
+          
+          </template>
+
+      </v-data-table>
        <v-btn block outlined >
           Add an Entry
           <v-icon>mdi-plus</v-icon>
@@ -32,43 +39,25 @@
           { text: 'Issue', value: "title" },
           { text: 'Room #', value: 'room' },
           { text: 'Assigned To', value: 'user_id' },
-          { text: 'Resoluton Date', value: 'date' },
+          { text: 'Resoluton Date', value: 'due_date' },
         ],
-        items: [
+        issues: [
           // {
           //   name: 'Status1',
           //   issue: 33,
           //   room: 'ED 123',
           //   assigned: 'Edward Livingstone',
           //   date: "Jan 02, 2020",
-            
-          // },
-          // {
-          //   name: 'Status1',
-          //   issue: 33,
-          //   room: 'ED 123',
-          //   assigned: 'Edward Livingstone',
-          //   date: "Jan 02, 2020",
-            
-          // },
-          // {
-          //   name: 'Status1',
-          //   issue: 33,
-          //   room: 'ED 123',
-          //   assigned: 'Edward Livingstone',
-          //   date: "Jan 02, 2020",
-            
-          // },
-          // {
-          //   name: 'Status1',
-          //   issue: 33,
-          //   room: 'ED 123',
-          //   assigned: 'Edward Livingstone',
-          //   date: "Jan 02, 2020",
-            
-          // },
+          // }
         ],
       }
+    },
+    methods:{
+      getColor(status_name) {
+      if (status_name == "Open") return "red";
+      else if (status_name == "Closed") return "blue";
+      else return "grey";
+    }
     },
 
      mounted() {
@@ -80,8 +69,9 @@
       .then(
         response => {
           console.log("fetch done!");
+          
+          this.issues = response.data.data;
           debugger
-          this.items = response.data.data;
         },
         error => {
           console.log("fetch failed!");
