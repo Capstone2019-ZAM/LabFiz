@@ -28,7 +28,7 @@ class CreateRequest extends FormRequest
         return [
             'id' => array('required','int'),
             'report_id' => array('required', 'int'),
-            'room' => array('required', 'int'),
+            'room' => array('required', 'string'),
             'assigned_to' => array('required', 'int'),
             'status' => array('required','string'),
             'due_date' => array('required', 'date'),

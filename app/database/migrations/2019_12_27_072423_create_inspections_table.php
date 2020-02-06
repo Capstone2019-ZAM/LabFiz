@@ -15,7 +15,7 @@ class CreateInspectionsTable extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedMediumInteger('room');
+            $table->string('room');
             $table->unsignedBigInteger('report_id');
             $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');

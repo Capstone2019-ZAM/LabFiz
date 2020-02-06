@@ -28,7 +28,7 @@ class CreateRequest extends FormRequest
         return [
             'id' => array('required', 'int'),
             'title' => array('required', 'regex:/^[\s\w-]*$/'),
-            'room' => array('required', 'int'),
+            'room' => array('required', 'string'),
             'template_id' => array('required', 'int'),
             'sections.*' => array('sometimes','nullable','array'),
             'sections.*.template_id' => array('required', 'int'),
