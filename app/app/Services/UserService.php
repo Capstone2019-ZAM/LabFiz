@@ -11,6 +11,7 @@ use App\Http\Requests\User\RefreshRequest;
 use App\Http\Requests\User\RegisterRequest;
 use App\Repositories\ModelRepository;
 use App\User;
+use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
@@ -63,7 +64,7 @@ class UserService implements RestServiceContract
 
         }catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
-            return ['data' => $result, 'status' => 400];
+            return ['response' => $result, 'status' => 400];
         }
 
         $result['status'] = '200 (Ok)';
@@ -76,21 +77,21 @@ class UserService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $user = AuthHelper::instance()->user($request,$this->model_user);
+            $user = AuthHelper::instance()->user($request,$this->user_model);
         } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
-            return ['data' => $result, 'status' => 400];
+            return ['response' => $result, 'status' => 400];
         }
 
-        if (!$user) {
-            $result['message'] = 'Refresh token not found.';
-            return ['data' => $result, 'status' => 400];
+        if ($user->api_refresh_token != $request->api_refresh_token) {
+            $result['message'] = 'Could not find given refresh token.';
+            return ['response' => $result, 'status' => 400];
         }
 
         $api_token_refresh_date = $user->api_token_expiry_date;
         if ($api_token_refresh_date > now()) {
-            $result['message'] = 'Api token has not expired yet.';
-            return ['data' => $result, 'status' => 400];
+            $result['message'] = 'Authentication token has not expired yet.';
+            return ['response' => $result, 'status' => 400];
         }
 
         $user = $this->user_model->updateById(
@@ -106,7 +107,7 @@ class UserService implements RestServiceContract
         ];
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Api token refreshed successfully';
+        $result['message'] = 'authentication refreshed successfully';
         return ['response' => $result, 'status' => 200];
     }
 
@@ -118,13 +119,13 @@ class UserService implements RestServiceContract
             $user = $this->user_model->getByColumn($request->email, 'email');
         } catch (QueryException $ex) {
             $result['message'] = 'User not found.';
-            return ['data' => $result, 'status' => 400];
+            return ['response' => $result, 'status' => 400];
         }
 
         $pass = Hash::check($request->password, $user->password);
         if (!$pass) {
             $result['message'] = 'Invalid password.';
-            return ['data' => $result, 'status' => 400];
+            return ['response' => $result, 'status' => 400];
         }
 
         $result['status'] = '200 (Ok)';
@@ -143,7 +144,18 @@ class UserService implements RestServiceContract
 
     public function get($id)
     {
-        // TODO: Implement get() method.
+        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+
+        try {
+            $result['data'] = $this->user_model->getById($id);
+        } catch (Exception $ex) {
+            $result['message'] = $ex->getMessage();
+            return ['response' => $result, 'status' => 400];
+        }
+
+        $result['status'] = '200 (Ok)';
+        $result['message'] = 'User retrieved successfully.';
+        return ['response' => $result, 'status' => 200];
     }
 
     public function create(FormRequest $request)

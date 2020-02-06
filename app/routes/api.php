@@ -25,6 +25,7 @@ Route::group([
 ], function() {
     Route::post('/user/refresh', 'Api\Auth\LoginController@refresh');
     Route::post('/user/register', 'Api\Auth\LoginController@register');
+    Route::get('/user/{id}','Api\Auth\LoginController@get');
     Route::get('/users', 'Api\Auth\LoginController@get_all');
 });
 
@@ -63,7 +64,9 @@ Route::group([
     Route::delete('/template/{id}', 'Api\v1\TemplateController@get');
 
     // labs
+    Route::get('/lab/{id}', 'Api\v1\LabController@get');
     Route::get('/labs', 'Api\v1\LabController@get_all');
-
+    Route::post('/lab', 'Api\v1\LabController@create');
+    Route::delete('/lab/{id}', 'Api\v1\LabController@delete');
 });
 

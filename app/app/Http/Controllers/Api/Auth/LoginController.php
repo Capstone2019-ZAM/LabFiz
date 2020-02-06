@@ -17,6 +17,12 @@ class LoginController extends Controller
         $this->user_service = $user_service;
     }
 
+    public function get($id)
+    {
+        $res = $this->user_service->get($id);
+        return response($res['response'], $res['status']);
+    }
+
     public function get_all()
     {
         $res = $this->user_service->get_all();

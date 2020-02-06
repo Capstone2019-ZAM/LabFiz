@@ -26,7 +26,7 @@ class ReportService implements RestServiceContract
         $this->user_model = new ModelRepository($user);
     }
 
-    protected function get_foreign($report, $result)
+    protected function foreign_data($report, $result)
     {
         $result['data'] = [
             $report->title =>
@@ -71,7 +71,7 @@ class ReportService implements RestServiceContract
 
         try {
             $report = $this->report_model->getById($id);
-            $result = $this->get_foreign($report, $result);
+            $result = $this->foreign_data($report, $result);
         } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
@@ -87,7 +87,7 @@ class ReportService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
         $reports = $this->report_model->get();
         foreach ($reports as $report)
-            $result = $this->get_foreign($report, $result);
+            $result = $this->foreign_data($report, $result);
 
         $result['status'] = '200 (Ok)';
         $result['message'] = 'All Reports retrieved successfully.';
@@ -98,7 +98,7 @@ class ReportService implements RestServiceContract
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
 
-        $user = AuthHelper::instance()->user($request,$this->model_user);
+        $user = AuthHelper::instance()->user($request,$this->user_model);
         $sections = $request->sections;
 
         // create the report
@@ -113,21 +113,21 @@ class ReportService implements RestServiceContract
                     'due_date' => $request->due_date
                 ]
             );
+
+            $result['data'] = [
+                'id' => $report->id,
+                'title' => $report->title,
+                'user_id' => $report->user_id,
+                'created_at' => $report->created_at,
+                'updated_at' => $report->updated_at,
+                'report_template_id' => $report->report_template_id,
+                'room' => $report->room,
+                'due_date' => $report->due_date
+            ];
         } catch (QueryException $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
-
-        $result['data'] = [
-            'id' => $report->id,
-            'title' => $report->title,
-            'user_id' => $report->user_id,
-            'created_at' => $report->created_at,
-            'updated_at' => $report->updated_at,
-            'report_template_id' => $report->report_template_id,
-            'room' => $report->room,
-            'due_date' => $report->due_date
-        ];
 
         // if the report has sections, populate the tables for sections and questions
         if ($sections) {
@@ -144,19 +144,19 @@ class ReportService implements RestServiceContract
                             'report_section_template_id' => $sect_val['template_id']
                         ]
                     );
+
+                    $result['data']['ref'][$sect_key] = [
+                        'id' => $section->id,
+                        'title' => $section->title,
+                        'report_id' => $section->report_id,
+                        'created_at' => $section->created_at,
+                        'updated_at' => $section->updated_at,
+                        'report_section_template_id' => $section->report_template_section_id
+                    ];
                 } catch (QueryException $ex) {
                     $result['message'] = $ex->getMessage();
                     return ['response' => $result, 'status' => 400];
                 }
-
-                $result['data']['ref'][$sect_key] = [
-                    'id' => $section->id,
-                    'title' => $section->title,
-                    'report_id' => $section->report_id,
-                    'created_at' => $section->created_at,
-                    'updated_at' => $section->updated_at,
-                    'report_section_template_id' => $section->report_template_section_id
-                ];
 
                 // create any questions
                 foreach ($sect_val['qs'] as $question_key => $question_val) {
@@ -174,12 +174,12 @@ class ReportService implements RestServiceContract
                                 'description' => $question_val['description']
                             ]
                         );
+
+                        $result['data']['ref'][$sect_key]['ref'][$question_key] = $question;
                     } catch (QueryException $ex) {
                         $result['message'] = $ex->getMessage();
                         return ['response' => $result, 'status' => 400];
                     }
-
-                    $result['data']['ref'][$sect_key]['ref'][$question_key] = $question;
                 }
             }
         }
