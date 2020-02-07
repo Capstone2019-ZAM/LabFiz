@@ -150,7 +150,7 @@ export default {
       this.SaveSucc = false;
 
       let promise = new Promise((resolve, reject) => {
-        setTimeout(() => resolve(true), 1000);
+        setTimeout(() => resolve(true), 400);
       });
 
       let result = await promise; // wait until the promise resolves (*)
