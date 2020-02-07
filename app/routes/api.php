@@ -51,18 +51,23 @@ Route::group([
     Route::get('/templates', 'Api\v1\TemplateController@get_all');
     Route::get('/template/{id}', 'Api\v1\TemplateController@get');
     Route::post('/template', 'Api\v1\TemplateController@create');
-    Route::put('/template/{id}', 'Api\v1\TemplateController@update'); //to do 
-    Route::delete('/template/{id}', 'Api\v1\TemplateController@get');
+    //Route::put('/template/{id}', 'Api\v1\TemplateController@update'); //to do 
+    Route::delete('/template/{id}', 'Api\v1\TemplateController@delete');
 
     //lab 
     Route::get('/labs', 'Api\v1\LabController@get_all');
     Route::get('/lab/{id}', 'Api\v1\LabController@get');
     Route::post('/lab', 'Api\v1\LabController@create');
-    Route::put('/lab/{id}', 'Api\v1\LabController@update'); //to do 
-    Route::delete('/lab/{id}', 'Api\v1\LabController@get');
+    //Route::put('/lab/{id}', 'Api\v1\LabController@update'); //to do 
+    Route::delete('/lab/{id}', 'Api\v1\LabController@delete');
 
-    //TO DO 
-    // User Endpoint - for assignments
+    //comment
+    Route::get('/comments/{id}', 'Api\v1\CommentController@get_all');
+    //Route::get('/comment/{id}', 'Api\v1\CommentController@get');  // dont think this will be needed
+    Route::post('/comment/{id}', 'Api\v1\CommentController@create');
+    //Route::put('/lab/{id}', 'Api\v1\LabController@update'); //to do 
+    Route::delete('/lab/{id}', 'Api\v1\CommentController@delete');
+
     
 
 
