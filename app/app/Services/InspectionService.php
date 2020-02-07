@@ -50,7 +50,7 @@ class InspectionService implements RestServiceContract
     public function create(FormRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
-        $user = AuthHelper::instance()->user($request,$this->model_user);
+        $user = AuthHelper::instance()->user($request,$this->user_model);
 
         try {
             $result['data'] = $this->inspection_model->updateOrCreate(
