@@ -181,6 +181,9 @@ return [
          */
         App\Providers\UserServiceProvider::class,
         App\Providers\LabServiceProvider::class,
+        App\Providers\InspectionServiceProvider::class,
+        App\Providers\IssueServiceProvider::class,
+        App\Providers\ReportServiceProvider::class,
     ],
 
     /*

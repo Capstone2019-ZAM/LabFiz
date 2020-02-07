@@ -19,25 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(
-            LabServiceProvider::class
-        );
 
-        $this->app->register(
-            UserServiceProvider::class
-        );
-
-        $this->app->register(
-            ReportServiceProvider::class
-        );
-
-        $this->app->register(
-            InspectionServiceProvider::class
-        );
-
-        $this->app->register(
-            IssueServiceProvider::class
-        );
     }
 
     /**
