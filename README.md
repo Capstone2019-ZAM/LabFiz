@@ -3,6 +3,9 @@ ENSE 2019 ZAM Group Capstone
 
 # ZAM
 Contributos: 
+- 	Muhammad Ahmed
+-  Zain Abedin
+-  Alwin Baby
  
 
 # Objective
