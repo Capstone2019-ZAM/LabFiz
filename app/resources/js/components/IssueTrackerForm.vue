@@ -11,10 +11,10 @@
             <v-row>
               <v-col class="d-flex" cols="12" sm="8" md="8">
                 <v-text-field
+                  label="Title"
                   v-model="issue.title"
                   placeholder="Title"
                   :rules="titleRules"
-                  clearable
                   outlined
                 ></v-text-field>
               </v-col>
@@ -24,17 +24,28 @@
             </v-row>
             <v-row>
               <v-col class="d-flex" cols="12" sm="6" md="3">
-                <v-select :items="labs" label="Lab#" outlined v-model="issue.room"></v-select>
+                <v-select :items="labs" label="Lab" outlined v-model="issue.room"></v-select>
               </v-col>
               <v-col class="d-flex" cols="12" sm="6" md="5">
-                <v-select :items="assignables" label="Assigned To" outlined v-model="issue.assigned_to"></v-select>
+                <v-select
+                  :items="assignables"
+                  label="Assigned To"
+                  outlined
+                  v-model="issue.assigned_to"
+                ></v-select>
               </v-col>
-              <v-col class="d-flex" cols="12" sm="6" md="3">
+              <v-col class="d-flex" cols="12" sm="6" md="4">
                 <v-select :items="severities" label="Severity" outlined v-model="issue.severity"></v-select>
               </v-col>
             </v-row>
             <v-col cols="12" md="fill">
-              <v-textarea solo name="input-15-4" :counter="150" label="Description" v-model="issue.desc"></v-textarea>
+              <v-textarea
+                outlined
+                name="input-15-4"
+                :counter="150"
+                label="Description"
+                v-model="issue.description"
+              ></v-textarea>
             </v-col>
             <v-col cols="12" md="fill">
               <v-textarea
@@ -70,22 +81,22 @@ export default {
         assigned_to: null,
         latest_comment :null
         },
-         id : 1,     //get this dynamic or from url
+         id :  window.location.pathname.split("/").pop(),     //get this dynamic or from url
         
         titleRules: [
             v=> !!v || "Title is required"   ],
 
-        statuses:['open',],
-        labs:['ed-400','Lab2','Lab3','Lab4'],
+        statuses:['Open','Closed'],
+        labs:['ED-400','Lab2','Lab3','Lab4'],
         assignables:['st4'],
-        severities:['high','low'],
+        severities:['Immediately Dangerous to Life or Health (IDLH)','Critical Deficiency','Urgent','Non-critical']
     })
     ,
     methods:{
         submitIssue(){
             if(valid){
                 var req = Object;
-                req= Object.assign(req,this.title,this.desc,this.status,this.severity,this.lab,this.assigned_to);
+                req= Object.assign(req,this.id,this.issue);
 
             //     axios.put("/api/v1/issue/"+this.id, {
             //     // data : req
@@ -102,20 +113,20 @@ export default {
         }
     },
    mounted() {
-      axios
-      .get("/api/v1/issue/"+this.id, {
-        headers: { Authorization: this.AuthStr }
-      })
-      .then(
-        response => {
-          console.log("fetch done!");
-          this.issue = response.data.data;
-          debugger
-        },
-        error => {
-          console.log("fetch failed!");
-        }
-      );
+
+     axios.all([
+                axios.get("/api/v1/issue/"+this.id, { headers: { Authorization: this.AuthStr }}),
+                axios.get("/api/v1/labs/", { headers: { Authorization: this.AuthStr }}),
+                //axios.get("/api/v1/users/", { headers: { Authorization: this.AuthStr }})
+                ])
+        .then(axios.spread((issueResp, labResp) => {
+              this.issue = issueResp.data.data;
+              this.labs =  labResp.data.data.map( x=> x.location);
+             },
+           error => {
+                console.log("fetch failed!");
+            }
+          ));
     }
 };
 </script>
