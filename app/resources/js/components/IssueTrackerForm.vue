@@ -51,37 +51,41 @@
             </v-row>
             <v-card>
               <v-card-text>Comments</v-card-text>
-              <v-row>
-                <v-list-item>
+              <v-list dense disabled>
+                <v-list-item class="ml-3 mr-3 mb-0" v-for="data in comments" :key="data.id">
                   <v-list-item-avatar color="grey"></v-list-item-avatar>
                   <v-list-item-content>
-                       <v-col md="4"> My Name here</v-col>
-                      <v-col md="7">
-                        <div>This is my first comment</div>
-                      </v-col>
-                     
-
-                    <!-- <v-list-item-title class></v-list-item-title> -->
+                    <v-col md="2" sm="1">
+                      <v-row><div>{{data.user_id}}</div></v-row>
+                      <v-row>{{data.updated_at}}</v-row>
+                    </v-col>
+                    <v-col md="7" sm="9">
+                      <div>{{data.content}}</div>
+                    </v-col>
                   </v-list-item-content>
                 </v-list-item>
-              </v-row>
-              <v-row cols="12" class="ma-4">
-                <v-col>
-                  <v-textarea
-                    :counter="100"
-                    label="Comments"
-                    outlined
-                    v-model="issue.latest_comment"
-                  ></v-textarea>
-                </v-col>
-              </v-row>
-              <v-card-actions>
-                <v-btn>Post Comment</v-btn>
-              </v-card-actions>
+              
+              </v-list>
+              <v-col >
+                <v-row cols="12" class="mr-4 ml-4">
+                  <v-col >
+                    <v-textarea
+                      label="Comment"
+                      outlined
+                      rows="3"
+                      auto-grow
+                      v-model="issue.latest_comment"
+                    ></v-textarea>
+                  </v-col>
+                </v-row>
+                <v-row align="start" justify="end">
+                  <v-btn class="mr-9" @click="postComment()">Post Comment</v-btn>
+                </v-row>
+              </v-col>
             </v-card>
-            <v-row align="center" justify="center">
-              <v-btn color="primary">
-                <v-icon>mdi-mouse</v-icon>Post
+            <v-row align="center" justify="end" class="ma-9">
+              <v-btn color="primary" @click="saveIssue()">
+                Save
               </v-btn>
             </v-row>
           </v-container>
@@ -100,15 +104,17 @@ export default {
       status: null,
       severity: null,
       room: null,
-      assigned_to: null,
-      latest_comment: null
+      assigned_to: null,      
     },
+    latest_comment: null,
+    comments: [ {id: 1, issue_id: 1, user_id:1 , updated_at: '2020-02-01', content:'My comment is here'},
+     {id: 2, issue_id: 1, user_id:1 , updated_at: '2020-02-01', content:'My comment 2is here'},
+      {id: 3, issue_id: 1, user_id:1 , updated_at: '2020-02-01', content:'My comment 3 is here'},
+       {id: 4, issue_id: 1, user_id:1 , updated_at: '2020-02-01', content:'My comment 4 is here'}],
     id: window.location.pathname.split("/").pop(), //get this dynamic or from url
-
     titleRules: [v => !!v || "Title is required"],
-
     statuses: ["Open", "Closed"],
-    labs: ["ED-400", "Lab2", "Lab3", "Lab4"],
+    labs: [],
     assignables: ["st4"],
     severities: [
       "Immediately Dangerous to Life or Health (IDLH)",
@@ -118,12 +124,12 @@ export default {
     ]
   }),
   methods: {
-    submitIssue() {
+    saveIssue() {
       if (valid) {
         var req = Object;
         req = Object.assign(req, this.id, this.issue);
 
-        //     axios.put("/api/v1/issue/"+this.id, {
+        //     axios.post("/api/v1/issue/"+this.id, {
         //     // data : req
         //     headers: { Authorization: this.AuthStr }
         //     })
@@ -135,6 +141,28 @@ export default {
         // error => {console.log("fetch failed!");});
         //     }
       }
+    },
+    postComment(){
+      let req = Object;
+      req.content = this.latest_comment;
+      req.issue_id = this.id;
+
+      axios.post("api/v1/comment/"+this.id,{
+      headers: { Authorization: this.AuthStr },
+      data:{
+        content  : req.content,
+        issue_id : req.issue_id
+      }}     
+      ).then(
+        response => {
+          console.log("comment posted!");
+          this.comments.push(req);
+        },
+        error => {
+          console.log("comment post failed!");
+          // show error here
+        });
+
     }
   },
   mounted() {
