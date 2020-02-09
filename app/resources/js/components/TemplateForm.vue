@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-row justify="center">
     <v-col cols="12" md="9" sm="12" xs="12" xl="6" lg="6">
       <v-card class="mx-auto">
@@ -15,43 +16,7 @@
             </v-col>
           </v-row>
         </v-row>
-        <v-row align="center" justify="center" v-if="!valid||Saving||NetError||SaveSucc">
-          <v-col cols="12" md="9">
-            <v-alert elevation=5 type="info" text transition="scale-transition" :value="Saving&&valid">
-              <v-progress-circular indeterminate color="primary"> 
-                </v-progress-circular> Saving
-            </v-alert>
-          </v-col>
-          <v-col cols="12" md="9" align="center" justify="center">
-            <v-alert
-              type="warning"
-              dense
-              dismissible= true
-              prominent
-              elevation=5
-              transition="scale-transition"
-              :value="!valid"
-            >Template missing required fields</v-alert>
-          </v-col>
-          <v-col cols="12" md="9">
-            <v-alert
-            elevation=5
-              type="success"
-              transition="scale-transition"
-              :value="SaveSucc"
-            >Saved Successfully</v-alert>
-          </v-col>
-          <v-col cols="12" md="9">
-            <v-alert
-            elevation=5
-              type="error"
-              transition="scale-transition"
-              :value="NetError"
-              dismissible =true
-              dense
-            >Something went wrong. Please try again later</v-alert>
-          </v-col>
-        </v-row>
+   
         <v-form v-model="valid">
           <v-container>
             <div class="border pa-4 mb-4 mt-5">
@@ -121,10 +86,46 @@
       </v-card>
     </v-col>
   </v-row>
+ <v-dialog v-model="dialog"  overlay-opacity="0"  width="50%">
+        <v-card color="white" class="ma-4" width="95%"  v-if="!valid||Saving||NetError||SaveSucc">
+          <v-alert
+            type="info"
+            text
+            transition="scale-transition"
+            :value="Saving&&valid"
+          >
+            <v-progress-circular indeterminate color="primary"></v-progress-circular>Saving
+          </v-alert>
+        
+          <v-alert
+            type="warning"
+            dense
+            prominent
+            transition="scale-transition"
+            :value="!valid"
+          >Template missing required fields</v-alert>
+     
+          <v-alert      
+            type="success"
+            transition="scale-transition"
+            :value="SaveSucc"
+          >Saved Successfully</v-alert>
+  
+          <v-alert
+            type="error"
+            transition="scale-transition"
+            :value="NetError"
+            dismissible="true"
+            dense
+          >Something went wrong. Please try again later</v-alert>
+           </v-card>
+  </v-dialog>
+</div>
 </template>
 <script>
 export default {
   data: () => ({
+    dialog: false,
     valid: null,
     Saving: false,
     NetError: false,
@@ -145,6 +146,7 @@ export default {
   }),
   methods: {
     setAlert: async function(msg) {
+      this.dialog= true;
       this.Saving = false;
       this.NetError = false;
       this.SaveSucc = false;
@@ -210,11 +212,11 @@ export default {
       const req = Object;
       req.title = this.title;
       req.sections = this.sections;
-
+      debugger
       if (this.valid) {
         this.setAlert("Saving");
         axios
-          .put("http://localhost/api/v1/template/" + this.id, {
+          .post("http://localhost/api/v1/template/" + this.id, {
             headers: { Authorization: this.AuthStr }
 
             //TO DO : ADD Data to sent
@@ -239,7 +241,7 @@ export default {
   mounted() {
     this.loading = true;
     axios
-      .get("http://localhost/api/v1/template/" + this.id, {
+      .get("/api/v1/template/" + this.id, {
         headers: { Authorization: this.AuthStr }
       })
       .then(

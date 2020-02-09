@@ -56,7 +56,9 @@
                   <v-list-item-avatar color="grey"></v-list-item-avatar>
                   <v-list-item-content>
                     <v-col md="2" sm="1">
-                      <v-row><div>{{data.user_id}}</div></v-row>
+                      <v-row>
+                        <div>{{data.user_id}}</div>
+                      </v-row>
                       <v-row>{{data.updated_at}}</v-row>
                     </v-col>
                     <v-col md="7" sm="9">
@@ -64,11 +66,10 @@
                     </v-col>
                   </v-list-item-content>
                 </v-list-item>
-              
               </v-list>
-              <v-col >
+              <v-col>
                 <v-row cols="12" class="mr-4 ml-4">
-                  <v-col >
+                  <v-col>
                     <v-textarea
                       label="Comment"
                       outlined
@@ -84,19 +85,58 @@
               </v-col>
             </v-card>
             <v-row align="center" justify="end" class="ma-9">
-              <v-btn color="primary" @click="saveIssue()">
-                Save
-              </v-btn>
+              <v-btn color="primary" @click="saveIssue()">Save</v-btn>
             </v-row>
           </v-container>
         </v-card-text>
       </v-card>
     </v-form>
+
+    <v-dialog v-model="dialog"  overlay-opacity="0"  width="50%">
+        <v-card color="white" class="ma-4" width="95%"  v-if="!valid||Saving||NetError||SaveSucc">
+          <v-alert
+            type="info"
+            text
+            transition="scale-transition"
+            :value="Saving&&valid"
+          >
+            <v-progress-circular indeterminate color="primary"></v-progress-circular>Saving
+          </v-alert>
+        
+          <v-alert
+            type="warning"
+            dense
+            prominent
+            transition="scale-transition"
+            :value="!valid"
+          >Template missing required fields</v-alert>
+     
+          <v-alert      
+            type="success"
+            transition="scale-transition"
+            :value="SaveSucc"
+          >Saved Successfully</v-alert>
+  
+          <v-alert
+            type="error"
+            transition="scale-transition"
+            :value="NetError"
+            dismissible="true"
+            dense
+          >Something went wrong. Please try again later</v-alert>
+           </v-card>
+
+    </v-dialog>
   </div>
 </template>
 <script>
 export default {
   data: () => ({
+    dialog: false,
+    Saving: false,
+    NetError: false,
+    SaveSucc: false,
+    loading: false,
     valid: false,
     issue: {
       title: null,
@@ -104,13 +144,39 @@ export default {
       status: null,
       severity: null,
       room: null,
-      assigned_to: null,      
+      assigned_to: null
     },
     latest_comment: null,
-    comments: [ {id: 1, issue_id: 1, user_id:1 , updated_at: '2020-02-01', content:'My comment is here'},
-     {id: 2, issue_id: 1, user_id:1 , updated_at: '2020-02-01', content:'My comment 2is here'},
-      {id: 3, issue_id: 1, user_id:1 , updated_at: '2020-02-01', content:'My comment 3 is here'},
-       {id: 4, issue_id: 1, user_id:1 , updated_at: '2020-02-01', content:'My comment 4 is here'}],
+    comments: [
+      {
+        id: 1,
+        issue_id: 1,
+        user_id: 1,
+        updated_at: "2020-02-01",
+        content: "My comment is here"
+      },
+      {
+        id: 2,
+        issue_id: 1,
+        user_id: 1,
+        updated_at: "2020-02-01",
+        content: "My comment 2is here"
+      },
+      {
+        id: 3,
+        issue_id: 1,
+        user_id: 1,
+        updated_at: "2020-02-01",
+        content: "My comment 3 is here"
+      },
+      {
+        id: 4,
+        issue_id: 1,
+        user_id: 1,
+        updated_at: "2020-02-01",
+        content: "My comment 4 is here"
+      }
+    ],
     id: window.location.pathname.split("/").pop(), //get this dynamic or from url
     titleRules: [v => !!v || "Title is required"],
     statuses: ["Open", "Closed"],
@@ -125,7 +191,11 @@ export default {
   }),
   methods: {
     saveIssue() {
-      if (valid) {
+      debugger
+      this.dialog = true;
+
+      if (this.valid) {
+        debugger;
         var req = Object;
         req = Object.assign(req, this.id, this.issue);
 
@@ -142,27 +212,29 @@ export default {
         //     }
       }
     },
-    postComment(){
+    postComment() {
       let req = Object;
       req.content = this.latest_comment;
       req.issue_id = this.id;
 
-      axios.post("api/v1/comment/"+this.id,{
-      headers: { Authorization: this.AuthStr },
-      data:{
-        content  : req.content,
-        issue_id : req.issue_id
-      }}     
-      ).then(
-        response => {
-          console.log("comment posted!");
-          this.comments.push(req);
-        },
-        error => {
-          console.log("comment post failed!");
-          // show error here
-        });
-
+      axios
+        .post("api/v1/comment/" + this.id, {
+          headers: { Authorization: this.AuthStr },
+          data: {
+            content: req.content,
+            issue_id: req.issue_id
+          }
+        })
+        .then(
+          response => {
+            console.log("comment posted!");
+            this.comments.push(req);
+          },
+          error => {
+            console.log("comment post failed!");
+            // show error here
+          }
+        );
     }
   },
   mounted() {
