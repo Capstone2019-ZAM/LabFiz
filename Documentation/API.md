@@ -1,8 +1,19 @@
-# API Documentation 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) [![Generic badge](https://img.shields.io/badge/Version-1.0-<COLOR>.svg)](https://shields.io/)[![Generic badge](https://img.shields.io/badge/Iros-RestApi-<COLOR>.svg)](https://shields.io/)
- [![made-with-Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
+<h1 align="center">
+API Documentation
+<br><br>
+<img src="https://user-images.githubusercontent.com/55599368/74112684-ac881b00-4b96-11ea-84a0-6cf4273033ac.png">
+<br><br>
+<a href=""><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Build Status"></a>
+<a href=""><img src="https://img.shields.io/badge/Version-1.0-<COLOR>.svg" alt="Build Status"></a>
+<a href=""><img src="https://img.shields.io/badge/StyleGuide-Iros-<COLOR>.svg" alt="Build Status"></a>
+<a href=""><img src="https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg" alt="Build Status"></a>
+</h1>
 
-The end points described below serve authenticated JSON to a VueJs frontend. All the endpoints(except login) are protected using token based authentication with short-lived access tokens. Note that the refresh route will need to be invoked when an api access token expires in order to refresh it using a refresh token.
+<p align="center">
+
+</p>	
+	
+The end points described below serve authenticated JSON to the VueJs frontend for the laravel app. All the endpoints(except login) are protected using token based authentication with short-lived access tokens. Note that the refresh route(localhost/api/user/refresh) will need to be invoked when an api access token expires in order to generate a new token pair{api auth token, refresh token} for future endpoint requests.
 
 ## Generic Errors 
 
