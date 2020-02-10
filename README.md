@@ -19,5 +19,5 @@ Contributors:
  - [Wireframes](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Wireframe%20-%20Coordinator%20(2).svg)
  
  # Screenshots
-  -[Asana](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Asana%20Snapshot%2004-Feb-2020.PNG)
+  - [Asana](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Asana%20Snapshot%2004-Feb-2020.PNG)
  
