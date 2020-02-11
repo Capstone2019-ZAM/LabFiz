@@ -13,8 +13,8 @@ Contributors:
 
 # Features
   - Lab inspectors will be able to record their inspection reports online
-  - Inspectors will be notified before an inspection is due
-  - Inspecors will be able to see the progress
+  - inspectors will be notified before an inspection is due
+  - inspectors will be able to see the progress
   - Admin will be able to assign tasks 
   - Admin will be able to add new inspectors
 
