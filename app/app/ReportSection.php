@@ -12,10 +12,14 @@ class ReportSection extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'report_id'
+        'title', 'report_id', 'report_section_template_id'
     ];
 
     public function report(){
         return $this->belongsTo(Report::class);
+    }
+
+    public function questions(){
+        return $this->hasMany(ReportQuestion::class);
     }
 }

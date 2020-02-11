@@ -2,42 +2,48 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Contracts\RestServiceContract;
 use App\Http\Controllers\Controller;
-use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\User\LoginRequest;
+use App\Http\Requests\User\RefreshRequest;
+use App\Http\Requests\User\RegisterRequest;
 
 class LoginController extends Controller
 {
+    protected $user_service;
 
-    public function __construct()
+    public function __construct(RestServiceContract $user_service)
     {
-
+        $this->user_service = $user_service;
     }
 
-    public function login(Request $request)
+    public function get($id)
     {
-        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-        $user = User::where('email', $request->email)->first();
-        if (!$user) {
-            $result['message'] = 'User not found.';
-            return response($result, 400);
-        }
+        $res = $this->user_service->get($id);
+        return response($res['response'], $res['status']);
+    }
 
-        $pass = Hash::check($request->password, $user->password);
-        if (!$pass) {
-            $result['message'] = 'Invalid password.';
-            return response($result, 400);
-        }
+    public function get_all()
+    {
+        $res = $this->user_service->get_all();
+        return response($res['response'], $res['status']);
+    }
 
-        $result['status'] = '200 (Ok)';
-        $result['message'] = 'User logged in successfully.';
-        $result['data'] = [
-            'email' => $user->email,
-            'role' => $user->roles->pluck('name')[0],
-            'token' => $user->api_token
-        ];
+    public function register(RegisterRequest $request)
+    {
+        $res = $this->user_service->register($request);
+        return response($res['response'], $res['status']);
+    }
 
-        return response($result, 200);
+    public function refresh(RefreshRequest $request)
+    {
+        $res = $this->user_service->refresh($request);
+        return response($res['response'], $res['status']);
+    }
+
+    public function login(LoginRequest $request)
+    {
+        $res = $this->user_service->login($request);
+        return response($res['response'], $res['status']);
     }
 }

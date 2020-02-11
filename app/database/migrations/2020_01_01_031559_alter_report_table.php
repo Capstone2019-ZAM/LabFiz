@@ -16,7 +16,7 @@ class AlterReportTable extends Migration
         Schema::table('reports', function (Blueprint $table) {
             $table->unsignedBigInteger('report_template_id');
             $table->foreign('report_template_id')->references('id')->on('report_templates')->onDelete('cascade');
-            $table->unsignedMediumInteger('room');
+            $table->string('room');
             //$table->date('due_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->date('due_date')->useCurrent();
 

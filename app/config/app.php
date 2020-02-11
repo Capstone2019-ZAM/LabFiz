@@ -175,6 +175,15 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\EloquentModelObserverProvider::class,
+
+        /*
+         * Other Service Providers...
+         */
+        App\Providers\UserServiceProvider::class,
+        App\Providers\LabServiceProvider::class,
+        App\Providers\InspectionServiceProvider::class,
+        App\Providers\IssueServiceProvider::class,
+        App\Providers\ReportServiceProvider::class,
     ],
 
     /*

@@ -19,4 +19,10 @@ class Report extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function sections()
+    {
+        return $this->hasMany(ReportSection::class);
+    }
+
 }
