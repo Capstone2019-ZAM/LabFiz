@@ -9,8 +9,16 @@ Contributors:
  
 
 # Objective
- Our objective is to create a web application that will serve as a platform for lab training and safety inspection for educational institutions. 
-  Our highest priority is to finish the Lab Inspection part of the application. 
+ Our objective is to create a web application that will serve as a platform for lab training and safety inspection for educational institutions.
+
+# Features
+  - Lab inspectors will be able to record their inspection reports online
+  - Inspectors will be notified before an inspection is due
+  - Inspecors will be able to see the progress
+  - Admin will be able to assign tasks 
+  - Admin will be able to add new inspectors
+
+  
 
 # Links
  - [ERD document](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/ERD%20-%20Main%20App.pdf)
