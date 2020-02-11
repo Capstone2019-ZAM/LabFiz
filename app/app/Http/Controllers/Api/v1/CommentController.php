@@ -17,11 +17,12 @@ class CommentController extends Controller
     protected $model_user;
     protected $model_issue;
 
-    public function __construct(Comment $comment, User $user ,$issue)
+    public function __construct(Comment $comment, User $user ,Issue $issue)
     {
         $this->model_comment = new ModelRepository($comment);
-        $this->model_user = new ModelRepository($user);
-        $this->model_issue = new ModelRepository($issue);
+        //set foreign keys on user id and issue id
+        //$this->model_user = new ModelRepository($user);
+        //$this->model_issue = new ModelRepository($issue);
 
     }
 
@@ -42,7 +43,7 @@ class CommentController extends Controller
         return response($result, 200);
     }
 
-    public function get_all($issue_id)
+    public function get_all()
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
         $result['data'] = $this->model_comment->get();
@@ -56,7 +57,7 @@ class CommentController extends Controller
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
         $header = $request->header('Authorization');
         $user = $this->model_user->getByColumn($header, 'api_token');
-
+        //$issue = $this->model_issue->getById()
         try {
             $result['data'] = $this->model_comment->create(
                 [

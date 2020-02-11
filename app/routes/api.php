@@ -62,11 +62,10 @@ Route::group([
     Route::delete('/lab/{id}', 'Api\v1\LabController@delete');
 
     //comment
-    Route::get('/comments/{id}', 'Api\v1\CommentController@get_all');
-    //Route::get('/comment/{id}', 'Api\v1\CommentController@get');  // dont think this will be needed
+    Route::get('/comments', 'Api\v1\CommentController@get_all');
+    Route::get('/comment/{id}', 'Api\v1\CommentController@get');
     Route::post('/comment/{id}', 'Api\v1\CommentController@create');
-    //Route::put('/lab/{id}', 'Api\v1\LabController@update'); //to do 
-    Route::delete('/lab/{id}', 'Api\v1\CommentController@delete');
+    Route::delete('/comment/{id}', 'Api\v1\CommentController@delete');
 
     
 
