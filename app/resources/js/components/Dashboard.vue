@@ -61,11 +61,8 @@ export default {
         headers: { Authorization: this.AuthStr }})
       .then((response)  =>  {
         console.log('fetch done!')
-        debugger
         this.options = response.data.data;
         this.loading = true;
-            console.log(this.options);
-
       }, (error)  =>  {
         this.loading = false;
     })
