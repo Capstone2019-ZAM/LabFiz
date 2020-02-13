@@ -14,4 +14,11 @@ class Comment extends Model
     protected $fillable = [
         'content'
     ];
+
+    /**
+     * 
+     */
+    public function issues(){
+        return $this->hasMany(Issue::class);
+    }
 }

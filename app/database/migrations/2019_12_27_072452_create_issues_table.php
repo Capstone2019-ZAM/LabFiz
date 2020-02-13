@@ -17,7 +17,6 @@ class CreateIssuesTable extends Migration
             $table->bigIncrements('id');
             // $table->unsignedBigInteger('room');
             $table->string('room', 400);
-            $table->string('room');
             $table->string('status');
             $table->string('title');
             $table->string('severity');

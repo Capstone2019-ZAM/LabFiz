@@ -15,8 +15,8 @@ class AlterQuestionTable extends Migration
     {
         Schema::table('report_questions', function (Blueprint $table) {
             $table->foreign('report_section_id')->references('id')->on('report_sections')->onDelete('cascade');
-            $table->unsignedBigInteger('report_question_template_id');
-            $table->foreign('report_question_template_id')->references('id')->on('question_templates')->onDelete('cascade');
+            // $table->unsignedBigInteger('report_question_template_id');
+            // $table->foreign('report_question_template_id')->references('id')->on('question_templates')->onDelete('cascade');
             $table->string('answer');
             $table->string('description');
         });

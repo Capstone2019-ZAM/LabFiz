@@ -26,6 +26,10 @@ class LoginController extends Controller
     public function get_all()
     {
         $res = $this->user_service->get_all();
+        $res['response']['data'] = $res['response']['data']->map(
+           function($item, $key){
+              return $item->only(['id', 'first_name','last_name']);  
+            });
         return response($res['response'], $res['status']);
     }
 

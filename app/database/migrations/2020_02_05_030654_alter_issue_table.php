@@ -14,6 +14,8 @@ class AlterIssueTable extends Migration
     public function up()
     {
         Schema::table('issues', function (Blueprint $table) {
+            $table->foreign('room')->references('location')->on('labs');
+
             $table->dateTime('resolution_date')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
