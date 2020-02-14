@@ -56,6 +56,7 @@ class TemplateController extends Controller
             $result['data'] = $this->model_template->create(
                 [
                     'user_id' => $user->id,
+                    'schema'  =>$request->schema
                 ]
             );
         } catch (QueryException $ex) {

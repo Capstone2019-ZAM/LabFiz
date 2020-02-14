@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Inspection;
+namespace App\Http\Requests\Template;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -25,12 +25,10 @@ class CreateRequest extends FormRequest
      */
     public function rules()
     {
-        // return [
-        //     'report_id' => array('required', 'numeric'),
-        //     'room' => array('required', 'numeric'),
-        //     'assigned_to' => array('required', 'numeric'),
-        //     'due_date' => array('required', 'date'),
-        // ];
+        return [
+            'id' => array('required', 'int'),
+            'schema' => array('required', 'string'),
+       ];
     }
 
     /**

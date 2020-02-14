@@ -9,7 +9,7 @@
               <v-card-title class="ma2">Template Builder</v-card-title>
             </v-col>
 
-            <v-col cols="12" md="3" sm="6">
+            <v-col cols="12" md="3" sm="6" xs="">
               <v-btn color="primary" @click="postTemplate()">
                 <v-icon>mdi-content-save</v-icon>Save
               </v-btn>
@@ -21,7 +21,7 @@
           <v-container>
             <div class="border pa-4 mb-4 mt-5">
               <v-row>
-                <v-col cols="12" md="9" sm="12">
+                <v-col cols="12" md="9" sm="10">
                   <v-text-field
                     v-model="title"
                     outlined
@@ -35,7 +35,7 @@
             </div>
             <div class="border pa-4" v-for="sec in sections" :key="sec.id">
               <v-row>
-                <v-col cols="12" md="6">
+                <v-col cols="12" md="6" sm="10">
                   <v-text-field
                     v-model="sec.section_nm"
                     label="Section Title"
@@ -45,14 +45,14 @@
                   ></v-text-field>
                 </v-col>
                 <v-spacer></v-spacer>
-                <v-col cols="12" md="1">
+                <v-col cols="12" md="1" sm="1">
                   <v-btn color="red" small icon @click="removeSection(sec,sections)">
                     <v-icon>mdi-close-circle</v-icon>
                   </v-btn>
                 </v-col>
               </v-row>
               <v-row v-for="(qs,index) in sec.questions" :key="index">
-                <v-col cols="12" md="8">
+                <v-col cols="12" md="8" sm="10">
                   <v-text-field
                     v-model="sec.questions[index]"
                     :rules="qRules"
@@ -62,7 +62,7 @@
                 </v-col>
                 <v-spacer></v-spacer>
 
-                <v-col cols="12" md="1">
+                <v-col cols="12" md="1" sm="1">
                   <v-btn @click="removeQuestion(qs,sec.questions)" icon color="error">
                     <v-icon>mdi-minus-circle-outline</v-icon>
                   </v-btn>
@@ -134,15 +134,16 @@ export default {
     AuthStr: localStorage.getItem("api"),
     id: window.location.pathname.split("/").pop(), // Get this from URL or router
     title: "",
+    new: null,
 
     qRules: [v => !!v || "Item value is required"],
-    sections: Array
-    // [
-    //   {
-    //     section_nm: "Section 1",
-    //     questions: ["q1?", ""]
-    //   }
-    // ]
+    sections: 
+    [
+      {
+        section_nm: "Section 1",
+        questions: ["q1", ""]
+      }
+    ]
   }),
   methods: {
     setAlert: async function(msg) {
@@ -156,7 +157,6 @@ export default {
       });
 
       let result = await promise; // wait until the promise resolves (*)
-      //debugger;
 
       switch (msg) {
         case "Saving":
@@ -212,14 +212,13 @@ export default {
       const req = Object;
       req.title = this.title;
       req.sections = this.sections;
-      debugger
+
       if (this.valid) {
         this.setAlert("Saving");
         axios
-          .post("http://localhost/api/v1/template/" + this.id, {
-            headers: { Authorization: this.AuthStr }
-
-            //TO DO : ADD Data to sent
+          .post("http://localhost/api/v1/template", {
+            headers: { Authorization: this.AuthStr },
+            body: req
           })
           .then(
             response => {
@@ -240,7 +239,10 @@ export default {
   },
   mounted() {
     this.loading = true;
-    axios
+    
+    if (Number.isInteger(window.location.pathname.split("/").pop())){
+      console.log(window.location.pathname.split("/").pop())
+          axios
       .get("/api/v1/template/" + this.id, {
         headers: { Authorization: this.AuthStr }
       })
@@ -259,6 +261,9 @@ export default {
           this.NetError = true;
         }
       );
+    }
+    
+
   }
 };
 </script>
