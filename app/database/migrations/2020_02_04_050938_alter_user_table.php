@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReportTemplatesTable extends Migration
+class AlterUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateReportTemplatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('report_templates', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('title');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->dateTime('api_token_expiry_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('api_refresh_token', 60)->unique()->nullable()->default(null);
+            $table->string('api_token_type')->default('ApiAuth');
         });
     }
 
@@ -27,6 +27,6 @@ class CreateReportTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('report_templates');
+        //
     }
 }

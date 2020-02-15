@@ -2,49 +2,29 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Contracts\RestServiceContract;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Issue\CreateRequest;
-use App\Issue;
-use App\Repositories\ModelRepository;
-use App\User;
-use Exception;
-use Illuminate\Http\Request;
 
 class IssueController extends Controller
 {
-    protected $model_issue;
-    protected $model_user;
+    protected $issue_service;
 
-    public function __construct(Issue $issue, User $user)
+    public function __construct(RestServiceContract $service)
     {
-        $this->model_issue = new ModelRepository($issue);
-        $this->model_user = new ModelRepository($user);
+        $this->issue_service = $service;
     }
 
     public function get($id)
     {
-        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-
-        try {
-            $issue = $this->model_issue->getById($id);
-            $result['data'] = $issue;
-        } catch (Exception $ex) {
-            $result['message'] = $ex->getMessage();
-            return response($result, 400);
-        }
-
-        $result['status'] = '200 (Ok)';
-        $result['message'] = 'Issue retrieved succesfully.';
-        return response($result, 200);
+        $res = $this->issue_service->get($id);
+        return response($res['response'], $res['status']);
     }
 
     public function get_all()
     {
-        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-        $result['data'] = $this->model_issue->get();
-        $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Issues retrieved succesfully.';
-        return response($result, 200);
+        $res = $this->issue_service->get_all();
+        return response($res['response'], $res['status']);
     }
 
     public function create(CreateRequest $request)
@@ -74,21 +54,13 @@ class IssueController extends Controller
         $result['status'] = '200 (Ok)';
         $result['message'] = 'Created issue succesfully!';
         return response($result, 200);
+        $res = $this->issue_service->create($request);
+        return response($res['response'], $res['status']);
     }
 
     public function delete($id)
     {
-        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-
-        try {
-            $result['data'] = $this->model_issue->deleteById($id);
-        } catch (Exception $ex) {
-            $result['message'] = $ex->getMessage();
-            return response($result, 400);
-        }
-
-        $result['status'] = '200 (Ok)';
-        $result['message'] = 'Issue deleted succesfully';
-        return response($result, 200);
+        $res = $this->issue_service->delete($id);
+        return response($res['response'], $res['status']);
     }
 }

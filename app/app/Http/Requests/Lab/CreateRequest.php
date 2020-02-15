@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Issue;
+namespace App\Http\Requests\Lab;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreateRequest extends FormRequest
@@ -26,14 +26,8 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => array('required','int'),
+            'id' => array('required', 'int'),
             'title' => array('required', 'regex:/^[\s\w-]*$/'),
-            'room' => array('required', 'string'),
-            'assigned_to' => array('required', 'int'),
-            'severity' => array('required', 'regex:/^[\s\w-]*$/'),
-            'description' => array('required', 'regex:/^[\s\w!-@#$^_:,.]*$/', 'max:250'),
-            'due_date' =>array('required' ,'date'),
-            'comments' => array('required', 'regex:/^[\s\w!-@#$^_:,.]*$/', 'max:250'),
         ];
     }
 

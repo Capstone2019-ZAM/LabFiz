@@ -26,9 +26,11 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'report_id' => array('required', 'numeric'),
-            'room' => array('required', 'numeric'),
-            'assigned_to' => array('required', 'numeric'),
+            'id' => array('required','int'),
+            'report_id' => array('required', 'int'),
+            'room' => array('required', 'string'),
+            'assigned_to' => array('required', 'int'),
+            'status' => array('required','string'),
             'due_date' => array('required', 'date'),
         ];
     }

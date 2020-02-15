@@ -12,6 +12,6 @@ class Issue extends Model
      * @var array
      */
     protected $fillable = [
-        'title','user_id','room', 'assigned_to', 'status', 'severity', 'description', 'comments'
+        'title','user_id','room', 'assigned_to', 'status', 'severity', 'description', 'comments', 'resolution_date'
     ];
 }
