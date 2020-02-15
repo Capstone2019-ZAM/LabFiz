@@ -16,7 +16,7 @@ class CreateTemplatesTable extends Migration
         Schema::create('templates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 400)->nullable()->default('Lab Template');
-            $table->string('schema', 4000)->nullable()->default('"sections":[{"section_nm":"Section Title","questions":["Question"]}]}');
+            $table->string('schema', 4000)->nullable()->default('{"sections":[{"section_nm":"Section Title","questions":["Question"]}]}');
             //$table->json('jschema');//->default('{"report_nm":"Title","sections":[{"section_nm":"Section Title","questions":["Question"]}]}');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

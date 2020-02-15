@@ -115,7 +115,7 @@
             type="error"
             transition="scale-transition"
             :value="NetError"
-            dismissible="true"
+            
             dense
           >Something went wrong. Please try again later</v-alert>
            </v-card>
@@ -141,7 +141,7 @@ export default {
     [
       {
         section_nm: "Section 1",
-        questions: ["q1", ""]
+        questions: ["q1"]
       }
     ]
   }),
@@ -209,16 +209,14 @@ export default {
       // this.NetError = false;
       // this.SaveSucc = false;
 
-      const req = Object;
+      let req = Object();
       req.title = this.title;
-      req.sections = this.sections;
-
+      req.schema = JSON.stringify( this.sections);
       if (this.valid) {
         this.setAlert("Saving");
         axios
-          .post("http://localhost/api/v1/template", {
-            headers: { Authorization: this.AuthStr },
-            body: req
+          .post("http://localhost/api/v1/template", req,{
+            headers: { "Authorization": this.AuthStr ,  "Content-Type" : "application/json"},
           })
           .then(
             response => {
@@ -226,6 +224,8 @@ export default {
               this.items = response.data; //
               //this.loading = true;
               this.setAlert("SaveSucc");
+              console.log('Template Created');
+              window.location.href = '/template/'+ this.items.data.id
               //this.SaveSucc = true; //TODO: time it
             },
             error => {
@@ -240,7 +240,8 @@ export default {
   mounted() {
     this.loading = true;
     
-    if (Number.isInteger(window.location.pathname.split("/").pop())){
+    if (Number.isInteger(parseInt(window.location.pathname.split("/").pop()))){
+      
       console.log(window.location.pathname.split("/").pop())
           axios
       .get("/api/v1/template/" + this.id, {
@@ -250,7 +251,7 @@ export default {
         response => {
           console.log("fetch done!");
           let schema = JSON.parse(response.data.data.schema);
-          this.sections = schema.sections;
+          this.sections = schema;
           this.title = response.data.data.name;
           this.id = response.data.data.id;
           this.loading = false;

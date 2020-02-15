@@ -12,7 +12,7 @@ class Template extends Model
      * @var array
      */
     protected $fillable = [
-        'schema','user_id'
+        'name','schema','user_id'
     ];
 
 }

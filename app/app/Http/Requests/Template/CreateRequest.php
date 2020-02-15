@@ -26,8 +26,10 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => array('required', 'int'),
+            
             'schema' => array('required', 'string'),
+            'title' => array('required', 'string'),
+
        ];
     }
 
