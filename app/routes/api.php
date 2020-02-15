@@ -64,7 +64,8 @@ Route::group([
     //comment
     Route::get('/comments', 'Api\v1\CommentController@get_all');
     Route::get('/comment/{id}', 'Api\v1\CommentController@get');
-    Route::post('/comment/{id}', 'Api\v1\CommentController@create');
+    Route::post('/comment', 'Api\v1\CommentController@create');
+    Route::post('/comment/{id}', 'Api\v1\CommentController@update');
     Route::delete('/comment/{id}', 'Api\v1\CommentController@delete');
 
     
