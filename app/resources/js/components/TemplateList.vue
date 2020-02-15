@@ -24,7 +24,7 @@
           </v-list-item>
         </v-list>
 
-        <v-btn block outlined color="indigo" class="ma-10">
+        <v-btn block outlined color="indigo" class="ma-10" @click="navigate()">
           Add new Template
           <v-icon dark>mdi-plus</v-icon>
         </v-btn>
@@ -69,7 +69,12 @@ export default {
 
    methods: {
      navigate(id){
-          window.location.href = "http://localhost/template/"+id
+          if (id == null){
+          window.location.href = "http://localhost/template"
+   
+          }
+          else
+            window.location.href = "http://localhost/template/"+id
     },
     formattedDate(dt) {
       return dt
