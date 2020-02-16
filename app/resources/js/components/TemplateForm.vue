@@ -7,12 +7,7 @@
           <v-row align="center" justify="center">
             <v-col cols="12" md="9">
               <v-card-title class="ma2">Template Builder</v-card-title>
-            </v-col>
-
-            <v-col cols="12" md="3" sm="6" xs="">
-              <v-btn color="primary" @click="postTemplate()">
-                <v-icon>mdi-content-save</v-icon>Save
-              </v-btn>
+              <v-spacer></v-spacer>
             </v-col>
           </v-row>
         </v-row>
@@ -83,6 +78,11 @@
             </v-row>
           </v-container>
         </v-form>
+        <v-col align="right" justify="center">
+        <v-btn large color="primary" @click="postTemplate()">
+                <v-icon>mdi-content-save</v-icon>Save
+              </v-btn>
+        </v-col>
       </v-card>
     </v-col>
   </v-row>
