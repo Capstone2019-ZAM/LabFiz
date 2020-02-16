@@ -53,7 +53,8 @@ class TemplateController extends Controller
         $user = AuthHelper::instance()->user($request,$this->model_user);
 
         try {
-            $result['data'] = $this->model_template->create(
+            $result['data'] = $this->model_template->updateOrCreate(
+                ['id' => $request->id],
                 [
                     'user_id' => $user->id,
                     'schema'  =>$request->schema
