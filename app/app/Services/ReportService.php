@@ -69,6 +69,8 @@ class ReportService implements RestServiceContract
                 ]
             );
 
+            $updated_flag = $report->wasChanged();
+
             $result['data'] = [
                 'id' => $report->id,
                 'title' => $report->title,
@@ -100,7 +102,7 @@ class ReportService implements RestServiceContract
                         ]
                     );
 
-                    $result['data']['ref'][$sect_key] = [
+                    $result['data']['sections'][$sect_key] = [
                         'id' => $section->id,
                         'title' => $section->title,
                         'report_id' => $section->report_id,
@@ -130,7 +132,7 @@ class ReportService implements RestServiceContract
                             ]
                         );
 
-                        $result['data']['ref'][$sect_key]['ref'][$question_key] = $question;
+                        $result['data']['sections'][$sect_key]['questions'][$question_key] = $question;
                     } catch (Exception $ex) {
                         $result['message'] = $ex->getMessage();
                         return ['response' => $result, 'status' => 400];
@@ -140,7 +142,7 @@ class ReportService implements RestServiceContract
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Created report document successfully!';
+        $result['message'] = ($updated_flag ? 'Updated' : 'Created') .' report document successfully!';
         return ['response' => $result, 'status' => 200];
     }
 
