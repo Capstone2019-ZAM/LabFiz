@@ -91,7 +91,7 @@
                   <v-list-item-content>
                     <v-col md="2" sm="1">
                       <v-row>
-                        <div>{{data.user_id}}</div>
+                        <div>{{data.user_name}}</div>
                       </v-row>
                       <v-row>{{data.updated_at}}</v-row>
                     </v-col>
@@ -223,7 +223,7 @@ export default {
   methods: {
     getNamebyId(t_id){
      let n= this.assignables.find( x => x.id ==t_id);
-     return n.first_name +" " +n.last_name
+     return n.name;
     },
     getFullName(el) {
       return el.first_name + " " + el.last_name;
@@ -326,10 +326,17 @@ export default {
 
               this.issue = issueResp.data.data;
               this.issue.assigned_to = this.issue.user_id;
-
-              commentResp.data.data=  commentResp.data.data.map( el=> el.user_name = getNamebyId(el.user_id));
+              
+              commentResp.data.data=  commentResp.data.data.map( el=> {
+                 let t = Object();
+                 debugger
+                t.user_name = this.getNamebyId(el.user_id);
+                t.updated_at = el.updated_at;
+                t.content = el.content;
+                return t;
+                });
               this.comments=commentResp.data.data;
-
+              
             },
             error => {
               console.log("fetch failed!");

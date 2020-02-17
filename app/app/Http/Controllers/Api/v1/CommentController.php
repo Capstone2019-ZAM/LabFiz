@@ -10,6 +10,8 @@ use App\User;
 use App\Issue;
 use Exception;
 use Illuminate\Http\Request;
+//TODO Remove this import and update eloquent query to repository method
+use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
@@ -20,9 +22,8 @@ class CommentController extends Controller
     public function __construct(Comment $comment, User $user ,Issue $issue)
     {
         $this->model_comment = new ModelRepository($comment);
-        //set foreign keys on user id and issue id
-        //$this->model_user = new ModelRepository($user);
-        //$this->model_issue = new ModelRepository($issue);
+        $this->model_user = new ModelRepository($user);
+        $this->model_issue = new ModelRepository($issue);
 
     }
 
@@ -31,7 +32,9 @@ class CommentController extends Controller
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $comment = $this->model_comment->getById($id);
+            //$comment = $this->model_comment->getById($id);
+            //$comment = $this->model_comment->getByColumn($id, 'issue_id');
+            $comment = DB::table('comments')->where('issue_id',$id)->get();
             $result['data'] = $comment;
         } catch (Exception $ex) {
             $result['message'] = $ex->getMessage();
@@ -39,7 +42,7 @@ class CommentController extends Controller
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Comment retrieved succesfully.';
+        $result['message'] = 'Comments related to issue retrieved succesfully.';
         return response($result, 200);
     }
 
@@ -48,7 +51,7 @@ class CommentController extends Controller
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
         $result['data'] = $this->model_comment->get();
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Comment retrieved succesfully.';
+        $result['message'] = 'All Comments retrieved succesfully.';
         return response($result, 200);
     }
 
@@ -57,7 +60,7 @@ class CommentController extends Controller
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
         $header = $request->header('Authorization');
         $user = $this->model_user->getByColumn($header, 'api_token');
-        $issue = $this->model_issue->getById($request->id)
+        $issue = $this->model_issue->getById($request->id);
         try {
             $result['data'] = $this->model_comment->create(
                 [

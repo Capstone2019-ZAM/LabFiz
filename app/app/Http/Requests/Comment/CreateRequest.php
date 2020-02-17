@@ -27,6 +27,8 @@ class CreateRequest extends FormRequest
     {
         return [
             'content' => array('required', 'regex:/^[\s\w-]*$/'),
+            'issue_id' => array('required', 'int'),
+
         ];
     }
 
