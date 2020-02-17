@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-form>
+    <v-form v-model="valid">
       <v-card class="mx-auto" max-width="750" outlined>
         <v-card-title class="justify-center">
           <span class="headline">Issue Tracker Form</span>
@@ -10,32 +10,41 @@
           <v-container>
             <v-row>
               <v-col class="d-flex" cols="12" sm="8" md="8">
-                <v-text-field
-                  label="Title"
-                  v-model="issue.title"
-                  placeholder="Title"
-                  :rules="titleRules"
-                  outlined
-                ></v-text-field>
+                <v-text-field label="Title" v-model="issue.title" :rules="titleRules" outlined></v-text-field>
               </v-col>
               <v-col class="d-flex" cols="12" sm="6" md="4">
-                <v-select :items="statuses" label="Status" outlined v-model="issue.status"></v-select>
+                <v-select
+                  :rules="statusRules"
+                  :items="statuses"
+                  label="Status"
+                  outlined
+                  v-model="issue.status"
+                ></v-select>
               </v-col>
             </v-row>
             <v-row>
               <v-col class="d-flex" cols="12" sm="6" md="3">
-                <v-select :items="labs" label="Lab" outlined v-model="issue.room"></v-select>
+                <v-select :rules="labRules" :items="labs" label="Lab" outlined v-model="issue.room"></v-select>
               </v-col>
               <v-col class="d-flex" cols="12" sm="6" md="5">
                 <v-select
                   :items="assignables"
+                  item-text="name"
+                  item-value="id"
                   label="Assigned To"
                   outlined
+                  :rules="assignRules"
                   v-model="issue.assigned_to"
                 ></v-select>
               </v-col>
               <v-col class="d-flex" cols="12" sm="6" md="4">
-                <v-select :items="severities" label="Severity" outlined v-model="issue.severity"></v-select>
+                <v-select
+                  :rules="sevRules"
+                  :items="severities"
+                  label="Severity"
+                  outlined
+                  v-model="issue.severity"
+                ></v-select>
               </v-col>
             </v-row>
             <v-row cols="12" md="12">
@@ -45,11 +54,12 @@
                   name="input-15-4"
                   :counter="150"
                   label="Description"
+                  :rules="descRules"
                   v-model="issue.description"
                 ></v-textarea>
               </v-col>
             </v-row>
-            <v-card>
+            <v-card v-if="Number.isInteger(parseInt(this.id))">
               <v-card-text>Comments</v-card-text>
               <v-list dense disabled>
                 <v-list-item class="ml-3 mr-3 mb-0" v-for="data in comments" :key="data.id">
@@ -85,62 +95,53 @@
               </v-col>
             </v-card>
             <v-row align="center" justify="end" class="ma-9">
-              <v-btn color="primary" @click="saveIssue()">Save</v-btn>
+              <v-btn large color="primary" @click="saveIssue()">Save</v-btn>
             </v-row>
           </v-container>
         </v-card-text>
       </v-card>
     </v-form>
 
-    <v-dialog v-model="dialog"  overlay-opacity="0"  width="50%">
-        <v-card color="white" class="ma-4" width="95%"  v-if="!valid||Saving||NetError||SaveSucc">
-          <v-alert
-            type="info"
-            text
-            transition="scale-transition"
-            :value="Saving&&valid"
-          >
-            <v-progress-circular indeterminate color="primary"></v-progress-circular>Saving
-          </v-alert>
-        
-          <v-alert
-            type="warning"
-            dense
-            prominent
-            transition="scale-transition"
-            :value="!valid"
-          >Template missing required fields</v-alert>
-     
-          <v-alert      
-            type="success"
-            transition="scale-transition"
-            :value="SaveSucc"
-          >Saved Successfully</v-alert>
-  
-          <v-alert
-            type="error"
-            transition="scale-transition"
-            :value="NetError"
-            dismissible="true"
-            dense
-          >Something went wrong. Please try again later</v-alert>
-           </v-card>
+    <v-dialog v-model="dialog" overlay-opacity="0" width="50%">
+      <v-card color="white" class="ma-4" width="95%" v-if="!valid||Saving||NetError||SaveSucc">
+        <v-alert type="info" text transition="scale-transition" :value="Saving&&valid">
+          <v-progress-circular indeterminate color="primary"></v-progress-circular>Saving
+        </v-alert>
 
+        <v-alert
+          type="warning"
+          dense
+          prominent
+          transition="scale-transition"
+          :value="!valid"
+        >Form missing required fields</v-alert>
+
+        <v-alert type="success" transition="scale-transition" :value="SaveSucc">Saved Successfully</v-alert>
+
+        <v-alert
+          type="error"
+          transition="scale-transition"
+          :value="NetError"
+          dismissible="true"
+          dense
+        >Something went wrong. Please try again later</v-alert>
+      </v-card>
     </v-dialog>
   </div>
 </template>
 <script>
 export default {
   data: () => ({
+    AuthStr: localStorage.getItem("api"),
     dialog: false,
     Saving: false,
     NetError: false,
     SaveSucc: false,
     loading: false,
-    valid: false,
+    valid: true,
     issue: {
       title: null,
-      desc: null,
+      description: null,
       status: null,
       severity: null,
       room: null,
@@ -161,27 +162,19 @@ export default {
         user_id: 1,
         updated_at: "2020-02-01",
         content: "My comment 2is here"
-      },
-      {
-        id: 3,
-        issue_id: 1,
-        user_id: 1,
-        updated_at: "2020-02-01",
-        content: "My comment 3 is here"
-      },
-      {
-        id: 4,
-        issue_id: 1,
-        user_id: 1,
-        updated_at: "2020-02-01",
-        content: "My comment 4 is here"
       }
     ],
     id: window.location.pathname.split("/").pop(), //get this dynamic or from url
     titleRules: [v => !!v || "Title is required"],
+    labRules: [v => !!v || "Lab is required"],
+    assignRules: [v => !!v || "Assignee is required"],
+    statusRules: [v => !!v || "Status is required"],
+    descRules: [v => !!v || "Description is required"],
+    sevRules: [v => !!v || "Severity classification is required"],
     statuses: ["Open", "Closed"],
+
     labs: [],
-    assignables: ["st4"],
+    assignables: [],
     severities: [
       "Immediately Dangerous to Life or Health (IDLH)",
       "Critical Deficiency",
@@ -189,28 +182,49 @@ export default {
       "Non-critical"
     ]
   }),
+  computed: {},
   methods: {
+    getFullName(el) {
+      return el.first_name + " " + el.last_name;
+    },
     saveIssue() {
-      debugger
-      this.dialog = true;
+      //this.dialog = true;
 
       if (this.valid) {
-        debugger;
         var req = Object;
-        req = Object.assign(req, this.id, this.issue);
-
-        //     axios.post("/api/v1/issue/"+this.id, {
-        //     // data : req
-        //     headers: { Authorization: this.AuthStr }
-        //     })
-        //     .then(
-        //     response => {
-        //     console.log("fetch done!");
-        //     this.issues = response.data.data;
-        //     },
-        // error => {console.log("fetch failed!");});
-        //     }
+       // req = Object.assign(req, this.id, this.issue);
+          req= this.issue;
+        //Save Exisiting Issue
+        if (
+          Number.isInteger(parseInt(window.location.pathname.split("/").pop()))
+        ) {
+          //     axios.post("/api/v1/issue/"+this.id, {
+          //     // data : req
+          //     headers: { Authorization: this.AuthStr }
+          //     })
+          //     .then(
+          //     response => {
+          //     console.log("fetch done!");
+          //     this.issues = response.data.data;
+          //     },
+          // error => {console.log("fetch failed!");});
+          //     }
+        } else {
+          debugger
+          axios.post("/api/v1/issue", req,{
+            headers: { "Authorization": this.AuthStr ,  "Content-Type" : "application/json"}})
+          .then(
+          response => {
+          console.log("Issue created done!");
+          window.location.href = '/issue/'+response.data.data.id
+          //this.issues = response.data.data;
+          },
+            error => {console.log("fetch failed!");});
+          
+        }
       }
+
+      
     },
     postComment() {
       let req = Object;
@@ -238,25 +252,54 @@ export default {
     }
   },
   mounted() {
-    axios
-      .all([
-        axios.get("/api/v1/issue/" + this.id, {
-          headers: { Authorization: this.AuthStr }
-        }),
-        axios.get("/api/v1/labs/", { headers: { Authorization: this.AuthStr } })
-        //axios.get("/api/v1/users/", { headers: { Authorization: this.AuthStr }})
-      ])
-      .then(
-        axios.spread(
-          (issueResp, labResp) => {
-            this.issue = issueResp.data.data;
-            this.labs = labResp.data.data.map(x => x.location);
-          },
-          error => {
-            console.log("fetch failed!");
-          }
-        )
-      );
+    if (Number.isInteger(parseInt(window.location.pathname.split("/").pop()))) {
+      axios
+        .all([
+          axios.get("/api/v1/issue/" + this.id, {
+            headers: { Authorization: this.AuthStr }
+          }),
+          axios.get("/api/v1/labs", {
+            headers: { Authorization: this.AuthStr }
+          }),
+          axios.get("/api/users", { headers: { Authorization: this.AuthStr } })
+          // axios.get("/api/v1/comments/{issue_id}", { headers: { Authorization: this.AuthStr }}),
+        ])
+        .then(
+          axios.spread(
+            (issueResp, labResp) => {
+              this.issue = issueResp.data.data;
+              this.labs = labResp.data.data.map(x => x.location);
+            },
+            error => {
+              console.log("fetch failed!");
+            }
+          )
+        );
+    } else {
+      axios
+        .all([
+          axios.get("/api/v1/labs", {
+            headers: { Authorization: this.AuthStr }
+          }),
+          axios.get("/api/users", { headers: { Authorization: this.AuthStr } })
+        ])
+        .then(
+          axios.spread(
+            (labResp, userResp) => {
+              this.assignables = userResp.data.data.map(x => {
+                let t = Object();
+                t.name = x.first_name + " " + x.last_name;
+                t.id = x.id;
+                return t;
+              });
+              this.labs = labResp.data.data.map(x => x.location);
+            },
+            error => {
+              console.log("fetch failed!");
+            }
+          )
+        );
+    }
   }
 };
 </script>
