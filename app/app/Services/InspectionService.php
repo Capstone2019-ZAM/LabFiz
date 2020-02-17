@@ -40,10 +40,8 @@ class InspectionService implements RestServiceContract
 
     public function get_all()
     {
-        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+        $result = ['status' => '200 (Ok)', 'message' => 'All Inspection assignments retrieved successfully.', 'data' => ''];
         $result['data'] = $this->inspection_model->get();
-        $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Inspection assignments retrieved successfully.';
         return ['response' => $result, 'status' => 200];
     }
 

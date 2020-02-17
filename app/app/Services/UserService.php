@@ -24,12 +24,26 @@ class UserService implements RestServiceContract
         $this->user_model = new ModelRepository($user);
     }
 
-    public function get_all()
+    public function get($id, array $columns = ['*'])
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-        $result['data'] = $this->user_model->get();
+
+        try {
+            $result['data'] = $this->user_model->getById($id, $columns);
+        } catch (Exception $ex) {
+            $result['message'] = 'Could not find user record.';
+            return ['response' => $result, 'status' => 400];
+        }
+
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Users retrieved successfully.';
+        $result['message'] = 'User retrieved successfully.';
+        return ['response' => $result, 'status' => 200];
+    }
+
+    public function get_all(array $columns = ['*'])
+    {
+        $result = ['status' => '200 (Ok)', 'message' => 'All Users retrieved successfully.', 'data' => ''];
+        $result['data'] = $this->user_model->get($columns);
         return ['response' => $result, 'status' => 200];
     }
 
@@ -143,22 +157,6 @@ class UserService implements RestServiceContract
             'refresh_token' => $user->api_refresh_token
         ];
 
-        return ['response' => $result, 'status' => 200];
-    }
-
-    public function get($id)
-    {
-        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-
-        try {
-            $result['data'] = $this->user_model->getById($id);
-        } catch (Exception $ex) {
-            $result['message'] = 'Could not find user record.';
-            return ['response' => $result, 'status' => 400];
-        }
-
-        $result['status'] = '200 (Ok)';
-        $result['message'] = 'User retrieved successfully.';
         return ['response' => $result, 'status' => 200];
     }
 

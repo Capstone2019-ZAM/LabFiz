@@ -37,10 +37,8 @@ class LabService implements RestServiceContract
 
     public function get_all()
     {
-        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+        $result = ['status' => '200 (Ok)', 'message' => 'All Labs retrieved successfully.', 'data' => ''];
         $result['data'] = $this->lab_model->get();
-        $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Labs retrieved successfully.';
         return ['response' => $result, 'status' => 200];
     }
 
