@@ -85,6 +85,7 @@
             </v-row>
             <v-card v-if="Number.isInteger(parseInt(this.id))">
               <v-card-text>Comments</v-card-text>
+              <div class="scrollable">
               <v-list dense disabled>
                 <v-list-item class="ml-3 mr-3 mb-0" v-for="data in comments" :key="data.id">
                   <v-list-item-avatar color="grey"></v-list-item-avatar>
@@ -101,6 +102,7 @@
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
+              </div>
               <v-col>
                 <v-row cols="12" class="mr-4 ml-4">
                   <v-col>
@@ -256,7 +258,6 @@ export default {
               }
             );
         } else {
-          debugger;
           axios
             .post("/api/v1/issue", req, {
               headers: {
@@ -278,20 +279,20 @@ export default {
       }
     },
     postComment() {
-      let req = Object;
-      req.content = this.latest_comment;
+      let req = Object();
+      req.content = this.issue.latest_comment;
       req.issue_id = this.id;
-
       axios
-        .post("api/v1/comment/" + this.id,req, {
+        .post("/api/v1/comment",req, {
           headers: { Authorization: this.AuthStr,  "Content-Type": "application/json" }
         })
         .then(
           response => {
             console.log("comment posted!");
             debugger
-            response.data.data.user_name = getNamebyId(response.data.data.user_id);
+            response.data.data.user_name = this.getNamebyId(response.data.data.user_id);
             this.comments.push(response.data.data);
+            this.issue.latest_comment = ""
           },
           error => {
             console.log("comment post failed!");
@@ -329,7 +330,6 @@ export default {
               
               commentResp.data.data=  commentResp.data.data.map( el=> {
                  let t = Object();
-                 debugger
                 t.user_name = this.getNamebyId(el.user_id);
                 t.updated_at = el.updated_at;
                 t.content = el.content;
@@ -372,3 +372,9 @@ export default {
   }
 };
 </script>
+<style>
+.scrollable{
+  height: 400px;
+  overflow: auto;
+}
+</style>

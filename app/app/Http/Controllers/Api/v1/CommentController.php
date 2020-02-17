@@ -60,13 +60,13 @@ class CommentController extends Controller
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
         $header = $request->header('Authorization');
         $user = $this->model_user->getByColumn($header, 'api_token');
-        $issue = $this->model_issue->getById($request->id);
+        //$issue = $this->model_issue->getById($request->id);
         try {
             $result['data'] = $this->model_comment->create(
                 [
-                    'content' => $request->content,
                     'user_id' => $user->id,
-                    'issue_id' =>$issue->id
+                    'content' => $request->content,
+                    'issue_id' =>$request->issue_id              
                 ]
             );
         } catch (Exception $ex) {
