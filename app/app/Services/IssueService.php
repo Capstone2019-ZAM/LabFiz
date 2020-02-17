@@ -40,10 +40,8 @@ class IssueService implements RestServiceContract
 
     public function get_all()
     {
-        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+        $result = ['status' => '200 (Ok)', 'message' => 'All Issues retrieved successfully.', 'data' => ''];
         $result['data'] = $this->issue_model->get();
-        $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Issues retrieved successfully.';
         return ['response' => $result, 'status' => 200];
     }
 

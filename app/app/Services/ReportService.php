@@ -26,52 +26,12 @@ class ReportService implements RestServiceContract
         $this->user_model = new ModelRepository($user);
     }
 
-    protected function foreign_data($report, $result)
-    {
-        $result['data'] = [
-            $report->title =>
-                [
-                    'id' => $report->id,
-                    'title' => $report->title,
-                    'user_id' => $report->user_id,
-                    'created_at' => $report->created_at,
-                    'updated_at' => $report->updated_at,
-                    'report_template_id' => $report->report_template_id,
-                    'room' => $report->room
-                ]
-        ];
-        foreach ($report->sections as $section) {
-            $result['data'][$report->title]['ref'][$section->title] = [
-                'id' => $section->id,
-                'report_id' => $section->report_id,
-                'created_at' => $section->created_at,
-                'updated_at' => $section->updated_at,
-                'report_section_template_id' => $section->report_section_template_id
-            ];
-
-            foreach ($section->questions as $question) {
-                $result['data'][$report->title]['ref'][$section->title]['ref'][$question->question] = [
-                    'id' => $question->id,
-                    'question' => $question->question,
-                    'report_section_id' => $question->report_section_id,
-                    'created_at' => $question->created_at,
-                    'updated_at' => $question->updated_at,
-                    'report_question_template_id' => $question->report_question_template_id,
-                    'answer' => $question->answer,
-                    'description' => $question->description,
-                ];
-            }
-        }
-        return $result;
-    }
-
     public function get($id)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $report = $this->report_model->getById($id);
-            $result = $this->foreign_data($report, $result);
+            $result['data'] = $this->report_model->with(['sections','sections.questions'])->getById($id);
         } catch (Exception $ex) {
             $result['message'] = 'Could not find report record.';
             return ['response' => $result, 'status' => 400];
@@ -84,13 +44,8 @@ class ReportService implements RestServiceContract
 
     public function get_all()
     {
-        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-        $reports = $this->report_model->get();
-        foreach ($reports as $report)
-            $result = $this->foreign_data($report, $result);
-
-        $result['status'] = '200 (Ok)';
-        $result['message'] = 'All Reports retrieved successfully.';
+        $result = ['status' => '200 (Ok)', 'message' => 'All Reports retrieved successfully.', 'data' => ''];
+        $result['data'] = $this->report_model->with(['sections','sections.questions'])->get();
         return ['response' => $result, 'status' => 200];
     }
 
