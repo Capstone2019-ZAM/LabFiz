@@ -60,21 +60,18 @@ Route::group([
     Route::get('/templates', 'Api\v1\TemplateController@get_all');
     Route::get('/template/{id}', 'Api\v1\TemplateController@get');
     Route::post('/template', 'Api\v1\TemplateController@create');
-    //Route::put('/template/{id}', 'Api\v1\TemplateController@update'); //to do 
     Route::delete('/template/{id}', 'Api\v1\TemplateController@delete');
 
     //lab 
     Route::get('/labs', 'Api\v1\LabController@get_all');
     Route::get('/lab/{id}', 'Api\v1\LabController@get');
     Route::post('/lab', 'Api\v1\LabController@create');
-    //Route::put('/lab/{id}', 'Api\v1\LabController@update'); //to do 
     Route::delete('/lab/{id}', 'Api\v1\LabController@delete');
 
     //comment
     Route::get('/comments', 'Api\v1\CommentController@get_all');
     Route::get('/comment/{id}', 'Api\v1\CommentController@get');
     Route::post('/comment', 'Api\v1\CommentController@create');
-    Route::post('/comment/{id}', 'Api\v1\CommentController@update');
     Route::delete('/comment/{id}', 'Api\v1\CommentController@delete');
 
     
