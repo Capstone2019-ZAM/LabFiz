@@ -1,6 +1,6 @@
 <?php
-Use App\Dashboard;
-Use App\Template;
+// Use App\Dashboard;
+// Use App\Template;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,11 +60,14 @@ Route::get('/assignment', function () {
 Route::get('/issue/{id}', function () {
     return view('issue_rpt');
 });
-Route::get('/newaccount', function () {
-    return view('account_rpt');
+Route::get('/issue', function () {
+    return view('issue_rpt');
 });
 Route::get('/issues', function () {
     return view('issue');
+});
+Route::get('/newaccount', function () {
+    return view('account_rpt');
 });
 Route::get('/account', function () {
     return view('account');
