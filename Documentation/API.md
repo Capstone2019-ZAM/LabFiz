@@ -1,11 +1,8 @@
 <h1 align="center">
 API Documentation
 <br><br>
-<img src="https://user-images.githubusercontent.com/55599368/74112684-ac881b00-4b96-11ea-84a0-6cf4273033ac.png">
-<br><br>
 <a href=""><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Build Status"></a>
 <a href=""><img src="https://img.shields.io/badge/Version-1.0-<COLOR>.svg" alt="Build Status"></a>
-<a href=""><img src="https://img.shields.io/badge/StyleGuide-Iros-<COLOR>.svg" alt="Build Status"></a>
 <a href=""><img src="https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg" alt="Build Status"></a>
 </h1>
 	
@@ -48,30 +45,30 @@ The end points described below serve authenticated JSON to the VueJs frontend fo
  * [**Users**](#users)
      * [Login](#login)
      * [Refresh](#Refresh)
-     * [Get](#GetUserById)
-     * [Get all](#GetAllUsers)
-     * [Create/Update](#CreateUser)
-     * [Delete](#DeleteUser)
+     * [Get](#Get-User-By-Id)
+     * [Get all](#Get-All-Users)
+     * [Create/Update](#Create-User)
+     * [Delete](#Delete-User)
  * [**Reports**](#reports)
-     * [Get](#GetReportById)
-     * [Get all](#GetAllReports)
-     * [Create/Update](#CreateReport)
-     * [Delete](#DeleteReport)
+     * [Get](#Get-Report-By-Id)
+     * [Get all](#Get-All-Reports)
+     * [Create/Update](#Create-Report)
+     * [Delete](#Delete-Report)
  * [**Inspections**](#inspections)
-     * [Get](#GetInspectionById)
-     * [Get all](#GetAllInspections)
-     * [Create/Update](#CreateInspection)
-     * [Delete](#DeleteInspection)
+     * [Get](#Get-Inspection-By-Id)
+     * [Get all](#Get-All-Inspections)
+     * [Create/Update](#Create-Inspection)
+     * [Delete](#Delete-Inspection)
  * [**Issues**](#issues)
-     * [Get](#GetIssueById)
-     * [Get all](#GetAllIssues)
-     * [Create/Update](#CreateIssue)
-     * [Delete](#DeleteIssue)
+     * [Get](#Get-Issue-By-Id)
+     * [Get all](#Get-All-Issues)
+     * [Create/Update](#Create-Issue)
+     * [Delete](#Delete-Issue)
   * [**Labs**](#labs)
-	 * [Get](#GetLabById)
-     * [Get all](#GetAllLabs)
-     * [Create/Update](#CreateLab)
-     * [Delete](#DeleteLab)
+	 * [Get](#Get-Lab-By-Id)
+     * [Get all](#Get-All-Labs)
+     * [Create/Update](#Create-Lab)
+     * [Delete](#Delete-Lab)
 <!--te-->
 
 | # | Category |           Route URL          | Latest Version | Request Type |              Desc              |                More Info               |
@@ -103,8 +100,7 @@ The end points described below serve authenticated JSON to the VueJs frontend fo
 
 Users
 ============
-Login
------
+## Login
 ```bash
   Logs in the user using a short lived access token. Once the access token has expired,
   a refresh will need to be issued to the refresh route in order to generate a new 
@@ -192,8 +188,7 @@ OR
 }
 ```
 
-Refresh
------
+## Refresh
 ```bash
   Used to refresh auth tokens. A new api auth and refresh token pair will be generated.
 ```
@@ -282,8 +277,7 @@ OR
 }
 ```
 
-GetUserById
------
+## Get User By Id
 ```bash
   Logs in the user using a short lived access token.
   Once the access token has expired, a refresh will 
@@ -358,8 +352,7 @@ localhost/api/user/{id}
 }
 ```
 
-GetAllUsers
------
+## Get All Users
 ```bash
   Gets all users.
 ```
@@ -481,8 +474,7 @@ localhost/api/users
 Reports
 ============
 
-GetReportById
------
+## Get Report By Id
 ```bash
   Gets a report by the report id
 ```
@@ -509,114 +501,116 @@ GetReportById
 
 * **Sample Request:**
 
-    localhost/api/v1/report/155
+    localhost/api/v1/report/5
   
   
 * **Success Response:**
 
 ```json
 {
-    "status": "400 (Bad Request)",
-    "message": "",
+    "status": "200 (Ok)",
+    "message": "Report retrieved successfully.",
     "data": {
-        "some cool title": {
-            "id": 155,
-            "title": "some cool title",
-            "user_id": 23,
-            "created_at": "2020-02-05T06:09:48.000000Z",
-            "updated_at": "2020-02-05T06:17:47.000000Z",
-            "report_template_id": 1,
-            "room": 69,
-            "ref": {
-                "sect_title_1": {
-                    "id": 162,
-                    "report_id": 155,
-                    "created_at": "2020-02-05T06:09:48.000000Z",
-                    "updated_at": "2020-02-05T06:09:48.000000Z",
-                    "report_section_template_id": 3,
-                    "ref": {
-                        "quest_title_1": {
-                            "id": 183,
-                            "question": "quest_title_1",
-                            "report_section_id": 162,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
-                            "report_question_template_id": 1,
-                            "answer": "dog",
-                            "description": "food"
-                        },
-                        "quest_title_2": {
-                            "id": 184,
-                            "question": "quest_title_2",
-                            "report_section_id": 162,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
-                            "report_question_template_id": 1,
-                            "answer": "dog",
-                            "description": "food"
-                        }
+        "id": 5,
+        "title": "some cool title",
+        "user_id": 1,
+        "created_at": "2020-02-17 00:23:40",
+        "updated_at": "2020-02-17 00:23:40",
+        "report_template_id": 1,
+        "room": "edc-232",
+        "due_date": "2020-02-04",
+        "sections": [
+            {
+                "id": 4,
+                "title": "sect_title_1",
+                "report_id": 5,
+                "created_at": "2020-02-17 00:23:40",
+                "updated_at": "2020-02-17 00:23:40",
+                "report_section_template_id": 1,
+                "questions": [
+                    {
+                        "id": 2,
+                        "question": "quest_title_1",
+                        "report_section_id": 4,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
+                    },
+                    {
+                        "id": 3,
+                        "question": "quest_title_2",
+                        "report_section_id": 4,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
                     }
-                },
-                "sect_title_2": {
-                    "id": 163,
-                    "report_id": 155,
-                    "created_at": "2020-02-05T06:09:48.000000Z",
-                    "updated_at": "2020-02-05T06:09:48.000000Z",
-                    "report_section_template_id": 1,
-                    "ref": {
-                        "quest_title_1": {
-                            "id": 185,
-                            "question": "quest_title_1",
-                            "report_section_id": 163,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
-                            "report_question_template_id": 1,
-                            "answer": "dog",
-                            "description": "food"
-                        },
-                        "quest_title_2": {
-                            "id": 186,
-                            "question": "quest_title_2",
-                            "report_section_id": 163,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
-                            "report_question_template_id": 1,
-                            "answer": "dog",
-                            "description": "food"
-                        }
+                ]
+            },
+            {
+                "id": 5,
+                "title": "sect_title_2",
+                "report_id": 5,
+                "created_at": "2020-02-17 00:23:40",
+                "updated_at": "2020-02-17 00:23:40",
+                "report_section_template_id": 1,
+                "questions": [
+                    {
+                        "id": 4,
+                        "question": "quest_title_1",
+                        "report_section_id": 5,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
+                    },
+                    {
+                        "id": 5,
+                        "question": "quest_title_2",
+                        "report_section_id": 5,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
                     }
-                },
-                "sect_title_3": {
-                    "id": 164,
-                    "report_id": 155,
-                    "created_at": "2020-02-05T06:09:48.000000Z",
-                    "updated_at": "2020-02-05T06:09:48.000000Z",
-                    "report_section_template_id": 1,
-                    "ref": {
-                        "quest_title_1": {
-                            "id": 187,
-                            "question": "quest_title_1",
-                            "report_section_id": 164,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
-                            "report_question_template_id": 1,
-                            "answer": "dog",
-                            "description": "food"
-                        },
-                        "quest_title_2": {
-                            "id": 188,
-                            "question": "quest_title_2",
-                            "report_section_id": 164,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
-                            "report_question_template_id": 1,
-                            "answer": "dog",
-                            "description": "food"
-                        }
+                ]
+            },
+            {
+                "id": 6,
+                "title": "sect_title_3",
+                "report_id": 5,
+                "created_at": "2020-02-17 00:23:40",
+                "updated_at": "2020-02-17 00:23:40",
+                "report_section_template_id": 1,
+                "questions": [
+                    {
+                        "id": 6,
+                        "question": "quest_title_1",
+                        "report_section_id": 6,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
+                    },
+                    {
+                        "id": 7,
+                        "question": "quest_title_2",
+                        "report_section_id": 6,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food"
                     }
-                }
+                ]
             }
-        }
+        ]
     }
 }
 ```
@@ -626,8 +620,7 @@ GetReportById
 ```json
 ```
 
-GetAllReports
------
+## Get All Reports
 ```bash
   Gets all reports	
 ```
@@ -661,108 +654,214 @@ GetAllReports
 
 ```json
 {
-    "status": "400 (Bad Request)",
-    "message": "",
-    "data": {
-        "some cool title": {
-            "id": 155,
+    "status": "200 (Ok)",
+    "message": "All Reports retrieved successfully.",
+    "data": [
+        {
+            "id": 5,
             "title": "some cool title",
-            "user_id": 23,
-            "created_at": "2020-02-05T06:09:48.000000Z",
-            "updated_at": "2020-02-05T06:17:47.000000Z",
+            "user_id": 1,
+            "created_at": "2020-02-17 00:23:40",
+            "updated_at": "2020-02-17 00:23:40",
             "report_template_id": 1,
-            "room": 69,
-            "ref": {
-                "sect_title_1": {
-                    "id": 162,
-                    "report_id": 155,
-                    "created_at": "2020-02-05T06:09:48.000000Z",
-                    "updated_at": "2020-02-05T06:09:48.000000Z",
-                    "report_section_template_id": 3,
-                    "ref": {
-                        "quest_title_1": {
-                            "id": 183,
-                            "question": "quest_title_1",
-                            "report_section_id": 162,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
-                            "report_question_template_id": 1,
-                            "answer": "dog",
-                            "description": "food"
-                        },
-                        "quest_title_2": {
-                            "id": 184,
-                            "question": "quest_title_2",
-                            "report_section_id": 162,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
-                            "report_question_template_id": 1,
-                            "answer": "dog",
-                            "description": "food"
-                        }
-                    }
-                },
-                "sect_title_2": {
-                    "id": 163,
-                    "report_id": 155,
-                    "created_at": "2020-02-05T06:09:48.000000Z",
-                    "updated_at": "2020-02-05T06:09:48.000000Z",
+            "room": "edc-232",
+            "due_date": "2020-02-04",
+            "sections": [
+                {
+                    "id": 4,
+                    "title": "sect_title_1",
+                    "report_id": 5,
+                    "created_at": "2020-02-17 00:23:40",
+                    "updated_at": "2020-02-17 00:23:40",
                     "report_section_template_id": 1,
-                    "ref": {
-                        "quest_title_1": {
-                            "id": 185,
+                    "questions": [
+                        {
+                            "id": 2,
                             "question": "quest_title_1",
-                            "report_section_id": 163,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_section_id": 4,
+                            "created_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
                             "report_question_template_id": 1,
                             "answer": "dog",
                             "description": "food"
                         },
-                        "quest_title_2": {
-                            "id": 186,
+                        {
+                            "id": 3,
                             "question": "quest_title_2",
-                            "report_section_id": 163,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_section_id": 4,
+                            "created_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
                             "report_question_template_id": 1,
                             "answer": "dog",
                             "description": "food"
                         }
-                    }
+                    ]
                 },
-                "sect_title_3": {
-                    "id": 164,
-                    "report_id": 155,
-                    "created_at": "2020-02-05T06:09:48.000000Z",
-                    "updated_at": "2020-02-05T06:09:48.000000Z",
+                {
+                    "id": 5,
+                    "title": "sect_title_2",
+                    "report_id": 5,
+                    "created_at": "2020-02-17 00:23:40",
+                    "updated_at": "2020-02-17 00:23:40",
                     "report_section_template_id": 1,
-                    "ref": {
-                        "quest_title_1": {
-                            "id": 187,
+                    "questions": [
+                        {
+                            "id": 4,
                             "question": "quest_title_1",
-                            "report_section_id": 164,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_section_id": 5,
+                            "created_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
                             "report_question_template_id": 1,
                             "answer": "dog",
                             "description": "food"
                         },
-                        "quest_title_2": {
-                            "id": 188,
+                        {
+                            "id": 5,
                             "question": "quest_title_2",
-                            "report_section_id": 164,
-                            "created_at": "2020-02-05T06:09:48.000000Z",
-                            "updated_at": "2020-02-05T06:09:48.000000Z",
+                            "report_section_id": 5,
+                            "created_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
                             "report_question_template_id": 1,
                             "answer": "dog",
                             "description": "food"
                         }
-                    }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "title": "sect_title_3",
+                    "report_id": 5,
+                    "created_at": "2020-02-17 00:23:40",
+                    "updated_at": "2020-02-17 00:23:40",
+                    "report_section_template_id": 1,
+                    "questions": [
+                        {
+                            "id": 6,
+                            "question": "quest_title_1",
+                            "report_section_id": 6,
+                            "created_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        },
+                        {
+                            "id": 7,
+                            "question": "quest_title_2",
+                            "report_section_id": 6,
+                            "created_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        }
+                    ]
                 }
-            }
+            ]
+        },
+        {
+            "id": 6,
+            "title": "some cool title",
+            "user_id": 1,
+            "created_at": "2020-02-17 00:27:17",
+            "updated_at": "2020-02-17 00:27:17",
+            "report_template_id": 1,
+            "room": "edc-232",
+            "due_date": "2020-02-04",
+            "sections": [
+                {
+                    "id": 7,
+                    "title": "sect_title_1",
+                    "report_id": 6,
+                    "created_at": "2020-02-17 00:27:17",
+                    "updated_at": "2020-02-17 00:27:17",
+                    "report_section_template_id": 1,
+                    "questions": [
+                        {
+                            "id": 8,
+                            "question": "quest_title_1",
+                            "report_section_id": 7,
+                            "created_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        },
+                        {
+                            "id": 9,
+                            "question": "quest_title_2",
+                            "report_section_id": 7,
+                            "created_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "title": "sect_title_2",
+                    "report_id": 6,
+                    "created_at": "2020-02-17 00:27:17",
+                    "updated_at": "2020-02-17 00:27:17",
+                    "report_section_template_id": 1,
+                    "questions": [
+                        {
+                            "id": 10,
+                            "question": "quest_title_1",
+                            "report_section_id": 8,
+                            "created_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        },
+                        {
+                            "id": 11,
+                            "question": "quest_title_2",
+                            "report_section_id": 8,
+                            "created_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "title": "sect_title_3",
+                    "report_id": 6,
+                    "created_at": "2020-02-17 00:27:17",
+                    "updated_at": "2020-02-17 00:27:17",
+                    "report_section_template_id": 1,
+                    "questions": [
+                        {
+                            "id": 12,
+                            "question": "quest_title_1",
+                            "report_section_id": 9,
+                            "created_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        },
+                        {
+                            "id": 13,
+                            "question": "quest_title_2",
+                            "report_section_id": 9,
+                            "created_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
+                            "report_question_template_id": 1,
+                            "answer": "dog",
+                            "description": "food"
+                        }
+                    ]
+                }
+            ]
         }
-    }
+    ]
 }
 ```
 
@@ -772,10 +871,9 @@ GetAllReports
 ```json
 ```
 
-CreateReport
------
+## Create Report
 ```bash
-  Creates a report if it does not exist, otherwise updates an exisiting one
+  Creates a report if it does not exist, otherwise updates an exisiting one.
 ```
 
 * **Route:** 
@@ -807,14 +905,14 @@ CreateReport
 
 ```json
 {
-	"title" : "some cool title",
-	"id": 155,
+	"title" : "some cool report title",
+	"id": -1,
 	"template_id": 1,
-	"room" : 69,
+	"room" : "edc-232",
 	"due_date": "2020-02-04 23:26:46",
 	"sections" : {
 		"sect_title_1" : {
-		 "template_id": 3,
+		 "template_id": 1,
 		 "qs": {
 		 	"quest_title_1" : {"template_id": 1, "answer":"dog", "description":"food"},
 			"quest_title_2" : {"template_id": 1, "answer":"dog", "description":"food"}
@@ -845,39 +943,150 @@ CreateReport
     "status": "200 (Ok)",
     "message": "Created report document successfully!",
     "data": {
-        "id": 155,
-        "title": "some cool title",
-        "user_id": 23,
-        "created_at": "2020-02-05T06:09:48.000000Z",
-        "updated_at": "2020-02-05T06:17:47.000000Z",
+        "id": -1,
+        "title": "some cool report title",
+        "user_id": 1,
+        "created_at": "2020-02-17T03:58:03.000000Z",
+        "updated_at": "2020-02-17T03:58:03.000000Z",
         "report_template_id": 1,
-        "room": 69,
+        "room": "edc-232",
         "due_date": "2020-02-04 23:26:46",
-        "ref": {
+        "sections": {
             "sect_title_1": {
-                "id": 162,
+                "id": 22,
                 "title": "sect_title_1",
-                "report_id": 155,
-                "created_at": "2020-02-05T06:09:48.000000Z",
-                "updated_at": "2020-02-05T06:09:48.000000Z",
+                "report_id": 11,
+                "created_at": "2020-02-17T03:58:03.000000Z",
+                "updated_at": "2020-02-17T03:58:03.000000Z",
                 "report_section_template_id": null,
-                "ref": {
+                "questions": {
                     "quest_title_1": {
-                        "id": 183,
+                        "report_section_id": 22,
                         "question": "quest_title_1",
-                        "report_section_id": 162,
-                        "created_at": "2020-02-05 06:09:48",
-                        "updated_at": "2020-02-05 06:09:48",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food",
+                        "updated_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
+                        "id": 38
+                    },
+                    "quest_title_2": {
+                        "report_section_id": 22,
+                        "question": "quest_title_2",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food",
+                        "updated_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
+                        "id": 39
+                    }
+                }
+            },
+            "sect_title_2": {
+                "id": 23,
+                "title": "sect_title_2",
+                "report_id": 11,
+                "created_at": "2020-02-17T03:58:03.000000Z",
+                "updated_at": "2020-02-17T03:58:03.000000Z",
+                "report_section_template_id": null,
+                "questions": {
+                    "quest_title_1": {
+                        "report_section_id": 23,
+                        "question": "quest_title_1",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food",
+                        "updated_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
+                        "id": 40
+                    },
+                    "quest_title_2": {
+                        "report_section_id": 23,
+                        "question": "quest_title_2",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food",
+                        "updated_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
+                        "id": 41
+                    }
+                }
+            },
+            "sect_title_3": {
+                "id": 24,
+                "title": "sect_title_3",
+                "report_id": 11,
+                "created_at": "2020-02-17T03:58:03.000000Z",
+                "updated_at": "2020-02-17T03:58:03.000000Z",
+                "report_section_template_id": null,
+                "questions": {
+                    "quest_title_1": {
+                        "report_section_id": 24,
+                        "question": "quest_title_1",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food",
+                        "updated_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
+                        "id": 42
+                    },
+                    "quest_title_2": {
+                        "report_section_id": 24,
+                        "question": "quest_title_2",
+                        "report_question_template_id": 1,
+                        "answer": "dog",
+                        "description": "food",
+                        "updated_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
+                        "id": 43
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+OR
+
+```json
+{
+    "status": "200 (Ok)",
+    "message": "Updated report document successfully!",
+    "data": {
+        "id": 5,
+        "title": "some cool report title",
+        "user_id": 1,
+        "created_at": "2020-02-17T00:23:40.000000Z",
+        "updated_at": "2020-02-17T04:10:54.000000Z",
+        "report_template_id": 1,
+        "room": "edc-232",
+        "due_date": "2020-02-04 23:26:46",
+        "sections": {
+            "sect_title_1": {
+                "id": 4,
+                "title": "sect_title_1",
+                "report_id": 5,
+                "created_at": "2020-02-17T00:23:40.000000Z",
+                "updated_at": "2020-02-17T00:23:40.000000Z",
+                "report_section_template_id": null,
+                "questions": {
+                    "quest_title_1": {
+                        "id": 2,
+                        "question": "quest_title_1",
+                        "report_section_id": 4,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
                         "report_question_template_id": 1,
                         "answer": "dog",
                         "description": "food"
                     },
                     "quest_title_2": {
-                        "id": 184,
+                        "id": 3,
                         "question": "quest_title_2",
-                        "report_section_id": 162,
-                        "created_at": "2020-02-05 06:09:48",
-                        "updated_at": "2020-02-05 06:09:48",
+                        "report_section_id": 4,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
                         "report_question_template_id": 1,
                         "answer": "dog",
                         "description": "food"
@@ -885,29 +1094,29 @@ CreateReport
                 }
             },
             "sect_title_2": {
-                "id": 163,
+                "id": 5,
                 "title": "sect_title_2",
-                "report_id": 155,
-                "created_at": "2020-02-05T06:09:48.000000Z",
-                "updated_at": "2020-02-05T06:09:48.000000Z",
+                "report_id": 5,
+                "created_at": "2020-02-17T00:23:40.000000Z",
+                "updated_at": "2020-02-17T00:23:40.000000Z",
                 "report_section_template_id": null,
-                "ref": {
+                "questions": {
                     "quest_title_1": {
-                        "id": 185,
+                        "id": 4,
                         "question": "quest_title_1",
-                        "report_section_id": 163,
-                        "created_at": "2020-02-05 06:09:48",
-                        "updated_at": "2020-02-05 06:09:48",
+                        "report_section_id": 5,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
                         "report_question_template_id": 1,
                         "answer": "dog",
                         "description": "food"
                     },
                     "quest_title_2": {
-                        "id": 186,
+                        "id": 5,
                         "question": "quest_title_2",
-                        "report_section_id": 163,
-                        "created_at": "2020-02-05 06:09:48",
-                        "updated_at": "2020-02-05 06:09:48",
+                        "report_section_id": 5,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
                         "report_question_template_id": 1,
                         "answer": "dog",
                         "description": "food"
@@ -915,29 +1124,29 @@ CreateReport
                 }
             },
             "sect_title_3": {
-                "id": 164,
+                "id": 6,
                 "title": "sect_title_3",
-                "report_id": 155,
-                "created_at": "2020-02-05T06:09:48.000000Z",
-                "updated_at": "2020-02-05T06:09:48.000000Z",
+                "report_id": 5,
+                "created_at": "2020-02-17T00:23:40.000000Z",
+                "updated_at": "2020-02-17T00:23:40.000000Z",
                 "report_section_template_id": null,
-                "ref": {
+                "questions": {
                     "quest_title_1": {
-                        "id": 187,
+                        "id": 6,
                         "question": "quest_title_1",
-                        "report_section_id": 164,
-                        "created_at": "2020-02-05 06:09:48",
-                        "updated_at": "2020-02-05 06:09:48",
+                        "report_section_id": 6,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
                         "report_question_template_id": 1,
                         "answer": "dog",
                         "description": "food"
                     },
                     "quest_title_2": {
-                        "id": 188,
+                        "id": 7,
                         "question": "quest_title_2",
-                        "report_section_id": 164,
-                        "created_at": "2020-02-05 06:09:48",
-                        "updated_at": "2020-02-05 06:09:48",
+                        "report_section_id": 6,
+                        "created_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
                         "report_question_template_id": 1,
                         "answer": "dog",
                         "description": "food"
@@ -993,8 +1202,7 @@ OR
 ```
 
 
-DeleteReport
------
+## Delete Report
 ```bash
   Deletes an existing report by the id.
 ```
@@ -1048,8 +1256,7 @@ DeleteReport
 
 Inspections
 ============
-GetInspectionById
------
+## Get Inspection By Id
 ```bash
   Gets an inspection assignment by the id
 ```
@@ -1106,8 +1313,7 @@ GetInspectionById
 ```
 
 
-GetAllInspections
------
+## Get All Inspections
 ```bash
   Gets all inspection assignments	
 ```
@@ -1176,8 +1382,7 @@ GetAllInspections
 ```json
 ```
 
-CreateInspection
------
+## Create Inspection
 ```bash
   Creates an inspection if it does not exist, otherwise updates an exisiting one
 ```
@@ -1267,8 +1472,7 @@ CreateInspection
 ```
 
 
-DeleteInspection
------
+## Delete Inspection
 ```bash
   Deletes an existing inspection by the id.
 ```
@@ -1326,8 +1530,7 @@ DeleteInspection
 
 Issues
 ============
-GetIssueById
------
+## Get Issue By Id
 ```bash
   Gets an issue by the id
 ```
@@ -1383,8 +1586,7 @@ GetIssueById
 ```json
 ```
 
-GetAllIssues
------
+## Get All Issues
 ```bash
   Gets all issues	
 ```
@@ -1455,8 +1657,7 @@ GetAllIssues
 
 ```
 
-CreateIssue
------
+## Create Issue
 ```bash
   Creates an issue if it does not exist, otherwise updates an exisiting one
 ```
@@ -1558,8 +1759,7 @@ CreateIssue
 ```
 
 
-DeleteIssue
------
+## Delete Issue
 ```bash
   Deletes an existing issue by the id.
 ```
@@ -1623,8 +1823,7 @@ DeleteIssue
 
 Labs
 ============
-GetLabById
------
+## Get Lab By Id
 ```bash
   Gets an lab by the id
 ```
@@ -1675,8 +1874,7 @@ GetLabById
 ```
 
 
-GetAllLabs
------
+## Get All Labs
 ```bash
   Gets all labs	
 ```
@@ -1729,8 +1927,7 @@ GetAllLabs
 
 ```
 
-CreateLab
------
+## Create Lab
 ```bash
   Creates a lab if it does not exist, otherwise updates an exisiting one
 ```
@@ -1764,8 +1961,7 @@ CreateLab
 * **Error Response:**
 
 
-DeleteLab
------
+## Delete Lab
 ```bash
   Deletes an existing lab by the id.
 ```
