@@ -20,11 +20,11 @@ class CreateIssuesTable extends Migration
             $table->string('status');
             $table->string('title');
             $table->string('severity');
-            $table->string('description');
-            $table->unsignedBigInteger('comment_id');
-            $table->unsignedBigInteger('user_id');
             $table->date('due_date');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('description');
+            //$table->unsignedBigInteger('comment_id');
+            $table->unsignedBigInteger('user_id');            
+            $table->foreign('user_id')->references('id')->on('users');//->onDelete('cascade');
             $table->timestamps();
         });
     }
