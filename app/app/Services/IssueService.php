@@ -61,9 +61,9 @@ class IssueService implements RestServiceContract
                     'user_id' => $user->id,
                     'severity' => $request->severity,
                     'status' => 'incomplete',
-                    'resolution_date' => $request->resolution_date,
+                    'due_date' => $request->due_date,
                     'description' => $request->description,
-                    'comments' => $request->comments
+                    //'comments' => $request->comments //not required
                 ]
             );
         } catch (Exception $ex) {
