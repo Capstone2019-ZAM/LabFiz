@@ -9,12 +9,12 @@
         <template v-slot:item.status="{ item }">
           <v-chip :color="getColor(item.status)" dark>{{ item.status }}</v-chip>
         </template>
-         <template v-slot:item.action="{ item }">
-            <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-            <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
-          </template>
+        <template v-slot:item.action="{ item }">
+          <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+          <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+        </template>
       </v-data-table>
-      <v-btn block outlined  @click="addItem()">
+      <v-btn block outlined @click="addItem()">
         Add an Entry
         <v-icon>mdi-plus</v-icon>
       </v-btn>
@@ -27,6 +27,7 @@
 export default {
   data() {
     return {
+      AuthStr: localStorage.getItem("api"),
       headers: [
         {
           text: "Status",
@@ -39,7 +40,6 @@ export default {
         { text: "Assigned To", value: "user_id" },
         { text: "Resoluton Date", value: "due_date" },
         { text: "Actions", value: "action", sortable: false, width: "100px" }
-
       ],
       issues: [
         // {
@@ -59,7 +59,7 @@ export default {
       else return "grey";
     },
     editItem(item) {
-      window.location.href = 'http://localhost/issue/'+item.id
+      window.location.href = "http://localhost/issue/" + item.id;
     },
 
     deleteItem(item) {
@@ -78,25 +78,10 @@ export default {
       //     console.log("delete failed!");
       //   }
       // );
-
     },
 
-    addItem(){
-      axios
-      .post("/api/v1/issue", {
-        headers: { Authorization: this.AuthStr }
-      })
-      .then(
-        response => {
-          console.log("Issue record made");
-          let new_id = response.data.data.id
-          window.location.href = 'http:/localhost/issue/'+new_id
-        },
-        error => {
-          console.log("Failed to create an Issue record! ");
-        }
-      );
-
+    addItem() {
+      window.location.href = "http://localhost/issue";
     }
   },
 
