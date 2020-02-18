@@ -58,9 +58,12 @@
                 </v-row>
                 <v-row align="center" justify="center">
                   <v-btn color="primary" @click="createUser()">
-                    <v-icon>mdi-account-circle</v-icon>Create Account
+                    <v-icon>mdi-account-circle</v-icon>
+                    <v-span v-if="Number.isInteger(parseInt(id))">Update Account</v-span>
+                    <v-span v-if="!Number.isInteger(parseInt(id))">Create Account</v-span>
                   </v-btn>
                 </v-row>
+                
               </v-container>
             </v-card-text>
           </v-card>
@@ -129,6 +132,7 @@ export default {
       if (
         Number.isInteger(parseInt(window.location.pathname.split("/").pop()))
       ) {
+        //Update exisiting user
         axios
           .post("/api/user/"+ this.id, req, {
             headers: {
@@ -138,13 +142,16 @@ export default {
           })
           .then(
             response => {
+              dialog: true
               console.log("User account updated!");
             },
             error => {
+              dialog: true
               console.log("User account update failed !");
             }
           );
       } else {
+        // Create a new user
         axios
           .post("/api/user/register" , req, {
             headers: {
@@ -154,9 +161,11 @@ export default {
           })
           .then(
             response => {
+              dialog: true
               console.log("User account created!");
             },
             error => {
+              dialog: true
               console.log("User account creation failed !");
             }
           );
@@ -168,14 +177,13 @@ export default {
         Number.isInteger(parseInt(window.location.pathname.split("/").pop()))
       ) {
           axios
-          .get("/api/user/" + this.id, req, {
+          .get("/api/user/" + this.id, {
             headers: {
               Authorization: this.AuthStr,              
             }
           })
           .then(
             response => {
-                  dialog: true
               console.log("User account retrieved!");
                 this.first_name = response.data.data.first_name;
                 this.last_name= response.data.data.last_name;

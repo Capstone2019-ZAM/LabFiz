@@ -29,6 +29,7 @@ class UserService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
+            $columns = ['id', 'first_name', 'last_name','department', 'email', 'created_at'];
             $result['data'] = $this->user_model->getById($id, $columns);
         } catch (Exception $ex) {
             $result['message'] = 'Could not find user record.';
@@ -42,6 +43,7 @@ class UserService implements RestServiceContract
 
     public function get_all(array $columns = ['*'])
     {
+        $columns = ['id', 'first_name', 'last_name','department', 'email','created_at'];
         $result = ['status' => '200 (Ok)', 'message' => 'All Users retrieved successfully.', 'data' => ''];
         $result['data'] = $this->user_model->get($columns);
         return ['response' => $result, 'status' => 200];
