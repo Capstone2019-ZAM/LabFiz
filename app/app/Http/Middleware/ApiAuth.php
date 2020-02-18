@@ -11,6 +11,10 @@ class ApiAuth
 {
     protected $user_model;
 
+    /**
+     * ApiAuth constructor.
+     * @param User $user
+     */
     public function __construct(User $user)
     {
         $this->user_model = new ModelRepository($user);

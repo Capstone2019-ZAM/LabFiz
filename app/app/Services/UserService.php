@@ -14,14 +14,16 @@ use App\User;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserService implements RestServiceContract
 {
-    protected $user_model;
+    protected $user_model, $role_model;
 
-    public function __construct(User $user)
+    public function __construct(User $user, Role $role)
     {
         $this->user_model = new ModelRepository($user);
+        $this->role_model = new ModelRepository($role);
     }
 
     public function get($id, array $columns = ['*'])
@@ -63,6 +65,9 @@ class UserService implements RestServiceContract
                     'department' => $request->department,
                     'email' => $request->email
                 ]);
+
+            // bind user role
+            $user->assignRole($this->role_model->where('name',$request->role)->first()->id);
 
             $result['data'] = [
                 'first_name' => $user->first_name,

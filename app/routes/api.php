@@ -21,17 +21,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/user/login','Api\Auth\LoginController@login');
 
 Route::group([
-    'middleware' => ['ApiAuth'],
+    'middleware' => ['api_auth'],
 ], function() {
     Route::post('/user/refresh', 'Api\Auth\LoginController@refresh');
-    Route::post('/user/register', 'Api\Auth\LoginController@register');
+    Route::post('/user/register', 'Api\Auth\LoginController@register')->middleware('admin_only');
     Route::get('/user/{id}','Api\Auth\LoginController@get');
     Route::get('/users', 'Api\Auth\LoginController@get_all');
 });
 
 // protected api v1 routes
 Route::group([
-    'middleware' => ['ApiAuth'],
+    'middleware' => ['api_auth'],
     'prefix' => 'v1'
     ], function(){
 
@@ -62,7 +62,7 @@ Route::group([
     Route::post('/template', 'Api\v1\TemplateController@create');
     Route::delete('/template/{id}', 'Api\v1\TemplateController@delete');
 
-    //lab 
+    //lab
     Route::get('/labs', 'Api\v1\LabController@get_all');
     Route::get('/lab/{id}', 'Api\v1\LabController@get');
     Route::post('/lab', 'Api\v1\LabController@create');
@@ -74,7 +74,7 @@ Route::group([
     Route::post('/comment', 'Api\v1\CommentController@create');
     Route::delete('/comment/{id}', 'Api\v1\CommentController@delete');
 
-    
+
 
 
 });
