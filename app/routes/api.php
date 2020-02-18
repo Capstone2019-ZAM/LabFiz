@@ -13,25 +13,29 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 // user(s) routes
 Route::post('/user/login','Api\Auth\LoginController@login');
 
 Route::group([
-    'middleware' => ['api_auth'],
-], function() {
+    'middleware' => ['auth:api'], ], function(){
     Route::post('/user/refresh', 'Api\Auth\LoginController@refresh');
+});
+
+Route::group([
+    'middleware' => ['auth:api'],
+], function() {
     Route::post('/user/register', 'Api\Auth\LoginController@register')->middleware('admin_only');
     Route::get('/user/{id}','Api\Auth\LoginController@get');
-    Route::get('/users', 'Api\Auth\LoginController@get_all');
+    Route::get('/users', 'Api\Auth\LoginController@get_all')->middleware(['admin_only']);
+    Route::get('/logout', 'Api\Auth\LoginController@logout');
+    Route::get('/user',function(Request $request){
+        return $request->user();
+    });
 });
 
 // protected api v1 routes
 Route::group([
-    'middleware' => ['api_auth'],
+    'middleware' => ['auth:api'],
     'prefix' => 'v1'
     ], function(){
 
@@ -73,9 +77,5 @@ Route::group([
     Route::get('/comment/{id}', 'Api\v1\CommentController@get');
     Route::post('/comment', 'Api\v1\CommentController@create');
     Route::delete('/comment/{id}', 'Api\v1\CommentController@delete');
-
-
-
-
 });
 

@@ -47,7 +47,7 @@ class LabService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
 
         try {
-            $result['data'] = $this->lab_model->updateOrCreate(
+            $lab = $this->lab_model->updateOrCreate(
                 [
                     'id' => $request->id,
                     'title' => $request->title
@@ -56,13 +56,14 @@ class LabService implements RestServiceContract
                     'title' => $request->title,
                 ]
             );
+            $result['data'] = $lab;
         } catch (Exception $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Created lab successfully!';
+        $result['message'] = ($lab->wasRecentlyCreated ? 'Created' : 'Updated') .' lab successfully!';
         return ['response' => $result, 'status' => 200];
     }
 

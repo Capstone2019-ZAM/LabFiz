@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Helpers\AuthHelper;
 use App\Repositories\ModelRepository;
 use App\User;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class AdminOnly
 {
@@ -28,7 +28,7 @@ class AdminOnly
      */
     public function handle($request, Closure $next)
     {
-        if(!AuthHelper::instance()->user($request,$this->user_model)->hasRole('admin'))
+        if(!Auth::guard('api')->user()->hasRole('admin'))
             return response()->json([
                 'status' => '401 (Unauthorized)',
                 'message' => 'Only admins have authorized access for this route.',

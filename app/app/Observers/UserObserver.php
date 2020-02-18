@@ -11,6 +11,6 @@ class UserObserver
             $user->api_token = AuthHelper::instance()->create_auth_token();
             $user->api_token_expiry_date = AuthHelper::instance()->create_auth_token_expiry();
             $user->api_refresh_token = AuthHelper::instance()->create_auth_token();
-            $user->api_token_type = "ApiAuth";
+            $user->api_token_type = "Bearer";
     }
 }

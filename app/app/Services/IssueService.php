@@ -5,12 +5,12 @@ namespace App\Services;
 
 
 use App\Contracts\RestServiceContract;
-use App\Helpers\AuthHelper;
 use App\Issue;
 use App\Repositories\ModelRepository;
 use App\User;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class IssueService implements RestServiceContract
 {
@@ -48,10 +48,10 @@ class IssueService implements RestServiceContract
     public function create(FormRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
-        $user = AuthHelper::instance()->user($request, $this->user_model);
+        $user = Auth::guard('api')->user();
 
         try {
-            $result['data'] = $this->issue_model->updateOrCreate(
+            $issue = $this->issue_model->updateOrCreate(
                 ['id' => $request->id],
                 [
                     'title' => $request->title,
@@ -59,18 +59,20 @@ class IssueService implements RestServiceContract
                     'user_id' => $user->id,
                     'severity' => $request->severity,
                     'status' => 'incomplete',
+                    'comments' => $request->comments,
                     'due_date' => $request->due_date,
                     'description' => $request->description,
                     //'comments' => $request->comments //not required
                 ]
             );
+            $result['data'] = $issue;
         } catch (Exception $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Created issue successfully!';
+        $result['message'] = ($issue->wasRecentlyCreated ? 'Created' : 'Updated') .' issue successfully!';
         return ['response' => $result, 'status' => 200];
     }
 

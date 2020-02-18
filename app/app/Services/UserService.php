@@ -7,14 +7,13 @@ namespace App\Services;
 use App\Contracts\RestServiceContract;
 use App\Helpers\AuthHelper;
 use App\Http\Requests\User\LoginRequest;
-use App\Http\Requests\User\RefreshRequest;
 use App\Http\Requests\User\RegisterRequest;
 use App\Repositories\ModelRepository;
 use App\User;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class UserService implements RestServiceContract
 {
@@ -92,21 +91,10 @@ class UserService implements RestServiceContract
         return ['response' => $result, 'status' => 200];
     }
 
-    public function refresh(RefreshRequest $request)
+    public function refresh()
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-
-        try {
-            $user = AuthHelper::instance()->user($request,$this->user_model);
-        } catch (Exception $ex) {
-            $result['message'] = 'Could not find user associated with current request auth token.';
-            return ['response' => $result, 'status' => 400];
-        }
-
-        if ($user->api_refresh_token != $request->api_refresh_token) {
-            $result['message'] = 'Could not find given refresh token.';
-            return ['response' => $result, 'status' => 400];
-        }
+        $user = Auth::guard('api')->user();
 
         $api_token_refresh_date = $user->api_token_expiry_date;
         if ($api_token_refresh_date > now()) {
@@ -116,7 +104,7 @@ class UserService implements RestServiceContract
 
         $user = $this->user_model->updateById(
             $user->id,
-            AuthHelper::instance()->create_auth_data()
+            AuthHelper::instance()->create_auth_data(false)
         );
 
         $result['data'] = [
@@ -127,31 +115,23 @@ class UserService implements RestServiceContract
         ];
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'authentication refreshed successfully';
+        $result['message'] = 'authentication token refreshed successfully';
         return ['response' => $result, 'status' => 200];
     }
 
     public function login(LoginRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
-
-        try {
-            $user = $this->user_model->getByColumn($request->email, 'email');
-        } catch (Exception $ex) {
-            $result['message'] = $ex->getMessage();
+        if(!Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $result['message'] = 'Invalid login credentials.';
             return ['response' => $result, 'status' => 400];
         }
 
-        if (!$user) {
-            $result['message'] = 'Could not find report record.';
-            return ['response' => $result, 'status' => 400];
-        }
-
-        $pass = Hash::check($request->password, $user->password);
-        if (!$pass) {
-            $result['message'] = 'Invalid password.';
-            return ['response' => $result, 'status' => 400];
-        }
+        $user = Auth::user();
+        $user = $this->user_model->updateById(
+            $user->id,
+            AuthHelper::instance()->create_auth_data()
+        );
 
         $result['status'] = '200 (Ok)';
         $result['message'] = 'User logged in successfully.';
@@ -164,6 +144,28 @@ class UserService implements RestServiceContract
             'refresh_token' => $user->api_refresh_token
         ];
 
+        return ['response' => $result, 'status' => 200];
+    }
+
+    public function logout()
+    {
+        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+        $user = Auth::guard('api')->user();
+
+        if(!$user){
+            $result['message'] = 'No currently authenticated user to logout.';
+            return ['response' => $result, 'status' => 400];
+        }
+
+        if ($user) {
+            $this->user_model->updateById(
+                $user->id,
+                ['api_token' => null, 'api_refresh_token' => null]
+            );
+        }
+
+        $result['status'] = '200 (Ok)';
+        $result['message'] = 'User logged out successfully.';
         return ['response' => $result, 'status' => 200];
     }
 

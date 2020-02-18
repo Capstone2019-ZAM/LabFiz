@@ -8,7 +8,7 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 /**
  * Class ModelRepository.
  */
-class ModelRepository extends BaseRepository
+class ModelRepository extends ModelExtensionRepository
 {
     protected $model;
 
@@ -21,6 +21,8 @@ class ModelRepository extends BaseRepository
     {
         $this->model = $model;
     }
+
+
 
     /**
      * @return string
