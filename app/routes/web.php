@@ -66,9 +66,12 @@ Route::get('/issue', function () {
 Route::get('/issues', function () {
     return view('issue');
 });
-Route::get('/newaccount', function () {
+Route::get('/account', function () {
     return view('account_rpt');
 });
-Route::get('/account', function () {
+Route::get('/account/{id}', function () {
+    return view('account_rpt');
+});
+Route::get('/accounts', function () {
     return view('account');
 });

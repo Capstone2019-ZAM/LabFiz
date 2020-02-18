@@ -11,7 +11,7 @@
       ></v-data-table>
        <v-btn block outlined >
           Add an Entry
-          <v-icon>mdi-plus</v-icon>
+          <v-icon @click="addAccount()">mdi-plus</v-icon>
         </v-btn>
     </v-card>
 </v-container>
@@ -54,7 +54,7 @@
             date: 'Jan 02, 2020',
             
           },
-          {
+        {
             fname: 'Jacob',
             lname: 'Ferno',
             role: 'Inspector',
@@ -66,5 +66,10 @@
         ],
       }
     },
+    methods:{
+      addAccount(){
+        window.location.href="http://localhost/account_new"
+      }
+    }
   }
 </script>
