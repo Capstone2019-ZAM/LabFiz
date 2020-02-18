@@ -59,8 +59,8 @@
                 <v-row align="center" justify="center">
                   <v-btn color="primary" @click="createUser()">
                     <v-icon>mdi-account-circle</v-icon>
-                    <v-span v-if="Number.isInteger(parseInt(id))">Update Account</v-span>
-                    <v-span v-if="!Number.isInteger(parseInt(id))">Create Account</v-span>
+                    <span v-if="Number.isInteger(parseInt(id))">Update Account</span>
+                    <span v-if="!Number.isInteger(parseInt(id))">Create Account</span>
                   </v-btn>
                 </v-row>
                 
