@@ -8,33 +8,46 @@ API Documentation
 	
 The end points described below serve authenticated JSON to the VueJs frontend for the laravel app. All the endpoints(except login) are protected using token based authentication with short-lived access tokens. Note that the refresh route(localhost/api/user/refresh) will need to be invoked when an api access token expires in order to generate a new token pair{api auth token, refresh token} for future endpoint requests.
 
+## Bearer Authentication
+HTTP requests to protected routes will require the Authorization field set in the HTTP header with a key value of Bearer + ' ' + token.
+
+*Format:*
+```bash
+  Authorization: Bearer Token
+```
+
+*Example:*
+```bash
+  Authorization: Bearer 1shtRTbPCVs2xe7cviyaIAGWClT57y9YwjyVSFerKgXeFDh0LnvdpyM6CUvb
+```
+
 ## Generic Errors 
 
-*Using an authentication token that has expired.*
+*Using an authentication token that has expired:*
 
 ```json
 {
     "status": "401 (Unauthorized)",
-    "message": "Your token is expired, refresh your api auth token using the refresh route.",
+    "message": "Your authentication token has expired, request a refresh using the refresh route.",
     "data": ""
 }
 ```
 
-*The authentication token in request header is invalid(does not exisit):*
+*Authorization field is either null or doesn't match the required format with the authentication token:*
 
 ```json
 {
     "status": "422 (Unprocessable Entity)",
-    "message": "Invalid api authentication token.",
+    "message": "Authorization field of request header requires a Bearer token.",
     "data": ""
 }
 ```
 
-*Missing authorization field in the request header with the value field as the authentication token:*
+*Authentication token supplied is not valid(i.e: does not exist):*
 ```json
 {
     "status": "422 (Unprocessable Entity)",
-    "message": "Please add the api authentication token in your request header.",
+    "message": "Invalid authentication token. Please make sure the bearer token is valid.",
     "data": ""
 }
 ```
