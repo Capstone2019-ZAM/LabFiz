@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,17 +20,16 @@ Route::post('/user/login','Api\Auth\LoginController@login');
 Route::group([
     'middleware' => ['auth:api'], ], function(){
     Route::post('/user/refresh', 'Api\Auth\LoginController@refresh');
-});
-
-Route::group([
-    'middleware' => ['auth:api'],
-], function() {
-    Route::post('/user/register', 'Api\Auth\LoginController@register')->middleware('admin_only');
+    Route::post('/user/register', 'Api\Auth\LoginController@register');
     Route::get('/user/{id}','Api\Auth\LoginController@get');
     Route::get('/users', 'Api\Auth\LoginController@get_all')->middleware(['admin_only']);
-    Route::get('/logout', 'Api\Auth\LoginController@logout');
+    Route::post('/user/logout', 'Api\Auth\LoginController@logout');
     Route::get('/user',function(Request $request){
-        return $request->user();
+        return response([
+            'status' => '200 (Ok)',
+            'message' => 'Local authenticated user retrieved.',
+            'data' => Auth::guard('api')->user(),
+        ], 200);
     });
 });
 

@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name','department', 'email', 'password', 'api_token', 'api_token_expiry_date', 'api_refresh_token'
+        'first_name','last_name','department', 'email', 'password', 'api_token', 'api_token_expiry_date'
     ];
 
     /**
@@ -38,4 +38,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'api_token_expiry_date' => 'datetime'
     ];
+
+    public function auth_refresh_token()
+    {
+        return $this->hasOne('App\AuthRefreshToken','client_id');
+    }
 }

@@ -52,7 +52,7 @@ class Authenticate extends Middleware
             }
 
             // check if bearer token has expired
-            if ($user && $user->api_token_expiry_date < now()) {
+            if ($user && $user->api_token_expiry_date < now() && !strpos($request->path(),'refresh')) {
                 return response()->json([
                     'status' => '401 (Unauthorized)',
                     'message' => 'Your authentication token has expired, request a refresh using the refresh route.',
