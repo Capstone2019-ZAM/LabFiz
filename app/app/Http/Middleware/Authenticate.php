@@ -32,11 +32,30 @@ class Authenticate extends Middleware
     public function handle($request, Closure $next, ...$guards)
     {
         if (!empty($guards) && $guards[0] === 'api') {
+            // handle empty bearer token
+            $bearer =$request->header('Authorization');
+            if(!$bearer || explode(" ", $bearer)[0] !== 'Bearer')
+                return response()->json([
+                    'status' => '422 (Unauthorized)',
+                    'message' => 'Authorization field of request header requires a Bearer token.',
+                    'data' => '',
+                ], 401);
+
+            // check if bearer token is valid
             $user = Auth::guard('api')->user();
+            if(!$user){
+                return response()->json([
+                    'status' => '422 (Unauthorized)',
+                    'message' => 'Invalid authentication token. Please make sure the bearer token is valid.',
+                    'data' => '',
+                ], 401);
+            }
+
+            // check if bearer token has expired
             if ($user && $user->api_token_expiry_date < now()) {
                 return response()->json([
                     'status' => '401 (Unauthorized)',
-                    'message' => 'Your authentication token has expired, you will need to refresh it using the /refresh route.',
+                    'message' => 'Your authentication token has expired, request a refresh using the refresh route.',
                     'data' => '',
                 ], 401);
             }
