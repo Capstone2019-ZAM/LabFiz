@@ -1,19 +1,22 @@
 <template>
-  <v-container>
+<v-row cols="12" align="start" justify="center">
+  <v-col md="9">
+  <v-container class="pa5" >
 
-    <v-row>
-      <div  v-for="data in options" :key="data.id">
-        <v-col>
+    <v-row cols="12" >
+
+        <v-col md="4"  sm="12" v-for="data in options" :key="data.id">
           <dash-button :data="data"></dash-button>
         </v-col>
-      </div>
+
     </v-row>
   </v-container>
+  </v-col>
+</v-row>
 </template>
 
 <script>
 import DashButton from "./DashButton";
-// import axios from 'axios';
 
 export default {
   components: {
@@ -24,34 +27,7 @@ export default {
       AuthStr: localStorage.getItem("api"),
       loading :true,
       options: null
-      // [
-        // {
-        //   icon: "mdi-file-document-edit",
-        //   title: "Assign Inspections",
-        //   description: "Something said here"
-        // },
-        // {
-        //   icon: "mdi-account-card-details",
-        //   title: "Account Managment",
-        //   description: "Something said here"
-        // },
-        // {
-        //   icon: "mdi-clipboard-text-multiple",
-        //   title: "Templates",
-        //   description: "Something said here"
-        // },
-        // {
-        //   icon: "mdi-bug",
-        //   title: "Issue Tracker",
-        //   description: "Something said here"
-        // },
-        // {
-        //   icon: "mdi-timetable",
-        //   title: "Pending Inspections",
-        //   description: "Something said here"
-        // }
-      //]
-    };
+     };
   },
 
   mounted(){

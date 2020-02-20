@@ -1,49 +1,31 @@
 <template>
   <v-card
+  color="teal lighten-5"
     md="4"
     sm="12"
     hover
     outlined
-
-     align="center" justify="center"
+      height="200"
+      width="400"
     @click="navigate(data.link)"
   >
-
+  <v-container  align="center" justify="center">
   <v-row cols="12" align="center" justify="center">
     <v-col md="4">
       <v-icon max-height="auto" size="90">{{data.img}}</v-icon>
     </v-col>
     
-    <v-col md="8">
-        <v-card-title>
+    <v-col md="8" >
+        <div class="headline">
            {{data.title}}
-        </v-card-title>
-        <v-card-subtitle>
+        </div>
+        <v-card-subtitle justify="start" >
           {{data.desc}}
         </v-card-subtitle>
 
     </v-col>
   </v-row>
-    <!-- <v-layout dark row wrap align-content-center>
-      <v-flex xs2 md4 centered pa-3>
-        <v-responsive pa-2>
-          <v-icon max-height="auto" size="90">{{data.img}}</v-icon>
-        </v-responsive>
-      </v-flex>
-
-      <v-flex xs10 md8>
-        <v-card-text>
-          <v-list-item-title class="headline">
-            <span>{{data.title}}</span>
-          </v-list-item-title>
-          <v-list-item-subtitle class="grey--light">
-            <span>{{data.desc}}</span>
-          </v-list-item-subtitle>
-          <!-- <v-card-title class="headline"> -->
-          <!-- <v-card-subtitle class="greFy--light">  </v-card-subtitle> 
-        </v-card-text>
-      </v-flex>
-    </v-layout> -->
+  </v-container>
   </v-card>
 </template>
  
