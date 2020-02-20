@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class AuthRefreshToken extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,13 +12,6 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'content' , 'issue_id' ,'user_id'
+        'client_id','issued_at','expires_at', 'black_listed', 'token'
     ];
-
-    /**
-     *
-     */
-    public function issues(){
-        return $this->hasMany(Issue::class);
-    }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Helpers\AuthHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Template\CreateRequest;
 use App\Template;
 use App\Repositories\ModelRepository;
 use App\User;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class TemplateController extends Controller
 {
@@ -50,7 +50,7 @@ class TemplateController extends Controller
     public function create(CreateRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
-        $user = AuthHelper::instance()->user($request,$this->model_user);
+        $user = Auth::guard('api')->user();
 
         try {
             $result['data'] = $this->model_template->updateOrCreate(

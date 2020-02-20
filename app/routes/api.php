@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,25 +14,28 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 // user(s) routes
 Route::post('/user/login','Api\Auth\LoginController@login');
 
 Route::group([
-    'middleware' => ['ApiAuth'],
-], function() {
+    'middleware' => ['auth:api'], ], function(){
     Route::post('/user/refresh', 'Api\Auth\LoginController@refresh');
     Route::post('/user/register', 'Api\Auth\LoginController@register');
     Route::get('/user/{id}','Api\Auth\LoginController@get');
-    Route::get('/users', 'Api\Auth\LoginController@get_all');
+    Route::get('/users', 'Api\Auth\LoginController@get_all')->middleware(['admin_only']);
+    Route::post('/user/logout', 'Api\Auth\LoginController@logout');
+    Route::get('/user',function(Request $request){
+        return response([
+            'status' => '200 (Ok)',
+            'message' => 'Local authenticated user retrieved.',
+            'data' => Auth::guard('api')->user(),
+        ], 200);
+    });
 });
 
 // protected api v1 routes
 Route::group([
-    'middleware' => ['ApiAuth'],
+    'middleware' => ['auth:api'],
     'prefix' => 'v1'
     ], function(){
 
@@ -62,7 +66,7 @@ Route::group([
     Route::post('/template', 'Api\v1\TemplateController@create');
     Route::delete('/template/{id}', 'Api\v1\TemplateController@delete');
 
-    //lab 
+    //lab
     Route::get('/labs', 'Api\v1\LabController@get_all');
     Route::get('/lab/{id}', 'Api\v1\LabController@get');
     Route::post('/lab', 'Api\v1\LabController@create');
@@ -73,9 +77,5 @@ Route::group([
     Route::get('/comment/{id}', 'Api\v1\CommentController@get');
     Route::post('/comment', 'Api\v1\CommentController@create');
     Route::delete('/comment/{id}', 'Api\v1\CommentController@delete');
-
-    
-
-
 });
 

@@ -5,7 +5,6 @@ namespace App\Services;
 
 
 use App\Contracts\RestServiceContract;
-use App\Helpers\AuthHelper;
 use App\Report;
 use App\ReportQuestion;
 use App\ReportSection;
@@ -13,6 +12,7 @@ use App\Repositories\ModelRepository;
 use App\User;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ReportService implements RestServiceContract
 {
@@ -52,8 +52,7 @@ class ReportService implements RestServiceContract
     public function create(FormRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
-
-        $user = AuthHelper::instance()->user($request,$this->user_model);
+        $user = Auth::guard('api')->user();
         $sections = $request->sections;
 
         // create the report
@@ -69,18 +68,7 @@ class ReportService implements RestServiceContract
                 ]
             );
 
-            $updated_flag = $report->wasChanged();
-
-            $result['data'] = [
-                'id' => $report->id,
-                'title' => $report->title,
-                'user_id' => $report->user_id,
-                'created_at' => $report->created_at,
-                'updated_at' => $report->updated_at,
-                'report_template_id' => $report->report_template_id,
-                'room' => $report->room,
-                'due_date' => $report->due_date
-            ];
+            $result['data'] = $report;
         } catch (Exception $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
@@ -102,14 +90,7 @@ class ReportService implements RestServiceContract
                         ]
                     );
 
-                    $result['data']['sections'][$sect_key] = [
-                        'id' => $section->id,
-                        'title' => $section->title,
-                        'report_id' => $section->report_id,
-                        'created_at' => $section->created_at,
-                        'updated_at' => $section->updated_at,
-                        'report_section_template_id' => $section->report_template_section_id
-                    ];
+                    $result['data']['sections'][$sect_key] = $section;
                 } catch (Exception $ex) {
                     $result['message'] = $ex->getMessage();
                     return ['response' => $result, 'status' => 400];
@@ -142,7 +123,7 @@ class ReportService implements RestServiceContract
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = ($updated_flag ? 'Updated' : 'Created') .' report document successfully!';
+        $result['message'] = ($report->wasRecentlyCreated ? 'Created' : 'Updated') .' report document successfully!';
         return ['response' => $result, 'status' => 200];
     }
 

@@ -5,12 +5,12 @@ namespace App\Services;
 
 
 use App\Contracts\RestServiceContract;
-use App\Helpers\AuthHelper;
 use App\Inspection;
 use App\Repositories\ModelRepository;
 use App\User;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class InspectionService implements RestServiceContract
 {
@@ -48,10 +48,10 @@ class InspectionService implements RestServiceContract
     public function create(FormRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
-        $user = AuthHelper::instance()->user($request,$this->user_model);
+        $user = Auth::guard('api')->user();
 
         try {
-            $result['data'] = $this->inspection_model->updateOrCreate(
+            $inspection = $this->inspection_model->updateOrCreate(
                 [
                     'id' => $request->id
                 ],
@@ -64,13 +64,14 @@ class InspectionService implements RestServiceContract
                     'status' => 'incomplete',
                 ]
             );
+            $result['data'] = $inspection;
         } catch (Exception $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
         }
 
         $result['status'] = '200 (Ok)';
-        $result['message'] = 'Created inspection assignment successfully!';
+        $result['message'] = ($inspection->wasRecentlyCreated ? 'Created' : 'Updated') .' inspection assignment successfully!';
         return ['response' => $result, 'status' => 200];
     }
 

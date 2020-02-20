@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Auth\AuthenticationException;
 
 class Handler extends ExceptionHandler
 {
@@ -47,5 +48,23 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param AuthenticationException $exception
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson() || substr($request->path(), 0,3) == 'api') {
+            return response()->json([
+                'status' => '422 (Unprocessable Entity)',
+                'message' => 'Invalid authentication token in request header. Please make sure the Bearer token is in the header and is valid.',
+                'data' => '',
+            ], 401);
+        }
+
+        return redirect()->guest(route('login'));
     }
 }

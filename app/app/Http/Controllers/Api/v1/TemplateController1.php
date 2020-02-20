@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Helpers\AuthHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Report\CreateRequest;
 use App\ReportTemplate;
@@ -12,6 +11,7 @@ use App\Repositories\ModelRepository;
 use App\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TemplateController extends Controller
 {
@@ -58,7 +58,7 @@ class TemplateController extends Controller
     public function create(CreateRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
-        $user = AuthHelper::instance()->user($request,$this->model_user);
+        $user = Auth::guard('api')->user();
         $sections = $request->sections;
 
         // create the report
