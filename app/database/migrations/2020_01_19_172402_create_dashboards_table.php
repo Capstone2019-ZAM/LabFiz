@@ -24,6 +24,8 @@ class CreateDashboardsTable extends Migration
             $table->integer('accessible_to');
             $table->timestamps();
         });
+        $seeder = new DashboardSeeder();
+        $seeder->run();
     }
 
     /**
