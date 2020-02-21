@@ -4,7 +4,7 @@
       <v-card-title>Section Title</v-card-title>
       <v-data-table :headers="headers" :items="sec_q" :search="search" hide-default-footer>
         <template v-slot:item.answer="{ item }">
-          <v-radio-group row>
+          <v-radio-group row v-model="item.answer">
             <v-radio :label="`Yes`"></v-radio>
             <v-radio :label="`No`"></v-radio>
             <v-radio :label="`NA`"></v-radio>
@@ -24,28 +24,27 @@
               <div class="mt-4 title">Update Comment</div>
             </template>
             <template v-slot:input>
-              <v-text-field
+              <v-textarea
                 v-model="props.item.comment"
                 :rules="[]"
                 label="Comment"
-                single-line
                 counter
                 autofocus
-              ></v-text-field>
+              ></v-textarea>
             </template>
           </v-edit-dialog>
         </template>
       </v-data-table>
       <v-row justify="center">
-      <v-card-actions>
-        <v-btn  small class="ma-2 white--text" fab color="primary">
-          <v-icon dark>mdi-arrow-left-thick</v-icon>
-        </v-btn>
-        <v-label>Section # 1</v-label>
-        <v-btn small class="ma-2 white--text"  fab color="primary">
-          <v-icon dark>mdi-arrow-right-thick</v-icon>
-        </v-btn>
-      </v-card-actions>
+        <v-card-actions>
+          <v-btn small class="ma-2 white--text" fab color="primary" @click="prevSection()">
+            <v-icon dark>mdi-arrow-left-thick</v-icon>
+          </v-btn>
+          <v-label>Section # 1</v-label>
+          <v-btn small class="ma-2 white--text" fab color="primary" @click="nextSection()">
+            <v-icon dark>mdi-arrow-right-thick</v-icon>
+          </v-btn>
+        </v-card-actions>
       </v-row>
     </v-card>
   </v-row>
@@ -57,7 +56,9 @@
 export default {
   data() {
     return {
+      AuthStr: 'Bearer '+localStorage.getItem("api"),
       search: "",
+      sctn_index:0,
       dialog: false,
       headers: [
         {
@@ -80,16 +81,11 @@ export default {
       created() {
         this.initialize();
       },
+      master_sctn:Array(),
       sec_q: [
         {
-          question: "How do you do?"
-        },
-        {
-          question: "What is your age?"
-        },
-        {
-          question:
-            "Did you clean ur room?Did you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur roomDid you clean ur room"
+          question: "How do you do?",
+          answer: 1
         }
       ]
     };
@@ -105,20 +101,56 @@ export default {
   },
   methods: {
     initialize() {
+      //  axios
+      // .get("/api/v1/report", {
+      //   headers: { Authorization: this.AuthStr }
+      // })
+      // .then(
+      //   response => {
+      //     console.log("fetch done!");
+      //     this.master_sctn = response.data.data;
+      //   },
+      //   error => {
+      //     console.log("fetch failed!");
+      //   }
+      // );
+
+
       this.sec_q = [
         {
           question: "Did you clean ur room?Did",
-          comment: "Nada"
+          answer: 1,
+          comment: "Nada0"
         },
         {
           question: "What is your age?",
-          comment: "Nada"
+          answer: 2,
+          comment: "Nada1"
         },
         {
           question: "Did you clean ur room?",
-          comment: "Nada"
+          answer: 0,
+          comment: "Nada2"
         }
       ];
+      this.master_sctn.push( this.sec_q);
+    },
+
+    submitInspection(){
+    
+    axios
+      .post("/api/v1/report/"+this.id,this.master_sctn, {
+        headers: { Authorization: this.AuthStr, "Content-Type": "application/json"}
+      })
+      .then(
+        response => {
+          console.log("post done!");
+          this.issues = response.data.data;
+        },
+        error => {
+          console.log("post failed!");
+        }
+      );
     },
     editItem(item) {
       debugger;
@@ -136,12 +168,20 @@ export default {
     },
 
     save() {
-      // if (this.editedIndex > -1) {
-      //   Object.assign(this.sec_q[this.editedIndex], this.editedItem);
-      // } else {
-      //   this.sec_q.push(this.editedItem);
-      // }
       this.close();
+    },
+    prevSection(){
+      debugger
+      if ( this.sctn_index != 0){
+      this.sec_q = this.master_sctn[this.sctn_index -1];
+      this.sctn_index--;
+      }
+    },
+    nextSection(){
+      if ( this.sctn_index != (this.master_sctn.length -1)  ){
+      this.sec_q = this.master_sctn[this.sctn_index +1];
+      this.sctn_index++;
+      }
     }
   }
 };
