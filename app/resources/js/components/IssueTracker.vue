@@ -27,7 +27,7 @@
 export default {
   data() {
     return {
-      AuthStr: localStorage.getItem("api"),
+      AuthStr: 'Bearer '+localStorage.getItem("api"),
       headers: [
         {
           text: "Status",
