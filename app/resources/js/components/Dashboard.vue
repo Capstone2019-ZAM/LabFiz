@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      AuthStr: localStorage.getItem("api"),
+      AuthStr: 'Bearer '+localStorage.getItem("api"),
       loading :true,
       options: null
      };
