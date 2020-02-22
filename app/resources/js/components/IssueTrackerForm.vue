@@ -237,7 +237,7 @@ export default {
           axios
             .post("/api/v1/issue/" + this.id, req, {
               headers: {
-                Authorization: this.AuthStr,
+                Authorization: 'Bearer '+this.AuthStr,
                 "Content-Type": "application/json"
               }
             })
@@ -254,7 +254,7 @@ export default {
           axios
             .post("/api/v1/issue", req, {
               headers: {
-                Authorization: this.AuthStr,
+                Authorization: 'Bearer '+this.AuthStr,
                 "Content-Type": "application/json"
               }
             })
@@ -277,7 +277,7 @@ export default {
       req.issue_id = this.id;
       axios
         .post("/api/v1/comment",req, {
-          headers: { Authorization: this.AuthStr,  "Content-Type": "application/json" }
+          headers: { Authorization: 'Bearer '+this.AuthStr,  "Content-Type": "application/json" }
         })
         .then(
           response => {
@@ -299,13 +299,13 @@ export default {
       axios
         .all([
           axios.get("/api/v1/issue/" + this.id, {
-            headers: { Authorization: this.AuthStr }
+            headers: { Authorization: 'Bearer '+this.AuthStr }
           }),
           axios.get("/api/v1/labs", {
-            headers: { Authorization: this.AuthStr }
+            headers: { Authorization: 'Bearer '+this.AuthStr }
           }),
-          axios.get("/api/users", { headers: { Authorization: this.AuthStr } }),
-          axios.get("/api/v1/comment/"+this.id, { headers: { Authorization: this.AuthStr }}),
+          axios.get("/api/users", { headers: { Authorization: 'Bearer '+ this.AuthStr } }),
+          axios.get("/api/v1/comment/"+this.id, { headers: { Authorization: 'Bearer '+this.AuthStr }}),
         ])
         .then(
           axios.spread(
@@ -340,9 +340,9 @@ export default {
       axios
         .all([
           axios.get("/api/v1/labs", {
-            headers: { Authorization: this.AuthStr }
+            headers: { Authorization: 'Bearer '+this.AuthStr }
           }),
-          axios.get("/api/users", { headers: { Authorization: this.AuthStr } })
+          axios.get("/api/users", { headers: { Authorization: 'Bearer '+this.AuthStr } })
         ])
         .then(
           axios.spread(

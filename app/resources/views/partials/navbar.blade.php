@@ -1,5 +1,5 @@
-{{-- <style>
-    /* .links > a {
+ {{-- <style>
+     .links > a {
         color: #636b6f;
         padding: 0 25px;
         font-size: 15px;
@@ -7,13 +7,13 @@
         letter-spacing: .1rem;
         text-decoration: none;
         text-transform: uppercase;
-    } */
-</style> --}}
+    } 
+</style>  --}}
 
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <b>ZAM Lab Solutions</b>
+            <b>LabFiz</b> | University of Regina
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
