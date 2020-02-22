@@ -17,6 +17,7 @@ class CreateReportsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('status');
+            $table->string('lab',400);
             $table->date('due_date');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('assigned_to');
