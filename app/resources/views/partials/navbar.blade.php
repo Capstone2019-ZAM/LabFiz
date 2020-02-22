@@ -50,17 +50,17 @@
         <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto links">
                 @if(Request::path() !== "/")
-                    <a class="mt-2" href="{{ url('/') }}">Home</a>
+                    <a class="mt-2 nav-link" href="{{ url('/') }}">Home</a>
                 @endif
             <!-- Authentication Links -->
                 @guest
-                    <a class="mt-2" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="mt-2 nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     @if (Route::has('register'))
-                        <a class="mt-2" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <a class="mt-2 nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 @else
                     @if(Request::path() !== "home")
-                        <a class="mt-2" href="{{ url('/home') }}">Dashboard</a>
+                        <a class="mt-2 nav-link" href="{{ url('/home') }}">Dashboard</a>
                     @endif
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
