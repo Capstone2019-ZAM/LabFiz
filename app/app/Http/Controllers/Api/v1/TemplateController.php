@@ -56,6 +56,7 @@ class TemplateController extends Controller
             $result['data'] = $this->model_template->updateOrCreate(
                 ['id' => $request->id],
                 [
+                    'name'  => $request->name,
                     'user_id' => $user->id,
                     'schema'  =>$request->schema
                 ]
