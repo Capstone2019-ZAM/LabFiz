@@ -28,7 +28,7 @@ class CreateRequest extends FormRequest
         return [
             
             'schema' => array('required', 'string'),
-            'title' => array('required', 'string'),
+            'name' => array('required', 'string'),
 
        ];
     }
