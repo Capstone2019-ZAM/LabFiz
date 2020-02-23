@@ -18,7 +18,7 @@
               <v-row>
                 <v-col cols="12" md="9" sm="10">
                   <v-text-field
-                    v-model="title"
+                    v-model="name"
                     outlined
                     :rules="qRules"
                     label="Report Title"
@@ -133,7 +133,7 @@ export default {
     loading: false,
     AuthStr: localStorage.getItem("api"),
     id: window.location.pathname.split("/").pop(), // Get this from URL or router
-    title: "",
+    name: "",
     new: null,
 
     qRules: [v => !!v || "Item value is required"],
@@ -210,13 +210,16 @@ export default {
       // this.SaveSucc = false;
 
       let req = Object();
-      req.title = this.title;
+      req.name = this.name;
       req.schema = JSON.stringify( this.sections);
       if (this.valid) {
         this.setAlert("Saving");
+
+       if (Number.isInteger(parseInt(window.location.pathname.split("/").pop()))){
+         req.id = this.id;
         axios
-          .post("http://localhost/api/v1/template", req,{
-            headers: { "Authorization": this.AuthStr ,  "Content-Type" : "application/json"},
+          .post("http://localhost/api/v1/template/" +this.id, req,{
+            headers: { "Authorization":'Bearer '+ this.AuthStr ,  "Content-Type" : "application/json"},
           })
           .then(
             response => {
@@ -224,7 +227,7 @@ export default {
               this.items = response.data; //
               //this.loading = true;
               this.setAlert("SaveSucc");
-              console.log('Template Created');
+              console.log('Template Updated');
               window.location.href = '/template/'+ this.items.data.id
               //this.SaveSucc = true; //TODO: time it
             },
@@ -235,7 +238,30 @@ export default {
             }
           );
       }
-    }
+      else{
+        axios
+          .post("http://localhost/api/v1/template", req,{
+            headers: { "Authorization":'Bearer '+ this.AuthStr ,  "Content-Type" : "application/json"},
+          })
+          .then(
+            response => {
+              console.log("Create done!");
+              this.items = response.data; //
+              //this.loading = true;
+              this.setAlert("SaveSucc");
+              console.log('Template Created');
+              window.location.href = '/template/'+ this.items.data.id
+            },
+            error => {
+              console.log("Update failed!");
+              //this.loading = false;
+              this.setAlert("NetError");
+            }
+          );
+
+      }
+      }
+    },
   },
   mounted() {
     this.loading = true;
@@ -245,14 +271,14 @@ export default {
       console.log(window.location.pathname.split("/").pop())
           axios
       .get("/api/v1/template/" + this.id, {
-        headers: { Authorization: this.AuthStr }
+        headers: { Authorization:'Bearer '+ this.AuthStr }
       })
       .then(
         response => {
           console.log("fetch done!");
           let schema = JSON.parse(response.data.data.schema);
           this.sections = schema;
-          this.title = response.data.data.name;
+          this.name = response.data.data.name;
           this.id = response.data.data.id;
           this.loading = false;
         },
