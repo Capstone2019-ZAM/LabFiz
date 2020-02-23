@@ -64,6 +64,7 @@ Route::group([
     Route::get('/templates', 'Api\v1\TemplateController@get_all');
     Route::get('/template/{id}', 'Api\v1\TemplateController@get');
     Route::post('/template', 'Api\v1\TemplateController@create');
+    Route::post('/template/{id}', 'Api\v1\TemplateController@create');
     Route::delete('/template/{id}', 'Api\v1\TemplateController@delete');
 
     //lab
