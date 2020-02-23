@@ -13,9 +13,9 @@
             hide-details
           ></v-text-field>
         </v-card-title>
-        <v-data-table :headers="headers" :items="assignments" :search="search">
-          <template v-slot:item.status_name="{ item }">
-            <v-chip :color="getColor(item.status_name)" dark>{{ item.status_name }}</v-chip>
+        <v-data-table :headers="headers" :items="reports" :search="search">
+          <template v-slot:item.status="{ item }">
+            <v-chip :color="getColor(item.status)" dark>{{ item.status }}</v-chip>
           
           </template>
 
@@ -61,21 +61,23 @@ export default {
   data() {
     return {
       search: "",
+      AuthStr: localStorage.getItem("api"),
       dialog: false,
+      users: null,
       headers: [
         {
           text: "Lab",
           align: "left",
           sortable: true,
-          value: "lab_name",
+          value: "lab",
           width: "100px"
         },
-        { text: "Status", value: "status_name", width: "200px" },
+        { text: "Status", value: "status", width: "100px" },
 
-        { text: "Report", value: "report_name", width: "100px" },
-        { text: "Assigned To", value: "assignee", width: "100px" },
+        { text: "Report", value: "title", width: "200px" },
+        { text: "Assigned To", value: "user_name", width: "150px" },
         { text: "Due Date", value: "due_date", width: "100px" },
-        { text: "Actions", value: "action", sortable: false, width: "100px" }
+        { text: "Actions", value: "action", sortable: false, width: "50px" }
       ],
       editedIndex: -1,
       editedItem: {
@@ -93,7 +95,7 @@ export default {
       created() {
         this.initialize();
       },
-      assignments: [
+      reports: [
     
       ]
     };
@@ -108,61 +110,95 @@ export default {
     this.initialize();
   },
   methods: {
-    getColor(status_name) {
-      if (status_name == "Pending") return "blue";
-      else if (status_name == "Submitted") return "green";
-      else if (status_name == "Overdue") return "red";
+    getColor(status) {
+      if (status == "Pending") return "blue";
+      else if (status == "Submitted") return "green";
+      else if (status == "Overdue") return "red";
       else return "grey";
     },
     initialize() {
-      this.assignments = [
-            {
-          status_name: "Pending",
-          lab_name: "ED-401",
-          assignee: "John Doe",
-          report_name: "Wet Lab",
-          due_date: "14-Jan-2020"
+
+      axios
+      .get("/api/v1/reports" , {
+        headers: { Authorization:'Bearer '+ this.AuthStr }
+      })
+      .then(
+        response => {
+          console.log("reports fetch done!");
+          this.reports = response.data.data
+          
         },
-        {
-          status_name: "Review Required",
-          lab_name: "ED-401",
-          assignee: "John Doe",
-          report_name: "Wet Lab",
-          due_date: "14-Jan-2020"
-        },
-        {
-          status_name: "Overdue",
-          lab_name: "ED-401",
-          assignee: "Johnathan Doe",
-          report_name: "Wet Lab",
-          due_date: "14-Jan-2020"
-        },
-        {
-          status_name: "Pending",
-          lab_name: "ED-401",
-          assignee: "John Doe",
-          report_name: "Wet Lab",
-          due_date: "14-Jan-2020"
-        },
-        {
-          status_name: "Submitted",
-          lab_name: "ED-310",
-          assignee: "John Doe",
-          report_name: "Wet Lab",
-          due_date: "10-Jul-2020"
+        error => {
+          console.log("reports fetch failed!");
+          this.loading = false;
+          this.NetError = true;
         }
-      ];
+      );
+            axios
+      .get("/api/users" , {
+        headers: { Authorization:'Bearer '+ this.AuthStr }
+      })
+      .then(
+        response => {
+          console.log("user fetch done!");
+          this.users = response.data.data
+          debugger
+        },
+        error => {
+          console.log("user fetch failed!");
+          this.loading = false;
+          this.NetError = true;
+        }
+      );
+
+      // this.reports = [
+      //       {
+      //     status: "Pending",
+      //     lab: "ED-401",
+      //     user_name: "John Doe",
+      //     title: "Wet Lab",
+      //     due_date: "14-Jan-2020"
+      //   },
+      //   {
+      //     status: "Review Required",
+      //     lab: "ED-401",
+      //     user_name: "John Doe",
+      //     title: "Wet Lab",
+      //     due_date: "14-Jan-2020"
+      //   },
+      //   {
+      //     status: "Overdue",
+      //     lab: "ED-401",
+      //     user_name: "Johnathan Doe",
+      //     title: "Wet Lab",
+      //     due_date: "14-Jan-2020"
+      //   },
+      //   {
+      //     status: "Pending",
+      //     lab: "ED-401",
+      //     user_name: "John Doe",
+      //     title: "Wet Lab",
+      //     due_date: "14-Jan-2020"
+      //   },
+      //   {
+      //     status: "Submitted",
+      //     lab: "ED-310",
+      //     user_name: "John Doe",
+      //     title: "Wet Lab",
+      //     due_date: "10-Jul-2020"
+      //   }
+      // ];
     },
     editItem(item) {
-      this.editedIndex = this.assignments.indexOf(item);
+      this.editedIndex = this.reports.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      const index = this.assignments.indexOf(item);
+      const index = this.reports.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
-        this.assignments.splice(index, 1);
+        this.reports.splice(index, 1);
     },
 
     close() {
@@ -175,9 +211,9 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.assignments[this.editedIndex], this.editedItem);
+        Object.assign(this.reports[this.editedIndex], this.editedItem);
       } else {
-        this.assignments.push(this.editedItem);
+        this.reports.push(this.editedItem);
       }
       this.close();
     }
