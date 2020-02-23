@@ -86,7 +86,7 @@ export default {
     this.loading = true;
     axios
       .get("http://localhost/api/v1/templates", {
-        headers: { Authorization: this.AuthStr }
+        headers: { Authorization:'Bearer '+ this.AuthStr }
       })
       .then(
         response => {

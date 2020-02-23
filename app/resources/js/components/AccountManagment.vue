@@ -136,7 +136,7 @@ export default {
         axios
           .post("/api/user/"+ this.id, req, {
             headers: {
-              Authorization: this.AuthStr,
+              Authorization: 'Bearer '+this.AuthStr,
               "Content-Type": "application/json"
             }
           })
@@ -155,7 +155,7 @@ export default {
         axios
           .post("/api/user/register" , req, {
             headers: {
-              Authorization: this.AuthStr,
+              Authorization: 'Bearer '+this.AuthStr,
               "Content-Type": "application/json"
             }
           })
@@ -179,7 +179,7 @@ export default {
           axios
           .get("/api/user/" + this.id, {
             headers: {
-              Authorization: this.AuthStr,              
+              Authorization: 'Bearer '+this.AuthStr,              
             }
           })
           .then(
