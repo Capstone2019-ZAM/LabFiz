@@ -115,7 +115,12 @@ export default {
   methods: {
     assign(){
       if(this.valid){
-        axios.post('/api/v1/report',this.inspection,{
+        let req = new Object();
+        req.template_id = this.inspection.selected_report;
+        req.due_date = this.inspection.due_date;
+        req.assigned_to = this.inspection.selected_inspector;
+        req.lab = this.inspection.selected_lab;
+        axios.post('/api/v1/report',req,{
             headers: { Authorization: "Bearer " + this.AuthStr }
           }).then(
               response => {
