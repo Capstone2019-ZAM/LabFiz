@@ -16,6 +16,7 @@ class AlterReportTable extends Migration
         //
         Schema::table('reports', function (Blueprint $table) {
             $table->foreign('lab')->references('location')->on('labs');
+            $table->foreign('template_id')->references('id')->on('templates');
 
         });
     }

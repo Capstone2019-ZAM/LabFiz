@@ -14,7 +14,7 @@ class Report extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'user_id', 'report_template_id', 'room', 'due_date'
+        'title', 'template_id','assigned_to', 'lab', 'due_date','status','user_id'
     ];
 
     public function user()

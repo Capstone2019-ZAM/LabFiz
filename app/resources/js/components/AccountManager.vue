@@ -67,7 +67,7 @@
       debugger
        axios
       .get("/api/users", {
-        headers: { Authorization: this.AuthStr }
+        headers: { Authorization:'Bearer '+ this.AuthStr }
       })
       .then(
         response => {

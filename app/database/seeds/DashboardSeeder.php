@@ -55,6 +55,14 @@ class DashboardSeeder extends Seeder
             'accessible_to'=> 1, 
         ]);
 
+        DB::table('dashboards')->insert([
+            'title' => "Recycle",
+            'desc' => "Restore or permanently delete items",
+            'img' =>    "mdi-delete-restore",
+            'link' => "/restore",
+            'accessible_to'=> 1, 
+        ]);
+
 
     }
 }

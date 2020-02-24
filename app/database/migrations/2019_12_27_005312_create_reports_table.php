@@ -16,7 +16,8 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('status');
+            $table->unsignedBigInteger('template_id');
+            $table->string('status')->default('Pending');
             $table->string('lab',400);
             $table->date('due_date');
             $table->unsignedBigInteger('user_id');
