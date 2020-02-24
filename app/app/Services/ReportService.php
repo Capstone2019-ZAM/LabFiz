@@ -63,7 +63,8 @@ class ReportService implements RestServiceContract
                     'title' => $request->title,
                     'report_template_id' => $request->template_id,
                     'user_id' => $user->id,
-                    'room' => $request->room,
+                    'assigned_to' => $request->assigned_to,
+                    'lab' => $request->lab,
                     'due_date' => $request->due_date
                 ]
             );
