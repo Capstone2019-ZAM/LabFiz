@@ -75,3 +75,6 @@ Route::get('/account/{id}', function () {
 Route::get('/accounts', function () {
     return view('account');
 });
+Route::get('/restore', function () {
+    return view('restore');
+});
