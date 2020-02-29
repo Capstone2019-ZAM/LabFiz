@@ -49,6 +49,13 @@ class ReportService implements RestServiceContract
         return ['response' => $result, 'status' => 200];
     }
 
+    public function get_all_deleted()
+    {
+        $result = ['status' => '200 (Ok)', 'message' => 'All Deleted Reports retrieved successfully.', 'data' => ''];
+        $result['data'] = $this->report_model->onlyTrashed()->get();
+        return ['response' => $result, 'status' => 200];
+    }
+
     public function create(FormRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
@@ -141,6 +148,22 @@ class ReportService implements RestServiceContract
 
         $result['status'] = '200 (Ok)';
         $result['message'] = 'Report deleted successfully.';
+        return ['response' => $result, 'status' => 200];
+    }
+
+    public function undelete($id)
+    {
+        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+
+        try {
+            $result['data'] = $this->report_model->restoreById($id);
+        } catch (Exception $ex) {
+            $result['message'] = 'Could not find report record.';
+            return ['response' => $result, 'status' => 400];
+        }
+
+        $result['status'] = '200 (Ok)';
+        $result['message'] = 'Report restored successfully.';
         return ['response' => $result, 'status' => 200];
     }
 }

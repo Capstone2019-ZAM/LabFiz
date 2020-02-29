@@ -52,13 +52,6 @@ export default {
       dialog: false,
       users: null,
       headers: [
-             {
-          text: "Deleted At",
-          align: "left",
-          sortable: true,
-          value: "deleted_at",
-          width: "100px"
-        },
         {
           text: "Lab",
           align: "left",
@@ -71,6 +64,13 @@ export default {
         { text: "Report", value: "title", width: "150px" },
         { text: "Assigned To", value: "user_name", width: "150px" },
         { text: "Due Date", value: "due_date", width: "100px" },
+        {
+          text: "Deleted At",
+          align: "left",
+          sortable: true,
+          value: "deleted_at",
+          width: "100px"
+        },
         { text: "Restore", value: "action", sortable: false, width: "50px" }
       ],
       defaultItem: {
