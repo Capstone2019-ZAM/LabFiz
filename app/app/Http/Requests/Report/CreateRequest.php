@@ -26,17 +26,19 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => array('required', 'int'),
-            'title' => array('required', 'regex:/^[\s\w-]*$/'),
-            'room' => array('required', 'string'),
+            //'id' => array('required', 'int'),
+            //'title' => array('required', 'regex:/^[\s\w-]*$/'),
+            'lab' => array('required', 'string'),
             'template_id' => array('required', 'int'),
-            'sections.*' => array('sometimes','nullable','array'),
-            'sections.*.template_id' => array('required', 'int'),
-            'sections.*.qs' => array('required_with:sections.*', 'array'),
-            'sections.*.qs.*' => array('required_with:sections.qs', 'array'),
-            'sections.*.qs.*.template_id' => array('required', 'int'),
-            'sections.*.qs.*.answer' => array('required', 'string'),
-            'sections.*.qs.*.description' => array('required', 'string'),
+            'assigned_to' => array('required', 'int'),
+            'due_date' => array('required', 'date'),
+            // 'sections.*' => array('sometimes','nullable','array'),
+            // 'sections.*.template_id' => array('required', 'int'),
+            // 'sections.*.qs' => array('required_with:sections.*', 'array'),
+            // 'sections.*.qs.*' => array('required_with:sections.qs', 'array'),
+            // 'sections.*.qs.*.template_id' => array('required', 'int'),
+            // 'sections.*.qs.*.answer' => array('required', 'string'),
+            // 'sections.*.qs.*.description' => array('required', 'string'),
         ];
     }
 
