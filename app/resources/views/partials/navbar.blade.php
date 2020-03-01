@@ -13,7 +13,8 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <b>LabFiz</b> | University of Regina
+            <img src= "{{ asset('images/labfiz_logo_200.png') }}" alt="LabFiz"  height="50" width="50">
+            <b>LabFiz</b> | <img src= "{{ asset('images/ur_logo.png') }}" alt="U of R"  height="50" width="40"> University of Regina
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -50,7 +51,7 @@
         <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto links">
                 @if(Request::path() !== "/")
-                    <a class="mt-2 nav-link" href="{{ url('/') }}">Home</a>
+                    <a class="mt-2 nav-link" href="{{ url('/dashboard') }}">Home</a>
                 @endif
             <!-- Authentication Links -->
                 @guest
@@ -59,11 +60,11 @@
                         <a class="mt-2 nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 @else
-                    @if(Request::path() !== "home")
-                        <a class="mt-2 nav-link" href="{{ url('/home') }}">Dashboard</a>
-                    @endif
+                    {{-- @if(Request::path() !== "home")
+                        <a class="mt-2 nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
+                    @endif --}}
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle mt-2" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span>
                         </a>
