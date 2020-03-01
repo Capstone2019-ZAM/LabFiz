@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col cols="12" md="12" lg="9">
+    <v-col cols="12" md="11" lg="9">
       <v-card>
         <v-card-title>
           Deleted Inspections
@@ -107,7 +107,7 @@ export default {
       return n.first_name + " " + n.last_name;
     },
     viewLink(i) {
-      return "/report/" + i.id;
+      return "/assignment/" + i.id;
     },
     getColor(status) {
       if (status == "Pending") return "blue";
