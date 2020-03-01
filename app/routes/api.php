@@ -46,7 +46,7 @@ Route::group([
     Route::get('/reports', 'Api\v1\ReportController@get_all');
 
     Route::get('/restore_reports', 'Api\v1\ReportController@get_all_deleted');
-    Route::post('/restore_report/{id}', 'Api\v1\ReportController@undelete');
+    Route::post('/restore_report/{id}', 'Api\v1\ReportController@restore');
 
 
     // inspection routes

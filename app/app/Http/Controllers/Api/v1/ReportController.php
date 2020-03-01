@@ -39,13 +39,13 @@ class ReportController extends Controller
         return response($res['response'], $res['status']);
     }
 
-    public function undelete($id)
+    public function restore($id)
     {
-        $res = $this->report_service->undelete($id);
+        $res = $this->report_service->restore($id);
         return response($res['response'], $res['status']);
     }
 
-    public function get_all_deleted($id)
+    public function get_all_deleted()
     {
         $res = $this->report_service->get_all_deleted();
         return response($res['response'], $res['status']);

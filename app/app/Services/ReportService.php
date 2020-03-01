@@ -13,6 +13,8 @@ use App\User;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class ReportService implements RestServiceContract
 {
@@ -52,7 +54,9 @@ class ReportService implements RestServiceContract
     public function get_all_deleted()
     {
         $result = ['status' => '200 (Ok)', 'message' => 'All Deleted Reports retrieved successfully.', 'data' => ''];
-        $result['data'] = $this->report_model->onlyTrashed()->get();
+       //TODO use onlyTrashed() with model
+        //$result['data'] = $this->report_model->onlyTrashed()->get();
+        $result['data'] = DB::table('Reports')->whereNotNull('deleted_at')->get();
         return ['response' => $result, 'status' => 200];
     }
 
@@ -151,7 +155,7 @@ class ReportService implements RestServiceContract
         return ['response' => $result, 'status' => 200];
     }
 
-    public function undelete($id)
+    public function restore($id)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
