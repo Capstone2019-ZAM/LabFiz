@@ -19,6 +19,15 @@ class AlterReportTable extends Migration
             $table->foreign('template_id')->references('id')->on('templates');
 
         });
+
+        $seederPerm = new PermissionsSeeder();
+        $seederRole = new RolesSeeder();
+        // $seederUser = new UsersSeeder();
+        // $seederLab = new  LabSeeder();
+        $seederPerm->run();
+        $seederRole->run();
+        // $seederUser->run();
+        // $seederLab->run();
     }
 
     /**
