@@ -2,7 +2,7 @@
 
 @section('content')
     <div id="app">
-        <v-app >
+        <v-app class="bg-transparent">
             <dash-board></dash-board>              
     </v-app>
     </div>
