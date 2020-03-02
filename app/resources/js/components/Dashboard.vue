@@ -32,7 +32,7 @@ export default {
 
   mounted(){
      this.loading = true;
-      axios.get("http://localhost/api/v1/dashboard",
+      axios.get("/api/v1/dashboard",
       {
         headers: { Authorization: this.AuthStr }})
       .then((response)  =>  {
