@@ -54,7 +54,7 @@ Route::get('/template', function () {
 Route::get('/assignments', function () {
     return view('assignment_rpt');
 });
-Route::get('/assignment', function () {
+Route::get('/assignment/{id}', function () {
     return view('assignment');
 });
 Route::get('/issue/{id}', function () {
