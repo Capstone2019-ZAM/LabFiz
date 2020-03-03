@@ -129,7 +129,7 @@ class ReportService implements RestServiceContract
                 // create any questions
                 foreach ($sect_val->questions as $question_key => $question_val) {
                     try {
-                            dd($question_val);     
+                           // dd($question_val);     
                         $question = $this->report_question_model->updateOrCreate(
                             [
                                 'report_section_id' => $section->id,
@@ -139,8 +139,8 @@ class ReportService implements RestServiceContract
                                 'question' => $question_val,
                                 'report_section_id' => $section->id,
                                // 'report_question_template_id' => $question_val['template_id'],
-                                'answer' => $question_val['answer'],
-                                'description' => $question_val['description']
+                                //'answer' => $question_val['answer'],
+                                //'description' => $question_val['description']
                             ]
                         );
 
