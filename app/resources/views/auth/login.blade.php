@@ -1,4 +1,6 @@
 @extends('layouts.app')
+<script src="{{ asset('js/init.js') }}" defer></script>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 @section('content')
 <div class="container">
@@ -8,7 +10,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form id="signinform" method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -53,7 +55,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button onclick="init()" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
 
