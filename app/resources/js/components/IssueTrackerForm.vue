@@ -282,7 +282,6 @@ export default {
         .then(
           response => {
             console.log("comment posted!");
-            debugger
             response.data.data.user_name = this.getNamebyId(response.data.data.user_id);
             this.comments.push(response.data.data);
             this.issue.latest_comment = ""
@@ -367,7 +366,7 @@ export default {
 </script>
 <style>
 .scrollable{
-  height: 400px;
+  /* height: 400px; */
   overflow: auto;
 }
 </style>
