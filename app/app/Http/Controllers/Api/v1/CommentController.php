@@ -12,6 +12,8 @@ use Exception;
 use Illuminate\Http\Request;
 //TODO Remove this import and update eloquent query to repository method
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class CommentController extends Controller
 {
@@ -59,7 +61,8 @@ class CommentController extends Controller
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
         $header = $request->header('Authorization');
-        $user = $this->model_user->getByColumn($header, 'api_token');
+       // $user = $this->model_user->getByColumn($header, 'api_token');
+        $user = Auth::guard('api')->user();
         //$issue = $this->model_issue->getById($request->id);
         try {
             $result['data'] = $this->model_comment->create(
