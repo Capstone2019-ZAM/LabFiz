@@ -58,8 +58,8 @@ class IssueService implements RestServiceContract
                     'room' => $request->room,
                     'user_id' => $user->id,
                     'severity' => $request->severity,
-                    'status' => 'incomplete',
-                    'comments' => $request->comments,
+                    'status' => $request->status,
+                   // 'comments' => $request->comments,
                     'due_date' => $request->due_date,
                     'description' => $request->description,
                     //'comments' => $request->comments //not required
