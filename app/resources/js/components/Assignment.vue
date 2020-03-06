@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div >
+    <v-container justify="center" v-if="this.id!=null">
+     <v-breadcrumbs :items="navlist"></v-breadcrumbs>
+    </v-container>
     <assignment-header :data="this.section_header"></assignment-header>
     <assignment-section></assignment-section>
   </div>
@@ -18,6 +21,23 @@ export default {
       id: parseInt(window.location.pathname.split("/").pop()), //get this dynamic or from url
       AuthStr: "Bearer " + localStorage.getItem("api"),
       section_header: null,
+      navlist:[
+        {
+          text: 'Home',
+          disabled: false,
+          href: '/dashboard',
+        },
+        {
+          text: 'All Assignments',
+          disabled: false,
+          href: '/assignments',
+        },
+        {
+          text: '',
+          disabled: true,
+          href: '',
+        },
+      ],
     };
   },
   created() {
@@ -39,6 +59,8 @@ export default {
               console.log("fetch failed!");
             }
           );
+
+          this.navlist[navlist.length-1].text = this.id
       }
     }
   }
