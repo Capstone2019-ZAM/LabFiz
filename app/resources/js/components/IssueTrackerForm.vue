@@ -121,6 +121,7 @@
               </v-col>
             </v-card>
             <v-row align="center" justify="end" class="ma-9">
+               <v-btn large class="ma-3" @click="navigate('issues')">Cancel</v-btn>
               <v-btn large color="primary" @click="saveIssue()">Save</v-btn>
             </v-row>
           </v-container>
@@ -216,6 +217,9 @@ export default {
     }
   },
   methods: {
+    navigate(point){
+      window.location.href='/'+point
+    },
     getNamebyId(t_id){
      let n= this.assignables.find( x => x.id ==t_id);
      return n.name;

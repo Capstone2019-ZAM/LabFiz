@@ -79,6 +79,7 @@
           </v-container>
         </v-form>
         <v-col align="right" justify="center">
+          <v-btn large class="ma-3" @click="navigate('templates')">Cancel</v-btn>
         <v-btn large color="primary" @click="postTemplate()">
                 <v-icon>mdi-content-save</v-icon>Save
               </v-btn>
@@ -146,6 +147,9 @@ export default {
     ]
   }),
   methods: {
+    navigate(point){
+      window.location.href = '/'+point
+    },
     setAlert: async function(msg) {
       this.dialog= true;
       this.Saving = false;

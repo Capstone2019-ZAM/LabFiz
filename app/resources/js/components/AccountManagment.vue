@@ -56,7 +56,8 @@
                     ></v-text-field>
                   </v-col>
                 </v-row>
-                <v-row align="center" justify="center">
+                <v-row align="center" justify="end">
+                  <v-btn @click="navigate('accounts')" class="ma-3">Cancel</v-btn>
                   <v-btn color="primary" @click="createUser()">
                     <v-icon>mdi-account-circle</v-icon>
                     <span v-if="Number.isInteger(parseInt(id))">Update Account</span>
@@ -120,6 +121,9 @@ export default {
     ]
   }),
   methods: {
+    navigate(point){
+      window.location.href= '/'+point;
+    },
     createUser() {
       let req = new Object();
       req.first_name = this.first_name;

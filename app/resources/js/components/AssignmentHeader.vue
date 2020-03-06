@@ -13,6 +13,7 @@
           <v-card-subtitle class="subtitle-1	">{{'Status: ' +data.status}}<br>          
           {{'Due Date: ' +data.due_date}}</v-card-subtitle>
         <v-card-actions >
+          <v-btn @click="navigate('assignments')">Cancel</v-btn>
           <v-btn color="primary" dark>Save</v-btn>
           <v-btn color="primary">Submit</v-btn>
         </v-card-actions>
@@ -26,5 +27,10 @@
 <script>
 export default {
     props: ["data"],
+    methods:{
+      navigate(point){
+        window.location.href= '/'+point
+      }
+    }
 };
 </script>
