@@ -108,7 +108,6 @@ export default {
               console.log("fetch done!");
               this.master_sctn = response.data.data;
               this.active_sctn = this.master_sctn.sections[0].questions;
-              debugger
             },
             error => {
               console.log("fetch failed!");
@@ -155,7 +154,6 @@ export default {
         );
     },
     editItem(item) {
-      debugger;
       this.editedIndex = this.active_sctn.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
@@ -173,7 +171,6 @@ export default {
       this.close();
     },
     prevSection() {
-      debugger;
       if (this.sctn_index != 0) {
         this.active_sctn = this.master_sctn[this.sctn_index - 1];
         this.sctn_index--;

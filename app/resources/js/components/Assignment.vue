@@ -1,6 +1,6 @@
 <template>
   <div >
-    <v-container justify="center" v-if="this.id!=null">
+    <v-container justify="center" >
      <v-breadcrumbs :items="navlist"></v-breadcrumbs>
     </v-container>
     <assignment-header :data="this.section_header"></assignment-header>
@@ -33,7 +33,7 @@ export default {
           href: '/assignments',
         },
         {
-          text: '',
+          text: 'Assignment',
           disabled: true,
           href: '',
         },

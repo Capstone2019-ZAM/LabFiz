@@ -1,11 +1,13 @@
 <template>
   <div id="app">
+     <v-container justify="center">
+     <v-breadcrumbs :items="navlist"></v-breadcrumbs>
+    </v-container>
     <v-form v-model="valid">
-      <v-card class="mx-auto" max-width="750" outlined>
+      <v-card class="mx-auto" max-width="750">
         <v-card-title class="justify-center">
-          <span class="headline">Issue Tracker Form</span>
+          Issue Tracker Form
         </v-card-title>
-        <v-divider></v-divider>
         <v-card-text>
           <v-container>
             <v-row>
@@ -207,7 +209,24 @@ export default {
       "Critical Deficiency",
       "Urgent",
       "Non-critical"
-    ]
+    ],
+    navlist:[
+        {
+          text: 'Home',
+          disabled: false,
+          href: '/dashboard',
+        },
+        {
+          text: 'All Issues',
+          disabled: false,
+          href: '/issues',
+        },
+        {
+          text: 'Issue #',
+          disabled: true,
+          href: '',
+        },
+      ],
   }),
   computed: {
     formattedDate() {

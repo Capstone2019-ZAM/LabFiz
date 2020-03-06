@@ -1,6 +1,11 @@
 <template>
+<v-container>
+     <v-container justify="center">
+     <v-breadcrumbs :items="navlist"></v-breadcrumbs>
+    </v-container>
   <v-row justify="center">
-    <v-col cols="12" md="11" lg="9">
+
+    <v-col cols="12" md="12" lg="9">
       <v-card>
         <v-card-title>
           Deleted Inspections
@@ -39,6 +44,7 @@
       </v-card>
     </v-col>
   </v-row>
+</v-container>
 </template>
 
 
@@ -46,6 +52,16 @@
 export default {
   data() {
     return {
+      navlist:[{
+          text: 'Home',
+          disabled: false,
+          href: '/dashboard',
+        },
+        {
+          text: 'Restore Center',
+          disabled: true,
+          href: '',
+        },],
       search: "",
       loading: false,
       AuthStr: localStorage.getItem("api"),

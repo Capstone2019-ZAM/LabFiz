@@ -1,5 +1,8 @@
 <template>
   <v-container>
+     <v-container justify="center">
+     <v-breadcrumbs :items="navlist"></v-breadcrumbs>
+    </v-container>
     <v-card>
       <v-card-title class="justify-center">
         <span class="headline">Issue Tracker Form</span>
@@ -49,6 +52,18 @@ export default {
         //   assigned: 'Edward Livingstone',
         //   date: "Jan 02, 2020",
         // }
+      ],
+      navlist:[
+        {
+          text: 'Home',
+          disabled: false,
+          href: '/dashboard',
+        },
+        {
+          text: 'All Issues',
+          disabled: true,
+          href: '',
+        },
       ]
     };
   },

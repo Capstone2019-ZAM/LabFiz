@@ -1,5 +1,8 @@
 <template>
 <div>
+   <v-container justify="center">
+     <v-breadcrumbs :items="navlist"></v-breadcrumbs>
+    </v-container>
   <v-row justify="center">
     <v-col cols="12" md="9" sm="12" xs="12" xl="6" lg="6">
       <v-card class="mx-auto">
@@ -144,7 +147,24 @@ export default {
         section_nm: "Section 1",
         questions: ["q1"]
       }
-    ]
+    ],
+    navlist:[
+        {
+          text: 'Home',
+          disabled: false,
+          href: '/dashboard',
+        },
+        {
+          text: 'All Templates',
+          disabled: false,
+          href: '/templates',
+        },
+        {
+          text: 'Template #',
+          disabled: true,
+          href: '',
+        },
+      ],
   }),
   methods: {
     navigate(point){

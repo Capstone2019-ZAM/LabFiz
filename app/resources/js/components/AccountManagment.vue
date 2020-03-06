@@ -1,13 +1,15 @@
 <template>
-  <div id="app">
+  <div>
+     <v-container justify="center" >
+     <v-breadcrumbs :items="navlist"></v-breadcrumbs>
+    </v-container>
     <v-row cols="12" align="center" justify="center">
-      <v-col md="6" sm="11" lg="4">
+      <v-col md="8" sm="11" lg="4">
         <v-form v-model="valid">
-          <v-card outlined>
+          <v-card>
             <v-card-title class="justify-center">
-              <span class="headline">Create New Account</span>
+              Account Details
             </v-card-title>
-            <v-divider></v-divider>
             <v-card-text>
               <v-container>
                 <v-row>
@@ -118,7 +120,24 @@ export default {
       "EYES",
       "Engineering Workshop",
       "Others"
-    ]
+    ],
+    navlist:[
+        {
+          text: 'Home',
+          disabled: false,
+          href: '/dashboard',
+        },
+        {
+          text: 'All Accounts',
+          disabled: false,
+          href: '/accounts',
+        },
+        {
+          text: "Account #",
+          disabled: true,
+          href: '',
+        },
+      ],
   }),
   methods: {
     navigate(point){

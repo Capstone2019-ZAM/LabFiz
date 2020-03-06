@@ -1,5 +1,8 @@
 <template>
 <v-container>
+   <v-container justify="center" >
+     <v-breadcrumbs :items="navlist"></v-breadcrumbs>
+    </v-container>
     <v-card>
       <v-card-title class="justify-center" >
           <span class="headline" >Account Tracker</span>
@@ -52,6 +55,18 @@
             
           },
         ],
+        navlist:[
+        {
+          text: 'Home',
+          disabled: false,
+          href: '/dashboard',
+        },
+        {
+          text: 'All Accounts',
+          disabled: true,
+          href: '',
+        },
+      ],
       }
     },
     methods:{
@@ -64,7 +79,6 @@
       }
     },
     mounted(){
-      debugger
        axios
       .get("/api/users", {
         headers: { Authorization:'Bearer '+ this.AuthStr }

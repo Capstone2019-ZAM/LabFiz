@@ -1,5 +1,8 @@
 <template>
   <v-row justify="center">
+     <v-container justify="center">
+     <v-breadcrumbs :items="navlist"></v-breadcrumbs>
+    </v-container>
     <v-col cols="12" md="12">
       <v-card class="mx-auto" width="80%">
         <v-card-title>Report Templates</v-card-title>
@@ -43,7 +46,7 @@ export default {
       loading: true,
       icon: "mdi-clipboard-text",
       iconClass: "grey lighten-1 white--text",
-      items: { data: null} 
+      items: { data: null} ,
       //[
       // {
       //   icon: "mdi-clipboard-text",
@@ -64,6 +67,19 @@ export default {
       //   subtitle: "Jan 28, 2014"
       // }
       //  ]
+      navlist:[
+        {
+          text: 'Home',
+          disabled: false,
+          href: '/dashboard',
+        },
+        {
+          text: 'All Templates',
+          disabled: true,
+          href: '/templates',
+        },
+      ],
+
     };
   },
 
