@@ -119,7 +119,10 @@ export default {
         req.template_id = this.inspection.selected_report;
         req.due_date = this.inspection.due_date;
         req.assigned_to = this.inspection.selected_inspector;
-        req.lab = this.inspection.selected_lab;
+        req.lab = this.inspection.selected_lab;      
+        let t =   new Date().toISOString().substr(0, 10);
+        let y = this.reports.find(x=>x.id ==this.inspection.selected_report);
+        req.title = y.name + ' - '+ t
         axios.post('/api/v1/report',req,{
             headers: { Authorization: "Bearer " + this.AuthStr }
           }).then(
