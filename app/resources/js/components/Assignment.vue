@@ -60,7 +60,6 @@ export default {
             }
           );
 
-          this.navlist[navlist.length-1].text = this.id
       }
     }
   }
