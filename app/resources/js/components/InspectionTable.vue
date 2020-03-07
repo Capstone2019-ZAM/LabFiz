@@ -122,7 +122,7 @@ export default {
       return n.first_name + " " + n.last_name;
     },
     viewLink(i) {
-      return "/report/" + i.id;
+      return "/assignment/" + i.id;
     },
     getColor(status) {
       if (status == "Pending") return "blue";
