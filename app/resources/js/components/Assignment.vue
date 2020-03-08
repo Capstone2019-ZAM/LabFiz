@@ -3,8 +3,8 @@
     <v-container justify="center" >
      <v-breadcrumbs :items="navlist"></v-breadcrumbs>
     </v-container>
-    <assignment-header :data="this.section_header"></assignment-header>
-    <assignment-section></assignment-section>
+    <assignment-header :data="this.section_header"  ></assignment-header>
+    <assignment-section @update-header="initialize($event)"></assignment-section>
   </div>
 </template>
 
@@ -41,26 +41,27 @@ export default {
     };
   },
   created() {
-    this.initialize();
+   // this.initialize(e);
   },
   methods: {
-    initialize() {
-      if (Number.isInteger(this.id)) {
-        axios
-          .get("/api/v1/report/" + this.id, {
-            headers: { Authorization: this.AuthStr }
-          })
-          .then(
-            response => {
-              console.log("fetch done!");
-              this.section_header = response.data.data;
-            },
-            error => {
-              console.log("fetch failed!");
-            }
-          );
+    initialize(e) {
+      this.section_header = e
+     // if (Number.isInteger(this.id)) {
+      //   axios
+      //     .get("/api/v1/report/" + this.id, {
+      //       headers: { Authorization: this.AuthStr }
+      //     })
+      //     .then(
+      //       response => {
+      //         console.log("fetch done!");
+      //         this.section_header = response.data.data;
+      //       },
+      //       error => {
+      //         console.log("fetch failed!");
+      //       }
+      //     );
 
-      }
+      // }
     }
   }
 };

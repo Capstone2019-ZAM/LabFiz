@@ -46,17 +46,15 @@
             </v-card-actions>
           </v-card>-->
 
-          <!-- <v-dialog v-model="dialog" max-width="500px"> -->
           <template v-slot:item.title="{ item }">
             <a class="nav" :href="viewLink(item)">{{item.title}}</a>
           </template>
 
           <template v-slot:item.action="{ item }">
-            <!-- <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon> -->
+            <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
             <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
           </template>
 
-          <!-- </v-dialog>           -->
         </v-data-table>
       </v-card>
     </v-col>
@@ -95,16 +93,7 @@ export default {
         // assigned_to: ""
       },
       temp_reports: [],
-      reports: [
-        // {
-        //   status: "Pending",
-        //   lab: "ED-401",
-        //   user_name: "John Doe",
-        //   user_id: 1,
-        //   title: "Wet Lab",
-        //   due_date: "14-Jan-2020"
-        // }
-      ]
+      reports: []
     };
   },
   watch: {
@@ -167,9 +156,8 @@ export default {
           );
     },
     editItem(item) {
-      // this.editedIndex = this.reports.indexOf(item);
-      // this.editedItem = Object.assign({}, item);
-      // this.dialog = true;
+      window.location.href = '/assignment/'+item.id
+
     },
 
     deleteItem(item) {

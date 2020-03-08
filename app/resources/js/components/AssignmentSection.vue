@@ -1,8 +1,19 @@
 <template>
   <v-row justify="center">
+    <v-snackbar v-model="alert.show" :timeout="alert.timeout" top :color="alert.color">
+      {{ alert.text }}
+    </v-snackbar>
     <v-card width="80%" class="ma-3" max-width="1000px" v-if="this.active_sctn !=null">
-      <v-card-title><div v-if="this.active_sctn.title !=null">{{this.active_sctn.title}}</div></v-card-title>
-      <v-data-table :headers="headers" :items="active_sctn.questions" :search="search" hide-default-footer height="300px">
+      <v-card-title>
+        <div v-if="this.active_sctn.title !=null">{{this.active_sctn.title}}</div>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="active_sctn.questions"
+        :search="search"
+        hide-default-footer
+        height="300px"
+      >
         <template v-slot:item.answer="{ item }">
           <v-radio-group row v-model="item.answer">
             <v-radio :label="`Yes`"></v-radio>
@@ -39,24 +50,30 @@
       </v-data-table>
       <v-row justify="center">
         <v-col>
-        <v-row cols="12" justify="end">
-        <v-card-actions class="ma-4">
-          <v-btn @click="navigate('assignments')">Cancel</v-btn>
-          <v-btn @click="saveInpsection()" color="primary" dark>Save</v-btn>
-          <v-btn @click="submitInspection()" color="primary" v-if="master_sctn.status !='Submitted'">Submit</v-btn>
-        </v-card-actions>
-        </v-row>
-        <v-row cols="12" justify="center">
-        <v-card-actions md="12">
-          <v-btn small class="ma-2 white--text" color="primary" @click="prevSection()">
-            <v-icon dark>mdi-chevron-left</v-icon>
-          </v-btn>
-          <v-label class="pa-2">Section {{this.sctn_index+1}} of {{this.master_sctn.sections.length}}</v-label>
-          <v-btn small class="ma-2 white--text" color="primary" @click="nextSection()">
-            <v-icon dark>mdi-chevron-right</v-icon>
-          </v-btn>
-        </v-card-actions>
-        </v-row>
+          <v-row cols="12" justify="end">
+            <v-card-actions class="ma-4">
+              <v-btn @click="navigate('assignments')">Cancel</v-btn>
+              <v-btn @click="saveInpsection()" color="primary" dark>Save</v-btn>
+              <v-btn
+                @click="submitInspection()"
+                color="primary"
+                v-if="master_sctn.status !='Submitted'"
+              >Submit</v-btn>
+            </v-card-actions>
+          </v-row>
+          <v-row cols="12" justify="center">
+            <v-card-actions md="12">
+              <v-btn small class="ma-2 white--text" color="primary" @click="prevSection()">
+                <v-icon dark>mdi-chevron-left</v-icon>
+              </v-btn>
+              <v-label
+                class="pa-2"
+              >Section {{this.sctn_index+1}} of {{this.master_sctn.sections.length}}</v-label>
+              <v-btn small class="ma-2 white--text" color="primary" @click="nextSection()">
+                <v-icon dark>mdi-chevron-right</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-row>
         </v-col>
       </v-row>
     </v-card>
@@ -74,6 +91,13 @@ export default {
       search: "",
       sctn_index: 0,
       dialog: false,
+      show: false,
+      alert:{
+        show: false,
+        text:" ",
+        timeout :3000,
+        color: "black"
+      },
       headers: [
         {
           text: "Question",
@@ -83,7 +107,12 @@ export default {
           width: "50%"
         },
         { text: "Response", value: "answer", width: "25%", sortable: false },
-        { text: "Comment", value: "description", width: "250px", sortable: false }
+        {
+          text: "Comment",
+          value: "description",
+          width: "250px",
+          sortable: false
+        }
       ],
       editedIndex: -1,
       editedItem: {
@@ -117,18 +146,21 @@ export default {
             response => {
               console.log("Report update done!");
               this.master_sctn = response.data.data;
-              this.active_sctn = this.master_sctn.sections[0];//.questions;
+              this.active_sctn = this.master_sctn.sections[0]; //.questions;
+              this.$emit("update-header", this.master_sctn);
             },
             error => {
               console.log("Report update failed!");
+              this.setSnack(true,"Failed to retrieve assignment","error" )
+
             }
           );
       }
-
     },
-    saveInpsection(){
-      this.master_sctn
-            axios
+    saveInpsection() {
+      
+      this.setSnack(true,"Saving...","black" )
+      axios
         .post("/api/v1/report/" + this.id, this.master_sctn, {
           headers: {
             Authorization: this.AuthStr,
@@ -138,18 +170,22 @@ export default {
         .then(
           response => {
             console.log("Inspection saved!");
-            this.master_sctn = response.data.data;
+            this.master_sctn.sections = response.data.data.sections;
+            this.master_sctn.status = response.data.data.status;
+            this.$emit("update-header", this.master_sctn);
+            this.setSnack(true,"Saved Successfully","success" )
           },
           error => {
             console.log("Inspection save failed!");
+            this.setSnack(true,"Something went wrong. Please contact system admin.","error" )
+
           }
         );
     },
     submitInspection() {
-       if ( confirm("Are you sure you want to Submit this inspection?") ){
-        this.master_sctn.status = 'Submitted'
-        this.saveInpsection()
-         
+      if (confirm("Are you sure you want to Submit this inspection?")) {
+        this.master_sctn.status = "Submitted";
+        this.saveInpsection();
       }
     },
     editItem(item) {
@@ -176,16 +212,26 @@ export default {
       }
     },
     nextSection() {
-      debugger
+      debugger;
       if (this.sctn_index != this.master_sctn.sections.length - 1) {
         this.active_sctn = this.master_sctn.sections[this.sctn_index + 1];
         this.sctn_index++;
       }
     },
-    navigate(point){
-      if ( confirm("Are you sure you want to leave this page? Any unsaved items will be lost.") ){
-        window.location.href="/"+point
+    navigate(point) {
+      if (
+        confirm(
+          "Are you sure you want to leave this page? Any unsaved items will be lost."
+        )
+      ) {
+        window.location.href = "/" + point;
       }
+    },
+    setSnack(on,txt, col,time){
+      this.alert.show = on
+      this.alert.text = txt
+      this.alert.color= col
+
     }
   }
 };
@@ -194,7 +240,7 @@ export default {
 .v-small-dialog__activator {
   border-bottom: 1px solid gray;
 }
-.inspection-tbl{
+.inspection-tbl {
   max-height: 40%;
 }
 </style>

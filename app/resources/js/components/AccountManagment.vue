@@ -1,15 +1,19 @@
 <template>
   <div>
-     <v-container justify="center" >
-     <v-breadcrumbs :items="navlist"></v-breadcrumbs>
+    <v-snackbar
+      v-model="alert.show"
+      :timeout="alert.timeout"
+      top
+      :color="alert.color"
+    >{{ alert.text }}</v-snackbar>
+    <v-container justify="center">
+      <v-breadcrumbs :items="navlist"></v-breadcrumbs>
     </v-container>
     <v-row cols="12" align="center" justify="center">
       <v-col md="8" sm="11" lg="4">
         <v-form v-model="valid">
           <v-card>
-            <v-card-title class="justify-center">
-              Account Details
-            </v-card-title>
+            <v-card-title class="justify-center">Account Details</v-card-title>
             <v-card-text>
               <v-container>
                 <v-row>
@@ -66,7 +70,6 @@
                     <span v-if="!Number.isInteger(parseInt(id))">Create Account</span>
                   </v-btn>
                 </v-row>
-                
               </v-container>
             </v-card-text>
           </v-card>
@@ -80,6 +83,12 @@ export default {
   data: () => ({
     AuthStr: localStorage.getItem("api"),
     dialog: false,
+    alert: {
+      show: false,
+      text: " ",
+      timeout: 3000,
+      color: "black"
+    },
     id: window.location.pathname.split("/").pop(),
     valid: false,
     first_name: "",
@@ -121,107 +130,124 @@ export default {
       "Engineering Workshop",
       "Others"
     ],
-    navlist:[
-        {
-          text: 'Home',
-          disabled: false,
-          href: '/dashboard',
-        },
-        {
-          text: 'All Accounts',
-          disabled: false,
-          href: '/accounts',
-        },
-        {
-          text: "Account #",
-          disabled: true,
-          href: '',
-        },
-      ],
+    navlist: [
+      {
+        text: "Home",
+        disabled: false,
+        href: "/dashboard"
+      },
+      {
+        text: "All Accounts",
+        disabled: false,
+        href: "/accounts"
+      },
+      {
+        text: "Account #",
+        disabled: true,
+        href: ""
+      }
+    ]
   }),
   methods: {
-    navigate(point){
-      window.location.href= '/'+point;
+    navigate(point) {
+      window.location.href = "/" + point;
+    },
+    setSnack(on, txt, col, time) {
+      this.alert.show = on;
+      this.alert.text = txt;
+      this.alert.color = col;
     },
     createUser() {
+      if ( this.valid){
       let req = new Object();
       req.first_name = this.first_name;
       req.last_name = this.last_name;
       req.department = this.department;
       req.email = this.email;
       req.role = this.role;
-      req.password =  Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+      req.password =
+        Math.random()
+          .toString(36)
+          .substring(2, 10) +
+        Math.random()
+          .toString(36)
+          .substring(2, 10);
 
       if (
         Number.isInteger(parseInt(window.location.pathname.split("/").pop()))
       ) {
         //Update exisiting user
         axios
-          .post("/api/user/"+ this.id, req, {
+          .post("/api/user/" + this.id, req, {
             headers: {
-              Authorization: 'Bearer '+this.AuthStr,
+              Authorization: "Bearer " + this.AuthStr,
               "Content-Type": "application/json"
             }
           })
           .then(
             response => {
-              dialog: true
+              this.setSnack(true,"Account updated successfully.","success" )
               console.log("User account updated!");
             },
             error => {
-              dialog: true
+              dialog: true;
               console.log("User account update failed !");
+              this.setSnack(true,"Failed to update account","error" )
+
             }
           );
       } else {
         // Create a new user
         axios
-          .post("/api/user/register" , req, {
+          .post("/api/user/register", req, {
             headers: {
-              Authorization: 'Bearer '+this.AuthStr,
+              Authorization: "Bearer " + this.AuthStr,
               "Content-Type": "application/json"
             }
           })
           .then(
             response => {
-              dialog: true
+              
               console.log("User account created!");
+              this.setSnack(true, "Account created successfully", "success");
+
             },
-            error => {
-              dialog: true
+            error => {              
               console.log("User account creation failed !");
+              this.setSnack(true,"Failed to create account","error" )
+
             }
           );
       }
+    }else{
+        this.setSnack(true,"Required items missing.","warning" )
+    }
     }
   },
-    mounted() {
-    if (
-        Number.isInteger(parseInt(window.location.pathname.split("/").pop()))
-      ) {
-          axios
-          .get("/api/user/" + this.id, {
-            headers: {
-              Authorization: 'Bearer '+this.AuthStr,              
-            }
-          })
-          .then(
-            response => {
-              console.log("User account retrieved!");
-                this.first_name = response.data.data.first_name;
-                this.last_name= response.data.data.last_name;
-                this.department= response.data.data.department;
-                this.email= response.data.data.email;
-                this.role= response.data.data.role;
-            },
-            error => {
-                  dialog: true,
-              console.log("User account update retrieved!");
-            }
-          );
-      
-      } 
-    
+  mounted() {
+    if (Number.isInteger(parseInt(window.location.pathname.split("/").pop()))) {
+      axios
+        .get("/api/user/" + this.id, {
+          headers: {
+            Authorization: "Bearer " + this.AuthStr
+          }
+        })
+        .then(
+          response => {
+            console.log("User account retrieved!");
+            this.first_name = response.data.data.first_name;
+            this.last_name = response.data.data.last_name;
+            this.department = response.data.data.department;
+            this.email = response.data.data.email;
+            this.role = response.data.data.role;
+          },
+          error => {      
+            console.log("User account update retrieved!");
+            this.setSnack(true,"Failed to retrieve account","error" )
+
+          }
+        );
     }
+  }
 };
 </script>

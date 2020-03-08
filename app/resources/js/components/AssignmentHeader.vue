@@ -24,9 +24,9 @@
 export default {
     props: ["data"],
     methods:{
-      navigate(point){
-        window.location.href= '/'+point
-      }
+      // navigate(point){
+      //   window.location.href= '/'+point
+      // }
     }
 };
 </script>

@@ -1,7 +1,13 @@
 <template>
   <v-container>
-     <v-container justify="center">
-     <v-breadcrumbs :items="navlist"></v-breadcrumbs>
+    <v-snackbar
+      v-model="alert.show"
+      :timeout="alert.timeout"
+      top
+      :color="alert.color"
+    >{{ alert.text }}</v-snackbar>
+    <v-container justify="center">
+      <v-breadcrumbs :items="navlist"></v-breadcrumbs>
     </v-container>
     <v-card>
       <v-card-title class="justify-center">
@@ -30,7 +36,13 @@
 export default {
   data() {
     return {
-      AuthStr: 'Bearer '+localStorage.getItem("api"),
+      alert: {
+        show: false,
+        text: " ",
+        timeout: 3000,
+        color: "black"
+      },
+      AuthStr: "Bearer " + localStorage.getItem("api"),
       headers: [
         {
           text: "Status",
@@ -44,30 +56,27 @@ export default {
         { text: "Resoluton Date", value: "due_date" },
         { text: "Actions", value: "action", sortable: false, width: "100px" }
       ],
-      issues: [
-        // {
-        //   name: 'Status1',
-        //   issue: 33,
-        //   room: 'ED 123',
-        //   assigned: 'Edward Livingstone',
-        //   date: "Jan 02, 2020",
-        // }
-      ],
-      navlist:[
+      issues: [],
+      navlist: [
         {
-          text: 'Home',
+          text: "Home",
           disabled: false,
-          href: '/dashboard',
+          href: "/dashboard"
         },
         {
-          text: 'All Issues',
+          text: "All Issues",
           disabled: true,
-          href: '',
-        },
+          href: ""
+        }
       ]
     };
   },
   methods: {
+    setSnack(on, txt, col, time) {
+      this.alert.show = on;
+      this.alert.text = txt;
+      this.alert.color = col;
+    },
     getColor(status_name) {
       if (status_name == "Open") return "red";
       else if (status_name == "Closed") return "blue";
@@ -79,24 +88,28 @@ export default {
 
     deleteItem(item) {
       const index = this.issues.indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
-        this.issues.splice(index, 1);
-      // axios.delete("/api/v1/issue/"+item.id, {
-      //   headers: { Authorization: this.AuthStr }
-      // })
-      // .then(
-      //   response => {
-      //     console.log("delete done!");
-      //     this.issues = response.data.data;
-      //   },
-      //   error => {
-      //     console.log("delete failed!");
-      //   }
-      // );
+      if (confirm("Are you sure you want to delete this item?")) {
+        axios
+          .delete("/api/v1/issue/" + item.id, {
+            headers: { Authorization: this.AuthStr }
+          })
+          .then(
+            response => {
+              console.log("delete done!");
+              this.issues = response.data.data;
+              this.issues.splice(index, 1);
+              this.setSnack(true, "Issue Log deleted successfully", "success");
+            },
+            error => {
+              console.log("delete failed!");
+              this.setSnack(true, "Issue Log delete failed", "error");
+            }
+          );
+      }
     },
 
     addItem() {
-      window.location.href = "http://localhost/issue";
+      window.location.href = "/issue";
     }
   },
 
@@ -112,6 +125,7 @@ export default {
         },
         error => {
           console.log("fetch failed!");
+          this.setSnack(true, "Failed to retrieve issue log", "error");
         }
       );
   }
