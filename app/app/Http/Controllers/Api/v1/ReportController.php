@@ -33,6 +33,13 @@ class ReportController extends Controller
         return response($res['response'], $res['status']);
     }
 
+    public function update(CreateRequest $request)
+    {
+        $res = $this->report_service->update($request);
+        return response($res['response'], $res['status']);
+    }
+
+
     public function delete($id)
     {
         $res = $this->report_service->delete($id);

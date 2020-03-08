@@ -27,12 +27,13 @@ class CreateRequest extends FormRequest
     {
         return [
             //'id' => array('required', 'int'),
-            //'title' => array('required', 'regex:/^[\s\w-]*$/'),
+            'title' => array('sometimes', 'regex:/^[\s\w-]*$/'),
             'lab' => array('required', 'string'),
             'template_id' => array('required', 'int'),
             'assigned_to' => array('required', 'int'),
             'due_date' => array('required', 'date'),
-            // 'sections.*' => array('sometimes','nullable','array'),
+            'status' => array('sometimes', 'regex: /Submitted|Pending|Overdue|In Review|Complete/'),
+             'sections.*' => array('sometimes','nullable','array'),
             // 'sections.*.template_id' => array('required', 'int'),
             // 'sections.*.qs' => array('required_with:sections.*', 'array'),
             // 'sections.*.qs.*' => array('required_with:sections.qs', 'array'),

@@ -89,22 +89,10 @@ class ReportService implements RestServiceContract
 
         $schema = DB::table('Templates')->where('id',$request->template_id)->value('schema');
         $sections = json_decode($schema);  
-        //dd($schema);      
-        // foreach( $schema as $section)
-        //     {                
-        //         $sec_name = $section->section_nm;
-        //         DB::table('users')->insert(['title'=>$sec_name]);
-        //         foreach( $questions as $q)
-        //         {
-                    
-        //         }
-        //     }
-        //dd($schema);
+
         // if the report has sections, populate the tables for sections and questions
         // if ($sections) {
             foreach ($sections as $sect_key => $sect_val) {
-                //dd($sect_val);
-
                 // create the section
                 try {
                     $section = $this->report_section_model->updateOrCreate(
@@ -113,8 +101,7 @@ class ReportService implements RestServiceContract
                             'title' => $sect_val->section_nm,
                             'report_id' => $report->id,
                             'user_id' => $user->id
-                            //'report_section_template_id' => $sect_val['template_id'
-                         
+                        
                         ]
                     );
 
@@ -124,8 +111,6 @@ class ReportService implements RestServiceContract
                     return ['response' => $result, 'status' => 400];
                 }
             
-                // dd($sect_val->questions);
-
                 // create any questions
                 foreach ($sect_val->questions as $question_key => $question_val) {
                     try {
@@ -158,6 +143,59 @@ class ReportService implements RestServiceContract
         return ['response' => $result, 'status' => 200];
     }
 
+    public function update(FormRequest $request)
+    {
+        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
+        $user = Auth::guard('api')->user();
+        $sections = $request->sections;
+        
+        //only update status in assigned reports
+        if ( isset($request->status) ){
+            try {
+                
+                DB::table('Reports')->where('id', $request->id)->update(['status' => $request->status]);              
+                //$report =$this->report_model->getById($request->$id);
+                //dd($report);
+                $result['data']["status"]= $request->status;
+            } catch (Exception $ex) {
+                $result['message'] = $ex->getMessage();
+                return ['response' => $result, 'status' => 400];
+            }
+        }
+
+        $s=0;
+        foreach ( $sections as $section){
+            try{    
+
+                $section = (object)$section;                
+                foreach($section->questions as $q){
+                    $q= (object)$q;
+                    // dd( $q);
+                    $question = $this->report_question_model->updateOrCreate(
+                        [
+                            'report_section_id' => $q->report_section_id,
+                            'question' => $q->question
+                        ],
+                        [
+                            'answer' => $q->answer,
+                            'description' =>$q->description
+                        ]
+                    );
+            }
+            $result['data']['sections'][$s] = $section;
+            $s++;
+            }
+            catch( Exception $ex){
+                $result['message'] = $ex->getMessage();
+                return ['response' => $result, 'status' => 400];
+            }
+        }
+
+        $result['status'] = '200 (Ok)';
+        $result['message'] = ($question->wasRecentlyCreated ? 'Created' : 'Updated') .' report document successfully!';
+        return ['response' => $result, 'status' => 200];
+    }
+
     public function delete($id)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
@@ -179,6 +217,7 @@ class ReportService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
+            //TODO fix restoreById
             $result['data'] = $this->report_model->restoreById($id);
         } catch (Exception $ex) {
             $result['message'] = 'Could not find report record.';

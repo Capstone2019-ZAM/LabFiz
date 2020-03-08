@@ -42,6 +42,7 @@ Route::group([
     // report end routes
     Route::get('/report/{id}', 'Api\v1\ReportController@get');
     Route::post('/report', 'Api\v1\ReportController@create');
+    Route::post('/report/{id}', 'Api\v1\ReportController@update');
     Route::delete('/report/{id}', 'Api\v1\ReportController@delete');
     Route::get('/reports', 'Api\v1\ReportController@get_all');
 
