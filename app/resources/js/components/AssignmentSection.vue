@@ -1,9 +1,9 @@
 <template>
   <v-row justify="center">
     <v-card width="80%" class="ma-3" max-width="1000px" v-if="this.active_sctn !=null">
-      <v-card-title>{{this.active_sctn.title}}</v-card-title>
-      <v-data-table :headers="headers" :items="active_sctn" :search="search" hide-default-footer >
-        <template v-slot:item.answer="{ item }" >
+      <v-card-title><div v-if="this.active_sctn.title !=null">{{this.active_sctn.title}}</div></v-card-title>
+      <v-data-table :headers="headers" :items="active_sctn.questions" :search="search" hide-default-footer height="300px">
+        <template v-slot:item.answer="{ item }">
           <v-radio-group row v-model="item.answer">
             <v-radio :label="`Yes`"></v-radio>
             <v-radio :label="`No`"></v-radio>
@@ -11,26 +11,26 @@
           </v-radio-group>
         </template>
 
-        <template v-slot:item.comment="props"  >
+        <template v-slot:item.description="props">
           <v-edit-dialog
             id="bl"
-            :return-value.sync="props.item.comment"
+            :return-value.sync="props.item.description"
             large
             persistent
             @save="save"
             @close="close"
           >
-            <div>{{ props.item.comment }}</div>
+            <div>{{ props.item.description }}</div>
             <template v-slot:input>
               <div class="mt-4 title">Update Comment</div>
             </template>
             <template v-slot:input>
               <v-textarea
-                v-model="props.item.comment"
+                v-model="props.item.description"
                 :rules="[]"
                 label="Comment"
                 clearable
-                rows=3
+                rows="3"
                 autofocus
               ></v-textarea>
             </template>
@@ -38,15 +38,26 @@
         </template>
       </v-data-table>
       <v-row justify="center">
-        <v-card-actions>
-          <v-btn small class="ma-2 white--text" fab color="primary" @click="prevSection()">
-            <v-icon dark>mdi-arrow-left-thick</v-icon>
+        <v-col>
+        <v-row cols="12" justify="end">
+        <v-card-actions class="ma-4">
+          <v-btn @click="navigate('assignments')">Cancel</v-btn>
+          <v-btn @click="saveInpsection()" color="primary" dark>Save</v-btn>
+          <v-btn @click="submitInspection()" color="primary" v-if="master_sctn.status !='Submitted'">Submit</v-btn>
+        </v-card-actions>
+        </v-row>
+        <v-row cols="12" justify="center">
+        <v-card-actions md="12">
+          <v-btn small class="ma-2 white--text" color="primary" @click="prevSection()">
+            <v-icon dark>mdi-chevron-left</v-icon>
           </v-btn>
-          <v-label>Section # 1</v-label>
-          <v-btn small class="ma-2 white--text" fab color="primary" @click="nextSection()">
-            <v-icon dark>mdi-arrow-right-thick</v-icon>
+          <v-label class="pa-2">Section {{this.sctn_index+1}} of {{this.master_sctn.sections.length}}</v-label>
+          <v-btn small class="ma-2 white--text" color="primary" @click="nextSection()">
+            <v-icon dark>mdi-chevron-right</v-icon>
           </v-btn>
         </v-card-actions>
+        </v-row>
+        </v-col>
       </v-row>
     </v-card>
   </v-row>
@@ -58,7 +69,7 @@
 export default {
   data() {
     return {
-      id: parseInt( window.location.pathname.split("/").pop()), //get this dynamic or from url
+      id: parseInt(window.location.pathname.split("/").pop()), //get this dynamic or from url
       AuthStr: "Bearer " + localStorage.getItem("api"),
       search: "",
       sctn_index: 0,
@@ -72,18 +83,18 @@ export default {
           width: "50%"
         },
         { text: "Response", value: "answer", width: "25%", sortable: false },
-        { text: "Comment", value: "comment", width: "250px", sortable: false }
+        { text: "Comment", value: "description", width: "250px", sortable: false }
       ],
       editedIndex: -1,
       editedItem: {
-        comment: ""
+        description: ""
       },
       defaultItem: {
-        comment: ""
+        description: ""
       },
-   
+
       master_sctn: null,
-      active_sctn: null,        
+      active_sctn: null
     };
   },
   watch: {
@@ -97,7 +108,6 @@ export default {
   },
   methods: {
     initialize() {
-      
       if (Number.isInteger(this.id)) {
         axios
           .get("/api/v1/report/" + this.id, {
@@ -105,38 +115,20 @@ export default {
           })
           .then(
             response => {
-              console.log("fetch done!");
+              console.log("Report update done!");
               this.master_sctn = response.data.data;
-              this.active_sctn = this.master_sctn.sections[0].questions;
+              this.active_sctn = this.master_sctn.sections[0];//.questions;
             },
             error => {
-              console.log("fetch failed!");
+              console.log("Report update failed!");
             }
           );
       }
 
-      // this.active_sctn = [
-      //   {
-      //     question: "Did you clean ur room?Did",
-      //     answer: 1,
-      //     comment: "Nada0"
-      //   },
-      //   {
-      //     question: "What is your age?",
-      //     answer: 2,
-      //     comment: "Nada1"
-      //   },
-      //   {
-      //     question: "Did you clean ur room?",
-      //     answer: 0,
-      //     comment: "Nada2"
-      //   }
-      // ];
-      
     },
-
-    submitInspection() {
-      axios
+    saveInpsection(){
+      this.master_sctn
+            axios
         .post("/api/v1/report/" + this.id, this.master_sctn, {
           headers: {
             Authorization: this.AuthStr,
@@ -145,13 +137,20 @@ export default {
         })
         .then(
           response => {
-            console.log("post done!");
-            this.issues = response.data.data;
+            console.log("Inspection saved!");
+            this.master_sctn = response.data.data;
           },
           error => {
-            console.log("post failed!");
+            console.log("Inspection save failed!");
           }
         );
+    },
+    submitInspection() {
+       if ( confirm("Are you sure you want to Submit this inspection?") ){
+        this.master_sctn.status = 'Submitted'
+        this.saveInpsection()
+         
+      }
     },
     editItem(item) {
       this.editedIndex = this.active_sctn.indexOf(item);
@@ -172,21 +171,30 @@ export default {
     },
     prevSection() {
       if (this.sctn_index != 0) {
-        this.active_sctn = this.master_sctn[this.sctn_index - 1];
+        this.active_sctn = this.master_sctn.sections[this.sctn_index - 1];
         this.sctn_index--;
       }
     },
     nextSection() {
-      if (this.sctn_index != this.master_sctn.length - 1) {
-        this.active_sctn = this.master_sctn[this.sctn_index + 1];
+      debugger
+      if (this.sctn_index != this.master_sctn.sections.length - 1) {
+        this.active_sctn = this.master_sctn.sections[this.sctn_index + 1];
         this.sctn_index++;
+      }
+    },
+    navigate(point){
+      if ( confirm("Are you sure you want to leave this page? Any unsaved items will be lost.") ){
+        window.location.href="/"+point
       }
     }
   }
 };
 </script>
 <style>
-.v-small-dialog__activator{
- border-bottom: 1px solid gray  
+.v-small-dialog__activator {
+  border-bottom: 1px solid gray;
+}
+.inspection-tbl{
+  max-height: 40%;
 }
 </style>

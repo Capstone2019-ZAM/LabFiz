@@ -12,11 +12,7 @@
         <v-col cols="12" md="4">
           <v-card-subtitle class="subtitle-1	">{{'Status: ' +data.status}}<br>          
           {{'Due Date: ' +data.due_date}}</v-card-subtitle>
-        <v-card-actions >
-          <v-btn @click="navigate('assignments')">Cancel</v-btn>
-          <v-btn color="primary" dark>Save</v-btn>
-          <v-btn color="primary">Submit</v-btn>
-        </v-card-actions>
+
         </v-col>
       </v-row> 
     </v-card>
