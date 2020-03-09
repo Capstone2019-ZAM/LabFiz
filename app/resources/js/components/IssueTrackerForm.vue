@@ -305,7 +305,7 @@ export default {
           response => {
             console.log("comment posted!");
             response.data.data.user_name = this.getNamebyId(
-              response.data.data.user_id
+              response.data.data.assigned_to
             );
             this.comments.push(response.data.data);
             this.issue.latest_comment = "";
@@ -346,8 +346,7 @@ export default {
               });
 
               this.issue = issueResp.data.data;
-              this.issue.assigned_to = this.issue.user_id;
-
+              //this.issue.assigned_to = this.issue.assigned_to;              
               commentResp.data.data = commentResp.data.data.map(el => {
                 let t = Object();
                 t.user_name = this.getNamebyId(el.user_id);

@@ -78,10 +78,10 @@ export default {
   },
   methods: {
     addAccount() {
-      window.location.href = "http://localhost/account";
+      window.location.href = "/account";
     },
     editItem(item) {
-      window.location.href = "http://localhost/account/" + item.id;
+      window.location.href = "/account/" + item.id;
     },
     setSnack(on, txt, col, time) {
       this.alert.show = on;

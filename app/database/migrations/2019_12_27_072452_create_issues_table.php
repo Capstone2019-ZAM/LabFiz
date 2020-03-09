@@ -23,8 +23,10 @@ class CreateIssuesTable extends Migration
             $table->date('due_date');
             $table->string('description');
             //$table->unsignedBigInteger('comment_id');
+            $table->unsignedBigInteger('assigned_to');            
             $table->unsignedBigInteger('user_id');            
             $table->foreign('user_id')->references('id')->on('users');//->onDelete('cascade');
+            $table->foreign('assigned_to')->references('id')->on('users');//->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -18,6 +18,10 @@
         <template v-slot:item.status="{ item }">
           <v-chip :color="getColor(item.status)" dark>{{ item.status }}</v-chip>
         </template>
+
+        <template v-slot:item.title="{ item }">
+          <a class="nav" :href="viewLink(item)">{{item.title}}</a>
+        </template>
         <template v-slot:item.action="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
           <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
@@ -42,6 +46,7 @@ export default {
         timeout: 3000,
         color: "black"
       },
+      users: null,
       AuthStr: "Bearer " + localStorage.getItem("api"),
       headers: [
         {
@@ -52,11 +57,12 @@ export default {
         },
         { text: "Issue", value: "title" },
         { text: "Room #", value: "room" },
-        { text: "Assigned To", value: "user_id" },
+        { text: "Assigned To", value: "user_name" },
         { text: "Resoluton Date", value: "due_date" },
         { text: "Actions", value: "action", sortable: false, width: "100px" }
       ],
       issues: [],
+      temp_issues: [],
       navlist: [
         {
           text: "Home",
@@ -77,13 +83,20 @@ export default {
       this.alert.text = txt;
       this.alert.color = col;
     },
+    viewLink(i) {
+      return "/issue/" + i.id;
+    },
+    getNamebyId(t_id) {
+      let n = this.users.find(x => x.id == t_id);
+      return n.first_name + " " + n.last_name;
+    },
     getColor(status_name) {
       if (status_name == "Open") return "red";
       else if (status_name == "Closed") return "blue";
       else return "grey";
     },
     editItem(item) {
-      window.location.href = "http://localhost/issue/" + item.id;
+      window.location.href = "/issue/" + item.id;
     },
 
     deleteItem(item) {
@@ -91,12 +104,12 @@ export default {
       if (confirm("Are you sure you want to delete this item?")) {
         axios
           .delete("/api/v1/issue/" + item.id, {
-            headers: { Authorization: this.AuthStr }
+            headers: { Authorization:  this.AuthStr }
           })
           .then(
             response => {
               console.log("delete done!");
-              this.issues = response.data.data;
+              //this.issues = response.data.data;
               this.issues.splice(index, 1);
               this.setSnack(true, "Issue Log deleted successfully", "success");
             },
@@ -121,11 +134,29 @@ export default {
       .then(
         response => {
           console.log("fetch done!");
-          this.issues = response.data.data;
+          this.temp_issues = response.data.data;
+          return axios.get("/api/users", {
+            headers: { Authorization: this.AuthStr }
+          });
         },
         error => {
           console.log("fetch failed!");
           this.setSnack(true, "Failed to retrieve issue log", "error");
+        }
+      )
+      .then(
+        response => {
+          console.log("user fetch done!");
+          this.users = response.data.data;
+          this.temp_issues.map(iss => {
+            iss.user_name = this.getNamebyId(iss.assigned_to);
+          });
+          this.issues = this.temp_issues;
+          this.loading = false;
+        },
+        error => {
+          console.log("user fetch failed!");
+          this.loading = false;
         }
       );
   }

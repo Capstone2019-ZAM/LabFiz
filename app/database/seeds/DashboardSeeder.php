@@ -23,7 +23,7 @@ class DashboardSeeder extends Seeder
 
         DB::table('dashboards')->insert([
             'title' => "Assign Inspection",
-            'desc' => "Create or manage inpsections",
+            'desc' => "Create or manage inspections",
             'img' =>    "mdi-clipboard-list",
             'link' => "/assignments",
             'accessible_to'=> 1, 

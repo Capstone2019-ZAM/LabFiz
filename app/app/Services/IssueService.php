@@ -59,10 +59,9 @@ class IssueService implements RestServiceContract
                     'user_id' => $user->id,
                     'severity' => $request->severity,
                     'status' => $request->status,
-                   // 'comments' => $request->comments,
                     'due_date' => $request->due_date,
                     'description' => $request->description,
-                    //'comments' => $request->comments //not required
+                    'assigned_to' => $request->assigned_to
                 ]
             );
             $result['data'] = $issue;

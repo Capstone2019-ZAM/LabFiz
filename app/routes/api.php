@@ -59,6 +59,7 @@ Route::group([
     // issue routes
     Route::get('/issue/{id}', 'Api\v1\IssueController@get');
     Route::post('/issue', 'Api\v1\IssueController@create');
+    Route::post('/issue/{id}', 'Api\v1\IssueController@create');
     Route::delete('/issue/{id}', 'Api\v1\IssueController@delete');
     Route::get('/issues', 'Api\v1\IssueController@get_all');
 
