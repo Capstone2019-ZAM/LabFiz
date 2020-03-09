@@ -35,7 +35,9 @@ class UserService implements RestServiceContract
 
         try {
             $columns = ['id', 'first_name', 'last_name', 'department', 'email', 'created_at'];
-            $result['data'] = $this->user_model->getById($id, $columns);
+            $result['data'] = $this->user_model->getById($id, $columns);        
+            $result['data']['role'] = $result['data']->getRoleNames();
+    
         } catch (Exception $ex) {
             $result['message'] = 'Could not find user record.';
             return ['response' => $result, 'status' => 400];
@@ -51,6 +53,10 @@ class UserService implements RestServiceContract
         $columns = ['id', 'first_name', 'last_name', 'department', 'email', 'created_at'];
         $result = ['status' => '200 (Ok)', 'message' => 'All Users retrieved successfully.', 'data' => ''];
         $result['data'] = $this->user_model->get($columns);
+        foreach( $result['data'] as $item){
+            $v = $item->getRoleNames();
+            // $result['data']['role'] =$v;
+        }
         return ['response' => $result, 'status' => 200];
     }
 
