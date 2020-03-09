@@ -102,6 +102,7 @@ export default {
         response => {
           console.log("fetch done!");
           this.items = response.data.data;
+          //TODO : Add map to get name of role from roles
         },
         error => {
           console.log("fetch failed!");

@@ -239,7 +239,7 @@ export default {
             this.last_name = response.data.data.last_name;
             this.department = response.data.data.department;
             this.email = response.data.data.email;
-            this.role = response.data.data.role;
+            this.role = response.data.data.role[0];
           },
           error => {      
             console.log("User account update retrieved!");
