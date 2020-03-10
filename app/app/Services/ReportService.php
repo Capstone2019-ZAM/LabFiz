@@ -52,6 +52,15 @@ class ReportService implements RestServiceContract
         return ['response' => $result, 'status' => 200];
     }
 
+    public function get_all_by_user()
+    {
+        $user = Auth::guard('api')->user();        
+        $result = ['status' => '200 (Ok)', 'message' => 'All Reports retrieved successfully.', 'data' => ''];
+        $result['data'] =$this->report_model->where('assigned_to',$user->id)->get();
+        //$result['data'] = $this->report_model->with(['sections','sections.questions'])->get();
+        return ['response' => $result, 'status' => 200];
+    }
+
     public function get_all_deleted()
     {
         $result = ['status' => '200 (Ok)', 'message' => 'All Deleted Reports retrieved successfully.', 'data' => ''];
@@ -217,10 +226,10 @@ class ReportService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            //TODO fix restoreById
-            $result['data'] = $this->report_model->restoreById($id);
+            $report=DB::table('Reports')->where('id',$id)->update(['deleted_at'=>null]);            
+            $result['data'] = $this->report_model->getById($id);
         } catch (Exception $ex) {
-            $result['message'] = 'Could not find report record.';
+            $result['message'] = 'Could not find report record to delete.';
             return ['response' => $result, 'status' => 400];
         }
 

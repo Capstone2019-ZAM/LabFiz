@@ -45,6 +45,8 @@ Route::group([
     Route::post('/report/{id}', 'Api\v1\ReportController@update');
     Route::delete('/report/{id}', 'Api\v1\ReportController@delete');
     Route::get('/reports', 'Api\v1\ReportController@get_all');
+    Route::get('/myreports', 'Api\v1\ReportController@get_all_by_user');
+
 
     Route::get('/restore_reports', 'Api\v1\ReportController@get_all_deleted');
     Route::post('/restore_report/{id}', 'Api\v1\ReportController@restore');

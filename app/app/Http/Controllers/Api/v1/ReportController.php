@@ -27,6 +27,12 @@ class ReportController extends Controller
         return response($res['response'], $res['status']);
     }
 
+    public function get_all_by_user()
+    {
+        $res = $this->report_service->get_all_by_user();
+        return response($res['response'], $res['status']);
+    }
+
     public function create(CreateRequest $request)
     {
         $res = $this->report_service->create($request);
