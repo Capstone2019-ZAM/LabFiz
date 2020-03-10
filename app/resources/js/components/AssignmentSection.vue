@@ -55,10 +55,23 @@
               <v-btn @click="navigate('assignments')">Cancel</v-btn>
               <v-btn @click="saveInpsection()" color="primary" dark>Save</v-btn>
               <v-btn
-                @click="submitInspection()"
-                color="primary"
-                v-if="master_sctn.status !='Submitted'"
+              class="ml-5"
+                @click="submitInspection('Submitted')"
+                color="secondary"
+                v-if="master_sctn.status =='Pending'"
               >Submit</v-btn>
+              <v-btn
+              class="ml-5"
+                @click="submitInspection('Complete')"
+                color="secondary"
+                v-if="master_sctn.status =='Submitted'  ||master_sctn.status=='In Review' "
+              >Mark Complete</v-btn>
+              <v-btn
+              class="ml-5"
+                @click="submitInspection('In Review')"
+                color="secondary"
+                v-if="master_sctn.status =='Submitted'"
+              >Set to Review</v-btn>
             </v-card-actions>
           </v-row>
           <v-row cols="12" justify="center">
@@ -182,9 +195,9 @@ export default {
           }
         );
     },
-    submitInspection() {
+    submitInspection(sts) {
       if (confirm("Are you sure you want to Submit this inspection?")) {
-        this.master_sctn.status = "Submitted";
+        this.master_sctn.status = sts;
         this.saveInpsection();
       }
     },
