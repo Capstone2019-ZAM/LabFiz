@@ -28,5 +28,5 @@ Contributors:
  - [APi.md](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/API.md)
  
  # Screenshots
-  - [Asana](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Asana%20Snapshot%2004-Feb-2020.PNG)
+  - [Asana](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Screenshot3..JPG)
  
