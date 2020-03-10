@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <v-snackbar
       v-model="alert.show"
       :timeout="alert.timeout"
@@ -41,7 +41,7 @@
 
             <template v-slot:item.action="{ item }">
               <!-- <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon> -->
-              <v-icon small @click="undeleteItem(item)">mdi-delete</v-icon>
+              <v-icon  @click="undeleteItem(item)">mdi-file-restore</v-icon>
             </template>
 
             <!-- </v-dialog>           -->
@@ -49,7 +49,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 
@@ -180,15 +180,19 @@ export default {
     undeleteItem(item) {
       const index = this.reports.indexOf(item);
       this.loading = true;
-      confirm("Are you sure you want to restore this item?") &&
+      if (confirm("Are you sure you want to restore this item?")){
+        
         axios
-          .put("/api/v1/restore_report/" + item.id, {
-            headers: { Authorization: "Bearer " + this.AuthStr }
-          })
+          .post("/api/v1/restore_report/" + item.id,null, {
+            headers: { 
+              Authorization: 'Bearer ' + this.AuthStr,
+              "Content-Type": "application/json"
+                      }
+            })
           .then(
             response => {
               console.log("Inspection instance restored!");
-              this.setSnack(true, "Assignment restored successfully", "success");
+              this.setSnack(true, "Inspection restored successfully", "success");
               this.reports.splice(index, 1);   
               this.loading = false;
           
@@ -199,24 +203,9 @@ export default {
               this.loading = false;
             }
           );
+      }
     },
 
-    // close() {
-    //   this.dialog = false;
-    //   setTimeout(() => {
-    //     this.editedItem = Object.assign({}, this.defaultItem);
-    //     this.editedIndex = -1;
-    //   }, 300);
-    // },
-
-    // save() {
-    //   if (this.editedIndex > -1) {
-    //     Object.assign(this.reports[this.editedIndex], this.editedItem);
-    //   } else {
-    //     this.reports.push(this.editedItem);
-    //   }
-    //   this.close();
-    // }
   }
 };
 </script>
