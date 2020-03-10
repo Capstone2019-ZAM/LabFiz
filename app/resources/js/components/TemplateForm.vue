@@ -218,7 +218,7 @@ export default {
         ) {
           req.id = this.id;
           axios
-            .post("http://localhost/api/v1/template/" + this.id, req, {
+            .post("/api/v1/template/" + this.id, req, {
               headers: {
                 Authorization: "Bearer " + this.AuthStr,
                 "Content-Type": "application/json"
@@ -240,7 +240,7 @@ export default {
             );
         } else {
           axios
-            .post("http://localhost/api/v1/template", req, {
+            .post("/api/v1/template", req, {
               headers: {
                 Authorization: "Bearer " + this.AuthStr,
                 "Content-Type": "application/json"

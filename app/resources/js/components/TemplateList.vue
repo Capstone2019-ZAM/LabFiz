@@ -86,11 +86,11 @@ export default {
    methods: {
      navigate(id){
           if (id == null){
-          window.location.href = "http://localhost/template"
+          window.location.href = "/template"
    
           }
           else
-            window.location.href = "http://localhost/template/"+id
+            window.location.href = "/template/"+id
     },
     formattedDate(dt) {
       return dt
@@ -101,7 +101,7 @@ export default {
   mounted() {
     this.loading = true;
     axios
-      .get("http://localhost/api/v1/templates", {
+      .get("/api/v1/templates", {
         headers: { Authorization:'Bearer '+ this.AuthStr }
       })
       .then(
