@@ -1,6 +1,6 @@
 <template>
   <v-card
-  color="teal lighten-5"
+  color="teal lighten-3"
     md="4"
     sm="12"
     hover
