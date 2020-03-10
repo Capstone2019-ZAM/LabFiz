@@ -24,6 +24,9 @@ Vue.component('accountmanage-form', require('./components/AccountManagment.vue')
 Vue.component('issue-tracker', require('./components/IssueTracker.vue').default);
 Vue.component('account-manage', require('./components/AccountManager.vue').default);
 Vue.component('restore-table', require('./components/RestoreTable.vue').default);
+Vue.component('inspection-my-table', require('./components/InspectionMyTable.vue').default);
+Vue.component('inspection-my', require('./components/InspectionMy.vue').default);
+
 
 const app = new Vue({
     vuetify,
