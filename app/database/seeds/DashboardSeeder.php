@@ -31,10 +31,10 @@ class DashboardSeeder extends Seeder
 
         
         DB::table('dashboards')->insert([
-            'title' => "My Pending Inspections",
-            'desc' => "View outstanding inpsections",
+            'title' => "My Inspections",
+            'desc' => "View outstanding inspections",
             'img' =>    "mdi-clipboard-alert",
-            'link' => "/assignments",
+            'link' => "/myassignments",
             'accessible_to'=> 1, 
         ]);
 
