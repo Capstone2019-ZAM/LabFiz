@@ -44,7 +44,7 @@ class DashboardSeeder extends Seeder
             'desc' => "View and manage issues in workplace",
             'img' =>    "mdi-bug",
             'link' => "/issues",
-            'accessible_to'=> 1, 
+            'accessible_to'=> 2 , 
         ]);
 
         DB::table('dashboards')->insert([

@@ -96,7 +96,7 @@ class ReportService implements RestServiceContract
             return ['response' => $result, 'status' => 400];
         }
 
-        $schema = DB::table('Templates')->where('id',$request->template_id)->value('schema');
+        $schema = DB::table('templates')->where('id',$request->template_id)->value('schema');
         $sections = json_decode($schema);  
 
         // if the report has sections, populate the tables for sections and questions
