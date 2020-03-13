@@ -224,6 +224,7 @@ export default {
       window.location.href = "/" + point;
     },
     getNamebyId(t_id) {
+      debugger
       let n = this.assignables.find(x => x.id == t_id);
       return n.name;
     },
@@ -303,10 +304,12 @@ export default {
         })
         .then(
           response => {
-            console.log("comment posted!");
+            console.log("comment posted!");            
             response.data.data.user_name = this.getNamebyId(
-              response.data.data.assigned_to
+              response.data.data.user_id
             );
+            this.setSnack(true,"Comment Added","success" )
+            debugger
             this.comments.push(response.data.data);
             this.issue.latest_comment = "";
           },
@@ -394,6 +397,7 @@ export default {
 </script>
 <style>
 .scrollable {
+  max-height: 400px;
   /* height: 400px; */
   overflow: auto;
 }
