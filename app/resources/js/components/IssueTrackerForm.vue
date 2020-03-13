@@ -224,7 +224,6 @@ export default {
       window.location.href = "/" + point;
     },
     getNamebyId(t_id) {
-      debugger
       let n = this.assignables.find(x => x.id == t_id);
       return n.name;
     },
@@ -309,7 +308,6 @@ export default {
               response.data.data.user_id
             );
             this.setSnack(true,"Comment Added","success" )
-            debugger
             this.comments.push(response.data.data);
             this.issue.latest_comment = "";
           },

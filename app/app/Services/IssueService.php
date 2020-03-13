@@ -11,6 +11,8 @@ use App\User;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class IssueService implements RestServiceContract
 {
@@ -27,9 +29,14 @@ class IssueService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
+            
             $result['data'] = $this->issue_model->getById($id);
+            $assign_id =$result['data']['assigned_to'];            
+            $user_assigned = DB::table('users')->where('id',$assign_id)->first();
+            $user_name = $user_assigned->first_name . ' '. $user_assigned->last_name;
+            $result['data']['user_name'] =$user_name;
         } catch (Exception $ex) {
-            $result['message'] = 'Could not find issue record.';
+            $result['message'] = ' Could not find issue record.';
             return ['response' => $result, 'status' => 400];
         }
 
@@ -40,8 +47,26 @@ class IssueService implements RestServiceContract
 
     public function get_all()
     {
+        $user = Auth::guard('api')->user();  
+        $user_id = $user['id'];
+        $role = $user->getRoleNames();
+        
         $result = ['status' => '200 (Ok)', 'message' => 'All Issues retrieved successfully.', 'data' => ''];
-        $result['data'] = $this->issue_model->get();
+        if( $role[0]=="admin"){
+            $result['data'] = $this->issue_model->get();
+        }
+        else{
+            $result['data'] =DB::table('issues')->where('user_id', $user_id)->orWhere('assigned_to',$user_id)->get();
+            $issues = $result['data'];
+            foreach( $issues as $issue){
+                $assign_id =$issue->assigned_to;            
+                $user_assigned = DB::table('users')->where('id',$assign_id)->first();
+                $user_name = $user_assigned->first_name . ' '. $user_assigned->last_name;
+                $issue->user_name =$user_name;
+            }
+            
+            //$this->issue_model->where('user_id', $user_id)->orWhere('assigned_to',$user_id)->get();
+        }
         return ['response' => $result, 'status' => 200];
     }
 

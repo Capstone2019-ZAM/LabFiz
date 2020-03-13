@@ -135,30 +135,32 @@ export default {
         response => {
           console.log("fetch done!");
           this.temp_issues = response.data.data;
-          return axios.get("/api/users", {
-            headers: { Authorization: this.AuthStr }
-          });
+          this.issues = this.temp_issues;
+          this.loading = false;
+          // return axios.get("/api/users", {
+          //   headers: { Authorization: this.AuthStr }
+          // });
         },
         error => {
           console.log("fetch failed!");
           this.setSnack(true, "Failed to retrieve issue log", "error");
         }
-      )
-      .then(
-        response => {
-          console.log("user fetch done!");
-          this.users = response.data.data;
-          this.temp_issues.map(iss => {
-            iss.user_name = this.getNamebyId(iss.assigned_to);
-          });
-          this.issues = this.temp_issues;
-          this.loading = false;
-        },
-        error => {
-          console.log("user fetch failed!");
-          this.loading = false;
-        }
       );
+      // .then(
+      //   response => {
+      //     console.log("user fetch done!");
+      //     this.users = response.data.data;
+      //     this.temp_issues.map(iss => {
+      //       iss.user_name = this.getNamebyId(iss.assigned_to);
+      //     });
+          // this.issues = this.temp_issues;
+          // this.loading = false;
+      //   },
+      //   error => {
+      //     console.log("user fetch failed!");
+      //     this.loading = false;
+      //   }
+      // );
   }
 };
 </script>
