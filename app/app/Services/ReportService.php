@@ -66,7 +66,7 @@ class ReportService implements RestServiceContract
         $result = ['status' => '200 (Ok)', 'message' => 'All Deleted Reports retrieved successfully.', 'data' => ''];
        //TODO use onlyTrashed() with model
         //$result['data'] = $this->report_model->onlyTrashed()->get();
-        $result['data'] = DB::table('Reports')->whereNotNull('deleted_at')->get();
+        $result['data'] = DB::table('reports')->whereNotNull('deleted_at')->get();
         return ['response' => $result, 'status' => 200];
     }
 
@@ -162,7 +162,7 @@ class ReportService implements RestServiceContract
         if ( isset($request->status) ){
             try {
                 
-                DB::table('Reports')->where('id', $request->id)->update(['status' => $request->status]);              
+                DB::table('reports')->where('id', $request->id)->update(['status' => $request->status]);              
                 //$report =$this->report_model->getById($request->$id);
                 //dd($report);
                 $result['data']["status"]= $request->status;
@@ -226,7 +226,7 @@ class ReportService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            $report=DB::table('Reports')->where('id',$id)->update(['deleted_at'=>null]);            
+            $report=DB::table('reports')->where('id',$id)->update(['deleted_at'=>null]);            
             $result['data'] = $this->report_model->getById($id);
         } catch (Exception $ex) {
             $result['message'] = 'Could not find report record to delete.';
