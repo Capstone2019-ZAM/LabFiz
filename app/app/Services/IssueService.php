@@ -54,6 +54,13 @@ class IssueService implements RestServiceContract
         $result = ['status' => '200 (Ok)', 'message' => 'All Issues retrieved successfully.', 'data' => ''];
         if( $role[0]=="admin"){
             $result['data'] = $this->issue_model->get();
+            $issues = $result['data'];
+            foreach( $issues as $issue){
+                $assign_id =$issue->assigned_to;            
+                $user_assigned = DB::table('users')->where('id',$assign_id)->first();
+                $user_name = $user_assigned->first_name . ' '. $user_assigned->last_name;
+                $issue->user_name =$user_name;
+            }
         }
         else{
             $result['data'] =DB::table('issues')->where('user_id', $user_id)->orWhere('assigned_to',$user_id)->get();
