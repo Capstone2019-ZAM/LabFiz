@@ -35,7 +35,7 @@ class DashboardSeeder extends Seeder
             'desc' => "View outstanding inspections",
             'img' =>    "mdi-clipboard-alert",
             'link' => "/myassignments",
-            'accessible_to'=> 1, 
+            'accessible_to'=> 2, 
         ]);
 
         
