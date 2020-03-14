@@ -23,7 +23,7 @@ class RolesSeeder extends Seeder
             'create issue', 'view local issues', 'view all issues'
         ];
 
-        $inspector_permissions = [
+        $inspector_permissions = [ 'view all users',
             'create report', 'view local report', 'delete report',
             'create inspection', 'view local inspections', 'delete inspection',
             'create issue', 'view local issues',

@@ -52,8 +52,6 @@ class IssueService implements RestServiceContract
         $user = Auth::guard('api')->user();  
         $user_id = $user['id'];
         $role = $user->getRoleNames();
-        //dd($role[0] . $user_id);
-
         $result = ['status' => '200 (Ok)', 'message' => 'All Issues retrieved successfully.', 'data' => ''];
         if( $role[0]=="admin"){
             $result['data'] = $this->issue_model->get();

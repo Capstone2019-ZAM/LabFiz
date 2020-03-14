@@ -28,7 +28,8 @@ class AdminOnly
      */
     public function handle($request, Closure $next)
     {
-        if(!Auth::guard('api')->user()->hasRole('admin'))
+        if(!Auth::guard('api')->user()->hasRole('admin') 
+        && !Auth::guard('api')->user()->hasPermissionTo('view all users') )
             return response()->json([
                 'status' => '401 (Unauthorized)',
                 'message' => 'Only admins have authorized access for this route.',
