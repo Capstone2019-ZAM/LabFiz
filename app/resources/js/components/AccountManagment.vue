@@ -210,6 +210,7 @@ export default {
               
               console.log("User account created!");
               this.setSnack(true, "Account created successfully", "success");
+              window.location.href = '/accounts'
 
             },
             error => {              
