@@ -29,12 +29,14 @@ class IssueService implements RestServiceContract
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
         try {
-            
             $result['data'] = $this->issue_model->getById($id);
             $assign_id =$result['data']['assigned_to'];            
             $user_assigned = DB::table('users')->where('id',$assign_id)->first();
             $user_name = $user_assigned->first_name . ' '. $user_assigned->last_name;
             $result['data']['user_name'] =$user_name;
+            $users = DB::table('users')->select('id','first_name','last_name')->get();
+            $result['data']['users'] =$users;
+
         } catch (Exception $ex) {
             $result['message'] = ' Could not find issue record.';
             return ['response' => $result, 'status' => 400];
@@ -50,7 +52,8 @@ class IssueService implements RestServiceContract
         $user = Auth::guard('api')->user();  
         $user_id = $user['id'];
         $role = $user->getRoleNames();
-        
+        //dd($role[0] . $user_id);
+
         $result = ['status' => '200 (Ok)', 'message' => 'All Issues retrieved successfully.', 'data' => ''];
         if( $role[0]=="admin"){
             $result['data'] = $this->issue_model->get();

@@ -328,18 +328,18 @@ export default {
           axios.get("/api/v1/labs", {
             headers: { Authorization: "Bearer " + this.AuthStr }
           }),
-          axios.get("/api/users", {
-            headers: { Authorization: "Bearer " + this.AuthStr }
-          }),
+          // axios.get("/api/users", {
+          //   headers: { Authorization: "Bearer " + this.AuthStr }
+          // }),
           axios.get("/api/v1/comment/" + this.id, {
             headers: { Authorization: "Bearer " + this.AuthStr }
           })
         ])
         .then(
           axios.spread(
-            (issueResp, labResp, userResp, commentResp) => {
+            (issueResp, labResp,  commentResp) => { //userResp
               this.labs = labResp.data.data.map(x => x.location);
-              this.assignables = userResp.data.data.map(x => {
+              this.assignables = issueResp.data.data.users.map(x => {  //userResp
                 let t = Object();
                 t.name = x.first_name + " " + x.last_name;
                 t.id = x.id;
