@@ -14,7 +14,7 @@
         <span class="headline">Account Tracker</span>
       </v-card-title>
       <v-divider></v-divider>
-      <v-data-table :headers="headers" :items="items">
+      <v-data-table :headers="headers" :items="items" :loading="loading">
         <template v-slot:item.action="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
           <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
@@ -36,6 +36,7 @@ export default {
         timeout: 3000,
         color: "black"
       },
+      loading: true,
       AuthStr: localStorage.getItem("api"),
       headers: [
         {
@@ -89,11 +90,23 @@ export default {
       this.alert.color = col;
     },
     deleteItem(item) {
-      this.setSnack(true, "Account deleted successfully", "success");
+      axios.delete("/api/user/"+item.id,{ headers:{ Authorization: "Bearer " + this.AuthStr }})
+      .then(
+        response =>{
+          this.setSnack(true, "Account deleted successfully", "success");
+          location.reload();
+        },
+        error => {
+          console.log("fetch failed!");
+          this.setSnack(true, "Unable to delete account. Ensure user is not assigned to any issue or inspection", "error");
+        }                
+      );
+      
 
     }
   },
   mounted() {
+    this.loading = true;
     axios
       .get("/api/users", {
         headers: { Authorization: "Bearer " + this.AuthStr }
@@ -104,16 +117,22 @@ export default {
           var temp_items;
           temp_items = response.data.data;
           this.items = temp_items.map( function(el){
+            debugger
+            if ( el.roles.length !=0){
               let r = el.roles[0].name;
               if ( r=='admin'){
                 r='Coordinator'
               }
               el.role = r.toUpperCase();
+            }
           })
           this.items = temp_items;
+          this.loading=false;
         },
         error => {
+          this.setSnack(true, "Unable to retrieve users", "error");
           console.log("fetch failed!");
+          this.loading=false;
         }
       );
   }

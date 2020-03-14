@@ -216,13 +216,68 @@ class UserService implements RestServiceContract
         return ['response' => $result, 'status' => 200];
     }
 
-    public function create(FormRequest $request)
+    public function create(FormRequest $request){
+
+    }
+
+    public function update(RegisterRequest $request)
     {
-        // TODO: Implement create() method.
+        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+
+        try {
+            $user = $this->user_model->updateOrCreate(['id'=>$request->id],
+                [
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    //'password' => Hash::make($request->password),
+                    'department' => $request->department,
+                    'email' => $request->email
+                ]);
+
+            // remove all user role and assign new --refactor
+            $user->removeRole('admin');
+            $user->removeRole('student');
+            $user->removeRole('inspector');
+            $user->assignRole($this->role_model->where('name', $request->role)->first()->id);
+
+            $result['data'] = [
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
+                //'password' => $user->password,
+                'roles' => $user->getRoleNames(),
+                'department' => $user->department,
+                'email' => $user->email,
+            ];
+
+        } catch (Exception $ex) {
+            $result['message'] = $ex->getMessage();
+            return ['response' => $result, 'status' => 400];
+        }
+
+        $result['status'] = '200 (Ok)';
+        $result['message'] = 'User updated successfully';
+        return ['response' => $result, 'status' => 200];
     }
 
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        
+        $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
+
+        try {
+            $current_user = Auth::guard('api')->user();
+            if ( $current_user->id != $id){
+                $user = $this->user_model->deleteById($id);
+            }
+        } catch (Exception $ex) {
+            $result['message'] = $ex->getMessage();
+            return ['response' => $result, 'status' => 400];
+        }
+
+        $result['status'] = '200 (Ok)';
+        $result['message'] = 'User deleted successfully';
+        return ['response' => $result, 'status' => 200];
+    
+
     }
 }

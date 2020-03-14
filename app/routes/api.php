@@ -22,6 +22,8 @@ Route::group([
     Route::post('/user/refresh', 'Api\Auth\LoginController@refresh');
     Route::post('/user/register', 'Api\Auth\LoginController@register');
     Route::get('/user/{id}','Api\Auth\LoginController@get');
+    Route::post('/user/{id}','Api\Auth\LoginController@update');
+    Route::delete('/user/{id}','Api\Auth\LoginController@delete');
     Route::get('/users', 'Api\Auth\LoginController@get_all')->middleware(['admin_only']);
     Route::post('/user/logout', 'Api\Auth\LoginController@logout');
     Route::get('/user',function(Request $request){

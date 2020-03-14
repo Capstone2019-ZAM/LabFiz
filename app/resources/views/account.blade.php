@@ -9,5 +9,3 @@
     </v-app>
 </div>
 @endsection
-
-v

@@ -38,6 +38,17 @@ class LoginController extends Controller
         $res = $this->user_service->register($request);
         return response($res['response'], $res['status']);
     }
+    public function update(RegisterRequest $request)
+    {
+        $res = $this->user_service->update($request);
+        return response($res['response'], $res['status']);
+    }
+
+    public function delete($id)
+    {
+        $res = $this->user_service->delete($id);
+        return response($res['response'], $res['status']);
+    }
 
     public function refresh()
     {
