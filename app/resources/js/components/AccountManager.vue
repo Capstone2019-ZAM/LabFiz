@@ -54,11 +54,11 @@ export default {
       items: [
         {
           id: 1,
-          first_name: "Robert",
-          last_name: "Junior",
-          role: "Inspector",
-          department: "Engineering",
-          email: "est@test.com",
+          first_name: "",
+          last_name: "",
+          role: "",
+          department: "",
+          email: "",
           created_at: null
         }
       ],
@@ -101,8 +101,16 @@ export default {
       .then(
         response => {
           console.log("fetch done!");
-          this.items = response.data.data;
-          //TODO : Add map to get name of role from roles
+          var temp_items;
+          temp_items = response.data.data;
+          this.items = temp_items.map( function(el){
+              let r = el.roles[0].name;
+              if ( r=='admin'){
+                r='Coordinator'
+              }
+              el.role = r.toUpperCase();
+          })
+          this.items = temp_items;
         },
         error => {
           console.log("fetch failed!");
