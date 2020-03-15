@@ -1,4 +1,5 @@
 <template>
+<div>
 <v-row cols="12" align="start" justify="center">
   <v-col md="9">
   <v-container class="pa5" >
@@ -13,6 +14,7 @@
   </v-container>
   </v-col>
 </v-row>
+</div>
 </template>
 
 <script>

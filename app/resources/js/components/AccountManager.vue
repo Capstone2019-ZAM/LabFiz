@@ -117,7 +117,7 @@ export default {
           var temp_items;
           temp_items = response.data.data;
           this.items = temp_items.map( function(el){
-            debugger
+            
             if ( el.roles.length !=0){
               let r = el.roles[0].name;
               if ( r=='admin'){
