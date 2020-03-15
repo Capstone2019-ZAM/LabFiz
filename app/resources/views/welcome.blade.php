@@ -1,100 +1,276 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app') --}}
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/welcome.css')}}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- header -->
-    <div class="header-container text-white text-center pt-10" style="padding-top:-20px; margin-top:-20px">
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-xl-9 mx-auto">
-                    <h1>Welcome to, ZAM Lab Solutions . This is a experimental labratory safety inspection
-                        application.</h1>
-                </div>
-            </div>
-        </div>
-    </div>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Panels  -->
-    <section class="features-icons bg-light text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex">
-                            <i class="icon-screen-desktop m-auto text-primary"></i>
-                        </div>
-                        <img width="100px" height="100px"
-                             src="https://cdn2.iconfinder.com/data/icons/reports-and-analytics-7/49/9-512.png">
-                        <h3>Create Inspection Reports</h3>
-                        <p class="lead mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo elit at
-                            imperdiet dui. Eu feugiat pretium nibh ipsum consequat.</p>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+        /* ---- particles.js config ---- */
+window.onload= function(){
+particlesJS("particles-js",
+{
+  "particles": {
+    "number": {
+      "value": 80,
+      "density": {
+        "enable": true,
+        "value_area": 800
+      }
+    },
+    "color": {
+      "value": "#008080"
+    },
+    "shape": {
+      "type": "polygon",
+      "stroke": {
+        "width": 0,
+        "color": "#000000"
+      },
+      "polygon": {
+        "nb_sides": 4
+      },
+      "image": {
+        "src": "img/github.svg",
+        "width": 100,
+        "height": 100
+      }
+    },
+    "opacity": {
+      "value": 0.5,
+      "random": false,
+      "anim": {
+        "enable": false,
+        "speed": 1,
+        "opacity_min": 0.1,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": 3,
+      "random": true,
+      "anim": {
+        "enable": false,
+        "speed": 40,
+        "size_min": 0.1,
+        "sync": false
+      }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 126.26362266116361,
+      "color": "#988282",
+      "opacity": 0.4,
+      "width": 1.4204657549380908
+    },
+    "move": {
+      "enable": true,
+      "speed": 1.5,
+      "direction": "top-right",
+      "random": true,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false,
+      "attract": {
+        "enable": true,
+        "rotateX": 600,
+        "rotateY": 1200
+      }
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        "enable": false,
+        "mode": "repulse"
+      },
+      "onclick": {
+        "enable": false,
+        "mode": "push"
+      },
+      "resize": true
+    },
+    "modes": {
+      "grab": {
+        "distance": 400,
+        "line_linked": {
+          "opacity": 1
+        }
+      },
+      "bubble": {
+        "distance": 400,
+        "size": 40,
+        "duration": 2,
+        "opacity": 8,
+        "speed": 3
+      },
+      "repulse": {
+        "distance": 200,
+        "duration": 0.4
+      },
+      "push": {
+        "particles_nb": 4
+      },
+      "remove": {
+        "particles_nb": 2
+      }
+    }
+  },
+  "retina_detect": true
+}
+);
+}
+
+
+/* ---- stats.js config ---- */
+
+// var count_particles, stats, update;
+// stats = new Stats;
+// stats.setMode(0);
+// stats.domElement.style.position = 'absolute';
+// stats.domElement.style.left = '0px';
+// stats.domElement.style.top = '0px';
+// document.body.appendChild(stats.domElement);
+// count_particles = document.querySelector('.js-count-particles');
+// update = function() {
+//   stats.begin();
+//   stats.end();
+//   if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+//     count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+//   }
+//   requestAnimationFrame(update);
+// };
+// requestAnimationFrame(update);
+        </script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- Styles -->
+    <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
+
+    @include('partials.head')
+</head>
+<body>
+<div id="app">
+    
+    <main class="py-4">
+        @yield('content')
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('css/welcome.css')}}">
+
+        <div id="particles-js"></div>
+
+        <!-- header -->
+
+           
+        <!-- Panels  -->
+        <section class="features-icons  text-center">
+
+            <div class="container">
+                <div class="row ">
+                    <img class="col-lg-4" src= "{{ asset('images/labfiz_logo_hd.png') }}" alt="LabFiz"  >
+                    <div class="col-lg-4">
+                        <h1 class="col-lg-4 display-2" >LabFiz</h1>
+                        <h2 class="float-lg-left display-5">Laboratory Safety and<br> Inspection Made Easy</h2>
+                        <button type="button" class="btn btn-dark btn-lg" onclick="window.location.href='/login'">Get Started</button>
+
+
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex">
-                            <i class="icon-layers m-auto text-primary"></i>
-                        </div>
-                        <img width="100px" height="100px"
-                             src="https://cdn4.iconfinder.com/data/icons/seo-internet/512/10-512.png">
-                        <h3>Live issue tracking</h3>
-                        <p class="lead mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo elit at
-                            imperdiet dui. Eu feugiat pretium nibh ipsum consequat.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex">
-                            <i class="icon-check m-auto text-primary"></i>
-                        </div>
-                        <img width="100px" height="100px" src="http://cdn.onlinewebfonts.com/svg/img_326017.png">
-                        <h3>Account managment</h3>
-                        <p class="lead mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo elit at
-                            imperdiet dui. Eu feugiat pretium nibh ipsum consequat.</p>
-                    </div>
-                </div>
             </div>
-        </div>
-    </section>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="row my-5">
+                <div class="col-lg-4">
 
-    <!-- Image Showcases -->
-    <section class="showcase">
-        <div class="container-fluid p-0">
-            <div class="row no-gutters">
-                <div class="col-lg-6 order-lg-2 text-white showcase-img"
-                     style="background-image: url('http://www.annualreports.com/HostedData/CompanyHeader/NASDAQ_CDXC.jpg')"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2>Inspection Reports</h2>
-                    <p class="lead mb-0">Dictum fusce ut placerat orci nulla. Consequat ac felis donec et odio
-                        pellentesque diam. Arcu felis bibendum ut tristique et egestas quis ipsum suspendisse. Justo
-                        eget magna fermentum iaculis eu non diam. </p>
+                <div class="card mx-2">
+                    <h5 class="card-header">Custom Templates</h5>
+                    <div class="card-body" >
+                      <h5 class="card-title">Create your own custom templates</h5>
+                      <img class="img-fluid" src= "{{ asset('images/undraw_file.svg') }}"  alt="LabFiz"   >
+
+                      <h6 class="card-text ft-desc">Create your own custom checklists and inspection templates as your orginization demands.</h6>
+                      
+                    </div>
+                  </div>
                 </div>
+                  <div class="col-lg-4">
+                  <div class="card">
+                    <h5 class="card-header">Manage Inspections</h5>
+                    <div class="card-body" >
+                      <h5 class="card-title">Create and assign inspections with ease</h5>
+                      <img class="img-fluid"src= "{{ asset('images/undraw_collab.svg') }}" alt="LabFiz"  >
+
+                      <h6 class="card-text ft-desc">You can create assignments for your team member and track their progress through reports with ease.</h6>
+                      
+                    </div>
+                  </div>
+                  </div>
+                  <div class="col-lg-4">
+                  <div class="card">
+                    <h5 class="card-header">Track Issues</h5>
+                    <div class="card-body" >
+                      <h5 class="card-title ">Log and track issues and collaborate with team</h5>
+                      <img class="img-fluid" src= "{{ asset('images/undraw1.svg') }}" alt="LabFiz"  >
+
+                      <h6 class="card-text ft-desc">Something went wrong :/ Create an issue log and track its progress easily.</h6>
+                      
+                    </div>
+
+                  </div>
+                  
             </div>
-            <div class="row no-gutters">
-                <div class="col-lg-6 text-white showcase-img"
-                     style="  transform:rotateY(180deg); background-image: url('http://www.annualreports.com/HostedData/CompanyHeader/NASDAQ_CDXC.jpg');"></div>
-                <div class="col-lg-6 my-auto showcase-text">
-                    <h2>Issue Tracking</h2>
-                    <p class="lead mb-0">Dictum fusce ut placerat orci nulla. Consequat ac felis donec et odio
-                        pellentesque diam. Arcu felis bibendum ut tristique et egestas quis ipsum suspendisse. Justo
-                        eget magna fermentum iaculis eu non diam. </p>
+            <div class="col-lg-4">
+
+                <div class="card mx-2">
+                    <h5 class="card-header">Account Management</h5>
+                    <div class="card-body" >
+                      <h5 class="card-title">Easily create and assign access to your team mates</h5>
+                      <img class="img-fluid" src= "{{ asset('images/undraw_team.svg') }}" alt="LabFiz"  >
+
+                      <h6 class="card-text ft-desc">Manage your team and grant them roles as they need.</h6>
+                      
+                    </div>
+                  </div>
                 </div>
+
+                <div class="col-lg-4">
+
+                    <div class="card mx-2">
+                        <h5 class="card-header">LabFiz is Open Source!</h5>
+                        <div class="card-body" >
+                          <h5 class="card-title">Found an issue or have an idea? Fork us on <a href="https://github.com/Capstone2019-ZAM/Capstone">Github</a></h5>
+                          <img class="img-fluid" src= "{{ asset('images/undraw_code.svg') }}" alt="LabFiz"  >
+    
+                          <h6 class="card-text ft-desc">And you are free to modify and use our code without any strings attached.</h6>
+                          
+                        </div>
+                      </div>
+                    </div>
             </div>
-            <div class="row no-gutters">
-                <div class="col-lg-6 order-lg-2 text-white showcase-img"
-                     style="background-image: url(http://www.annualreports.com/HostedData/CompanyHeader/NASDAQ_CDXC.jpg);"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2>Account Managment</h2>
-                    <p class="lead mb-0">Dictum fusce ut placerat orci nulla. Consequat ac felis donec et odio
-                        pellentesque diam. Arcu felis bibendum ut tristique et egestas quis ipsum suspendisse. Justo
-                        eget magna fermentum iaculis eu non diam. </p>
-                </div>
-            </div>
-        </div>
-    </section>
-@endsection
+        </section>
+    
+        <!-- Image Showcases -->
+      
+    </main>
+</div>
+@include('partials.footer')
+@yield('content-js-files')
+</body>
+</html>
+

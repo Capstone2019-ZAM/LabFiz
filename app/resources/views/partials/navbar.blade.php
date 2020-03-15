@@ -50,15 +50,16 @@
 
         <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto links">
-                @if(Request::path() !== "/")
+                @if(Request::path() !== "/" && Request::path() !== "login" )
                     <a class="mt-2 nav-link" href="{{ url('/dashboard') }}">Home</a>
                 @endif
+              
             <!-- Authentication Links -->
                 @guest
-                    <a class="mt-2 nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    @if (Route::has('register'))
+                    {{-- <a class="mt-2 nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> --}}
+                    {{-- @if (Route::has('register'))
                         <a class="mt-2 nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    @endif
+                    @endif --}}
                 @else
                     {{-- @if(Request::path() !== "home")
                         <a class="mt-2 nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
