@@ -1,4 +1,7 @@
-<img src="Capstone/Documentation/Logo/labfiz_logo_hd.png">
+<p align="center">
+<img src="Documentation/Logo/labfiz_logo_hd.png" height="400" width="460">
+ </p>
+ 
 # Capstone
 ENSE 2019 ZAM Group Capstone 
 
