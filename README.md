@@ -1,3 +1,4 @@
+<img src="Capstone/Documentation/Logo/labfiz_logo_hd.png">
 # Capstone
 ENSE 2019 ZAM Group Capstone 
 
