@@ -17,6 +17,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+
 
 class UserService implements RestServiceContract
 {
@@ -64,6 +66,7 @@ class UserService implements RestServiceContract
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => ''];
 
+        
         try {
             $user = $this->user_model->create(
                 [
@@ -76,6 +79,19 @@ class UserService implements RestServiceContract
 
             // bind user role
             $user->assignRole($this->role_model->where('name', $request->role)->first()->id);
+
+            $to_name = $request->first_name;
+            $to_email = $request->email;
+            $data = array('name' => $request->first_name, 
+                           'password'=>$request->password,
+                            'email'=>$request->email);
+   
+            Mail::send('emails.mail', $data,
+                 function($message) use ($to_name, $to_email) {
+                    $message->to($to_email, $to_name)->subject('LabFiz Registration');
+                    $message->from('labfiz.noreply@gmail.com','LabFiz Admin');
+                });
+   
 
             $result['data'] = [
                 'first_name' => $user->first_name,
@@ -93,6 +109,9 @@ class UserService implements RestServiceContract
 
         $result['status'] = '200 (Ok)';
         $result['message'] = 'User registered successfully';
+
+
+       
         return ['response' => $result, 'status' => 200];
     }
 
