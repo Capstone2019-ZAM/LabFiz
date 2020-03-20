@@ -141,6 +141,15 @@ particlesJS("particles-js",
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <!-- Styles -->
+    <style>
+      .cimg{
+        max-width: 60% !important;
+        max-height:200px;
+      }
+      .br-lg{
+        height: 200px;
+      }
+      </style>
     <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
 
     @include('partials.head')
@@ -163,19 +172,26 @@ particlesJS("particles-js",
 
             <div class="container">
                 <div class="row ">
-                    <img class="col-lg-4" src= "{{ asset('images/labfiz_logo_hd.png') }}" alt="LabFiz"  >
                     <div class="col-lg-4">
-                        <h1 class="col-lg-4 display-2" >LabFiz</h1>
-                        <h2 class="float-lg-left display-5">Laboratory Safety and<br> Inspection Made Easy</h2>
-                        <button type="button" class="btn btn-dark btn-lg" onclick="window.location.href='/login'">Get Started</button>
-
+                    <img  src= "{{ asset('images/labfiz_logo_hd.png') }}" alt="LabFiz"  style="max-width: 60%;">
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="row ">  
+                      <h1 class="display-2" >LabFiz</h1>
+                      </div>
+                      <div class="row ">
+                        <h2 class="display-5">Laboratory Safety and
+                          <br> Inspection Made Easy</h2>
+                      </div>
+                      <div class="row ">
+                        <button type="button" class="btn btn-dark btn-lg " onclick="window.location.href='/login'">Get Started</button>
+                      </div>
 
                     </div>
             </div>
-            <br>
-            <br>
-            <br>
-            <br>
+            <div class="br-lg">
+            </div>
+            
             <div class="row my-5">
                 <div class="col-lg-4">
 
@@ -183,7 +199,7 @@ particlesJS("particles-js",
                     <h5 class="card-header">Custom Templates</h5>
                     <div class="card-body" >
                       <h5 class="card-title">Create your own custom templates</h5>
-                      <img class="img-fluid" src= "{{ asset('images/undraw_file.svg') }}"  alt="LabFiz"   >
+                      <img class="img-fluid cimg" src= "{{ asset('images/undraw_file.svg') }}"  alt="LabFiz"   >
 
                       <h6 class="card-text ft-desc">Create your own custom checklists and inspection templates as your orginization demands.</h6>
                       
@@ -191,11 +207,11 @@ particlesJS("particles-js",
                   </div>
                 </div>
                   <div class="col-lg-4">
-                  <div class="card">
+                  <div class="card mx-2" >
                     <h5 class="card-header">Manage Inspections</h5>
                     <div class="card-body" >
                       <h5 class="card-title">Create and assign inspections with ease</h5>
-                      <img class="img-fluid"src= "{{ asset('images/undraw_collab.svg') }}" alt="LabFiz"  >
+                      <img class="img-fluid cimg"src= "{{ asset('images/undraw_collab.svg') }}" alt="LabFiz"    >
 
                       <h6 class="card-text ft-desc">You can create assignments for your team member and track their progress through reports with ease.</h6>
                       
@@ -203,11 +219,11 @@ particlesJS("particles-js",
                   </div>
                   </div>
                   <div class="col-lg-4">
-                  <div class="card">
+                  <div class="card mx-2">
                     <h5 class="card-header">Track Issues</h5>
                     <div class="card-body" >
                       <h5 class="card-title ">Log and track issues and collaborate with team</h5>
-                      <img class="img-fluid" src= "{{ asset('images/undraw1.svg') }}" alt="LabFiz"  >
+                      <img class="img-fluid cimg" src= "{{ asset('images/undraw1.svg') }}" alt="LabFiz"     >
 
                       <h6 class="card-text ft-desc">Something went wrong :/ Create an issue log and track its progress easily.</h6>
                       
@@ -222,7 +238,7 @@ particlesJS("particles-js",
                     <h5 class="card-header">Account Management</h5>
                     <div class="card-body" >
                       <h5 class="card-title">Easily create and assign access to your team mates</h5>
-                      <img class="img-fluid" src= "{{ asset('images/undraw_team.svg') }}" alt="LabFiz"  >
+                      <img class="img-fluid cimg" src= "{{ asset('images/undraw_team.svg') }}" alt="LabFiz"     >
 
                       <h6 class="card-text ft-desc">Manage your team and grant them roles as they need.</h6>
                       
@@ -236,7 +252,7 @@ particlesJS("particles-js",
                         <h5 class="card-header">LabFiz is Open Source!</h5>
                         <div class="card-body" >
                           <h5 class="card-title">Found an issue or have an idea? Fork us on <a href="https://github.com/Capstone2019-ZAM/Capstone">Github</a></h5>
-                          <img class="img-fluid" src= "{{ asset('images/undraw_code.svg') }}" alt="LabFiz"  >
+                          <img class="img-fluid cimg" src= "{{ asset('images/undraw_code.svg') }}" alt="LabFiz"     >
     
                           <h6 class="card-text ft-desc">And you are free to modify and use our code without any strings attached.</h6>
                           
