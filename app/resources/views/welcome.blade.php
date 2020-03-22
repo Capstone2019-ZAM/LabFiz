@@ -149,6 +149,31 @@ particlesJS("particles-js",
       .br-lg{
         height: 200px;
       }
+      @media only screen and (max-width: 600px) {
+        .row {
+            justify-content: center;
+        }
+        .t2{
+          text-align: center;
+        }
+        }
+        
+        @media only screen and (min-width: 601px) and (max-width: 980px) {
+        .row {
+            justify-content: center;
+        }
+        .t2{
+          text-align: center !important;
+        }
+        }
+        @media only screen and (min-width: 1000px) {
+        .row {
+            justify-content: left;
+        }
+        .t2{
+          text-align: left !important;
+        }
+        }
       </style>
     <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
 
@@ -180,8 +205,8 @@ particlesJS("particles-js",
                       <h1 class="display-2" >LabFiz</h1>
                       </div>
                       <div class="row ">
-                        <h2 class="display-5">Laboratory Safety and
-                          <br> Inspection Made Easy</h2>
+                        <h2 class="display-5 t2">Laboratory Safety and
+                           Inspection Made Easy</h2>
                       </div>
                       <div class="row ">
                         <button type="button" class="btn btn-dark btn-lg " onclick="window.location.href='/login'">Get Started</button>

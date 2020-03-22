@@ -1,20 +1,10 @@
- {{-- <style>
-     .links > a {
-        color: #636b6f;
-        padding: 0 25px;
-        font-size: 15px;
-        font-weight: 600;
-        letter-spacing: .1rem;
-        text-decoration: none;
-        text-transform: uppercase;
-    } 
-</style>  --}}
+
 
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src= "{{ asset('images/labfiz_logo_200.png') }}" alt="LabFiz"  height="50" width="50">
-            <b>LabFiz</b> | <img src= "{{ asset('images/ur_logo.png') }}" alt="U of R"  height="50" width="40"> University of Regina
+            <b>LabFiz</b>  <span class="uni"> | <img src= "{{ asset('images/ur_logo.png') }}" alt="U of R"  height="50" width="40"> University of Regina</span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -61,9 +51,7 @@
                         <a class="mt-2 nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif --}}
                 @else
-                    {{-- @if(Request::path() !== "home")
-                        <a class="mt-2 nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
-                    @endif --}}
+                    
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle mt-2" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -72,8 +60,7 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                               onclick="logout();">
                                 {{ __('Logout') }}
                             </a>
 

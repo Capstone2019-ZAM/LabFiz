@@ -225,7 +225,6 @@ export default {
       }
     },
     nextSection() {
-      debugger;
       if (this.sctn_index != this.master_sctn.sections.length - 1) {
         this.active_sctn = this.master_sctn.sections[this.sctn_index + 1];
         this.sctn_index++;

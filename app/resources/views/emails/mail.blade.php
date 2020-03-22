@@ -21,6 +21,8 @@
             align-content: center;
             justify-content: center;
             justify-items: center;
+            max-width: fit-content;
+
 
         }
 
@@ -45,8 +47,8 @@
 
                 <div id="msg">
                     <p> Hey {{$name}}, </p>
-                    <p> Your account has been created! Please use these credentials to log in <a
-                            href='www.labfiz.com/login'>www.labfiz.com</a>.</p>
+                    <p> Your account has been created! Please use these credentials to log in
+                         <a href="www.labfiz.com/login"> www.labfiz.com</a>.</p>
                     <strong>
                         <p>
                             {{$email}}
@@ -54,8 +56,7 @@
                     </strong>
                     <p>
                         Regards,
-                    </p>
-                    <p>
+                    <br>
                         LabFiz Admin
                     </p>
                 </div>
