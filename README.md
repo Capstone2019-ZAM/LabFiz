@@ -3,7 +3,7 @@
  </p>
  
 # Capstone
-ENSE 2019 ZAM Group Capstone 
+2020 Software Capstone 
 
 # ZAM
 Contributors: 
@@ -13,7 +13,7 @@ Contributors:
  
 
 # Objective
- Our objective is to create a web application that will serve as a platform for lab training and safety inspection for educational institutions.
+ Our objective is to create a web application that will serve as a platform for lab training and safety inspection for educational institutions. 
 
 # Features
   - Lab inspectors will be able to record their inspection reports online
@@ -30,7 +30,8 @@ Contributors:
  - [User Stories](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/User%20Stories.xlsx)
  - [Wireframes](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Wireframe%20-%20Coordinator%20(2).svg)
  - [APi.md](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/API.md)
+ - [System Architecture](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/System%20Architectural%20V2%20(2).png)
  
  # Screenshots
-  - [Asana](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Screenshot3..JPG)
+  - [Asana](https://github.com/Capstone2019-ZAM/Capstone/tree/master/Documentation/Asana%20Screenshots)
  
