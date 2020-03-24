@@ -26,7 +26,7 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => array('required', 'regex:/^[\s\w-]*$/'),
+            'content' => array('required', 'regex:/^[\s\w!-@#$^_:,.]*$/', 'max:250'),
             'issue_id' => array('required', 'int')
         ];
     }

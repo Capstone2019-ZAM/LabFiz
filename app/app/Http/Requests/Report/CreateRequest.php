@@ -38,8 +38,8 @@ class CreateRequest extends FormRequest
             // 'sections.*.qs' => array('required_with:sections.*', 'array'),
             // 'sections.*.qs.*' => array('required_with:sections.qs', 'array'),
             // 'sections.*.qs.*.template_id' => array('required', 'int'),
-            // 'sections.*.qs.*.answer' => array('required', 'string'),
-            // 'sections.*.qs.*.description' => array('required', 'string'),
+             'sections.*.qs.*.answer' => array('required', 'int'),
+             'sections.*.qs.*.description' => array('sometimes', 'regex:/^[\s\w!-@#$^_:,.]*$/', 'max:250'),
         ];
     }
 

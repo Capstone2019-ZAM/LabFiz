@@ -61,9 +61,8 @@ class CommentController extends Controller
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
         $header = $request->header('Authorization');
-       // $user = $this->model_user->getByColumn($header, 'api_token');
-        $user = Auth::guard('api')->user();
-        //$issue = $this->model_issue->getById($request->id);
+       
+        $user = Auth::guard('api')->user();        
         try {
             $result['data'] = $this->model_comment->create(
                 [
