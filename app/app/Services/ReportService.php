@@ -74,7 +74,6 @@ class ReportService implements RestServiceContract
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
         $user = Auth::guard('api')->user();
-        //$sections = $request->sections;
 
         // create the report
         try {
@@ -100,7 +99,6 @@ class ReportService implements RestServiceContract
         $sections = json_decode($schema);  
 
         // if the report has sections, populate the tables for sections and questions
-        // if ($sections) {
             foreach ($sections as $sect_key => $sect_val) {
                 // create the section
                 try {
@@ -123,7 +121,6 @@ class ReportService implements RestServiceContract
                 // create any questions
                 foreach ($sect_val->questions as $question_key => $question_val) {
                     try {
-                           // dd($question_val);     
                         $question = $this->report_question_model->updateOrCreate(
                             [
                                 'report_section_id' => $section->id,
@@ -163,8 +160,7 @@ class ReportService implements RestServiceContract
             try {
                 
                 DB::table('reports')->where('id', $request->id)->update(['status' => $request->status]);              
-                //$report =$this->report_model->getById($request->$id);
-                //dd($report);
+   
                 $result['data']["status"]= $request->status;
             } catch (Exception $ex) {
                 $result['message'] = $ex->getMessage();
@@ -179,7 +175,6 @@ class ReportService implements RestServiceContract
                 $section = (object)$section;                
                 foreach($section->questions as $q){
                     $q= (object)$q;
-                    // dd( $q);
                     $question = $this->report_question_model->updateOrCreate(
                         [
                             'report_section_id' => $q->report_section_id,
