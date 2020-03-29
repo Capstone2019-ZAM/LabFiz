@@ -13,6 +13,7 @@ use App\User;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 //TODO : remove this import and its usage with models
 use Illuminate\Support\Facades\DB;
 
@@ -88,6 +89,19 @@ class ReportService implements RestServiceContract
                     'due_date' => $request->due_date
                 ]
             );
+
+            $to = User::where('id',$request->assigned_to)->get(['first_name','email']);
+            $to_name = $to[0]->first_name;
+            $to_email = $to[0]->email;
+            $data = array('name' => $to_name, 'lab'=>$request->lab,
+                            'email'=>$to_email);
+   
+            Mail::send('emails.assign', $data,
+                 function($message) use ($to_name, $to_email) {
+                    $message->to($to_email, $to_name)->subject('Inspection Assigned');
+                    $message->from('labfiz.noreply@gmail.com','LabFiz Admin');
+                });
+   
 
             $result['data'] = $report;
         } catch (Exception $ex) {
