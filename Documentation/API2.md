@@ -1,8 +1,9 @@
-
-<h1  align="center">
+<h1 align="center">
 API Documentation
 <br><br>
-<a  href=""><img  src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"  alt="Build Status"></a><a  href=""><img  src="https://img.shields.io/badge/Version-1.0-<COLOR>.svg"  alt="Build Status"></a><a  href=""><img  src="https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg"  alt="Build Status"></a>
+<a href=""><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Build Status"></a>
+<a href=""><img src="https://img.shields.io/badge/Version-1.0-<COLOR>.svg" alt="Build Status"></a>
+<a href=""><img src="https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg" alt="Build Status"></a>
 </h1>
 
 The end points described below serve authenticated JSON to the VueJs frontend for the laravel app. All the endpoints(except login) are protected using token based authentication with short-lived access tokens. Note that the refresh route(localhost/api/user/refresh) will need to be invoked when an api access token expires in order to generate a new token pair{api auth token, refresh token} for future endpoint requests.
@@ -139,7 +140,6 @@ Authorization: Bearer 1shtRTbPCVs2xe7cviyaIAGWClT57y9YwjyVSFerKgXeFDh0LnvdpyM6CU
 | 23 |  Lab  |    localhost/api/v1/lab/{id}   |        1       |    DELETE    |     Deletes a lab by id     | [More](#DeleteLab) |
 
 Users
-
 ============
 
 ## Login
@@ -179,16 +179,14 @@ POST
 
 **Yes**
 
-*  **Body:**
 
-  
+* **Body:**
 
-| | Email | Password |
-
-|:--------: |:------------------------------------: |:-------------------------------------------------: |
-
-| Required | x | x |
-
+|          	|                 Email                	|                      Password                     	|
+|:--------:	|:------------------------------------:	|:-------------------------------------------------:	|
+| Required 	|                   x                  	|                         x                         	|
+| Optional 	|                                      	|                                                   	|
+|   Notes  	| 	| 	|
 | Optional | | |
 
 | Notes | | |
@@ -489,19 +487,14 @@ POST
 
 **Yes**
 
-*  **Body:**
 
-  
+* **Body:**
 
-| | Email | Password |
-
-|:--------: |:------------------------------------: |:-------------------------------------------------: |
-
-| Required | x | x |
-
-| Optional | | |
-
-| Notes | | |
+|          	|                 Email                	|                      Password                     	|
+|:--------:	|:------------------------------------:	|:-------------------------------------------------:	|
+| Required 	|                   x                  	|                         x                         	|
+| Optional 	|                                      	|                                                   	|
+|   Notes  	| 	| 	|
 
 *  **Sample Request:**
 
@@ -1588,20 +1581,13 @@ POST
 
 YES
 
-*  **Body:**
+* **Body:**
 
-  
-
-| | Title | Sections | Section Title | Section Questions |
-
+|          | Title |                      Sections                     |                               Section Title                               |       Section Questions       |
 |:--------:|:-----:|:-------------------------------------------------:|:-------------------------------------------------------------------------:|:-----------------------------:|
-
-| Required | x | | | |
-
-| Optional | | x | x | x |
-
-| Notes | | key with value of array containing section titles | section titles(sect_title_1,sect_title_2), etc. within the "sections" key | questions within the "qs" key |
-
+| Required |   x   |                                                   |                                                                           |                               |
+| Optional |       |                         x                         |                                     x                                     |               x               |
+|   Notes  |       | key with value of array containing section titles | section titles(sect_title_1,sect_title_2), etc. within the "sections" key | questions within the "qs" key |
   
 
 *  **Sample Request:**
@@ -3067,26 +3053,16 @@ POST
 
 YES
 
-*  **Body:**
+* **Body:**
 
-  
-
-| | title | room | assigned_to | severity | description | comments |
-
+|          | title |          room         |       assigned_to       | severity | description | comments |
 |:--------:|:-----:|:---------------------:|:-----------------------:|:--------:|:-----------:|:--------:|
-
-| Required | x | x | x | x | x | x |
-
-| Optional | | | | | | |
-
-| Notes | | as an unsigned number | needs to be the user id | | | |
+| Required |   x   |           x           |            x            |     x    |      x      |     x    |
+| Optional |       |                       |                         |          |             |          |
+|   Notes  |       | as an unsigned number | needs to be the user id |          |             |          |
 
   
-  
-
 *  **Sample Request:**
-
-  
 
 ```json
 
