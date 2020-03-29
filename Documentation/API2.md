@@ -1,47 +1,27 @@
 
 <h1  align="center">
-
 API Documentation
-
 <br><br>
-
-<a  href=""><img  src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"  alt="Build Status"></a>
-
-<a  href=""><img  src="https://img.shields.io/badge/Version-1.0-<COLOR>.svg"  alt="Build Status"></a>
-
-<a  href=""><img  src="https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg"  alt="Build Status"></a>
-
+<a  href=""><img  src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"  alt="Build Status"></a><a  href=""><img  src="https://img.shields.io/badge/Version-1.0-<COLOR>.svg"  alt="Build Status"></a><a  href=""><img  src="https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg"  alt="Build Status"></a>
 </h1>
 
 The end points described below serve authenticated JSON to the VueJs frontend for the laravel app. All the endpoints(except login) are protected using token based authentication with short-lived access tokens. Note that the refresh route(localhost/api/user/refresh) will need to be invoked when an api access token expires in order to generate a new token pair{api auth token, refresh token} for future endpoint requests.
-
-  
 
 ## Bearer Authentication
 
 HTTP requests to protected routes will require the Authorization field set in the HTTP header with a key value of Bearer + ' ' + token.
 
-  
 
 *Format:*
 
 ```bash
-
 Authorization: Bearer Token
-
 ```
-
-  
-
 *Example:*
-
 ```bash
-
 Authorization: Bearer 1shtRTbPCVs2xe7cviyaIAGWClT57y9YwjyVSFerKgXeFDh0LnvdpyM6CUvb
-
 ```
 
-  
 
 ## Generic Errors
 
@@ -49,43 +29,27 @@ Authorization: Bearer 1shtRTbPCVs2xe7cviyaIAGWClT57y9YwjyVSFerKgXeFDh0LnvdpyM6CU
 
 *Using an authentication token that has expired:*
 
-  
-
 ```json
-
 {
-
 "status": "401 (Unauthorized)",
-
 "message": "Your authentication token has expired, request a refresh using the refresh route.",
-
 "data": ""
-
 }
 
 ```
 
-  
-
 *Authorization field is either null or doesn't match the required format with the authentication token:*
-
-  
 
 ```json
 
 {
 
 "status": "422 (Unprocessable Entity)",
-
 "message": "Authorization field of request header requires a Bearer token.",
-
 "data": ""
-
 }
 
 ```
-
-  
 
 *Authentication token supplied is not valid(i.e: does not exist):*
 
@@ -94,153 +58,85 @@ Authorization: Bearer 1shtRTbPCVs2xe7cviyaIAGWClT57y9YwjyVSFerKgXeFDh0LnvdpyM6CU
 {
 
 "status": "422 (Unprocessable Entity)",
-
 "message": "Invalid authentication token. Please make sure the bearer token is valid.",
-
 "data": ""
-
 }
 
-```
-
-  
+``` 
 
 ## Endpoints
 
   
-
 <!--ts-->
 
 *  [**Users**](#users)
-
 *  [Login](#login)
-
 *  [Refresh](#Refresh)
-
 *  [Get](#Get-User-By-Id)
-
 *  [Get all](#Get-All-Users)
-
 *  [Create/Update](#Create-User)
-
 *  [Delete](#Delete-User)
-
 *  [**Reports**](#reports)
-
 *  [Get](#Get-Report-By-Id)
-
 *  [Get all](#Get-All-Reports)
-
 *  [Create/Update](#Create-Report)
-
 *  [Delete](#Delete-Report)
 *  [Restore](#Restore-Report)
-
 *  [**Inspections**](#inspections)
-
 *  [Get](#Get-Inspection-By-Id)
-
 *  [Get all](#Get-All-Inspections)
-
 *  [Create/Update](#Create-Inspection)
-
 *  [Delete](#Delete-Inspection)
-
 *  [**Issues**](#issues)
-
 *  [Get](#Get-Issue-By-Id)
-
 *  [Get all](#Get-All-Issues)
-
 *  [Create/Update](#Create-Issue)
-
 *  [Delete](#Delete-Issue)
-
 *  [**Labs**](#labs)
-
 *  [Get](#Get-Lab-By-Id)
-
 *  [Get all](#Get-All-Labs)
-
 *  [Create/Update](#Create-Lab)
-
 *  [Delete](#Delete-Lab)
-
 *  [**Templates**](#templates)
-
 *  [Get](#Get-Template-By-Id)
-
 *  [Get all](#Get-All-Templates)
-
 *  [Create/Update](#Create-Template)
-
 *  [Delete](#Delete-Template)
-
 *  [**Comments**](#comments)
-
 *  [Get](#Get-Comment-By-Id)
-
 *  [Get all](#Get-All-Comments)
-
 *  [Create/Update](#Create-Comment)
+*  [Delete](#Delete-Comment)
 
 <!--te-->
 
-  
+<!--te-->
 
-| # | Category | Route URL | Latest Version | Request Type | Desc | More Info |
-
+| # | Category |           Route URL          | Latest Version | Request Type |              Desc              |                More Info               |
 |:-:|:--------:|:----------------------------:|:--------------:|:------------:|:------------------------------:|:--------------------------------------:|
-
-| 1 | User | localhost/api/user/login | - | POST | Logins in a user by the user id | [More](#Login) |
-
-| 2 | User | localhost/api/user/refresh | - | POST | Refreshes an expired api auth token | [More](#Refresh) |
-
-| 3 | User | localhost/api/user/{id} | - | GET | Gets a user by the user id | [More](#GetUserById) |
-
-| 4 | User | localhost/api/users | - | GET | Gets all users | [More](#GetAllUsers) |
-
-| 5 | User | localhost/api/user | - | POST | Creates a user if it does not exist, otherwise updates an exisiting one | [More](#CreateUser) |
-
-| 6 | User | localhost/api/user/{id} | - | POST | Deletes an exisiting user | [More](#DeleteUser) |
-
-| 7 | User | localhost/api/user/{id} | - | DELETE | Deletes a user by id | [More](#DeleteUser) |
-
-| 8 | Report | localhost/api/v1/report/{id} | 1 | GET | Gets a report by the report id | [More](#GetReportById) |
-
-| 9 | Report | localhost/api/v1/reports | 1 | GET | Gets all reports | [More](#GetAllReports) |
-
-| 10 | Report | localhost/api/v1/report | 1 | POST | Creates a report if it does not exist, otherwise updates an exisiting one | [More](#CreateReport) |
-
-| 11 | Report | localhost/api/v1/report/{id} | 1 | DELETE | Deletes a report by id | [More](#DeleteReport) |
-| 11 | Report | localhost/api/v1/report/{id} | 1 | Restore| Restores a deleted by report by id | [More](#RestoreReport) |
-
-| 12 | Inspection | localhost/api/v1/report/{id} | 1 | GET | Gets an inspection assignment by the id | [More](#GetInspectionById) |
-
-| 13 | Inspection | localhost/api/v1/inspection | 1 | GET | Gets all inspection assignments | [More](#GetAllInspections) |
-
-| 14 | Inspection | localhost/api/v1/inspection | 1 | POST | Creates an inspection if it does not exist, otherwise updates exisiting one | [More](#CreateInspection) |
-
-| 15 | Inspection | localhost/api/v1/inspection/{id} | 1 | DELETE | Deletes an inspection assignment | [More](#DeleteInspection) |
-
-| 16 | Issue | localhost/api/v1/issue/{id} | 1 | GET | Gets an issue by id | [More](#GetIssueById) |
-
-| 17 | Issue | localhost/api/v1/issues | 1 | GET | Gets all issues | [More](#GetAllIssues) |
-
-| 18 | Issue | localhost/api/v1/issue | 1 | POST | Creates an issue if it does not exist, otherwise updates exisiting one | [More](#CreateIssue) |
-
-| 19 | Issue | localhost/api/v1/issue/{id} | 1 | DELETE | Deletes an issue by id | [More](#DeleteIssue) |
-
-| 20 | Lab | localhost/api/v1/lab/{id} | 1 | GET | Gets an lab by id | [More](#GetLabById) |
-
-| 21 | Lab | localhost/api/v1/labs | 1 | GET | Gets all labs | [More](#GetAllLabs) |
-
-| 22 | Lab | localhost/api/v1/lab | 1 | POST | Creates a lab if it does not exist, otherwise updates exisiting one | [More](#CreateLab) |
-
-| 23 | Lab | localhost/api/v1/lab/{id} | 1 | DELETE | Deletes a lab by id | [More](#DeleteLab) |
-
-  
-  
+| 1 |  User  | localhost/api/user/login            |        -       |      POST     | Logins in a user by the user id | [More](#Login) |
+| 2 |  User  | localhost/api/user/refresh            |        -       |      POST     | Refreshes an expired api auth token | [More](#Refresh) |
+| 3 |  User  | localhost/api/user/{id} |        -       |      GET     | Gets a user by the user id | [More](#GetUserById) |
+| 4 |  User  | localhost/api/users |        -       |      GET     | Gets all users | [More](#GetAllUsers) |
+| 5 |  User  | localhost/api/user |        -       |      POST     | Creates a user if it does not exist, otherwise updates an exisiting one | [More](#CreateUser) |
+| 6 |  User  | localhost/api/user/{id} |        -       |      POST     | Deletes an exisiting user | [More](#DeleteUser) |
+| 7 |  User  | localhost/api/user/{id} |        -       |      DELETE    | Deletes a user by id | [More](#DeleteUser) |
+| 8 |  Report  | localhost/api/v1/report/{id} |        1       |      GET     | Gets a report by the report id | [More](#GetReportById) |
+| 9 |  Report  |   localhost/api/v1/reports   |        1       |      GET     |        Gets all reports        | [More](#GetAllReports) |
+| 10 |  Report  |    localhost/api/v1/report   |        1       |     POST     |     Creates a report if it does not exist, otherwise updates an exisiting one    | [More](#CreateReport) |
+| 11 |  Report  |    localhost/api/v1/report/{id}   |        1       |    DELETE    |     Deletes a report by id     | [More](#DeleteReport) |
+| 12 |  Inspection  | localhost/api/v1/report/{id} |        1       |      GET     | Gets an inspection assignment by the id | [More](#GetInspectionById) |
+| 13 |  Inspection  |   localhost/api/v1/inspection   |        1       |      GET     |        Gets all inspection assignments        | [More](#GetAllInspections) |
+| 14 |  Inspection  |    localhost/api/v1/inspection   |        1       |     POST     |     Creates an inspection if it does not exist, otherwise updates exisiting one    | [More](#CreateInspection) |
+| 15 |  Inspection  |    localhost/api/v1/inspection/{id}   |        1       |    DELETE    |     Deletes an inspection assignment     | [More](#DeleteInspection) |
+| 16 |  Issue  | localhost/api/v1/issue/{id} |        1       |      GET     | Gets an issue by id | [More](#GetIssueById) |
+| 17 |  Issue  |   localhost/api/v1/issues   |        1       |      GET     |        Gets all issues        | [More](#GetAllIssues) |
+| 18 |  Issue  |    localhost/api/v1/issue   |        1       |     POST     |     Creates an issue if it does not exist, otherwise updates exisiting one    | [More](#CreateIssue) |
+| 19 |  Issue  |    localhost/api/v1/issue/{id}   |        1       |    DELETE    |     Deletes an issue by id     | [More](#DeleteIssue) |
+| 20 |  Lab  | localhost/api/v1/lab/{id} |        1       |      GET     | Gets an lab by id | [More](#GetLabById) |
+| 21 |  Lab  |   localhost/api/v1/labs   |        1       |      GET     |        Gets all labs        | [More](#GetAllLabs) |
+| 22 |  Lab  |    localhost/api/v1/lab   |        1       |     POST     |     Creates a lab if it does not exist, otherwise updates exisiting one    | [More](#CreateLab) |
+| 23 |  Lab  |    localhost/api/v1/lab/{id}   |        1       |    DELETE    |     Deletes a lab by id     | [More](#DeleteLab) |
 
 Users
 
