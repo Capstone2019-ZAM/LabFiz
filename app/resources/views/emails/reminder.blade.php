@@ -48,7 +48,7 @@
                     <h3 id="title">Inspection Reminder</h3>
                     </p>
                     <p> Hey {{$name}}, </p>
-                    <p> You have outstanding inpsections that are due soon. Please complete them at
+                    <p> You have outstanding inspections that are due soon. Please complete them at
                          <a href="www.labfiz.com/login"> www.labfiz.com</a>.
                     </p>                   
                     <p>
