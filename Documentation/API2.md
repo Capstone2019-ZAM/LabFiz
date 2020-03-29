@@ -32,9 +32,9 @@ Authorization: Bearer 1shtRTbPCVs2xe7cviyaIAGWClT57y9YwjyVSFerKgXeFDh0LnvdpyM6CU
 
 ```json
 {
-"status": "401 (Unauthorized)",
-"message": "Your authentication token has expired, request a refresh using the refresh route.",
-"data": ""
+    "status": "401 (Unauthorized)",
+    "message": "Your authentication token has expired, request a refresh using the refresh route.",
+    "data": ""
 }
 
 ```
@@ -45,9 +45,9 @@ Authorization: Bearer 1shtRTbPCVs2xe7cviyaIAGWClT57y9YwjyVSFerKgXeFDh0LnvdpyM6CU
 
 {
 
-"status": "422 (Unprocessable Entity)",
-"message": "Authorization field of request header requires a Bearer token.",
-"data": ""
+    "status": "422 (Unprocessable Entity)",
+    "message": "Authorization field of request header requires a Bearer token.",
+    "data": ""
 }
 
 ```
@@ -55,12 +55,11 @@ Authorization: Bearer 1shtRTbPCVs2xe7cviyaIAGWClT57y9YwjyVSFerKgXeFDh0LnvdpyM6CU
 *Authentication token supplied is not valid(i.e: does not exist):*
 
 ```json
-
 {
 
-"status": "422 (Unprocessable Entity)",
-"message": "Invalid authentication token. Please make sure the bearer token is valid.",
-"data": ""
+    "status": "422 (Unprocessable Entity)",
+    "message": "Invalid authentication token. Please make sure the bearer token is valid.",
+    "data": ""
 }
 
 ``` 
@@ -206,9 +205,9 @@ POST
 
 {
 
-"email": "bob@gmail.com",
+    "email": "bob@gmail.com",
 
-"password": "dogfood"
+    "password": "dogfood"
 
 }
 
@@ -222,25 +221,25 @@ POST
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "User logged in successfully.",
+    "message": "User logged in successfully.",
 
-"data": {
+    "data": {
 
-"email": "bob@gmail.com",
+        "email": "bob@gmail.com",
 
-"role": "admin",
+        "role": "admin",
 
-"token": "KMxhZdg8IL83STU8pwDYJmFTJbHmdp1HvGOqh6Q1ACumJxodNmFYFMFdOnwt",
+        "token": "KMxhZdg8IL83STU8pwDYJmFTJbHmdp1HvGOqh6Q1ACumJxodNmFYFMFdOnwt",
 
-"token_type": "ApiAuth",
+        "token_type": "ApiAuth",
 
-"expires_at": "2020-02-04T08:08:26.000000Z",
+        "expires_at": "2020-02-04T08:08:26.000000Z",
 
-"refresh_token": "hrRf6LGb8WFEl8RFFFQYMsp1Fk6vLIfq9eiSoAWf40pfXQTk6GcTtuqTsBZ7"
+        "refresh_token": "hrRf6LGb8WFEl8RFFFQYMsp1Fk6vLIfq9eiSoAWf40pfXQTk6GcTtuqTsBZ7"
 
-}
+    }
 
 }
 
@@ -253,14 +252,13 @@ POST
   
 
 ```json
-
 {
 
-"status": "400 (Bad Request)",
+    "status": "400 (Bad Request)",
 
-"message": "Invalid password.",
+    "message": "Invalid password.",
 
-"data": ""
+    "data": ""
 
 }
 
@@ -276,25 +274,25 @@ OR
 
 {
 
-"status": "422 (Unprocessable Entity)",
+    "status": "422 (Unprocessable Entity)",
 
-"message": {
+    "message": {
 
-"password": [
+        "password": [
 
-"The password field is required."
+            "The password field is required."
 
-],
+        ],
 
-"email": [
+        "email": [
 
-"The email field is required."
+            "The email field is required."
 
-]
+        ]
 
-},
+    },
 
-"data": ""
+    "data": ""
 
 }
 
@@ -348,7 +346,7 @@ POST
 
 {
 
-"api_refresh_token": "I3tDzkQxQnyQbDNPmQyOPgmWWu6z7fxJQj7ffDG2JpJft7kNgouuncSZLkTb"
+    "api_refresh_token": "I3tDzkQxQnyQbDNPmQyOPgmWWu6z7fxJQj7ffDG2JpJft7kNgouuncSZLkTb"
 
 }
 
@@ -362,25 +360,26 @@ POST
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Api token refreshed successfully",
+    "message": "Api token refreshed successfully",
 
-"data": {
+    "data": {
 
-"token": "q2E5T7rHcPUblPCiSWBE3wikjksctzdOIJOFj7oXbLXNxqB03FRVRoFrJVkK",
+        "token": "q2E5T7rHcPUblPCiSWBE3wikjksctzdOIJOFj7oXbLXNxqB03FRVRoFrJVkK",
 
-"token_type": "ApiAuth",
+        "token_type": "ApiAuth",
 
-"expires_at": "2020-02-04T23:27:46.000000Z",
+        "expires_at": "2020-02-04T23:27:46.000000Z",
 
-"refresh_token": "WmtUxLxverc6tzDPgU6lBfkJzYi0UDdxqMfbXhcMnYNixNIv5GDAfh9bqKyM"
+        "refresh_token": "WmtUxLxverc6tzDPgU6lBfkJzYi0UDdxqMfbXhcMnYNixNIv5GDAfh9bqKyM"
+
+    }
 
 }
 
-}
-
-```
+``
+`
 
   
 
@@ -388,23 +387,25 @@ POST
 
   
 
-```json
+`
+``
+json
 
 {
 
-"status": "422 (Unprocessable Entity)",
+    "status": "422 (Unprocessable Entity)",
 
-"message": {
+    "message": {
 
-"api_refresh_token": [
+        "api_refresh_token": [
 
-"The api refresh token field is required."
+            "The api refresh token field is required."
 
-]
+        ]
 
-},
+    },
 
-"data": ""
+    "data": ""
 
 }
 
@@ -418,14 +419,13 @@ OR
   
 
 ```json
-
 {
 
-"status": "400 (Bad Request)",
+    "status": "400 (Bad Request)",
 
-"message": "Authentication token has not expired yet.",
+    "message": "Authentication token has not expired yet.",
 
-"data": ""
+    "data": ""
 
 }
 
@@ -443,11 +443,11 @@ OR
 
 {
 
-"status": "400 (Bad Request)",
+    "status": "400 (Bad Request)",
 
-"message": "Could not find given refresh token.",
+    "message": "Could not find given refresh token.",
 
-"data": ""
+    "data": ""
 
 }
 
@@ -521,37 +521,37 @@ localhost/api/user/1
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "User retrieved successfully.",
+    "message": "User retrieved successfully.",
 
-"data": {
+    "data": {
 
-"id": 1,
+        "id": 1,
 
-"first_name": "Isabell",
+        "first_name": "Isabell",
 
-"last_name": "Adams",
+        "last_name": "Adams",
 
-"department": "chemical",
+        "department": "chemical",
 
-"email": "egrimes@example.net",
+        "email": "egrimes@example.net",
 
-"email_verified_at": "2020-02-03 01:30:23",
+        "email_verified_at": "2020-02-03 01:30:23",
 
-"api_token": "24nsjA8zwK21ewKMCNab9EFm2NMgozN2x8k1fDktxgRbQfK4sZFi73FWULMe",
+        "api_token": "24nsjA8zwK21ewKMCNab9EFm2NMgozN2x8k1fDktxgRbQfK4sZFi73FWULMe",
 
-"created_at": "2020-02-03 01:30:23",
+        "created_at": "2020-02-03 01:30:23",
 
-"updated_at": "2020-02-05 07:41:53",
+        "updated_at": "2020-02-05 07:41:53",
 
-"api_token_expiry_date": "2020-02-04 00:04:23",
+        "api_token_expiry_date": "2020-02-04 00:04:23",
 
-"api_refresh_token": "s7uLzmhqRF44nVwBRou8JrJqfLk36dPUxsMjoPKj9OkHOCDxyBAk7ZMOpAM5",
+        "api_refresh_token": "s7uLzmhqRF44nVwBRou8JrJqfLk36dPUxsMjoPKj9OkHOCDxyBAk7ZMOpAM5",
 
-"api_token_type": "ApiAuth"
+        "api_token_type": "ApiAuth"
 
-}
+    }
 
 }
 
@@ -567,11 +567,11 @@ localhost/api/user/1
 
 {
 
-"status": "400 (Bad Request)",
+    "status": "400 (Bad Request)",
 
-"message": "No query results for model [App\\User] 232",
+    "message": "No query results for model [App\\User] 232",
 
-"data": ""
+    "data": ""
 
 }
 
@@ -633,153 +633,153 @@ POST
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "All Users retrieved successfully.",
+    "message": "All Users retrieved successfully.",
 
-"data": [
+    "data": [
 
-{
+        {
 
-"id": 1,
+            "id": 1,
 
-"first_name": "Isabell",
+            "first_name": "Isabell",
 
-"last_name": "Adams",
+            "last_name": "Adams",
 
-"department": "chemical",
+            "department": "chemical",
 
-"email": "egrimes@example.net",
+            "email": "egrimes@example.net",
 
-"email_verified_at": "2020-02-03 01:30:23",
+            "email_verified_at": "2020-02-03 01:30:23",
 
-"api_token": "SjFJ0XyVOke1bpHfXVq8IAbwCTYwIgXHWztJi6lnJeLrLlu1QOgSQApJfK9r",
+            "api_token": "SjFJ0XyVOke1bpHfXVq8IAbwCTYwIgXHWztJi6lnJeLrLlu1QOgSQApJfK9r",
 
-"created_at": "2020-02-03 01:30:23",
+            "created_at": "2020-02-03 01:30:23",
 
-"updated_at": "2020-02-03 01:30:23",
+            "updated_at": "2020-02-03 01:30:23",
 
-"api_token_expiry_date": "2020-02-04 00:04:23",
+            "api_token_expiry_date": "2020-02-04 00:04:23",
 
-"api_refresh_token": null,
+            "api_refresh_token": null,
 
-"api_token_type": "ApiAuth"
+            "api_token_type": "ApiAuth"
 
-},
+        },
 
-{
+        {
 
-"id": 2,
+            "id": 2,
 
-"first_name": "Eusebio",
+            "first_name": "Eusebio",
 
-"last_name": "Schamberger",
+            "last_name": "Schamberger",
 
-"department": "software",
+            "department": "software",
 
-"email": "tatyana.zemlak@example.net",
+            "email": "tatyana.zemlak@example.net",
 
-"email_verified_at": "2020-02-03 01:30:23",
+            "email_verified_at": "2020-02-03 01:30:23",
 
-"api_token": "eAljW1ZkFQqKJvS6zg2660weDAMgYdhHwBodAMsbke7hA2lsioPoAJ6swDla",
+            "api_token": "eAljW1ZkFQqKJvS6zg2660weDAMgYdhHwBodAMsbke7hA2lsioPoAJ6swDla",
 
-"created_at": "2020-02-03 01:30:23",
+            "created_at": "2020-02-03 01:30:23",
 
-"updated_at": "2020-02-03 01:30:23",
+            "updated_at": "2020-02-03 01:30:23",
 
-"api_token_expiry_date": "2020-02-04 00:04:23",
+            "api_token_expiry_date": "2020-02-04 00:04:23",
 
-"api_refresh_token": null,
+            "api_refresh_token": null,
 
-"api_token_type": "ApiAuth"
+            "api_token_type": "ApiAuth"
 
-},
+        },
 
-{
+        {
 
-"id": 3,
+            "id": 3,
 
-"first_name": "Tyshawn",
+            "first_name": "Tyshawn",
 
-"last_name": "Blanda",
+            "last_name": "Blanda",
 
-"department": "electrical",
+            "department": "electrical",
 
-"email": "ebradtke@example.org",
+            "email": "ebradtke@example.org",
 
-"email_verified_at": "2020-02-03 01:30:23",
+            "email_verified_at": "2020-02-03 01:30:23",
 
-"api_token": "R1k6sY55sbzXjVkSycH8qZS9aGQB3m4d3S1XEfEUJKfemN8P6cEJg1XcYc0Y",
+            "api_token": "R1k6sY55sbzXjVkSycH8qZS9aGQB3m4d3S1XEfEUJKfemN8P6cEJg1XcYc0Y",
 
-"created_at": "2020-02-03 01:30:23",
+            "created_at": "2020-02-03 01:30:23",
 
-"updated_at": "2020-02-03 01:30:23",
+            "updated_at": "2020-02-03 01:30:23",
 
-"api_token_expiry_date": "2020-02-04 00:04:23",
+            "api_token_expiry_date": "2020-02-04 00:04:23",
 
-"api_refresh_token": null,
+            "api_refresh_token": null,
 
-"api_token_type": "ApiAuth"
+            "api_token_type": "ApiAuth"
 
-},
+        },
 
-{
+        {
 
-"id": 4,
+            "id": 4,
 
-"first_name": "Izaiah",
+            "first_name": "Izaiah",
 
-"last_name": "Rowe",
+            "last_name": "Rowe",
 
-"department": "chemical",
+            "department": "chemical",
 
-"email": "laura13@example.com",
+            "email": "laura13@example.com",
 
-"email_verified_at": "2020-02-03 01:30:23",
+            "email_verified_at": "2020-02-03 01:30:23",
 
-"api_token": "FxppX3PqRAAZYW7V8q0tZOCvhdbOSDTwadG3hs0inNC5yninXTWGrWcg0pxL",
+            "api_token": "FxppX3PqRAAZYW7V8q0tZOCvhdbOSDTwadG3hs0inNC5yninXTWGrWcg0pxL",
 
-"created_at": "2020-02-03 01:30:23",
+            "created_at": "2020-02-03 01:30:23",
 
-"updated_at": "2020-02-03 01:30:23",
+            "updated_at": "2020-02-03 01:30:23",
 
-"api_token_expiry_date": "2020-02-04 00:04:23",
+            "api_token_expiry_date": "2020-02-04 00:04:23",
 
-"api_refresh_token": null,
+            "api_refresh_token": null,
 
-"api_token_type": "ApiAuth"
+            "api_token_type": "ApiAuth"
 
-},
+        },
 
-{
+        {
 
-"id": 5,
+            "id": 5,
 
-"first_name": "Mariah",
+            "first_name": "Mariah",
 
-"last_name": "Feil",
+            "last_name": "Feil",
 
-"department": "petroleum",
+            "department": "petroleum",
 
-"email": "ollie.bayer@example.org",
+            "email": "ollie.bayer@example.org",
 
-"email_verified_at": "2020-02-03 01:30:23",
+            "email_verified_at": "2020-02-03 01:30:23",
 
-"api_token": "7ql7LrH7woABenV5435BPigx77fQMJusFLvVqk88obQs5J6v9V7lLzUIDHeF",
+            "api_token": "7ql7LrH7woABenV5435BPigx77fQMJusFLvVqk88obQs5J6v9V7lLzUIDHeF",
 
-"created_at": "2020-02-03 01:30:23",
+            "created_at": "2020-02-03 01:30:23",
 
-"updated_at": "2020-02-03 01:30:23",
+            "updated_at": "2020-02-03 01:30:23",
 
-"api_token_expiry_date": "2020-02-04 00:04:23",
+            "api_token_expiry_date": "2020-02-04 00:04:23",
 
-"api_refresh_token": null,
+            "api_refresh_token": null,
 
-"api_token_type": "ApiAuth"
+            "api_token_type": "ApiAuth"
 
-}
+        }
 
-]
+    ]
 
 }
 
@@ -848,216 +848,215 @@ localhost/api/v1/report/5
   
 
 ```json
-
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Report retrieved successfully.",
+    "message": "Report retrieved successfully.",
 
-"data": {
+    "data": {
 
-"id": 5,
+        "id": 5,
 
-"title": "some cool title",
+        "title": "some cool title",
 
-"user_id": 1,
+        "user_id": 1,
 
-"created_at": "2020-02-17 00:23:40",
+        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+        "updated_at": "2020-02-17 00:23:40",
 
-"report_template_id": 1,
+        "report_template_id": 1,
 
-"room": "edc-232",
+        "room": "edc-232",
 
-"due_date": "2020-02-04",
+        "due_date": "2020-02-04",
 
-"sections": [
+        "sections": [
 
-{
+            {
 
-"id": 4,
+                "id": 4,
 
-"title": "sect_title_1",
+                "title": "sect_title_1",
 
-"report_id": 5,
+                "report_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                "updated_at": "2020-02-17 00:23:40",
 
-"report_section_template_id": 1,
+                "report_section_template_id": 1,
 
-"questions": [
+                "questions": [
 
-{
+                    {
 
-"id": 2,
+                        "id": 2,
 
-"question": "quest_title_1",
+                        "question": "quest_title_1",
 
-"report_section_id": 4,
+                        "report_section_id": 4,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-},
+                    },
 
-{
+                    {
 
-"id": 3,
+                        "id": 3,
 
-"question": "quest_title_2",
+                        "question": "quest_title_2",
 
-"report_section_id": 4,
+                        "report_section_id": 4,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-}
+                    }
 
-]
+                ]
 
-},
+            },
 
-{
+            {
 
-"id": 5,
+                "id": 5,
 
-"title": "sect_title_2",
+                "title": "sect_title_2",
 
-"report_id": 5,
+                "report_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                "updated_at": "2020-02-17 00:23:40",
 
-"report_section_template_id": 1,
+                "report_section_template_id": 1,
 
-"questions": [
+                "questions": [
 
-{
+                    {
 
-"id": 4,
+                        "id": 4,
 
-"question": "quest_title_1",
+                        "question": "quest_title_1",
 
-"report_section_id": 5,
+                        "report_section_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-},
+                    },
 
-{
+                    {
 
-"id": 5,
+                        "id": 5,
 
-"question": "quest_title_2",
+                        "question": "quest_title_2",
 
-"report_section_id": 5,
+                        "report_section_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-}
+                    }
 
-]
+                ]
 
-},
+            },
 
-{
+            {
 
-"id": 6,
+                "id": 6,
 
-"title": "sect_title_3",
+                "title": "sect_title_3",
 
-"report_id": 5,
+                "report_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                "updated_at": "2020-02-17 00:23:40",
 
-"report_section_template_id": 1,
+                "report_section_template_id": 1,
 
-"questions": [
+                "questions": [
 
-{
+                    {
 
-"id": 6,
+                        "id": 6,
 
-"question": "quest_title_1",
+                        "question": "quest_title_1",
 
-"report_section_id": 6,
+                        "report_section_id": 6,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-},
+                    },
 
-{
+                    {
 
-"id": 7,
+                        "id": 7,
 
-"question": "quest_title_2",
+                        "question": "quest_title_2",
 
-"report_section_id": 6,
+                        "report_section_id": 6,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-}
+                    }
 
-]
+                ]
 
-}
+            }
 
-]
+        ]
 
-}
+    }
 
 }
 
@@ -1121,424 +1120,423 @@ localhost/api/v1/reports
   
 
 ```json
-
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "All Reports retrieved successfully.",
+    "message": "All Reports retrieved successfully.",
 
-"data": [
+    "data": [
 
-{
+        {
 
-"id": 5,
+            "id": 5,
 
-"title": "some cool title",
+            "title": "some cool title",
 
-"user_id": 1,
+            "user_id": 1,
 
-"created_at": "2020-02-17 00:23:40",
+            "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+            "updated_at": "2020-02-17 00:23:40",
 
-"report_template_id": 1,
+            "report_template_id": 1,
 
-"room": "edc-232",
+            "room": "edc-232",
 
-"due_date": "2020-02-04",
+            "due_date": "2020-02-04",
 
-"sections": [
+            "sections": [
 
-{
+                {
 
-"id": 4,
+                    "id": 4,
 
-"title": "sect_title_1",
+                    "title": "sect_title_1",
 
-"report_id": 5,
+                    "report_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                    "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                    "updated_at": "2020-02-17 00:23:40",
 
-"report_section_template_id": 1,
+                    "report_section_template_id": 1,
 
-"questions": [
+                    "questions": [
 
-{
+                        {
 
-"id": 2,
+                            "id": 2,
 
-"question": "quest_title_1",
+                            "question": "quest_title_1",
 
-"report_section_id": 4,
+                            "report_section_id": 4,
 
-"created_at": "2020-02-17 00:23:40",
+                            "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-},
+                        },
 
-{
+                        {
 
-"id": 3,
+                            "id": 3,
 
-"question": "quest_title_2",
+                            "question": "quest_title_2",
 
-"report_section_id": 4,
+                            "report_section_id": 4,
 
-"created_at": "2020-02-17 00:23:40",
+                            "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-}
+                        }
 
-]
+                    ]
 
-},
+                },
 
-{
+                {
 
-"id": 5,
+                    "id": 5,
 
-"title": "sect_title_2",
+                    "title": "sect_title_2",
 
-"report_id": 5,
+                    "report_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                    "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                    "updated_at": "2020-02-17 00:23:40",
 
-"report_section_template_id": 1,
+                    "report_section_template_id": 1,
 
-"questions": [
+                    "questions": [
 
-{
+                        {
 
-"id": 4,
+                            "id": 4,
 
-"question": "quest_title_1",
+                            "question": "quest_title_1",
 
-"report_section_id": 5,
+                            "report_section_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                            "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-},
+                        },
 
-{
+                        {
 
-"id": 5,
+                            "id": 5,
 
-"question": "quest_title_2",
+                            "question": "quest_title_2",
 
-"report_section_id": 5,
+                            "report_section_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                            "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-}
+                        }
 
-]
+                    ]
 
-},
+                },
 
-{
+                {
 
-"id": 6,
+                    "id": 6,
 
-"title": "sect_title_3",
+                    "title": "sect_title_3",
 
-"report_id": 5,
+                    "report_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                    "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                    "updated_at": "2020-02-17 00:23:40",
 
-"report_section_template_id": 1,
+                    "report_section_template_id": 1,
 
-"questions": [
+                    "questions": [
 
-{
+                        {
 
-"id": 6,
+                            "id": 6,
 
-"question": "quest_title_1",
+                            "question": "quest_title_1",
 
-"report_section_id": 6,
+                            "report_section_id": 6,
 
-"created_at": "2020-02-17 00:23:40",
+                            "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-},
+                        },
 
-{
+                        {
 
-"id": 7,
+                            "id": 7,
 
-"question": "quest_title_2",
+                            "question": "quest_title_2",
 
-"report_section_id": 6,
+                            "report_section_id": 6,
 
-"created_at": "2020-02-17 00:23:40",
+                            "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                            "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-}
+                        }
 
-]
+                    ]
 
-}
+                }
 
-]
+            ]
 
-},
+        },
 
-{
+        {
 
-"id": 6,
+            "id": 6,
 
-"title": "some cool title",
+            "title": "some cool title",
 
-"user_id": 1,
+            "user_id": 1,
 
-"created_at": "2020-02-17 00:27:17",
+            "created_at": "2020-02-17 00:27:17",
 
-"updated_at": "2020-02-17 00:27:17",
+            "updated_at": "2020-02-17 00:27:17",
 
-"report_template_id": 1,
+            "report_template_id": 1,
 
-"room": "edc-232",
+            "room": "edc-232",
 
-"due_date": "2020-02-04",
+            "due_date": "2020-02-04",
 
-"sections": [
+            "sections": [
 
-{
+                {
 
-"id": 7,
+                    "id": 7,
 
-"title": "sect_title_1",
+                    "title": "sect_title_1",
 
-"report_id": 6,
+                    "report_id": 6,
 
-"created_at": "2020-02-17 00:27:17",
+                    "created_at": "2020-02-17 00:27:17",
 
-"updated_at": "2020-02-17 00:27:17",
+                    "updated_at": "2020-02-17 00:27:17",
 
-"report_section_template_id": 1,
+                    "report_section_template_id": 1,
 
-"questions": [
+                    "questions": [
 
-{
+                        {
 
-"id": 8,
+                            "id": 8,
 
-"question": "quest_title_1",
+                            "question": "quest_title_1",
 
-"report_section_id": 7,
+                            "report_section_id": 7,
 
-"created_at": "2020-02-17 00:27:17",
+                            "created_at": "2020-02-17 00:27:17",
 
-"updated_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-},
+                        },
 
-{
+                        {
 
-"id": 9,
+                            "id": 9,
 
-"question": "quest_title_2",
+                            "question": "quest_title_2",
 
-"report_section_id": 7,
+                            "report_section_id": 7,
 
-"created_at": "2020-02-17 00:27:17",
+                            "created_at": "2020-02-17 00:27:17",
 
-"updated_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-}
+                        }
 
-]
+                    ]
 
-},
+                },
 
-{
+                {
 
-"id": 8,
+                    "id": 8,
 
-"title": "sect_title_2",
+                    "title": "sect_title_2",
 
-"report_id": 6,
+                    "report_id": 6,
 
-"created_at": "2020-02-17 00:27:17",
+                    "created_at": "2020-02-17 00:27:17",
 
-"updated_at": "2020-02-17 00:27:17",
+                    "updated_at": "2020-02-17 00:27:17",
 
-"report_section_template_id": 1,
+                    "report_section_template_id": 1,
 
-"questions": [
+                    "questions": [
 
-{
+                        {
 
-"id": 10,
+                            "id": 10,
 
-"question": "quest_title_1",
+                            "question": "quest_title_1",
 
-"report_section_id": 8,
+                            "report_section_id": 8,
 
-"created_at": "2020-02-17 00:27:17",
+                            "created_at": "2020-02-17 00:27:17",
 
-"updated_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-},
+                        },
 
-{
+                        {
 
-"id": 11,
+                            "id": 11,
 
-"question": "quest_title_2",
+                            "question": "quest_title_2",
 
-"report_section_id": 8,
+                            "report_section_id": 8,
 
-"created_at": "2020-02-17 00:27:17",
+                            "created_at": "2020-02-17 00:27:17",
 
-"updated_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-}
+                        }
 
-]
+                    ]
 
-},
+                },
 
-{
+                {
 
-"id": 9,
+                    "id": 9,
 
-"title": "sect_title_3",
+                    "title": "sect_title_3",
 
-"report_id": 6,
+                    "report_id": 6,
 
-"created_at": "2020-02-17 00:27:17",
+                    "created_at": "2020-02-17 00:27:17",
 
-"updated_at": "2020-02-17 00:27:17",
+                    "updated_at": "2020-02-17 00:27:17",
 
-"report_section_template_id": 1,
+                    "report_section_template_id": 1,
 
-"questions": [
+                    "questions": [
 
-{
+                        {
 
-"id": 12,
+                            "id": 12,
 
-"question": "quest_title_1",
+                            "question": "quest_title_1",
 
-"report_section_id": 9,
+                            "report_section_id": 9,
 
-"created_at": "2020-02-17 00:27:17",
+                            "created_at": "2020-02-17 00:27:17",
 
-"updated_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-},
+                        },
 
-{
+                        {
 
-"id": 13,
+                            "id": 13,
 
-"question": "quest_title_2",
+                            "question": "quest_title_2",
 
-"report_section_id": 9,
+                            "report_section_id": 9,
 
-"created_at": "2020-02-17 00:27:17",
+                            "created_at": "2020-02-17 00:27:17",
 
-"updated_at": "2020-02-17 00:27:17",
+                            "updated_at": "2020-02-17 00:27:17",
 
-"report_question_template_id": 1,
+                            "report_question_template_id": 1,
 
-"answer": "dog",
+                            "answer": "dog",
 
-"description": "food"
+                            "description": "food"
 
-}
+                        }
 
-]
+                    ]
 
-}
+                }
 
-]
+            ]
 
-}
+        }
 
-]
+    ]
 
 }
 
@@ -1601,20 +1599,19 @@ YES
   
 
 ```json
-
 {
 
-"title" : "some cool report title",
+    "title": "some cool report title",
 
-"id": -1,
+    "id": -1,
 
-"template_id": 1,
+    "template_id": 1,
 
-"room" : "edc-232",
+    "room": "edc-232",
 
-"due_date": "2020-02-04 23:26:46",
+    "due_date": "2020-02-04 23:26:46",
 
-"assigned_to" : 1
+    "assigned_to": 1
 
 },
 
@@ -1629,213 +1626,213 @@ YES
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Created report document successfully!",
+    "message": "Created report document successfully!",
 
-"data": {
+    "data": {
 
-"id": -1,
+        "id": -1,
 
-"title": "some cool report title",
+        "title": "some cool report title",
 
-"user_id": 1,
+        "user_id": 1,
 
-"created_at": "2020-02-17T03:58:03.000000Z",
+        "created_at": "2020-02-17T03:58:03.000000Z",
 
-"updated_at": "2020-02-17T03:58:03.000000Z",
+        "updated_at": "2020-02-17T03:58:03.000000Z",
 
-"report_template_id": 1,
+        "report_template_id": 1,
 
-"room": "edc-232",
+        "room": "edc-232",
 
-"due_date": "2020-02-04 23:26:46",
+        "due_date": "2020-02-04 23:26:46",
 
-"sections": {
+        "sections": {
 
-"sect_title_1": {
+            "sect_title_1": {
 
-"id": 22,
+                "id": 22,
 
-"title": "sect_title_1",
+                "title": "sect_title_1",
 
-"report_id": 11,
+                "report_id": 11,
 
-"created_at": "2020-02-17T03:58:03.000000Z",
+                "created_at": "2020-02-17T03:58:03.000000Z",
 
-"updated_at": "2020-02-17T03:58:03.000000Z",
+                "updated_at": "2020-02-17T03:58:03.000000Z",
 
-"report_section_template_id": null,
+                "report_section_template_id": null,
 
-"questions": {
+                "questions": {
 
-"quest_title_1": {
+                    "quest_title_1": {
 
-"report_section_id": 22,
+                        "report_section_id": 22,
 
-"question": "quest_title_1",
+                        "question": "quest_title_1",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food",
+                        "description": "food",
 
-"updated_at": "2020-02-17 03:58:03",
+                        "updated_at": "2020-02-17 03:58:03",
 
-"created_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
 
-"id": 38
+                        "id": 38
 
-},
+                    },
 
-"quest_title_2": {
+                    "quest_title_2": {
 
-"report_section_id": 22,
+                        "report_section_id": 22,
 
-"question": "quest_title_2",
+                        "question": "quest_title_2",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food",
+                        "description": "food",
 
-"updated_at": "2020-02-17 03:58:03",
+                        "updated_at": "2020-02-17 03:58:03",
 
-"created_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
 
-"id": 39
+                        "id": 39
 
-}
+                    }
 
-}
+                }
 
-},
+            },
 
-"sect_title_2": {
+            "sect_title_2": {
 
-"id": 23,
+                "id": 23,
 
-"title": "sect_title_2",
+                "title": "sect_title_2",
 
-"report_id": 11,
+                "report_id": 11,
 
-"created_at": "2020-02-17T03:58:03.000000Z",
+                "created_at": "2020-02-17T03:58:03.000000Z",
 
-"updated_at": "2020-02-17T03:58:03.000000Z",
+                "updated_at": "2020-02-17T03:58:03.000000Z",
 
-"report_section_template_id": null,
+                "report_section_template_id": null,
 
-"questions": {
+                "questions": {
 
-"quest_title_1": {
+                    "quest_title_1": {
 
-"report_section_id": 23,
+                        "report_section_id": 23,
 
-"question": "quest_title_1",
+                        "question": "quest_title_1",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food",
+                        "description": "food",
 
-"updated_at": "2020-02-17 03:58:03",
+                        "updated_at": "2020-02-17 03:58:03",
 
-"created_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
 
-"id": 40
+                        "id": 40
 
-},
+                    },
 
-"quest_title_2": {
+                    "quest_title_2": {
 
-"report_section_id": 23,
+                        "report_section_id": 23,
 
-"question": "quest_title_2",
+                        "question": "quest_title_2",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food",
+                        "description": "food",
 
-"updated_at": "2020-02-17 03:58:03",
+                        "updated_at": "2020-02-17 03:58:03",
 
-"created_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
 
-"id": 41
+                        "id": 41
 
-}
+                    }
 
-}
+                }
 
-},
+            },
 
-"sect_title_3": {
+            "sect_title_3": {
 
-"id": 24,
+                "id": 24,
 
-"title": "sect_title_3",
+                "title": "sect_title_3",
 
-"report_id": 11,
+                "report_id": 11,
 
-"created_at": "2020-02-17T03:58:03.000000Z",
+                "created_at": "2020-02-17T03:58:03.000000Z",
 
-"updated_at": "2020-02-17T03:58:03.000000Z",
+                "updated_at": "2020-02-17T03:58:03.000000Z",
 
-"report_section_template_id": null,
+                "report_section_template_id": null,
 
-"questions": {
+                "questions": {
 
-"quest_title_1": {
+                    "quest_title_1": {
 
-"report_section_id": 24,
+                        "report_section_id": 24,
 
-"question": "quest_title_1",
+                        "question": "quest_title_1",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food",
+                        "description": "food",
 
-"updated_at": "2020-02-17 03:58:03",
+                        "updated_at": "2020-02-17 03:58:03",
 
-"created_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
 
-"id": 42
+                        "id": 42
 
-},
+                    },
 
-"quest_title_2": {
+                    "quest_title_2": {
 
-"report_section_id": 24,
+                        "report_section_id": 24,
 
-"question": "quest_title_2",
+                        "question": "quest_title_2",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food",
+                        "description": "food",
 
-"updated_at": "2020-02-17 03:58:03",
+                        "updated_at": "2020-02-17 03:58:03",
 
-"created_at": "2020-02-17 03:58:03",
+                        "created_at": "2020-02-17 03:58:03",
 
-"id": 43
+                        "id": 43
 
-}
+                    }
 
-}
+                }
 
-}
+            }
 
-}
+        }
 
-}
+    }
 
 }
 
@@ -1848,216 +1845,215 @@ OR
   
 
 ```json
-
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Updated report document successfully!",
+    "message": "Updated report document successfully!",
 
-"data": {
+    "data": {
 
-"id": 5,
+        "id": 5,
 
-"title": "some cool report title",
+        "title": "some cool report title",
 
-"user_id": 1,
+        "user_id": 1,
 
-"created_at": "2020-02-17T00:23:40.000000Z",
+        "created_at": "2020-02-17T00:23:40.000000Z",
 
-"updated_at": "2020-02-17T04:10:54.000000Z",
+        "updated_at": "2020-02-17T04:10:54.000000Z",
 
-"report_template_id": 1,
+        "report_template_id": 1,
 
-"room": "edc-232",
+        "room": "edc-232",
 
-"due_date": "2020-02-04 23:26:46",
+        "due_date": "2020-02-04 23:26:46",
 
-"sections": {
+        "sections": {
 
-"sect_title_1": {
+            "sect_title_1": {
 
-"id": 4,
+                "id": 4,
 
-"title": "sect_title_1",
+                "title": "sect_title_1",
 
-"report_id": 5,
+                "report_id": 5,
 
-"created_at": "2020-02-17T00:23:40.000000Z",
+                "created_at": "2020-02-17T00:23:40.000000Z",
 
-"updated_at": "2020-02-17T00:23:40.000000Z",
+                "updated_at": "2020-02-17T00:23:40.000000Z",
 
-"report_section_template_id": null,
+                "report_section_template_id": null,
 
-"questions": {
+                "questions": {
 
-"quest_title_1": {
+                    "quest_title_1": {
 
-"id": 2,
+                        "id": 2,
 
-"question": "quest_title_1",
+                        "question": "quest_title_1",
 
-"report_section_id": 4,
+                        "report_section_id": 4,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-},
+                    },
 
-"quest_title_2": {
+                    "quest_title_2": {
 
-"id": 3,
+                        "id": 3,
 
-"question": "quest_title_2",
+                        "question": "quest_title_2",
 
-"report_section_id": 4,
+                        "report_section_id": 4,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-}
+                    }
 
-}
+                }
 
-},
+            },
 
-"sect_title_2": {
+            "sect_title_2": {
 
-"id": 5,
+                "id": 5,
 
-"title": "sect_title_2",
+                "title": "sect_title_2",
 
-"report_id": 5,
+                "report_id": 5,
 
-"created_at": "2020-02-17T00:23:40.000000Z",
+                "created_at": "2020-02-17T00:23:40.000000Z",
 
-"updated_at": "2020-02-17T00:23:40.000000Z",
+                "updated_at": "2020-02-17T00:23:40.000000Z",
 
-"report_section_template_id": null,
+                "report_section_template_id": null,
 
-"questions": {
+                "questions": {
 
-"quest_title_1": {
+                    "quest_title_1": {
 
-"id": 4,
+                        "id": 4,
 
-"question": "quest_title_1",
+                        "question": "quest_title_1",
 
-"report_section_id": 5,
+                        "report_section_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-},
+                    },
 
-"quest_title_2": {
+                    "quest_title_2": {
 
-"id": 5,
+                        "id": 5,
 
-"question": "quest_title_2",
+                        "question": "quest_title_2",
 
-"report_section_id": 5,
+                        "report_section_id": 5,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-}
+                    }
 
-}
+                }
 
-},
+            },
 
-"sect_title_3": {
+            "sect_title_3": {
 
-"id": 6,
+                "id": 6,
 
-"title": "sect_title_3",
+                "title": "sect_title_3",
 
-"report_id": 5,
+                "report_id": 5,
 
-"created_at": "2020-02-17T00:23:40.000000Z",
+                "created_at": "2020-02-17T00:23:40.000000Z",
 
-"updated_at": "2020-02-17T00:23:40.000000Z",
+                "updated_at": "2020-02-17T00:23:40.000000Z",
 
-"report_section_template_id": null,
+                "report_section_template_id": null,
 
-"questions": {
+                "questions": {
 
-"quest_title_1": {
+                    "quest_title_1": {
 
-"id": 6,
+                        "id": 6,
 
-"question": "quest_title_1",
+                        "question": "quest_title_1",
 
-"report_section_id": 6,
+                        "report_section_id": 6,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-},
+                    },
 
-"quest_title_2": {
+                    "quest_title_2": {
 
-"id": 7,
+                        "id": 7,
 
-"question": "quest_title_2",
+                        "question": "quest_title_2",
 
-"report_section_id": 6,
+                        "report_section_id": 6,
 
-"created_at": "2020-02-17 00:23:40",
+                        "created_at": "2020-02-17 00:23:40",
 
-"updated_at": "2020-02-17 00:23:40",
+                        "updated_at": "2020-02-17 00:23:40",
 
-"report_question_template_id": 1,
+                        "report_question_template_id": 1,
 
-"answer": "dog",
+                        "answer": "dog",
 
-"description": "food"
+                        "description": "food"
 
-}
+                    }
 
-}
+                }
 
-}
+            }
 
-}
+        }
 
-}
+    }
 
 }
 
@@ -2068,44 +2064,44 @@ OR
 *  **Error Response:**
 
 ```json
-
 {
 
-"status": "422 (Unprocessable Entity)",
+    "status": "422 (Unprocessable Entity)",
 
-"message": {
+    "message": {
 
-"id": [
+        "id": [
 
-"The id field is required."
+            "The id field is required."
 
-],
+        ],
 
-"title": [
+        "title": [
 
-"The title field is required."
+            "The title field is required."
 
-],
+        ],
 
-"room": [
+        "room": [
 
-"The room field is required."
+            "The room field is required."
 
-],
+        ],
 
-"template_id": [
+        "template_id": [
 
-"The template id field is required."
+            "The template id field is required."
 
-]
+        ]
 
-},
+    },
 
-"data": ""
+    "data": ""
 
 }
 
-```
+``
+`
 
   
 
@@ -2114,33 +2110,35 @@ OR
   
   
 
-```json
+`
+``
+json
 
 {
 
-"status": "422 (Unprocessable Entity)",
+    "status": "422 (Unprocessable Entity)",
 
-"message": {
+    "message": {
 
-"sections.sect_title_1.qs": [
+        "sections.sect_title_1.qs": [
 
-"The sections.sect_title_1.qs field is required when sections.sect_title_1 is present."
+            "The sections.sect_title_1.qs field is required when sections.sect_title_1 is present."
 
-],
+        ],
 
-"sections.sect_title_2.qs": [
+        "sections.sect_title_2.qs": [
 
-"The sections.sect_title_2.qs field is required when sections.sect_title_2 is present."
+            "The sections.sect_title_2.qs field is required when sections.sect_title_2 is present."
 
-],
+        ],
 
-"sections.sect_title_3.qs": [
+        "sections.sect_title_3.qs": [
 
-"The sections.sect_title_3.qs field is required when sections.sect_title_3 is present."
+            "The sections.sect_title_3.qs field is required when sections.sect_title_3 is present."
 
-]
+        ]
 
-},
+    },
 
 "data": ""
 
@@ -2200,35 +2198,35 @@ localhost/api/v1/restore_report/59
 
 {
 
-"status":  "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message":  "Report restored successfully.",
+    "message": "Report restored successfully.",
 
-"data":  {
+    "data": {
 
-"id":  2,
+        "id": 2,
 
-"title":  "Wet Labs Template - 2020-03-24",
+        "title": "Wet Labs Template - 2020-03-24",
 
-"template_id":  1,
+        "template_id": 1,
 
-"status":  "Overdue",
+        "status": "Overdue",
 
-"lab":  "ED-416",
+        "lab": "ED-416",
 
-"due_date":  "2020-03-31",
+        "due_date": "2020-03-31",
 
-"user_id":  12,
+        "user_id": 12,
 
-"assigned_to":  4,
+        "assigned_to": 4,
 
-"created_at":  "2020-03-24 02:52:57",
+        "created_at": "2020-03-24 02:52:57",
 
-"updated_at":  "2020-03-28 05:43:08",
+        "updated_at": "2020-03-28 05:43:08",
 
-"deleted_at":  null
+        "deleted_at": null
 
-}
+    }
 
 }
 
@@ -2243,11 +2241,11 @@ localhost/api/v1/restore_report/59
 ```json
 {
 
-"status":  "400 (Bad Request)",
+    "status": "400 (Bad Request)",
 
-"message":  "Could not find report record to delete.",
+    "message": "Could not find report record to delete.",
 
-"data":  ""
+    "data": ""
 
 }
 ```
@@ -2302,26 +2300,26 @@ localhost/api/v1/report/59
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Report deleted succesfully.",
+    "message": "Report deleted succesfully.",
 
-"data": {
+    "data": {
 
-"id": 18,
+        "id": 18,
 
-"title": "some cool title 2029",
+        "title": "some cool title 2029",
 
-"user_id": 1,
+        "user_id": 1,
 
-"created_at": "2019-12-27 04:27:45",
+        "created_at": "2019-12-27 04:27:45",
 
-"updated_at": "2019-12-27 04:27:45"
+        "updated_at": "2019-12-27 04:27:45",
 
-"deleted_at": "2019-12-27 04:27:45"
+        "deleted_at": "2019-12-27 04:27:45"
 
 
-}
+    }
 
 }
 
@@ -2391,31 +2389,31 @@ localhost/api/v1/inspection/2
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Inspection assignment retrieved succesfully.",
+    "message": "Inspection assignment retrieved succesfully.",
 
-"data": {
+    "data": {
 
-"id": 2,
+        "id": 2,
 
-"room": 69,
+        "room": 69,
 
-"report_id": 1,
+        "report_id": 1,
 
-"user_id": 1,
+        "user_id": 1,
 
-"assigned_to": 1,
+        "assigned_to": 1,
 
-"due_date": "2020-12-12",
+        "due_date": "2020-12-12",
 
-"status": "incomplete",
+        "status": "incomplete",
 
-"created_at": "2019-12-27 08:02:34",
+        "created_at": "2019-12-27 08:02:34",
 
-"updated_at": "2019-12-27 08:02:34"
+        "updated_at": "2019-12-27 08:02:34"
 
-}
+    }
 
 }
 
@@ -2485,57 +2483,57 @@ localhost/api/v1/inspections
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "All Inspection assignments retrieved succesfully.",
+    "message": "All Inspection assignments retrieved succesfully.",
 
-"data": [
+    "data": [
 
-{
+        {
 
-"id": 2,
+            "id": 2,
 
-"room": 69,
+            "room": 69,
 
-"report_id": 1,
+            "report_id": 1,
 
-"user_id": 1,
+            "user_id": 1,
 
-"assigned_to": 1,
+            "assigned_to": 1,
 
-"due_date": "2020-12-12",
+            "due_date": "2020-12-12",
 
-"status": "incomplete",
+            "status": "incomplete",
 
-"created_at": "2019-12-27 08:02:34",
+            "created_at": "2019-12-27 08:02:34",
 
-"updated_at": "2019-12-27 08:02:34"
+            "updated_at": "2019-12-27 08:02:34"
 
-},
+        },
 
-{
+        {
 
-"id": 3,
+            "id": 3,
 
-"room": 250,
+            "room": 250,
 
-"report_id": 1,
+            "report_id": 1,
 
-"user_id": 1,
+            "user_id": 1,
 
-"assigned_to": 1,
+            "assigned_to": 1,
 
-"due_date": "2020-12-12",
+            "due_date": "2020-12-12",
 
-"status": "incomplete",
+            "status": "incomplete",
 
-"created_at": "2019-12-27 08:12:44",
+            "created_at": "2019-12-27 08:12:44",
 
-"updated_at": "2019-12-27 08:12:44"
+            "updated_at": "2019-12-27 08:12:44"
 
-}
+        }
 
-]
+    ]
 
 }
 
@@ -2609,19 +2607,19 @@ YES
 
 {
 
-"id": 155,
+    "id": 155,
 
-"report_id": 155,
+    "report_id": 155,
 
-"room": 1,
+    "room": 1,
 
-"assigned_to" : 2,
+    "assigned_to": 2,
 
-"user_id" : "1",
+    "user_id": "1",
 
-"status" : "incomplete",
+    "status": "incomplete",
 
-"due_date": "2020-02-04 23:26:46"
+    "due_date": "2020-02-04 23:26:46"
 
 }
 
@@ -2636,31 +2634,31 @@ YES
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Created inspection assignment succesfully!",
+    "message": "Created inspection assignment succesfully!",
 
-"data": {
+    "data": {
 
-"room": 1,
+        "room": 1,
 
-"report_id": 155,
+        "report_id": 155,
 
-"assigned_to": 2,
+        "assigned_to": 2,
 
-"user_id": 23,
+        "user_id": 23,
 
-"due_date": "2020-02-04 23:26:46",
+        "due_date": "2020-02-04 23:26:46",
 
-"status": "incomplete",
+        "status": "incomplete",
 
-"updated_at": "2020-02-05 06:37:11",
+        "updated_at": "2020-02-05 06:37:11",
 
-"created_at": "2020-02-05 06:37:11",
+        "created_at": "2020-02-05 06:37:11",
 
-"id": 3
+        "id": 3
 
-}
+    }
 
 }
 
@@ -2673,40 +2671,39 @@ YES
   
 
 ```json
-
 {
 
-"status": "422 (Unprocessable Entity)",
+    "status": "422 (Unprocessable Entity)",
 
-"message": {
+    "message": {
 
-"report_id": [
+        "report_id": [
 
-"The report id field is required."
+            "The report id field is required."
 
-],
+        ],
 
-"room": [
+        "room": [
 
-"The room field is required."
+            "The room field is required."
 
-],
+        ],
 
-"assigned_to": [
+        "assigned_to": [
 
-"The assigned to field is required."
+            "The assigned to field is required."
 
-],
+        ],
 
-"due_date": [
+        "due_date": [
 
-"The due date field is required."
+            "The due date field is required."
 
-]
+        ]
 
-},
+    },
 
-"data": ""
+    "data": ""
 
 }
 
@@ -2764,31 +2761,31 @@ localhost/api/v1/inspection/59
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Inspection assignment deleted succesfully.",
+    "message": "Inspection assignment deleted succesfully.",
 
-"data": {
+    "data": {
 
-"id": 3,
+        "id": 3,
 
-"room": 250,
+        "room": 250,
 
-"report_id": 1,
+        "report_id": 1,
 
-"user_id": 1,
+        "user_id": 1,
 
-"assigned_to": 1,
+        "assigned_to": 1,
 
-"due_date": "2020-12-12",
+        "due_date": "2020-12-12",
 
-"status": "incomplete",
+        "status": "incomplete",
 
-"created_at": "2019-12-27 08:12:44",
+        "created_at": "2019-12-27 08:12:44",
 
-"updated_at": "2019-12-27 08:12:44"
+        "updated_at": "2019-12-27 08:12:44"
 
-}
+    }
 
 }
 
@@ -2860,33 +2857,33 @@ localhost/api/v1/issue/2
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Issue retrieved succesfully.",
+    "message": "Issue retrieved succesfully.",
 
-"data": {
+    "data": {
 
-"id": 1,
+        "id": 1,
 
-"room": 69,
+        "room": 69,
 
-"status": "incomplete",
+        "status": "incomplete",
 
-"title": "oil spill",
+        "title": "oil spill",
 
-"severity": "extreme",
+        "severity": "extreme",
 
-"description": "someone clean this oil spill asap!",
+        "description": "someone clean this oil spill asap!",
 
-"comments": "yikes, wow what a big oil spill!",
+        "comments": "yikes, wow what a big oil spill!",
 
-"user_id": 1,
+        "user_id": 1,
 
-"created_at": "2019-12-27 08:24:41",
+        "created_at": "2019-12-27 08:24:41",
 
-"updated_at": "2019-12-27 08:24:41"
+        "updated_at": "2019-12-27 08:24:41"
 
-}
+    }
 
 }
 
@@ -2953,61 +2950,61 @@ localhost/api/v1/issues
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "All Issues retrieved succesfully.",
+    "message": "All Issues retrieved succesfully.",
 
-"data": [
+    "data": [
 
-{
+        {
 
-"id": 1,
+            "id": 1,
 
-"room": 69,
+            "room": 69,
 
-"status": "incomplete",
+            "status": "incomplete",
 
-"title": "oil spill",
+            "title": "oil spill",
 
-"severity": "extreme",
+            "severity": "extreme",
 
-"description": "someone clean this oil spill asap!",
+            "description": "someone clean this oil spill asap!",
 
-"comments": "yikes, wow what a big oil spill!",
+            "comments": "yikes, wow what a big oil spill!",
 
-"user_id": 1,
+            "user_id": 1,
 
-"created_at": "2019-12-27 08:24:41",
+            "created_at": "2019-12-27 08:24:41",
 
-"updated_at": "2019-12-27 08:24:41"
+            "updated_at": "2019-12-27 08:24:41"
 
-},
+        },
 
-{
+        {
 
-"id": 2,
+            "id": 2,
 
-"room": 234,
+            "room": 234,
 
-"status": "incomplete",
+            "status": "incomplete",
 
-"title": "chemical spill",
+            "title": "chemical spill",
 
-"severity": "extreme",
+            "severity": "extreme",
 
-"description": "someone clean this chemical spill asap!",
+            "description": "someone clean this chemical spill asap!",
 
-"comments": "yikes, wow what a big chemical spill!",
+            "comments": "yikes, wow what a big chemical spill!",
 
-"user_id": 1,
+            "user_id": 1,
 
-"created_at": "2019-12-27 08:28:44",
+            "created_at": "2019-12-27 08:28:44",
 
-"updated_at": "2019-12-27 08:28:44"
+            "updated_at": "2019-12-27 08:28:44"
 
-}
+        }
 
-]
+    ]
 
 }
 
@@ -3072,21 +3069,21 @@ YES
 
 {
 
-"id": 1,
+    "id": 1,
 
-"room": 213,
+    "room": 213,
 
-"title": "some cool title 32",
+    "title": "some cool title 32",
 
-"severity": "critical",
+    "severity": "critical",
 
-"description": "dog food",
+    "description": "dog food",
 
-"comments": "more dog food",
+    "comments": "more dog food",
 
-"resolution_date": "2020-02-04 23:26:46",
+    "resolution_date": "2020-02-04 23:26:46",
 
-"assigned_to": 1
+    "assigned_to": 1
 
 }
 
@@ -3101,35 +3098,35 @@ YES
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Created issue succesfully!",
+    "message": "Created issue succesfully!",
 
-"data": {
+    "data": {
 
-"id": 1,
+        "id": 1,
 
-"room": 213,
+        "room": 213,
 
-"status": "incomplete",
+        "status": "incomplete",
 
-"title": "some cool title 32",
+        "title": "some cool title 32",
 
-"severity": "critical",
+        "severity": "critical",
 
-"description": "dog food",
+        "description": "dog food",
 
-"comments": "more dog food",
+        "comments": "more dog food",
 
-"user_id": 23,
+        "user_id": 23,
 
-"created_at": "2020-02-05 03:28:42",
+        "created_at": "2020-02-05 03:28:42",
 
-"updated_at": "2020-02-05 03:29:01",
+        "updated_at": "2020-02-05 03:29:01",
 
-"resolution_date": "2020-02-04 23:26:46"
+        "resolution_date": "2020-02-04 23:26:46"
 
-}
+    }
 
 }
 
@@ -3251,33 +3248,33 @@ localhost/api/v1/issue/59
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Issue deleted succesfully.",
+    "message": "Issue deleted succesfully.",
 
-"data": {
+    "data": {
 
-"id": 1,
+        "id": 1,
 
-"room": 69,
+        "room": 69,
 
-"status": "incomplete",
+        "status": "incomplete",
 
-"title": "oil spill",
+        "title": "oil spill",
 
-"severity": "extreme",
+        "severity": "extreme",
 
-"description": "someone clean this oil spill asap!",
+        "description": "someone clean this oil spill asap!",
 
-"comments": "yikes, wow what a big oil spill!",
+        "comments": "yikes, wow what a big oil spill!",
 
-"user_id": 1,
+        "user_id": 1,
 
-"created_at": "2019-12-27 08:24:41",
+        "created_at": "2019-12-27 08:24:41",
 
-"updated_at": "2019-12-27 08:24:41"
+        "updated_at": "2019-12-27 08:24:41"
 
-}
+    }
 
 }
 
@@ -3293,11 +3290,11 @@ localhost/api/v1/issue/59
 
 {
 
-"status": "400 (Bad Request)",
+    "status": "400 (Bad Request)",
 
-"message": "Could not find issue to be deleted by id",
+    "message": "Could not find issue to be deleted by id",
 
-"data": ""
+    "data": ""
 
 }
 
@@ -3355,24 +3352,23 @@ localhost/api/v1/lab/2
   
 
 ```json
-
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "Lab retrieved successfully.",
+    "message": "Lab retrieved successfully.",
 
-"data": {
+    "data": {
 
-"id": 1,
+        "id": 1,
 
-"created_at": "2020-02-05 10:09:14",
+        "created_at": "2020-02-05 10:09:14",
 
-"updated_at": "2020-02-05 10:09:16",
+        "updated_at": "2020-02-05 10:09:16",
 
-"title": "bob"
+        "title": "bob"
 
-}
+    }
 
 }
 
@@ -3440,25 +3436,25 @@ localhost/api/v1/labs
 
 {
 
-"status": "200 (Ok)",
+    "status": "200 (Ok)",
 
-"message": "All Labs retrieved successfully.",
+    "message": "All Labs retrieved successfully.",
 
-"data": [
+    "data": [
 
-{
+        {
 
-"id": 1,
+            "id": 1,
 
-"created_at": "2020-02-05 10:09:14",
+            "created_at": "2020-02-05 10:09:14",
 
-"updated_at": "2020-02-05 10:09:16",
+            "updated_at": "2020-02-05 10:09:16",
 
-"title": "edc-232"
+            "title": "edc-232"
 
-}
+        }
 
-]
+    ]
 
 }
 
