@@ -196,7 +196,6 @@ POST
 | Optional 	|                                      	|                                                   	|
 |   Notes  	| 	| 	|
 | Optional | | |
-
 | Notes | | |
 
 *  **Sample Request:**
@@ -4185,7 +4184,7 @@ OR
         "updated_at": "2020-03-29 22:11:21"
     }
 }
-  
+  ```
 
 *  **Error Response:**
 ```json
@@ -4260,7 +4259,7 @@ localhost/api/v1/template/1
 
 {
     "status": "400 (Bad Request)",
-    "message": ""
+    "message": "",
     "data": ""
 }
 ```
