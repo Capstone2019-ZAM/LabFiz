@@ -127,7 +127,6 @@ Authorization: Bearer 1shtRTbPCVs2xe7cviyaIAGWClT57y9YwjyVSFerKgXeFDh0LnvdpyM6CU
 | 10 |  Report  |    localhost/api/v1/report   |        1       |     POST     |     Creates a report if it does not exist, otherwise updates an exisiting one    | [More](#CreateReport) |
 | 11 |  Report  |    localhost/api/v1/report/{id}   |        1       |    DELETE    |     Deletes a report by id     | [More](#DeleteReport) |
 | 12 |  Report  |    localhost/api/v1/restore_report/{id}   |        1       |    DELETE    |     Restores a deleted report by id     | [More](#RestoreReport) |
-
 | 13 |  Inspection  | localhost/api/v1/report/{id} |        1       |      GET     | Gets an inspection assignment by the id | [More](#GetInspectionById) |
 | 14 |  Inspection  |   localhost/api/v1/inspection   |        1       |      GET     |        Gets all inspection assignments        | [More](#GetAllInspections) |
 | 15 |  Inspection  |    localhost/api/v1/inspection   |        1       |     POST     |     Creates an inspection if it does not exist, otherwise updates exisiting one    | [More](#CreateInspection) |
@@ -143,7 +142,6 @@ Authorization: Bearer 1shtRTbPCVs2xe7cviyaIAGWClT57y9YwjyVSFerKgXeFDh0LnvdpyM6CU
 | 25 |  Comment  |    localhost/api/v1/comment/{id}   |        1       |    GET    |     Gets comment by id      | [More](#GetByIdComment) |
 | 26 |  Comment  |    localhost/api/v1/comment/{id}   |        1       |    POST    |     Creates a comment for given issue id     | [More](#CreateComment) |
 | 27 |  Comment  |    localhost/api/v1/comment/{id}   |        1       |    DELETE    |     Deletes a comment by id     | [More](#DeleteComment) |
-
 | 28 |  Template  |    localhost/api/v1/templates/   |        1       |    GET    |     Gets all all templates     | [More](#GetAllTemplate) |
 | 29 |  Template  |    localhost/api/v1/template/{id}   |        1       |    GET    |     Gets template by id      | [More](#GetByITemplate) |
 | 30 |  Template  |    localhost/api/v1/template/{id}   |        1       |    POST    |     Creates or updates a template     | [More](#CreatTemplate) |
