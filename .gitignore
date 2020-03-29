@@ -21,3 +21,5 @@ storage/logs
 app/public/js/app.js
 app/public/js/app.js
 app/public/css/app.css
+
+app/package-lock.json

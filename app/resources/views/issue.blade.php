@@ -4,7 +4,7 @@
 
 <div id="app">
     {{-- < Your view components go here> --}}
-    <v-app>
+    <v-app class="bg-transparent">
         <issue-tracker></issue-tracker>
     </v-app>
 </div>

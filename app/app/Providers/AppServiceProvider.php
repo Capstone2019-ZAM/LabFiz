@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Contracts\RestServiceContract;
+use App\Http\Controllers\Api\v1\LabController;
+use App\Http\Controllers\Controller;
+use App\Services\LabService;
+use App\Services\UserService;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -23,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
     }
 }

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="app">
-        <v-app >
+    <div>
+        <v-app class="bg-transparent">
             <dash-board></dash-board>              
     </v-app>
     </div>

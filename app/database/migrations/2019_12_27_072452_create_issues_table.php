@@ -15,14 +15,18 @@ class CreateIssuesTable extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedMediumInteger('room');
+            // $table->unsignedBigInteger('room');
+            $table->string('room', 400);
             $table->string('status');
             $table->string('title');
             $table->string('severity');
+            $table->date('due_date');
             $table->string('description');
-            $table->string('comments');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            //$table->unsignedBigInteger('comment_id');
+            $table->unsignedBigInteger('assigned_to');            
+            $table->unsignedBigInteger('user_id');            
+            $table->foreign('user_id')->references('id')->on('users');//->onDelete('cascade');
+            $table->foreign('assigned_to')->references('id')->on('users');//->onDelete('cascade');
             $table->timestamps();
         });
     }

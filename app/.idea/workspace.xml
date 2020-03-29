@@ -35,7 +35,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -129,22 +129,26 @@
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
       <path value="$PROJECT_DIR$/vendor/jason-guru/laravel-make-repository" />
+      <path value="$PROJECT_DIR$/vendor/league/commonmark" />
     </include_path>
   </component>
   <component name="ProjectId" id="1VPEUVPHhOohU9F6VcZ6YBblYyi" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Extensions" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -190,11 +194,44 @@
       <workItem from="1577431215814" duration="4825000" />
       <workItem from="1577488501629" duration="17668000" />
       <workItem from="1577588098363" duration="7628000" />
+      <workItem from="1577596851908" duration="348000" />
+      <workItem from="1577834712388" duration="15146000" />
+      <workItem from="1580692554792" duration="110000" />
+      <workItem from="1580692695733" duration="2007000" />
+      <workItem from="1580696112047" duration="214000" />
+      <workItem from="1580790641536" duration="749000" />
+      <workItem from="1580791822181" duration="120000" />
+      <workItem from="1580792269047" duration="11424000" />
+      <workItem from="1580855655566" duration="22398000" />
+      <workItem from="1580939562109" duration="25503000" />
+      <workItem from="1581014403521" duration="2088000" />
+      <workItem from="1581045678808" duration="551000" />
+      <workItem from="1581898562812" duration="2467000" />
+      <workItem from="1581901050282" duration="173000" />
+      <workItem from="1581998267291" duration="1333000" />
+      <workItem from="1582005174358" duration="1165000" />
+      <workItem from="1582010877847" duration="11411000" />
+      <workItem from="1582055148951" duration="4277000" />
+      <workItem from="1582059479850" duration="12000" />
+      <workItem from="1582059659126" duration="5842000" />
+      <workItem from="1582083478967" duration="206000" />
+      <workItem from="1582090834020" duration="1743000" />
+      <workItem from="1582093552253" duration="1217000" />
+      <workItem from="1582099561075" duration="6384000" />
+      <workItem from="1582106123607" duration="1519000" />
+      <workItem from="1582107929627" duration="745000" />
+      <workItem from="1582142356252" duration="2170000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
     <state x="1045" y="503" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577592577004">
@@ -205,45 +242,80 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="960" y="428" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577321815191" />
-    <state x="870" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1577502277475">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="522" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1582021321072">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="870" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577502277475" />
-    <state x="1010" y="455" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1577494643537">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="522" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1582021321072" />
+    <state x="870" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577851808878" />
+    <state x="606" y="268" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1582143620298">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="606" y="268" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1582143620298" />
     <state x="1010" y="455" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577494643537" />
-    <state x="1060" y="455" key="FileChooserDialogImpl" timestamp="1577588125034">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="636" y="268" key="FileChooserDialogImpl" timestamp="1582012827688">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="636" y="268" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1582012827688" />
     <state x="1060" y="455" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577588125034" />
-    <state x="1089" y="515" key="NewPhpClassDialog" timestamp="1577498542915">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1580692664770">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580692664770" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1580692664770">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580692664770" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1580692664769">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580692664769" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1580692664770">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580692664770" />
+    <state x="653" y="303" key="NewPhpClassDialog" timestamp="1582012865040">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="653" y="303" key="NewPhpClassDialog/0.0.1536.824@0.0.1536.824" timestamp="1582012865040" />
     <state x="1089" y="515" key="NewPhpClassDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577498542915" />
     <state x="1114" y="624" key="NewPhpFileDialog" timestamp="1577322745887">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1114" y="624" key="NewPhpFileDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577322745887" />
-    <state x="781" y="343" key="SettingsEditor" timestamp="1577591460050">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="270" y="55" key="SettingsEditor" timestamp="1582093625896">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="270" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582093625896" />
     <state x="781" y="343" key="SettingsEditor/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577591460050" />
     <state x="92" y="92" width="2376" height="1216" key="dock-window-1" timestamp="1577489490379">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="92" y="92" width="2376" height="1216" key="dock-window-1/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577489490379" />
-    <state x="976" y="298" width="1310" height="804" key="find.popup" timestamp="1577500709017">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="586" y="175" width="786" height="566" key="find.popup" timestamp="1582108506522">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="586" y="175" width="786" height="566" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1582108506522" />
     <state x="976" y="298" width="1310" height="804" key="find.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577500709017" />
-    <state x="936" y="330" key="run.anything.popup" timestamp="1577322938896">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="562" y="194" key="run.anything.popup" timestamp="1582091948146">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="562" y="194" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1582091948146" />
     <state x="936" y="330" key="run.anything.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577322938896" />
-    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1577490433504">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="566" y="185" width="672" height="400" key="search.everywhere.popup" timestamp="1582060701166">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="566" y="185" width="672" height="400" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1582060701166" />
     <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1577490433504" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Api/v1/InspectionController.php</url>
+          <line>22</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

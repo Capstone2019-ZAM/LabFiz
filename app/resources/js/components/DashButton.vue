@@ -1,47 +1,41 @@
 <template>
   <v-card
-    max-width="420"
-    max-height="200"
-    min-height="200"
-    min-width="200"
-    class="mx-auto pa-3 d-flex flex-row"
+  color="teal lighten-3"
+    md="4"
+    sm="12"
     hover
     outlined
+      height="200"
+      width="400"
+    @click="navigate(data.link)"
   >
-    <v-layout dark row wrap align-content-center>
-      <v-flex xs2 md4 centered pa-3>
-        <v-responsive pa-2>
-          <v-icon max-height="auto" size="90">{{data.icon}}</v-icon>
-        </v-responsive>
-      </v-flex>
+  <v-container  align="center" justify="center">
+  <v-row cols="12" align="center" justify="center">
+    <v-col md="4">
+      <v-icon max-height="auto" size="90">{{data.img}}</v-icon>
+    </v-col>
+    
+    <v-col md="8" >
+        <div class="headline">
+           {{data.title}}
+        </div>
+        <v-card-subtitle justify="start" >
+          {{data.desc}}
+        </v-card-subtitle>
 
-      <v-flex xs10 md8>
-        <v-card-text>
-          <v-list-item-title class="headline">
-            <span>{{data.title}}</span>
-          </v-list-item-title>
-          <v-list-item-subtitle class="grey--light">
-            <span>{{data.description}}</span>
-          </v-list-item-subtitle>
-          <!-- <v-card-title class="headline"> -->
-          <!-- <v-card-subtitle class="greFy--light">  </v-card-subtitle> -->
-        </v-card-text>
-      </v-flex>
-    </v-layout>
+    </v-col>
+  </v-row>
+  </v-container>
   </v-card>
 </template>
  
 <script>
 export default {
-  props: ["data"]
+  props: ["data"],
+  methods :{
+    navigate (addr){
+        window.location.href = addr
+    }
+  }
 };
 </script>
-
-
-// data() {
-//     return {
-//       icon: 'mdi-file-document-edit',
-//       title: 'Inspections',
-//       description: 'Something',
-//     }
-//  }
