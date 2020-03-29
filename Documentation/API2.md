@@ -126,18 +126,28 @@ Authorization: Bearer 1shtRTbPCVs2xe7cviyaIAGWClT57y9YwjyVSFerKgXeFDh0LnvdpyM6CU
 | 9 |  Report  |   localhost/api/v1/reports   |        1       |      GET     |        Gets all reports        | [More](#GetAllReports) |
 | 10 |  Report  |    localhost/api/v1/report   |        1       |     POST     |     Creates a report if it does not exist, otherwise updates an exisiting one    | [More](#CreateReport) |
 | 11 |  Report  |    localhost/api/v1/report/{id}   |        1       |    DELETE    |     Deletes a report by id     | [More](#DeleteReport) |
-| 12 |  Inspection  | localhost/api/v1/report/{id} |        1       |      GET     | Gets an inspection assignment by the id | [More](#GetInspectionById) |
-| 13 |  Inspection  |   localhost/api/v1/inspection   |        1       |      GET     |        Gets all inspection assignments        | [More](#GetAllInspections) |
-| 14 |  Inspection  |    localhost/api/v1/inspection   |        1       |     POST     |     Creates an inspection if it does not exist, otherwise updates exisiting one    | [More](#CreateInspection) |
-| 15 |  Inspection  |    localhost/api/v1/inspection/{id}   |        1       |    DELETE    |     Deletes an inspection assignment     | [More](#DeleteInspection) |
-| 16 |  Issue  | localhost/api/v1/issue/{id} |        1       |      GET     | Gets an issue by id | [More](#GetIssueById) |
-| 17 |  Issue  |   localhost/api/v1/issues   |        1       |      GET     |        Gets all issues        | [More](#GetAllIssues) |
-| 18 |  Issue  |    localhost/api/v1/issue   |        1       |     POST     |     Creates an issue if it does not exist, otherwise updates exisiting one    | [More](#CreateIssue) |
-| 19 |  Issue  |    localhost/api/v1/issue/{id}   |        1       |    DELETE    |     Deletes an issue by id     | [More](#DeleteIssue) |
-| 20 |  Lab  | localhost/api/v1/lab/{id} |        1       |      GET     | Gets an lab by id | [More](#GetLabById) |
-| 21 |  Lab  |   localhost/api/v1/labs   |        1       |      GET     |        Gets all labs        | [More](#GetAllLabs) |
-| 22 |  Lab  |    localhost/api/v1/lab   |        1       |     POST     |     Creates a lab if it does not exist, otherwise updates exisiting one    | [More](#CreateLab) |
-| 23 |  Lab  |    localhost/api/v1/lab/{id}   |        1       |    DELETE    |     Deletes a lab by id     | [More](#DeleteLab) |
+| 12 |  Report  |    localhost/api/v1/restore_report/{id}   |        1       |    DELETE    |     Restores a deleted report by id     | [More](#RestoreReport) |
+
+| 13 |  Inspection  | localhost/api/v1/report/{id} |        1       |      GET     | Gets an inspection assignment by the id | [More](#GetInspectionById) |
+| 14 |  Inspection  |   localhost/api/v1/inspection   |        1       |      GET     |        Gets all inspection assignments        | [More](#GetAllInspections) |
+| 15 |  Inspection  |    localhost/api/v1/inspection   |        1       |     POST     |     Creates an inspection if it does not exist, otherwise updates exisiting one    | [More](#CreateInspection) |
+| 16 |  Inspection  |    localhost/api/v1/inspection/{id}   |        1       |    DELETE    |     Deletes an inspection assignment     | [More](#DeleteInspection) |
+| 17 |  Issue  | localhost/api/v1/issue/{id} |        1       |      GET     | Gets an issue by id | [More](#GetIssueById) |
+| 18 |  Issue  |   localhost/api/v1/issues   |        1       |      GET     |        Gets all issues        | [More](#GetAllIssues) |
+| 19 |  Issue  |    localhost/api/v1/issue   |        1       |     POST     |     Creates an issue if it does not exist, otherwise updates exisiting one    | [More](#CreateIssue) |
+| 20 |  Issue  |    localhost/api/v1/issue/{id}   |        1       |    DELETE    |     Deletes an issue by id     | [More](#DeleteIssue) |
+| 21 |  Lab  | localhost/api/v1/lab/{id} |        1       |      GET     | Gets an lab by id | [More](#GetLabById) |
+| 22 |  Lab  |   localhost/api/v1/labs   |        1       |      GET     |        Gets all labs        | [More](#GetAllLabs) |
+| 23 |  Lab  |    localhost/api/v1/lab   |        1       |     POST     |     Creates a lab if it does not exist, otherwise updates exisiting one    | [More](#CreateLab) |
+| 24 |  Comment  |    localhost/api/v1/comments/   |        1       |    GET    |     Gets all all comments for given issue id     | [More](#GetAllComments) |
+| 25 |  Comment  |    localhost/api/v1/comment/{id}   |        1       |    GET    |     Gets comment by id      | [More](#GetByIdComment) |
+| 26 |  Comment  |    localhost/api/v1/comment/{id}   |        1       |    POST    |     Creates a comment for given issue id     | [More](#CreateComment) |
+| 27 |  Comment  |    localhost/api/v1/comment/{id}   |        1       |    DELETE    |     Deletes a comment by id     | [More](#DeleteComment) |
+
+| 28 |  Template  |    localhost/api/v1/templates/   |        1       |    GET    |     Gets all all templates     | [More](#GetAllTemplate) |
+| 29 |  Template  |    localhost/api/v1/template/{id}   |        1       |    GET    |     Gets template by id      | [More](#GetByITemplate) |
+| 30 |  Template  |    localhost/api/v1/template/{id}   |        1       |    POST    |     Creates or updates a template     | [More](#CreatTemplate) |
+| 31 |  Template  |    localhost/api/v1/template/{id}   |        1       |    DELETE    |     Deletes a template by id     | [More](#DeletTemplate) |
 
 Users
 ============
@@ -791,7 +801,6 @@ POST
   
 
 Reports
-
 ============
 
   
@@ -2334,7 +2343,6 @@ localhost/api/v1/report/59
   
 
 Inspections
-
 ============
 
 ## Get Inspection By Id
@@ -2804,7 +2812,6 @@ localhost/api/v1/inspection/59
   
 
 Issues
-
 ============
 
 ## Get Issue By Id
@@ -3303,7 +3310,6 @@ localhost/api/v1/issue/59
   
 
 Labs
-
 ============
 
 ## Get Lab By Id
@@ -3586,7 +3592,6 @@ localhost/api/v1/lab/59
 
 ```
 Comments
-
 ============
 
 ## Get Comment By Id
@@ -3948,7 +3953,6 @@ localhost/api/v1/comment/59
 ```
 
 Templates
-
 ============
 
 ## Get Template By Id
