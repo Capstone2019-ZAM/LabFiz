@@ -54,9 +54,9 @@ class InpsectionReminder extends Command
         //get all near due reports
         // send email to assigned
         $soon = new DateTime();
-        $soon->add(new DateInterval('P5D'))->format('Y-m-d');
+        $soon=$soon->add(new DateInterval('P5D'))->format('Y-m-d');
         //$near_due = Report::whereBetween('due_date',[$soon,$today])->where('status','Pending')->get();        
-        $emails_neardue = User::leftJoin('reports','reports.assigned_to','=','users.id')->whereBetween('due_date',[$soon,$today])->where('status','Pending')->get(['first_name','email']);
+        $emails_neardue = User::leftJoin('reports','reports.assigned_to','=','users.id')->whereBetween('due_date',[$today,$soon])->where('status','Pending')->get(['first_name','email']);
         foreach ( $emails_neardue as $e){
 
             $data = array('name' => $e->first_name);
