@@ -12,6 +12,7 @@ use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 
 class IssueService implements RestServiceContract
@@ -98,6 +99,21 @@ class IssueService implements RestServiceContract
                 ]
             );
             $result['data'] = $issue;
+            if ($issue->wasRecentlyCreated){                
+                $to = User::where('id',$request->assigned_to)->get(['first_name','email']);
+                $to_name = $to[0]->first_name;
+                $to_email = $to[0]->email;
+                $data = array('name' => $to_name, 'lab'=>$request->room,
+                                'email'=>$to_email);
+       
+                Mail::send('emails.issue', $data,
+                     function($message) use ($to_name, $to_email) {
+                        $message->to($to_email, $to_name)->subject('Issue Assigned');
+                        $message->from('labfiz.noreply@gmail.com','LabFiz Admin');
+                    });
+       
+            }
+
         } catch (Exception $ex) {
             $result['message'] = $ex->getMessage();
             return ['response' => $result, 'status' => 400];
