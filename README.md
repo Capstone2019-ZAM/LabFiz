@@ -1,6 +1,7 @@
 <div align="center">
-<img src="Documentation/Logo/labfiz_logo_hd.png" >
+<img src="Documentation/Logo/labfiz_logo_hd.png"  width="50%" height="auto">
  </div>
+ 
 # Capstone
 2020 Software Capstone 
 
