@@ -44,9 +44,12 @@ Workplace and Lab safety is an important aspect of any institution. however, the
   - Laravel PHP
   - Vue.js & Veutify.js
  
-# Authors: 
+# Authors 
 - 	Muhammad Ahmed  ([@ahmed35m](https://github.com/ahmed35m))
 -  Zain Abedin
 -  Alwin Baby
+
+# License 
+ This project is to be licensed under the MIT License
  
 
