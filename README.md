@@ -5,12 +5,12 @@
  </div>
  
  # Objective
-Maintaining lab safety and conducting periodic inspections are required by every institute. To promote safety, LabFiz makes safety coordinators and inspectors job easy by providing inspection and issue management tools.
- 
+Workplace and Lab safety is an important aspect of any institution. however, there are no feasible management solutions available. LabFiz is a web application, designed to simplify lab inspection and safety management in academic settings. LabFiz allows lab wardens to automate assignment process and track inspections, to stay up to date on inspection requirements as required by law. LabFiz also provides features such as issue tracking, to enable collaborating on the resolution in a timely manner to avoid any loss. With plenty of customizations and administration features, LabFiz is a great tool to manage lab safety.
+
  # Features
  
  #### Create your own custom templates
-    Create your own custom checklists and inspection templates as your orginization demands.
+  Create your own custom checklists and inspection templates as your orginization demands.
 
  #### Manage Inspections
   You can create assignments for your team member and track their progress through reports with ease.
