@@ -2,6 +2,7 @@
 <img src="Documentation/Logo/labfiz_logo_hd.png"  width="25%" height="auto">
  
  ###### Laboratory Safety and Inspection Made Easy
+ ###### http://labfiz.com
  </div>
  
  # Introduction
@@ -23,27 +24,23 @@ Workplace and Lab safety is an important aspect of any institution. however, the
   
  #### Email Notifications
   Easily add an email service to start receiving email notifications.
-    
-# Authors: 
-- 	Muhammad Ahmed  ([@ahmed35m](https://github.com/ahmed35m))
--  Zain Abedin
--  Alwin Baby
- 
 
-
-
-
-
-  
 
 # Documentation
  - [ERD document](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/ERD%20-%20Main%20App.pdf)
  - [FRD document](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/FRD.docx)
  - [User Stories](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/User%20Stories.xlsx)
  - [Wireframes](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Wireframe%20-%20Coordinator%20(2).svg)
- - [APi.md](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/API2.md)
+ - [API.md](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/API2.md)
  - [System Architecture](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/System%20Architectural%20V2%20(2).png)
+ - [Poster(https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
  
- # Screenshots
+ # Project Management
   - [Asana](https://github.com/Capstone2019-ZAM/Capstone/tree/master/Documentation/Asana%20Screenshots)
  
+# Authors: 
+- 	Muhammad Ahmed  ([@ahmed35m](https://github.com/ahmed35m))
+-  Zain Abedin
+-  Alwin Baby
+ 
+
