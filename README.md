@@ -36,8 +36,7 @@ Workplace and Lab safety is an important aspect of any institution. however, the
  - [Poster](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
  
  # Project Management
-   LabFiz project was managed with Asana. Check out our project management @ [Asana](https://app.asana.com/0/1139874116808383) 
-  - [Asana](https://github.com/Capstone2019-ZAM/Capstone/tree/master/Documentation/Asana%20Screenshots)
+   LabFiz project was managed with Asana. Check out our project management @ [Asana](https://app.asana.com/0/1139874116808383) / [Asana Screenshots](https://github.com/Capstone2019-ZAM/Capstone/tree/master/Documentation/Asana%20Screenshots)
  
 # Authors: 
 - 	Muhammad Ahmed  ([@ahmed35m](https://github.com/ahmed35m))
