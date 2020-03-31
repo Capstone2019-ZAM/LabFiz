@@ -29,12 +29,12 @@ Workplace and Lab safety is an important aspect of any institution. however, the
 # Documentation
  - [Poster](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
  - [Business Requirement & Analysis]( https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/BusinessRequirementandProposal.pdf)
- - [Abstract](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.docx)
+ - [Abstract](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Abstract.docx)
  - [ERD document](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/ERD%20-%20Main%20App.pdf)
  - [FRD document](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/FRD.docx)
  - [User Stories](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/User%20Stories.xlsx)
  - [Wireframes](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Wireframe%20-%20Coordinator%20(2).svg)
- - [API.md](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/API2.md)
+ - [API Documentation](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/API2.md)
  - [System Architecture](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/System%20Architectural%20V2%20(2).png)
  
  # Project Management
