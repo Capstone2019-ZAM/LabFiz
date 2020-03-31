@@ -1,5 +1,8 @@
 <div align="center">
 <img src="Documentation/Logo/labfiz_logo_hd.png"  width="25%" height="auto">
+ 
+ ######Laboratory Safety and Inspection Made Easy
+ 
  </div>
  
 # Capstone
