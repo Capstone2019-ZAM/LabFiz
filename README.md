@@ -1,6 +1,5 @@
-<p align="center">
-<img src="Documentation/Logo/labfiz_logo_hd.png" height="400" width="460">
- </p>
+
+<img src="Documentation/Logo/labfiz_logo_hd.png" height="200" width="260">
  
 # Capstone
 2020 Software Capstone 
