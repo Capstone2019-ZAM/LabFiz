@@ -4,9 +4,26 @@
  ###### Laboratory Safety and Inspection Made Easy
  </div>
  
-# Capstone
-2020 Software Capstone 
+ # Objective
+Maintaining lab safety and conducting periodic inspections are required by every institute. To promote safety, LabFiz makes safety coordinators and inspectors job easy by providing inspection and issue management tools.
+ 
+ # Features
+ 
+ #### Create your own custom templates
+    Create your own custom checklists and inspection templates as your orginization demands.
 
+ #### Manage Inspections
+  You can create assignments for your team member and track their progress through reports with ease.
+
+ #### Track Issues
+  Create and assign issue instance and track its progress easily.
+  
+ #### Easily create and assign access to your team mates
+  Manage your team and grant them roles as they need.
+  
+ #### Email Notifications
+  Easily add aa email service to start receiving email notifications.
+    
 # ZAM
 Contributors: 
 - 	Muhammad Ahmed
@@ -14,15 +31,9 @@ Contributors:
 -  Alwin Baby
  
 
-# Objective
- Our objective is to create a web application that will serve as a platform for lab training and safety inspection for educational institutions. 
 
-# Features
-  - Lab inspectors will be able to record their inspection reports online
-  - inspectors will be notified before an inspection is due
-  - inspectors will be able to see the progress
-  - Admin will be able to assign tasks 
-  - Admin will be able to add new inspectors
+
+
 
   
 
