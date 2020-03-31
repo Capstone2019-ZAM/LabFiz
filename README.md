@@ -25,7 +25,7 @@ Workplace and Lab safety is an important aspect of any institution. however, the
   Easily add an email service to start receiving email notifications.
     
 # Authors: 
-- 	Muhammad Ahmed @ahmed35m
+- 	Muhammad Ahmed  ([@ahmed35m](https://github.com/ahmed35m))
 -  Zain Abedin
 -  Alwin Baby
  
