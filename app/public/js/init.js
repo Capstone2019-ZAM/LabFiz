@@ -15,14 +15,13 @@ function init(e) {
         )
         .then(function (response) {
             localStorage.setItem('api', response.data.data.token);
-            console.log('Login Successful!');
             var form = document.getElementById('signinform')
+            err_msg.textContent = ''
             form.submit();
         })
         .catch(function (error) {
-            console.log(error);
-            console.log('Login failed!');
-
+            var err_msg = document.getElementById('logfail')
+            err_msg.textContent = "Authentication Failed"
         });
 }
 
