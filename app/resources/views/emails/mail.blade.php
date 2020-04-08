@@ -43,9 +43,11 @@
     <div id="wrapper">
         <div id="content">
             <section>
-                <h3 id="title">LabFiz Registration</h3>
-
                 <div id="msg">
+                <p>
+                <h3 id="title">LabFiz Registration</h3>
+                </p> 
+                
                     <p> Hey {{$name}}, </p>
                     <p> Your account has been created! Please use these credentials to log in
                          <a href="www.labfiz.com/login"> www.labfiz.com</a>.</p>
