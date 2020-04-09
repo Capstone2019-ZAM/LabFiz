@@ -16,6 +16,7 @@ function init(e) {
         .then(function (response) {
             localStorage.setItem('api', response.data.data.token);
             var form = document.getElementById('signinform')
+            var err_msg = document.getElementById('logfail')
             err_msg.textContent = ''
             form.submit();
         })
