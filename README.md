@@ -7,7 +7,6 @@
  
 # Table of Contents 
 - [LabFiz](#labfiz)
-- [Installation](#installation)
 - [Features](#features)
 - [Documentation](#documentation)
   * [Presenations and Demo](#presenations-and-demo)
@@ -26,7 +25,7 @@ Check out the demo site @ http://labfiz.com and presentation here.
 
 ## Installation
 
-Prerequisites PHP v7+ , MySQL v5.7+ , Composer and Node.js. Consider using [Homestead](https://laravel.com/docs/7.x/homestead) or [Laragon](https://laragon.org) for installation on Windows OS.
+Prerequisites PHP v7+ , MySQL v5.7+ , Composer and Node.js. Consider using [Homstead](https://laravel.com/docs/7.x/homestead) or [Laragon](https://laragon.org) for installation on Windows OS.
 ```
 - Clone the repository on your system
 - Traverse to the project root folder
@@ -74,8 +73,10 @@ Prerequisites PHP v7+ , MySQL v5.7+ , Composer and Node.js. Consider using [Home
  - [User Stories](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/User%20Stories.xlsx)
  ### Solution Modeling
  - [API Documentation](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/API2.md)
+ - [Data Flow](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/DataFlow%20(1).jpg)
  - [ERD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/ERD%20Updated.png)
- - [System Architecture](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/System%20Architectural%20V2%20(2).png)
+ - [System Architecture](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/System%20Architectural%20V2.1.png)
+ - [User Interaction](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/User%20Interaction.jpg)
  - [Wireframes](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Wireframe%20-%20Coordinator%20(2).svg)
  ## Project Management
    LabFiz project was managed with Asana. Check out our project management @ [Asana](https://app.asana.com/0/1139874116808383) / [Asana Screenshots](https://github.com/Capstone2019-ZAM/Capstone/tree/master/Documentation/Asana%20Screenshots)
