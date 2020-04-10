@@ -9,6 +9,9 @@
 - [LabFiz](#labfiz)
 - [Features](#features)
 - [Documentation](#documentation)
+  * [Presenations and Demo](#presenation-and-demo)
+  * [Requriments and Analysis](#requriments-and-analysis)
+  * [Solution Modeling](#solution-modeling)
 - [Project Management](#project-management)
 - [Built Using](#built-using)
 - [Authors](#authors)
@@ -44,9 +47,10 @@ Check out the demo site @ http://labfiz.com
  - [Poster](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
 
 ### Requriments and Analysis
- - [Business Requirement & Analysis]( https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/BusinessRequirementandProposal.pdf)
  - [Abstract](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Abstract.docx)
- - [FRD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Functional%20Requirements%20Document.docx)
+ - [After Action Review](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/after_reveiw.pdf)
+  - [Business Requirement & Analysis]( https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/BusinessRequirementandProposal.pdf)
+ - [FRD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Functional%20Requirements%20Document.pdf)
  - [User Stories](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/User%20Stories.xlsx)
  ### Solution Modeling
  - [Wireframes](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Wireframe%20-%20Coordinator%20(2).svg)
