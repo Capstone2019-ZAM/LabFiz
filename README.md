@@ -22,7 +22,7 @@
  ## LabFiz
 Workplace and Lab safety is an important aspect of any institution. however, there are no feasible management solutions available. LabFiz is a web application, designed to simplify lab inspection and safety management in academic settings. LabFiz allows lab inspectors to automate assignment process and track inspections, to stay up to date on inspection requirements as required by their organization. LabFiz also provides features such as issue tracking, to enable collaboration and resolve issue in a timely manner.
 
-Check out the demo site @ http://labfiz.com and presentation here.
+Check out the demo site @ http://labfiz.com and presentation [here](https://youtu.be/w2I-L9mMd9k).
 
 ## Installation
 
@@ -62,7 +62,7 @@ Prerequisites PHP v7+ , MySQL v5.7+ , Composer and Node.js. Consider using [Homs
 
 ### Presentation and Demo
  - [Presentations](https://github.com/Capstone2019-ZAM/LabFiz/tree/master/Documentation/Presentations)
-  * Project Day Presentation [Video](https://youtube.com) | [pptx](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Presentations/ENSE_477_Final_Presentation_2020.pptx)
+  * Project Day Presentation [Video](https://youtu.be/w2I-L9mMd9k) | [pptx](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Presentations/ENSE_477_Final_Presentation_2020.pptx)
  - [Poster](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
 
 ### Requirements and Analysis
