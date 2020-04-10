@@ -48,17 +48,18 @@ Check out the demo site @ http://labfiz.com
  - [Poster](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
 
 ### Requriments and Analysis
- - [Abstract](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Abstract.docx)
+ - [Abstract](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Abstract.pdf)
  - [After Action Review](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/after_reveiw.pdf)
-  - [Business Requirement & Analysis]( https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/BusinessRequirementandProposal.pdf)
+ - [Back End Review](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/backend_review.md)
+ - [Business Requirement & Analysis](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/BusinessRequirementandProposal.pdf)
+ - [Code Review](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Code%20Review.pdf)
  - [FRD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Functional%20Requirements%20Document.pdf)
  - [User Stories](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/User%20Stories.xlsx)
  ### Solution Modeling
- - [Wireframes](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Wireframe%20-%20Coordinator%20(2).svg)
- - [ERD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/ERD%20Updated.png)
  - [API Documentation](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/API2.md)
+ - [ERD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/ERD%20Updated.png)
  - [System Architecture](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/System%20Architectural%20V2%20(2).png)
- 
+ - [Wireframes](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Wireframe%20-%20Coordinator%20(2).svg)
  ## Project Management
    LabFiz project was managed with Asana. Check out our project management @ [Asana](https://app.asana.com/0/1139874116808383) / [Asana Screenshots](https://github.com/Capstone2019-ZAM/Capstone/tree/master/Documentation/Asana%20Screenshots)
    
