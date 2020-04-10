@@ -11,7 +11,7 @@
 - [Features](#features)
 - [Documentation](#documentation)
   * [Presenations and Demo](#presenations-and-demo)
-  * [Requirements and Analysis](#requriments-and-analysis)
+  * [Requirements and Analysis](#requirements-and-analysis)
   * [Solution Modeling](#solution-modeling)
 - [Project Management](#project-management)
 - [Built Using](#built-using)
@@ -62,10 +62,10 @@ Prerequisites PHP v7+ , MySQL v5.7+ , Composer and Node.js. Consider using [Homs
 
 ### Presentation and Demo
  - [Presentations](https://github.com/Capstone2019-ZAM/LabFiz/tree/master/Documentation/Presentations)
-  * Project Day Presentation [Video](https://youtube.com) | [pptx](https://github.com/Capstone2019-ZAM/LabFiz/tree/master/Documentation/Presentations)
+  * Project Day Presentation [Video](https://youtube.com) | [pptx](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Presentations/ENSE_477_Final_Presentation_2020.pptx)
  - [Poster](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
 
-### Requirments and Analysis
+### Requirements and Analysis
  - [Abstract](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Abstract.pdf)
  - [After Action Review](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/after_reveiw.pdf)
  - [Back End Review](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/backend_review.md)
