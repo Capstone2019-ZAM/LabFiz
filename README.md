@@ -6,13 +6,13 @@
  </div>
  
 # Table of Contents 
-- [LabFiz](#heading)
-- [Features](#heading)
-- [Documentation](#heading)
-- [Project Management](#heading)
-- [Built Using](#heading)
-- [Authors ](#heading)
-- [License](#heading)
+* [LabFiz](#labfiz)
+* [Features](#features)
+* [Documentation](#documentation)
+* [Project Management](#project-management)
+* [Built Using](#built-using)
+* [Authors](#authors)
+* [License](#license)
 
 
  ## LabFiz
