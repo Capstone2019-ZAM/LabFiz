@@ -39,13 +39,18 @@ Check out the demo site @ http://labfiz.com
 
 
 ## Documentation
+
+### Presentation and Demo
  - [Poster](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
+
+### Requriments and Analysis
  - [Business Requirement & Analysis]( https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/BusinessRequirementandProposal.pdf)
  - [Abstract](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Abstract.docx)
- - [ERD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/ERD%20Updated.png)
  - [FRD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Functional%20Requirements%20Document.docx)
  - [User Stories](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/User%20Stories.xlsx)
+ ### Solution Modeling
  - [Wireframes](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Wireframe%20-%20Coordinator%20(2).svg)
+ - [ERD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/ERD%20Updated.png)
  - [API Documentation](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/API2.md)
  - [System Architecture](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/System%20Architectural%20V2%20(2).png)
  
