@@ -22,7 +22,7 @@
  ## LabFiz
 Workplace and Lab safety is an important aspect of any institution. however, there are no feasible management solutions available. LabFiz is a web application, designed to simplify lab inspection and safety management in academic settings. LabFiz allows lab inspectors to automate assignment process and track inspections, to stay up to date on inspection requirements as required by their organization. LabFiz also provides features such as issue tracking, to enable collaboration and resolve issue in a timely manner.
 
-Check out the demo site @ http://labfiz.com and presentation [here] (https://youtu.be/w2I-L9mMd9k).
+Check out the demo site @ http://labfiz.com and presentation [here](https://youtu.be/w2I-L9mMd9k).
 
 ## Installation
 
