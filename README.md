@@ -7,6 +7,7 @@
  
 # Table of Contents 
 - [LabFiz](#labfiz)
+- [Installation](#installation)
 - [Features](#features)
 - [Documentation](#documentation)
   * [Presenations and Demo](#presenations-and-demo)
@@ -25,7 +26,7 @@ Check out the demo site @ http://labfiz.com and presentation here.
 
 ## Installation
 
-Prerequisites PHP v7+ , MySQL v5.7+ , Composer and Node.js. Consider using [Homstead](https://laravel.com/docs/7.x/homestead) or [Laragon](https://laragon.org) for installation on Windows OS.
+Prerequisites PHP v7+ , MySQL v5.7+ , Composer and Node.js. Consider using [Homestead](https://laravel.com/docs/7.x/homestead) or [Laragon](https://laragon.org) for installation on Windows OS.
 ```
 - Clone the repository on your system
 - Traverse to the project root folder
