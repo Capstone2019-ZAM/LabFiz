@@ -7,6 +7,7 @@
  
 # Table of Contents 
 - [LabFiz](#labfiz)
+- [Installation](#installation)
 - [Features](#features)
 - [Documentation](#documentation)
   * [Presenations and Demo](#presenations-and-demo)
