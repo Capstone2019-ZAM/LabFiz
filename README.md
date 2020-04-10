@@ -9,7 +9,7 @@
 - [LabFiz](#labfiz)
 - [Features](#features)
 - [Documentation](#documentation)
-  * [Presenations and Demo](#presenation-and-demo)
+  * [Presenations and Demo](#presenations-and-demo)
   * [Requriments and Analysis](#requriments-and-analysis)
   * [Solution Modeling](#solution-modeling)
 - [Project Management](#project-management)
@@ -44,6 +44,7 @@ Check out the demo site @ http://labfiz.com
 ## Documentation
 
 ### Presentation and Demo
+ - [Presentations](https://github.com/Capstone2019-ZAM/LabFiz/tree/master/Documentation/Presentations)
  - [Poster](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
 
 ### Requriments and Analysis
