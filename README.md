@@ -26,18 +26,19 @@ Check out the demo site @ http://labfiz.com and presentation here.
 ## Installation
 
 Prerequisites PHP v7+ , MySQL v5.7+ , Composer and Node.js. Consider using [Homstead](https://laravel.com/docs/7.x/homestead) or [Laragon](https://laragon.org) for installation on Windows OS.
+```
 - Clone the repository on your system
 - Traverse to the project root folder
 - Run composer install
-- Ensure php artisan commands are available now.
+  Ensure php artisan commands are available now.
 - Run npm install
 - Run npm run dev
 - Update .env file for db connection , mail service and app preference
 - Run php artisan migrate:fresh
-Run additional seeders if required example:
-php artisan db:seed --class=LabSeeder
-Run php artisan serve
-
+- Run additional seeders if required example:
+  php artisan db:seed --class=LabSeeder
+- Run php artisan serve
+```
  ## Features
  
  #### Create your own custom templates
