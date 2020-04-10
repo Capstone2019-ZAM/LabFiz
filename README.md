@@ -29,15 +29,15 @@ Check out the demo site @ http://labfiz.com
 
 
 ## Documentation
- ### [Poster](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
- ### [Business Requirement & Analysis]( https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/BusinessRequirementandProposal.pdf)
- ### [Abstract](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Abstract.docx)
- ### [ERD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/ERD%20Updated.png)
- ### [FRD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Functional%20Requirements%20Document.docx)
- ### [User Stories](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/User%20Stories.xlsx)
- ### [Wireframes](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Wireframe%20-%20Coordinator%20(2).svg)
- ### [API Documentation](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/API2.md)
- ### [System Architecture](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/System%20Architectural%20V2%20(2).png)
+ - [Poster](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
+ - [Business Requirement & Analysis]( https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/BusinessRequirementandProposal.pdf)
+ - [Abstract](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Abstract.docx)
+ - [ERD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/ERD%20Updated.png)
+ - [FRD document](https://github.com/Capstone2019-ZAM/LabFiz/blob/master/Documentation/Functional%20Requirements%20Document.docx)
+ - [User Stories](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/User%20Stories.xlsx)
+ - [Wireframes](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Wireframe%20-%20Coordinator%20(2).svg)
+ - [API Documentation](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/API2.md)
+ - [System Architecture](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/System%20Architectural%20V2%20(2).png)
  
  ## Project Management
    LabFiz project was managed with Asana. Check out our project management @ [Asana](https://app.asana.com/0/1139874116808383) / [Asana Screenshots](https://github.com/Capstone2019-ZAM/Capstone/tree/master/Documentation/Asana%20Screenshots)
