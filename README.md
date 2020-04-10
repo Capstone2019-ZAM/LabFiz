@@ -62,6 +62,7 @@ Prerequisites PHP v7+ , MySQL v5.7+ , Composer and Node.js. Consider using [Homs
 
 ### Presentation and Demo
  - [Presentations](https://github.com/Capstone2019-ZAM/LabFiz/tree/master/Documentation/Presentations)
+ * Project Day [Video] | [Presentation]
  - [Poster](https://github.com/Capstone2019-ZAM/Capstone/blob/master/Documentation/Poster.png)
 
 ### Requirments and Analysis
