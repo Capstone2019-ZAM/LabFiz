@@ -16,13 +16,23 @@
                     >
                 </v-col>
             </v-row>
+            <v-row class="ma-1">
+                              <v-spacer></v-spacer>
+
+                <pdf-maker :data="data"></pdf-maker>
+            </v-row>
         </v-card>
     </v-row>
 </template>
 
 <script>
+import PdfMaker from "./PdfMaker";
+
 export default {
     props: ["data"],
+    components: {
+        "pdf-maker": PdfMaker
+    },
     methods: {}
 };
 </script>
