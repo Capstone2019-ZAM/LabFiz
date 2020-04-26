@@ -63,6 +63,15 @@ class DashboardSeeder extends Seeder
             'accessible_to'=> 1, 
         ]);
 
+        DB::table('dashboards')->insert([
+            'title' => "Laboratory",
+            'desc' => "View and manage Laboratory",
+            'img' =>    "mdi-domain",
+            'link' => "/labs",
+            'accessible_to'=> 1, 
+        ]);
+
+
 
     }
 }
