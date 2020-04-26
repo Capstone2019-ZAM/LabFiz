@@ -27,6 +27,8 @@ Vue.component('restore-table', require('./components/RestoreTable.vue').default)
 Vue.component('inspection-my-table', require('./components/InspectionMyTable.vue').default);
 Vue.component('inspection-my', require('./components/InspectionMy.vue').default);
 Vue.component('pdf-maker', require('./components/PdfMaker.vue').default);
+Vue.component('lab-list', require('./components/LabList.vue').default);
+Vue.component('lab-form', require('./components/LabForm.vue').default);
 
 
 const app = new Vue({

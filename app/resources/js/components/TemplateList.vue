@@ -38,8 +38,7 @@
                 <v-btn
                     block
                     outlined
-                    color="indigo"
-                    class="ma-10"
+                   
                     @click="navigate()"
                 >
                     Add new Template
