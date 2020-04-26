@@ -65,6 +65,15 @@ Route::group(['middleware' => ['role:admin']], function(){
     Route::get('/assignments', function () {
         return view('assignment_rpt');
     });
+    Route::get('/labs', function () {
+        return view('labs');
+    });
+    Route::get('/lab/{id}', function () {
+        return view('lab');
+    });
+    Route::get('/lab', function () {
+        return view('lab');
+    });
 });
 
 

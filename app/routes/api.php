@@ -81,6 +81,7 @@ Route::group([
     Route::get('/labs', 'Api\v1\LabController@get_all');
     Route::get('/lab/{id}', 'Api\v1\LabController@get');
     Route::post('/lab', 'Api\v1\LabController@create');
+    Route::post('/lab/{id}', 'Api\v1\LabController@create');
     Route::delete('/lab/{id}', 'Api\v1\LabController@delete');
 
     //comment

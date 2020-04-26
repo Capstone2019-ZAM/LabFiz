@@ -9,6 +9,10 @@ use App\Lab;
 use App\Repositories\ModelRepository;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+
+
 
 class LabService implements RestServiceContract
 {
@@ -45,15 +49,15 @@ class LabService implements RestServiceContract
     public function create(FormRequest $request)
     {
         $result = ['status' => '400 (Bad Request)', 'message' => '', 'data' => []];
+        $user = Auth::guard('api')->user();
 
         try {
             $lab = $this->lab_model->updateOrCreate(
+                ['id' => $request->id],
                 [
-                    'id' => $request->id,
-                    'title' => $request->title
-                ],
-                [
-                    'title' => $request->title,
+                    'name' => $request->name,
+                    'location' => $request->location,
+                    'user_id'=> $user->id
                 ]
             );
             $result['data'] = $lab;
