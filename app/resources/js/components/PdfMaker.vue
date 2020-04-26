@@ -61,7 +61,6 @@ export default {
                 })
                 .then(
                     response => {
-                        debugger;
                         user_name =
                             response.data.data.first_name +
                             " " +
