@@ -16,6 +16,7 @@
 - [Project Management](#project-management)
 - [Built Using](#built-using)
 - [Authors](#authors)
+- [Release Notes](#release-notes)
 - [License](#license)
 
 
@@ -91,6 +92,13 @@ Prerequisites PHP v7+ , MySQL v5.7+ , Composer and Node.js. Consider using [Homs
 - 	Muhammad Ahmed  ([@ahmed35m](https://github.com/ahmed35m))
 -  Zain Abedin
 -  Alwin Baby
+
+## Release Notes 
+-- Release v1.8 25-Apr-2020
+- Added authentication failure message
+- Added ability to add labs as an admin
+- Added pdf export functionality for inspections
+- Fixed issue with email body for sign up
 
 ## License 
  This project is to be licensed under the MIT License
